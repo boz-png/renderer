@@ -14,8 +14,6 @@ export class UserMessageData
     private _figure: string = '';
     private _custom: string = '';
     private _activityPoints: number = 0;
-    private _xpRoleplay: string = '';
-	private _perfilBanner: string = '';
     private _webID: number = 0;
     private _groupID: number = 0;
     private _groupStatus: number = 0;
@@ -178,32 +176,6 @@ export class UserMessageData
         if(!this._isReadOnly)
         {
             this._activityPoints = k;
-        }
-    }
-
-    public get xpRoleplay(): string
-    {
-        return this._xpRoleplay;
-    }
-
-    public set xpRoleplay(k: string)
-    {
-        if(!this._isReadOnly)
-        {
-            this._xpRoleplay = k;
-        }
-    }
-
-    public get perfilBanner(): string
-    {
-        return this._perfilBanner;
-    }
-
-    public set perfilBanner(k: string)
-    {
-        if(!this._isReadOnly)
-        {
-            this._perfilBanner = k;
         }
     }
 

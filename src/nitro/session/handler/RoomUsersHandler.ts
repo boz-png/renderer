@@ -72,8 +72,6 @@ export class RoomUsersHandler extends BaseHandler
                 userData.name = user.name;
                 userData.custom = user.custom;
                 userData.activityPoints = user.activityPoints;
-                userData.xpRoleplay = user.xpRoleplay;
-				userData.perfilBanner = user.perfilBanner;
                 userData.figure = user.figure;
                 userData.type = user.userType;
                 userData.webID = user.webID;
@@ -118,10 +116,8 @@ export class RoomUsersHandler extends BaseHandler
         session.userDataManager.updateFigure(parser.unitId, parser.figure, parser.gender, false, false);
         session.userDataManager.updateMotto(parser.unitId, parser.motto);
         session.userDataManager.updateAchievementScore(parser.unitId, parser.achievementScore);
-        session.userDataManager.updateAchievementXp(parser.unitId, parser.xpRoleplay);
-        session.userDataManager.updateAchievementBanner(parser.unitId, parser.perfilBanner);
 
-        this.listener.events.dispatchEvent(new RoomSessionUserFigureUpdateEvent(session, parser.unitId, parser.figure, parser.gender, parser.motto, parser.achievementScore, parser.xpRoleplay, parser.perfilBanner));
+        this.listener.events.dispatchEvent(new RoomSessionUserFigureUpdateEvent(session, parser.unitId, parser.figure, parser.gender, parser.motto, parser.achievementScore));
 
     }
 

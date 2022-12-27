@@ -183,24 +183,6 @@ export class UserDataManager extends Disposable
         userData.activityPoints = score;
     }
 
-    public updateAchievementXp(roomIndex: number, xp: string): void
-    {
-        const userData = this.getUserDataByIndex(roomIndex);
-
-        if(!userData) return;
-
-        userData.xpRoleplay = xp;
-    }
-
-    public updateAchievementBanner(roomIndex: number, banner: string): void
-    {
-        const userData = this.getUserDataByIndex(roomIndex);
-
-        if(!userData) return;
-
-        userData.perfilBanner = banner;
-    }
-
     public updatePetLevel(roomIndex: number, level: number): void
     {
         const userData = this.getUserDataByIndex(roomIndex);

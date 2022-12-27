@@ -27,35 +27,17 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
         this._badgePointLimits = new Map();
         this._romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI', 'XXVII', 'XXVIII', 'XXIX', 'XXX'];
         this._pendingUrls = [];
-        this._allowedLangs = ["es", "en", "fr", "zh", "de", "it", "ru", "fil", "tr", "pt"];
-        this._externalTextsLang = "es";
     }
 
     protected onInit(): void
     {
         this._communication.registerMessageEvent(new BadgePointLimitsEvent(this.onBadgePointLimitsEvent.bind(this)));
-        
-        if(window.localStorage.getItem("nitro-lang") == null){
 
-            var userLang = navigator.language;
-
-            for(let i = 0; i < this._allowedLangs.length; i++){
-                if(userLang.includes(this._allowedLangs[i] + "_")){
-                    this._externalTextsLang = this._allowedLangs[i];
-                }
-            }
-
-            window.localStorage.setItem("nitro-lang", this._externalTextsLang);
-        }
-        else this._externalTextsLang = window.localStorage.getItem("nitro-lang");
-
-        console.log('external.texts.url' + this._externalTextsLang);
-
-        let urls: string[] = Nitro.instance.getConfiguration<string[]>('external.texts.url.' + this._externalTextsLang);
+        let urls: string[] = Nitro.instance.getConfiguration<string[]>('external.texts.url');
 
         if(!Array.isArray(urls))
         {
-            urls = [ Nitro.instance.getConfiguration<string>('external.texts.url.' + this._externalTextsLang) ];
+            urls = [ Nitro.instance.getConfiguration<string>('external.texts.url') ];
         }
 
         for(let i = 0; i < urls.length; i++) urls[i] = Nitro.instance.core.configuration.interpolate(urls[i]);

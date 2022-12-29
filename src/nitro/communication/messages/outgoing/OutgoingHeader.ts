@@ -409,4 +409,5 @@ export class OutgoingHeader
     public static COMPOST_PLANT = 3835;
     public static HARVEST_PET = 1521;
     public static GROUP_UNFAVORITE = 1820;
+    public static WHISPER_GROUP = 1118;
 }

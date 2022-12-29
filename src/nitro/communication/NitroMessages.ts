@@ -463,6 +463,7 @@ import { UserFigureComposer } from './messages/outgoing/user/data/UserFigureComp
 import { UserMottoComposer } from './messages/outgoing/user/data/UserMottoComposer';
 import { UserProfileComposer } from './messages/outgoing/user/data/UserProfileComposer';
 import { UserRelationshipsComposer } from './messages/outgoing/user/data/UserRelationshipsComposer';
+import { WhisperGroupComposer } from './messages/outgoing/user/data/WhisperGroupComposer';
 import { UserCurrencyComposer } from './messages/outgoing/user/inventory/currency/UserCurrencyComposer';
 import { UserSubscriptionComposer } from './messages/outgoing/user/inventory/subscription/UserSubscriptionComposer';
 import { UserSettingsCameraFollowComposer } from './messages/outgoing/user/settings/UserSettingsCameraFollowComposer';
@@ -1339,6 +1340,7 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.APPROVE_NAME, ApproveNameMessageComposer);
         this._composers.set(OutgoingHeader.USER_RESPECT, UserRespectComposer);
         this._composers.set(OutgoingHeader.SCR_GET_KICKBACK_INFO, ScrGetKickbackInfoMessageComposer);
+        this._composers.set(OutgoingHeader.WHISPER_GROUP, WhisperGroupComposer)
 
         // DATA
         this._composers.set(OutgoingHeader.USER_IGNORED, GetIgnoredUsersComposer);

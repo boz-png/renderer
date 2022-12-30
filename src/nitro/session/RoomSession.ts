@@ -1,4 +1,3 @@
-import { WhisperGroupComposer } from 'nitro/communication/messages/outgoing/user/data/WhisperGroupComposer';
 import { Disposable } from '../../core/common/disposable/Disposable';
 import { IConnection } from '../../core/communication/connections/IConnection';
 import { CompostPlantMessageComposer, FurnitureMultiStateComposer, HarvestPetMessageComposer, PetMountComposer, PollAnswerComposer, PollRejectComposer, PollStartComposer, RemovePetSaddleComposer, TogglePetBreedingComposer, TogglePetRidingComposer, UsePetProductComposer } from '../communication';
@@ -156,11 +155,6 @@ export class RoomSession extends Disposable implements IRoomSession
     public sendWhisperMessage(recipientName: string, text: string, styleId: number): void
     {
         this._connection.send(new RoomUnitChatWhisperComposer(recipientName, text, styleId));
-    }
-
-    public addWhisperGroup(username: string): void
-    {
-        this._connection.send(new WhisperGroupComposer(username));
     }
 
     public sendChatTypingMessage(isTyping: boolean): void

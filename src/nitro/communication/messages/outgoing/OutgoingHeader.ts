@@ -410,4 +410,5 @@ export class OutgoingHeader
     public static HARVEST_PET = 1521;
     public static GROUP_UNFAVORITE = 1820;
     public static WHISPER_GROUP = 1118;
+    public static DELETE_FURNI = 2023;
 }

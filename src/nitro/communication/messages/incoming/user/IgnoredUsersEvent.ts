@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { IgnoredUsersParser } from '../../parser/user/IgnoredUsersParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { IgnoredUsersParser } from '../../parser';
 
 export class IgnoredUsersEvent extends MessageEvent implements IMessageEvent
 {

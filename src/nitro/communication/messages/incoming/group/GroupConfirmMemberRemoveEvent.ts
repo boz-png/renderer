@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { GroupConfirmMemberRemoveParser } from '../../parser/group/GroupConfirmMemberRemoveParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { GroupConfirmMemberRemoveParser } from '../../parser';
 
 export class GroupConfirmMemberRemoveEvent extends MessageEvent implements IMessageEvent
 {

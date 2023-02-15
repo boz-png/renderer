@@ -1,5 +1,4 @@
-﻿import { IVector3D } from '../../../room/utils/IVector3D';
-import { Vector3d } from '../../../room/utils/Vector3d';
+﻿import { IVector3D, Vector3d } from '../../../api';
 
 export class RoomCamera
 {
@@ -7,12 +6,12 @@ export class RoomCamera
 
     private _targetId: number = -1;
     private _targetCategory: number = -2;
-    private _targetLoc:Vector3d = null;
+    private _targetLoc: Vector3d = null;
     private _moveDistance: number = 0;
     private _previousMoveSpeed: number = 0;
     private _maintainPreviousMoveSpeed: boolean = false;
-    private _currentLoc:Vector3d = null;
-    private _targetObjectLoc:Vector3d;
+    private _currentLoc: Vector3d = null;
+    private _targetObjectLoc: Vector3d;
     private _limitedLocX: boolean = false;
     private _limitedLocY: boolean = false;
     private _centeredLocX: boolean = false;
@@ -31,7 +30,7 @@ export class RoomCamera
         this._targetObjectLoc = new Vector3d();
     }
 
-    public get location():IVector3D
+    public get location(): IVector3D
     {
         return this._currentLoc;
     }
@@ -56,12 +55,12 @@ export class RoomCamera
         this._targetCategory = k;
     }
 
-    public get targetObjectLoc():IVector3D
+    public get targetObjectLoc(): IVector3D
     {
         return this._targetObjectLoc;
     }
 
-    public set targetObjectLoc(k:IVector3D)
+    public set targetObjectLoc(k: IVector3D)
     {
         this._targetObjectLoc.assign(k);
     }
@@ -179,9 +178,9 @@ export class RoomCamera
         return false;
     }
 
-    public set target(k:IVector3D)
+    public set target(k: IVector3D)
     {
-        let _local_2:Vector3d;
+        let _local_2: Vector3d;
         if(this._targetLoc == null)
         {
             this._targetLoc = new Vector3d();
@@ -201,7 +200,7 @@ export class RoomCamera
         this._currentLoc = null;
     }
 
-    public initializeLocation(k:IVector3D): void
+    public initializeLocation(k: IVector3D): void
     {
         if(this._currentLoc != null)
         {
@@ -211,7 +210,7 @@ export class RoomCamera
         this._currentLoc.assign(k);
     }
 
-    public resetLocation(k:IVector3D): void
+    public resetLocation(k: IVector3D): void
     {
         if(this._currentLoc == null)
         {
@@ -222,7 +221,7 @@ export class RoomCamera
 
     public update(k: number, _arg_2: number): void
     {
-        let _local_3:Vector3d;
+        let _local_3: Vector3d;
         let _local_4: number;
         let _local_5: number;
         let _local_6: number;

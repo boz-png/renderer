@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { ClubOfferData } from '../../incoming/catalog/ClubOfferData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { ClubOfferData } from './ClubOfferData';
 
 export class HabboClubOffersMessageParser implements IMessageParser
 {

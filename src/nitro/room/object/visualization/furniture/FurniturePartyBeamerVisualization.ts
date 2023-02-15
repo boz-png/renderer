@@ -1,4 +1,4 @@
-import { NitroPoint } from '../../../../../core';
+import { NitroPoint } from '../../../../../pixi-proxy';
 import { FurnitureAnimatedVisualization } from './FurnitureAnimatedVisualization';
 
 export class FurniturePartyBeamerVisualization extends FurnitureAnimatedVisualization
@@ -99,7 +99,7 @@ export class FurniturePartyBeamerVisualization extends FurnitureAnimatedVisualiz
         return new NitroPoint(animationPhase, _local_11);
     }
 
-    private initItems(scale: number):void
+    private initItems(scale: number): void
     {
         let diameter: number;
 

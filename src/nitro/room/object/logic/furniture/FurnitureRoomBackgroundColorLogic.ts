@@ -1,12 +1,7 @@
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectHSLColorEnableEvent } from '../../../events/RoomObjectHSLColorEnableEvent';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { NumberDataType } from '../../data/type/NumberDataType';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IRoomGeometry, MouseEventType, NumberDataType, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectHSLColorEnableEvent, RoomObjectWidgetRequestEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureRoomBackgroundColorLogic extends FurnitureMultiStateLogic

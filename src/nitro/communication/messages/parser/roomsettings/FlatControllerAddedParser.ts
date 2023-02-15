@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { FlatControllerData } from '../../incoming/roomsettings/FlatControllerData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { FlatControllerData } from './FlatControllerData';
 
 export class FlatControllerAddedParser implements IMessageParser
 {

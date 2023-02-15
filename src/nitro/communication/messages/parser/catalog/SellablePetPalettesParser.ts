@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { SellablePetPaletteData } from './SellablePetPaletteData';
 
 export class SellablePetPalettesParser implements IMessageParser

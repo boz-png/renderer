@@ -1,4 +1,4 @@
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable } from '../../../../../api';
 import { FurnitureDynamicThumbnailVisualization } from './FurnitureDynamicThumbnailVisualization';
 
 export class FurnitureYoutubeVisualization extends FurnitureDynamicThumbnailVisualization

@@ -1,7 +1,6 @@
 import { Resource, Texture } from '@pixi/core';
-import { IRoomObjectSprite } from '../../../../../../room/object/visualization/IRoomObjectSprite';
-import { AvatarAction } from '../../../../../avatar/enum/AvatarAction';
-import { Nitro } from '../../../../../Nitro';
+import { AvatarAction, IRoomObjectSprite } from '../../../../../../api';
+import { GetTickerTime } from '../../../../../../pixi-proxy';
 import { AvatarVisualization } from '../AvatarVisualization';
 import { IAvatarAddition } from './IAvatarAddition';
 
@@ -26,7 +25,7 @@ export class FloatingIdleZAddition implements IAvatarAddition
         this._id = id;
         this._visualization = visualization;
         this._asset = null;
-        this._startTime = Nitro.instance.time;
+        this._startTime = GetTickerTime();
         this._offsetY = 0;
         this._scale = 0;
         this._state = 0;
@@ -110,7 +109,7 @@ export class FloatingIdleZAddition implements IAvatarAddition
     {
         if(!sprite) return false;
 
-        const totalTimeRunning = Nitro.instance.time;
+        const totalTimeRunning = GetTickerTime();
 
         if(this._state === FloatingIdleZAddition.STATE_DELAY)
         {

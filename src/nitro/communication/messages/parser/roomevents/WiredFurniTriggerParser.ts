@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { TriggerDefinition } from '../../incoming/roomevents/TriggerDefinition';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { TriggerDefinition } from './TriggerDefinition';
 
 export class WiredFurniTriggerParser implements IMessageParser
 {

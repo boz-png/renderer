@@ -1,11 +1,11 @@
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureTrophyLogic extends FurnitureLogic
 {
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.TROPHY ];
+        const types = [RoomObjectWidgetRequestEvent.TROPHY];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

@@ -1,47 +1,31 @@
 import { Application, IApplicationOptions } from '@pixi/app';
 import { SCALE_MODES } from '@pixi/constants';
 import { settings } from '@pixi/settings';
-import { Ticker } from '@pixi/ticker';
-import { ConfigurationEvent } from '../core/configuration/ConfigurationEvent';
-import { EventDispatcher } from '../core/events/EventDispatcher';
-import { IEventDispatcher } from '../core/events/IEventDispatcher';
-import { ILinkEventTracker } from '../core/events/ILinkEventTracker';
-import { IWorkerEventTracker } from '../core/events/IWorkerEventTracker';
-import { NitroEvent } from '../core/events/NitroEvent';
-import { INitroCore } from '../core/INitroCore';
-import { NitroCore } from '../core/NitroCore';
-import { NitroTimer } from '../core/utils/NitroTimer';
-import { IRoomManager } from '../room/IRoomManager';
-import { RoomManager } from '../room/RoomManager';
-import { AvatarRenderManager } from './avatar/AvatarRenderManager';
-import { IAvatarRenderManager } from './avatar/IAvatarRenderManager';
-import { IRoomCameraWidgetManager } from './camera/IRoomCameraWidgetManager';
-import { RoomCameraWidgetManager } from './camera/RoomCameraWidgetManager';
-import { INitroCommunicationManager } from './communication/INitroCommunicationManager';
-import { NitroCommunicationManager } from './communication/NitroCommunicationManager';
-import { LegacyExternalInterface } from './externalInterface/LegacyExternalInterface';
-import { GameMessageHandler } from './game/GameMessageHandler';
+import { IAvatarRenderManager, IEventDispatcher, ILinkEventTracker, INitroCommunicationManager, INitroCore, INitroLocalizationManager, IRoomCameraWidgetManager, IRoomEngine, IRoomManager, IRoomSessionManager, ISessionDataManager, ISoundManager, NitroConfiguration, NitroLogger } from '../api';
+import { ConfigurationEvent, EventDispatcher, NitroCore } from '../core';
+import { NitroEvent, RoomEngineEvent } from '../events';
+import { GetTicker, PixiApplicationProxy } from '../pixi-proxy';
+import { RoomManager } from '../room';
+import { AvatarRenderManager } from './avatar';
+import { RoomCameraWidgetManager } from './camera';
+import { NitroCommunicationManager } from './communication';
+import { LegacyExternalInterface } from './externalInterface';
+import { GameMessageHandler } from './game';
 import { INitro } from './INitro';
-import { INitroLocalizationManager } from './localization/INitroLocalizationManager';
-import { NitroLocalizationManager } from './localization/NitroLocalizationManager';
+import { NitroLocalizationManager } from './localization';
 import './Plugins';
-import { RoomEngineEvent } from './room/events/RoomEngineEvent';
-import { IRoomEngine } from './room/IRoomEngine';
-import { RoomEngine } from './room/RoomEngine';
-import { IRoomSessionManager } from './session/IRoomSessionManager';
-import { ISessionDataManager } from './session/ISessionDataManager';
-import { RoomSessionManager } from './session/RoomSessionManager';
-import { SessionDataManager } from './session/SessionDataManager';
-import { ISoundManager } from './sound/ISoundManager';
-import { SoundManager } from './sound/SoundManager';
+import { LandscapeRasterizer, RoomEngine } from './room';
+import { RoomSessionManager, SessionDataManager } from './session';
+import { SoundManager } from './sound';
 import { HabboWebTools } from './utils/HabboWebTools';
 
 LegacyExternalInterface.available;
 
 settings.SCALE_MODE = (!(window.devicePixelRatio % 1)) ? SCALE_MODES.NEAREST : SCALE_MODES.LINEAR;
 settings.ROUND_PIXELS = true;
+settings.GC_MAX_IDLE = 120;
 
-export class Nitro extends Application implements INitro
+export class Nitro implements INitro
 {
     public static WEBGL_CONTEXT_LOST: string = 'NE_WEBGL_CONTEXT_LOST';
     public static WEBGL_UNAVAILABLE: string = 'NE_WEBGL_UNAVAILABLE';
@@ -49,8 +33,7 @@ export class Nitro extends Application implements INitro
 
     private static INSTANCE: INitro = null;
 
-    private _nitroTimer: NitroTimer;
-    private _worker: Worker;
+    private _application: Application;
     private _core: INitroCore;
     private _events: IEventDispatcher;
     private _communication: INitroCommunicationManager;
@@ -63,19 +46,15 @@ export class Nitro extends Application implements INitro
     private _cameraManager: IRoomCameraWidgetManager;
     private _soundManager: ISoundManager;
     private _linkTrackers: ILinkEventTracker[];
-    private _workerTrackers: IWorkerEventTracker[];
 
     private _isReady: boolean;
     private _isDisposed: boolean;
 
     constructor(core: INitroCore, options?: IApplicationOptions)
     {
-        super(options);
-
         if(!Nitro.INSTANCE) Nitro.INSTANCE = this;
 
-        this._nitroTimer = new NitroTimer();
-        this._worker = null;
+        this._application = new PixiApplicationProxy(options);
         this._core = core;
         this._events = new EventDispatcher();
         this._communication = new NitroCommunicationManager(core.communication);
@@ -88,15 +67,12 @@ export class Nitro extends Application implements INitro
         this._cameraManager = new RoomCameraWidgetManager();
         this._soundManager = new SoundManager();
         this._linkTrackers = [];
-        this._workerTrackers = [];
 
         this._isReady = false;
         this._isDisposed = false;
 
         this._core.configuration.events.addEventListener(ConfigurationEvent.LOADED, this.onConfigurationLoadedEvent.bind(this));
         this._roomEngine.events.addEventListener(RoomEngineEvent.ENGINE_INITIALIZED, this.onRoomEngineReady.bind(this));
-
-        if(this._worker) this._worker.onmessage = this.createWorkerEvent.bind(this);
     }
 
     public static bootstrap(): void
@@ -112,9 +88,9 @@ export class Nitro extends Application implements INitro
 
         const instance = new this(new NitroCore(), {
             autoDensity: false,
-            resolution: window.devicePixelRatio,
             width: window.innerWidth,
             height: window.innerHeight,
+            resolution: window.devicePixelRatio,
             view: canvas
         });
 
@@ -204,7 +180,12 @@ export class Nitro extends Application implements INitro
             this._communication = null;
         }
 
-        super.destroy();
+        if(this._application)
+        {
+            this._application.destroy();
+
+            this._application = null;
+        }
 
         this._isDisposed = true;
         this._isReady = false;
@@ -212,10 +193,15 @@ export class Nitro extends Application implements INitro
 
     private onConfigurationLoadedEvent(event: ConfigurationEvent): void
     {
-        const animationFPS = this.getConfiguration<number>('system.animation.fps', 24);
-        const limitsFPS = this.getConfiguration<boolean>('system.limits.fps', true);
+        GetTicker().maxFPS = NitroConfiguration.getValue<number>('system.fps.max', 24);
 
-        if(limitsFPS) Nitro.instance.ticker.maxFPS = animationFPS;
+        NitroLogger.LOG_DEBUG = NitroConfiguration.getValue<boolean>('system.log.debug', true);
+        NitroLogger.LOG_WARN = NitroConfiguration.getValue<boolean>('system.log.warn', false);
+        NitroLogger.LOG_ERROR = NitroConfiguration.getValue<boolean>('system.log.error', false);
+        NitroLogger.LOG_EVENTS = NitroConfiguration.getValue<boolean>('system.log.events', false);
+        NitroLogger.LOG_PACKETS = NitroConfiguration.getValue<boolean>('system.log.packets', false);
+
+        LandscapeRasterizer.LANDSCAPES_ENABLED = NitroConfiguration.getValue<boolean>('room.landscapes.enabled', true);
     }
 
     private onRoomEngineReady(event: RoomEngineEvent): void
@@ -225,7 +211,7 @@ export class Nitro extends Application implements INitro
 
     public getConfiguration<T>(key: string, value: T = null): T
     {
-        return this._core.configuration.getValue<T>(key, value);
+        return NitroConfiguration.getValue<T>(key, value);
     }
 
     public getLocalization(key: string): string
@@ -241,43 +227,6 @@ export class Nitro extends Application implements INitro
     public getLocalizationWithParameters(key: string, parameters: string[], replacements: string[]): string
     {
         return this._localization.getValueWithParameters(key, parameters, replacements);
-    }
-
-    public addWorkerEventTracker(tracker: IWorkerEventTracker): void
-    {
-        if(this._workerTrackers.indexOf(tracker) >= 0) return;
-
-        this._workerTrackers.push(tracker);
-    }
-
-    public removeWorkerEventTracker(tracker: IWorkerEventTracker): void
-    {
-        const index = this._workerTrackers.indexOf(tracker);
-
-        if(index === -1) return;
-
-        this._workerTrackers.splice(index, 1);
-    }
-
-    public createWorkerEvent(message: MessageEvent): void
-    {
-        if(!message) return;
-
-        const data: { [index: string]: any } = message.data;
-
-        for(const tracker of this._workerTrackers)
-        {
-            if(!tracker) continue;
-
-            tracker.workerMessageReceived(data);
-        }
-    }
-
-    public sendWorkerEvent(message: { [index: string]: any }): void
-    {
-        if(!message || !this._worker) return;
-
-        this._worker.postMessage(message);
     }
 
     public addLinkEventTracker(tracker: ILinkEventTracker): void
@@ -329,15 +278,9 @@ export class Nitro extends Application implements INitro
         HabboWebTools.sendHeartBeat();
     }
 
-    public setWorker(val: Worker): void
+    public get application(): Application
     {
-        this._worker = val;
-        this._worker.onmessage = this.createWorkerEvent.bind(this);
-    }
-
-    public get nitroTimer(): NitroTimer
-    {
-        return this._nitroTimer;
+        return this._application;
     }
 
     public get core(): INitroCore
@@ -397,22 +340,12 @@ export class Nitro extends Application implements INitro
 
     public get width(): number
     {
-        return this.renderer.width;
+        return this._application.renderer.width;
     }
 
     public get height(): number
     {
-        return this.renderer.height;
-    }
-
-    public get ticker(): Ticker
-    {
-        return Ticker.shared;
-    }
-
-    public get time(): number
-    {
-        return this.ticker.lastTime;
+        return this._application.renderer.height;
     }
 
     public get isReady(): boolean

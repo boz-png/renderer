@@ -1,5 +1,5 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
 import { NoOwnedRoomsAlertMessageParser } from '../../parser';
 
 export class NoOwnedRoomsAlertMessageEvent extends MessageEvent implements IMessageEvent

@@ -27,13 +27,13 @@
     private _isDisposed: boolean;
     private _avatarEffectType: number = -1;
 
-    public loadAvatarData(k: string, _arg_2: string): void
+    public loadAvatarData(figure: string, gender: string): void
     {
         this._data = new Map();
         this._colors = new Map();
-        this._gender = _arg_2;
+        this._gender = gender;
 
-        this.parseFigureString(k);
+        this.parseFigureString(figure);
     }
 
     public dispose(): void
@@ -104,7 +104,7 @@
 
         const sets: string[] = [];
 
-        for(const [ key, value ] of this._data.entries())
+        for(const [key, value] of this._data.entries())
         {
             let set = ((key + '-') + value);
 
@@ -187,7 +187,7 @@
 
     public getFigureStringWithFace(k: number): string
     {
-        const partSets: string[] = [ FigureDataContainer.HD ];
+        const partSets: string[] = [FigureDataContainer.HD];
 
         let figure = '';
         const sets: string[] = [];

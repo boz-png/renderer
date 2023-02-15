@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { NavigatorTopLevelContext } from './utils/NavigatorTopLevelContext';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { NavigatorTopLevelContext } from './utils';
 
 export class NavigatorMetadataParser implements IMessageParser
 {

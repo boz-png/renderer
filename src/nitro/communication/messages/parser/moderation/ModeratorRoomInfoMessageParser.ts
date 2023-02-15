@@ -1,9 +1,9 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { RoomModerationData } from '../../incoming/moderation/RoomModerationData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { RoomModerationData } from './RoomModerationData';
 
 export class ModeratorRoomInfoMessageParser implements IMessageParser
 {
-    private _data:RoomModerationData;
+    private _data: RoomModerationData;
 
     public flush(): boolean
     {
@@ -21,7 +21,7 @@ export class ModeratorRoomInfoMessageParser implements IMessageParser
         return true;
     }
 
-    public get data():RoomModerationData
+    public get data(): RoomModerationData
     {
         return this._data;
     }

@@ -1,9 +1,9 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { PlayListEntry } from '../../incoming/sound';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { PlayListEntry } from './PlayListEntry';
 
 export class PlayListSongAddedMessageParser implements IMessageParser
 {
-    private _entry:PlayListEntry;
+    private _entry: PlayListEntry;
 
     flush(): boolean
     {
@@ -17,7 +17,7 @@ export class PlayListSongAddedMessageParser implements IMessageParser
         return true;
     }
 
-    public get entry():PlayListEntry
+    public get entry(): PlayListEntry
     {
         return this._entry;
     }

@@ -1,7 +1,6 @@
 import { Resource, Texture } from '@pixi/core';
-import { IRoomObjectSprite } from '../../../../../../room/object/visualization/IRoomObjectSprite';
-import { AvatarAction } from '../../../../../avatar/enum/AvatarAction';
-import { Nitro } from '../../../../../Nitro';
+import { AvatarAction, IRoomObjectSprite } from '../../../../../../api';
+import { GetTickerTime } from '../../../../../../pixi-proxy';
 import { AvatarVisualization } from '../AvatarVisualization';
 import { ExpressionAddition } from './ExpressionAddition';
 
@@ -25,7 +24,7 @@ export class FloatingHeartAddition extends ExpressionAddition
         super(id, type, visualization);
 
         this._asset = null;
-        this._startTime = Nitro.instance.time;
+        this._startTime = GetTickerTime();
         this._delta = 0;
         this._offsetY = 0;
         this._scale = 0;
@@ -114,7 +113,7 @@ export class FloatingHeartAddition extends ExpressionAddition
 
         if(this._state === FloatingHeartAddition.STATE_DELAY)
         {
-            if((Nitro.instance.time - this._startTime) < FloatingHeartAddition.DELAY_BEFORE_ANIMATION) return false;
+            if((GetTickerTime() - this._startTime) < FloatingHeartAddition.DELAY_BEFORE_ANIMATION) return false;
 
             this._state = FloatingHeartAddition.STATE_FADE_IN;
 

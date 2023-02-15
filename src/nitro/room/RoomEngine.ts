@@ -1,120 +1,23 @@
 import { RenderTexture, Resource, Texture } from '@pixi/core';
 import { Container, DisplayObject } from '@pixi/display';
 import { Matrix, Point, Rectangle } from '@pixi/math';
-import { NitroSprite } from '../../core';
-import { IDisposable } from '../../core/common/disposable/IDisposable';
-import { IUpdateReceiver } from '../../core/common/IUpdateReceiver';
-import { NitroManager } from '../../core/common/NitroManager';
-import { IConnection } from '../../core/communication/connections/IConnection';
-import { IMessageComposer } from '../../core/communication/messages/IMessageComposer';
-import { NitroEvent } from '../../core/events/NitroEvent';
-import { TextureUtils } from '../../room';
-import { RoomObjectEvent } from '../../room/events/RoomObjectEvent';
-import { RoomObjectMouseEvent } from '../../room/events/RoomObjectMouseEvent';
-import { IRoomInstance } from '../../room/IRoomInstance';
-import { IRoomManager } from '../../room/IRoomManager';
-import { IRoomManagerListener } from '../../room/IRoomManagerListener';
-import { RoomObjectUpdateMessage } from '../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObject } from '../../room/object/IRoomObject';
-import { IRoomObjectController } from '../../room/object/IRoomObjectController';
-import { IRoomObjectLogicFactory } from '../../room/object/logic/IRoomObjectLogicFactory';
-import { IRoomObjectVisualizationFactory } from '../../room/object/visualization/IRoomObjectVisualizationFactory';
-import { IRoomRenderer } from '../../room/renderer/IRoomRenderer';
-import { IRoomRendererFactory } from '../../room/renderer/IRoomRendererFactory';
-import { IRoomRenderingCanvas } from '../../room/renderer/IRoomRenderingCanvas';
-import { RoomRendererFactory } from '../../room/renderer/RoomRendererFactory';
-import { RoomInstance } from '../../room/RoomInstance';
-import { IRoomGeometry } from '../../room/utils/IRoomGeometry';
-import { IVector3D } from '../../room/utils/IVector3D';
-import { NumberBank } from '../../room/utils/NumberBank';
-import { RoomEnterEffect } from '../../room/utils/RoomEnterEffect';
-import { RoomGeometry } from '../../room/utils/RoomGeometry';
-import { Vector3d } from '../../room/utils/Vector3d';
-import { PetCustomPart } from '../avatar/pets/PetCustomPart';
-import { PetFigureData } from '../avatar/pets/PetFigureData';
+import { IConnection, IDisposable, IFurnitureStackingHeightMap, IGetImageListener, IImageResult, ILegacyWallGeometry, IMessageComposer, INitroCommunicationManager, INitroEvent, IObjectData, IPetColorResult, IPetCustomPart, IRoomContentListener, IRoomContentLoader, IRoomCreator, IRoomEngine, IRoomEngineServices, IRoomGeometry, IRoomInstance, IRoomManager, IRoomManagerListener, IRoomObject, IRoomObjectController, IRoomObjectLogicFactory, IRoomObjectVisualizationFactory, IRoomRenderer, IRoomRendererFactory, IRoomRenderingCanvas, IRoomSessionManager, ISelectedRoomObjectData, ISessionDataManager, ITileObjectMap, IUpdateReceiver, IVector3D, LegacyDataType, MouseEventType, NitroConfiguration, NitroLogger, ObjectDataFactory, RoomControllerLevel, RoomObjectCategory, RoomObjectUserType, RoomObjectVariable, ToolbarIconEnum, Vector3d } from '../../api';
+import { NitroManager } from '../../core';
+import { BadgeImageReadyEvent, NitroToolbarAnimateIconEvent, RoomBackgroundColorEvent, RoomDragEvent, RoomEngineEvent, RoomEngineObjectEvent, RoomObjectEvent, RoomObjectFurnitureActionEvent, RoomObjectMouseEvent, RoomSessionEvent, RoomToObjectOwnAvatarMoveEvent } from '../../events';
+import { GetTicker, GetTickerTime, NitroSprite, TextureUtils } from '../../pixi-proxy';
+import { NumberBank, RoomEnterEffect, RoomGeometry, RoomInstance, RoomObjectUpdateMessage, RoomRendererFactory } from '../../room';
+import { PetFigureData } from '../avatar';
 import { RenderRoomMessageComposer, RenderRoomThumbnailMessageComposer } from '../communication';
-import { INitroCommunicationManager } from '../communication/INitroCommunicationManager';
-import { ToolbarIconEnum } from '../enums/ToolbarIconEnum';
-import { NitroToolbarAnimateIconEvent } from '../events/NitroToolbarAnimateIconEvent';
-import { Nitro } from '../Nitro';
-import { RoomControllerLevel } from '../session/enum/RoomControllerLevel';
-import { BadgeImageReadyEvent } from '../session/events/BadgeImageReadyEvent';
-import { RoomSessionEvent } from '../session/events/RoomSessionEvent';
-import { IRoomSessionManager } from '../session/IRoomSessionManager';
-import { ISessionDataManager } from '../session/ISessionDataManager';
-import { MouseEventType } from '../ui/MouseEventType';
-import { FurniId } from '../utils/FurniId';
-import { RoomDragEvent } from './events';
-import { RoomBackgroundColorEvent } from './events/RoomBackgroundColorEvent';
-import { RoomEngineEvent } from './events/RoomEngineEvent';
-import { RoomEngineObjectEvent } from './events/RoomEngineObjectEvent';
-import { RoomObjectFurnitureActionEvent } from './events/RoomObjectFurnitureActionEvent';
-import { RoomToObjectOwnAvatarMoveEvent } from './events/RoomToObjectOwnAvatarMoveEvent';
-import { IGetImageListener } from './IGetImageListener';
+import { FurniId } from '../utils';
 import { ImageResult } from './ImageResult';
-import { IRoomContentListener } from './IRoomContentListener';
-import { IRoomCreator } from './IRoomCreator';
-import { IRoomEngine } from './IRoomEngine';
-import { IRoomEngineServices } from './IRoomEngineServices';
-import { ObjectAvatarCarryObjectUpdateMessage } from './messages/ObjectAvatarCarryObjectUpdateMessage';
-import { ObjectAvatarChatUpdateMessage } from './messages/ObjectAvatarChatUpdateMessage';
-import { ObjectAvatarDanceUpdateMessage } from './messages/ObjectAvatarDanceUpdateMessage';
-import { ObjectAvatarEffectUpdateMessage } from './messages/ObjectAvatarEffectUpdateMessage';
-import { ObjectAvatarExperienceUpdateMessage } from './messages/ObjectAvatarExperienceUpdateMessage';
-import { ObjectAvatarExpressionUpdateMessage } from './messages/ObjectAvatarExpressionUpdateMessage';
-import { ObjectAvatarFigureUpdateMessage } from './messages/ObjectAvatarFigureUpdateMessage';
-import { ObjectAvatarFlatControlUpdateMessage } from './messages/ObjectAvatarFlatControlUpdateMessage';
-import { ObjectAvatarGestureUpdateMessage } from './messages/ObjectAvatarGestureUpdateMessage';
-import { ObjectAvatarGuideStatusUpdateMessage } from './messages/ObjectAvatarGuideStatusUpdateMessage';
-import { ObjectAvatarMutedUpdateMessage } from './messages/ObjectAvatarMutedUpdateMessage';
-import { ObjectAvatarOwnMessage } from './messages/ObjectAvatarOwnMessage';
-import { ObjectAvatarPetGestureUpdateMessage } from './messages/ObjectAvatarPetGestureUpdateMessage';
-import { ObjectAvatarPlayerValueUpdateMessage } from './messages/ObjectAvatarPlayerValueUpdateMessage';
-import { ObjectAvatarPlayingGameUpdateMessage } from './messages/ObjectAvatarPlayingGameUpdateMessage';
-import { ObjectAvatarPostureUpdateMessage } from './messages/ObjectAvatarPostureUpdateMessage';
-import { ObjectAvatarSignUpdateMessage } from './messages/ObjectAvatarSignUpdateMessage';
-import { ObjectAvatarSleepUpdateMessage } from './messages/ObjectAvatarSleepUpdateMessage';
-import { ObjectAvatarTypingUpdateMessage } from './messages/ObjectAvatarTypingUpdateMessage';
-import { ObjectAvatarUpdateMessage } from './messages/ObjectAvatarUpdateMessage';
-import { ObjectAvatarUseObjectUpdateMessage } from './messages/ObjectAvatarUseObjectUpdateMessage';
-import { ObjectDataUpdateMessage } from './messages/ObjectDataUpdateMessage';
-import { ObjectGroupBadgeUpdateMessage } from './messages/ObjectGroupBadgeUpdateMessage';
-import { ObjectHeightUpdateMessage } from './messages/ObjectHeightUpdateMessage';
-import { ObjectItemDataUpdateMessage } from './messages/ObjectItemDataUpdateMessage';
-import { ObjectModelDataUpdateMessage } from './messages/ObjectModelDataUpdateMessage';
-import { ObjectMoveUpdateMessage } from './messages/ObjectMoveUpdateMessage';
-import { ObjectRoomColorUpdateMessage } from './messages/ObjectRoomColorUpdateMessage';
-import { ObjectRoomFloorHoleUpdateMessage } from './messages/ObjectRoomFloorHoleUpdateMessage';
-import { ObjectRoomMaskUpdateMessage } from './messages/ObjectRoomMaskUpdateMessage';
-import { ObjectRoomPlanePropertyUpdateMessage } from './messages/ObjectRoomPlanePropertyUpdateMessage';
-import { ObjectRoomPlaneVisibilityUpdateMessage } from './messages/ObjectRoomPlaneVisibilityUpdateMessage';
-import { ObjectRoomUpdateMessage } from './messages/ObjectRoomUpdateMessage';
-import { ObjectStateUpdateMessage } from './messages/ObjectStateUpdateMessage';
-import { IObjectData } from './object/data/IObjectData';
-import { ObjectDataFactory } from './object/data/ObjectDataFactory';
-import { LegacyDataType } from './object/data/type/LegacyDataType';
-import { RoomLogic } from './object/logic/room/RoomLogic';
-import { RoomMapData } from './object/RoomMapData';
-import { RoomObjectCategory } from './object/RoomObjectCategory';
-import { RoomObjectUserType } from './object/RoomObjectUserType';
-import { RoomObjectVariable } from './object/RoomObjectVariable';
-import { RoomObjectVisualizationFactory } from './object/RoomObjectVisualizationFactory';
-import { PetColorResult } from './PetColorResult';
+import { ObjectAvatarCarryObjectUpdateMessage, ObjectAvatarChatUpdateMessage, ObjectAvatarDanceUpdateMessage, ObjectAvatarEffectUpdateMessage, ObjectAvatarExperienceUpdateMessage, ObjectAvatarExpressionUpdateMessage, ObjectAvatarFigureUpdateMessage, ObjectAvatarFlatControlUpdateMessage, ObjectAvatarGestureUpdateMessage, ObjectAvatarGuideStatusUpdateMessage, ObjectAvatarMutedUpdateMessage, ObjectAvatarOwnMessage, ObjectAvatarPetGestureUpdateMessage, ObjectAvatarPlayerValueUpdateMessage, ObjectAvatarPlayingGameUpdateMessage, ObjectAvatarPostureUpdateMessage, ObjectAvatarSignUpdateMessage, ObjectAvatarSleepUpdateMessage, ObjectAvatarTypingUpdateMessage, ObjectAvatarUpdateMessage, ObjectAvatarUseObjectUpdateMessage, ObjectDataUpdateMessage, ObjectGroupBadgeUpdateMessage, ObjectHeightUpdateMessage, ObjectItemDataUpdateMessage, ObjectModelDataUpdateMessage, ObjectMoveUpdateMessage, ObjectRoomColorUpdateMessage, ObjectRoomFloorHoleUpdateMessage, ObjectRoomMaskUpdateMessage, ObjectRoomPlanePropertyUpdateMessage, ObjectRoomPlaneVisibilityUpdateMessage, ObjectRoomUpdateMessage, ObjectStateUpdateMessage } from './messages';
+import { RoomLogic, RoomMapData, RoomObjectVisualizationFactory } from './object';
 import { RoomContentLoader } from './RoomContentLoader';
 import { RoomMessageHandler } from './RoomMessageHandler';
 import { RoomObjectEventHandler } from './RoomObjectEventHandler';
 import { RoomObjectLogicFactory } from './RoomObjectLogicFactory';
 import { RoomVariableEnum } from './RoomVariableEnum';
-import { FurnitureStackingHeightMap } from './utils/FurnitureStackingHeightMap';
-import { LegacyWallGeometry } from './utils/LegacyWallGeometry';
-import { RoomCamera } from './utils/RoomCamera';
-import { RoomData } from './utils/RoomData';
-import { RoomFurnitureData } from './utils/RoomFurnitureData';
-import { RoomInstanceData } from './utils/RoomInstanceData';
-import { RoomObjectBadgeImageAssetListener } from './utils/RoomObjectBadgeImageAssetListener';
-import { SelectedRoomObjectData } from './utils/SelectedRoomObjectData';
-import { SpriteDataCollector } from './utils/SpriteDataCollector';
-import { TileObjectMap } from './utils/TileObjectMap';
+import { RoomCamera, RoomData, RoomFurnitureData, RoomInstanceData, RoomObjectBadgeImageAssetListener, SpriteDataCollector } from './utils';
 
 export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreator, IRoomEngineServices, IRoomManagerListener, IRoomContentListener, IUpdateReceiver, IDisposable
 {
@@ -141,7 +44,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
     private _roomSessionManager: IRoomSessionManager;
     private _roomObjectEventHandler: RoomObjectEventHandler;
     private _roomMessageHandler: RoomMessageHandler;
-    private _roomContentLoader: RoomContentLoader;
+    private _roomContentLoader: IRoomContentLoader;
     private _ready: boolean;
     private _roomContentLoaderReady: boolean;
     private _imageObjectIdBank: NumberBank;
@@ -247,7 +150,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
 
         this.events.addEventListener(RoomContentLoader.LOADER_READY, this.onRoomContentLoaderReadyEvent);
 
-        Nitro.instance.ticker.add(this.update, this);
+        GetTicker().add(this.update, this);
 
         document.addEventListener('visibilitychange', this.runVisibilityUpdate);
     }
@@ -263,7 +166,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
 
         document.removeEventListener('visibilitychange', this.runVisibilityUpdate);
 
-        Nitro.instance.ticker.remove(this.update, this);
+        GetTicker().remove(this.update, this);
 
         if(this._roomObjectEventHandler) this._roomObjectEventHandler.dispose();
 
@@ -301,7 +204,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         }
     }
 
-    private onRoomContentLoaderReadyEvent(event: NitroEvent): void
+    private onRoomContentLoaderReadyEvent(event: INitroEvent): void
     {
         this._roomContentLoaderReady = true;
 
@@ -371,14 +274,14 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
 
             this._roomDatas.set(roomId, data);
 
-            this.logger.warn('Room Engine not initilized yet, can not create room. Room data stored for later initialization.');
+            NitroLogger.warn('Room Engine not initilized yet, can not create room. Room data stored for later initialization.');
 
             return;
         }
 
         if(!roomMap)
         {
-            this.logger.warn('Room property messages received before floor height map, will initialize when floor height map received.');
+            NitroLogger.warn('Room property messages');
 
             return;
         }
@@ -447,7 +350,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
                 instance.model.setValue(RoomVariableEnum.ROOM_MIN_Y, minY);
                 instance.model.setValue(RoomVariableEnum.ROOM_MAX_Y, maxY);
 
-                const seed = ((((minX * 423) + (maxX * 671)) + (minY * 913)) + (maxY * 7509));
+                const seed = Math.trunc((minX * 423) + (maxX * 671) + (minY * 913) + (maxY * 7509));
 
                 if(roomObject && roomObject.model) roomObject.model.setValue(RoomObjectVariable.ROOM_RANDOM_SEED, seed);
             }
@@ -522,7 +425,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         }
 
         instance.createRoomObjectAndInitalize(RoomEngine.CURSOR_OBJECT_ID, RoomEngine.CURSOR_OBJECT_TYPE, RoomObjectCategory.CURSOR);
-        if(Nitro.instance.getConfiguration('enable.avatar.arrow', false)) instance.createRoomObjectAndInitalize(RoomEngine.ARROW_OBJECT_ID, RoomEngine.ARROW_OBJECT_TYPE, RoomObjectCategory.CURSOR);
+        if(NitroConfiguration.getValue('enable.avatar.arrow', false)) instance.createRoomObjectAndInitalize(RoomEngine.ARROW_OBJECT_ID, RoomEngine.ARROW_OBJECT_TYPE, RoomObjectCategory.CURSOR);
 
         return instance;
     }
@@ -883,12 +786,12 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
     {
         if(flag)
         {
-            Nitro.instance.ticker.remove(this.update, this);
+            GetTicker().remove(this.update, this);
         }
         else
         {
-            Nitro.instance.ticker.remove(this.update, this);
-            Nitro.instance.ticker.add(this.update, this);
+            GetTicker().remove(this.update, this);
+            GetTicker().add(this.update, this);
         }
     }
 
@@ -906,7 +809,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
     {
         if(!this._roomManager) return;
 
-        time = Nitro.instance.time;
+        time = GetTickerTime();
 
         RoomEnterEffect.turnVisualizationOn();
 
@@ -1059,7 +962,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
             model.setValue(RoomObjectVariable.FURNITURE_AD_URL, this.getRoomObjectAdUrl(data.type));
             model.setValue(RoomObjectVariable.FURNITURE_REAL_ROOM_OBJECT, (data.realRoomObject ? 1 : 0));
             model.setValue(RoomObjectVariable.FURNITURE_EXPIRY_TIME, data.expiryTime);
-            model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, Nitro.instance.time);
+            model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, GetTickerTime());
             model.setValue(RoomObjectVariable.FURNITURE_USAGE_POLICY, data.usagePolicy);
             model.setValue(RoomObjectVariable.FURNITURE_OWNER_ID, data.ownerId);
             model.setValue(RoomObjectVariable.FURNITURE_OWNER_NAME, data.ownerName);
@@ -1119,7 +1022,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
             model.setValue(RoomObjectVariable.FURNITURE_REAL_ROOM_OBJECT, (data.realRoomObject ? 1 : 0));
             model.setValue(RoomObjectVariable.OBJECT_ACCURATE_Z_VALUE, 1);
             model.setValue(RoomObjectVariable.FURNITURE_EXPIRY_TIME, data.expiryTime);
-            model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, Nitro.instance.time);
+            model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, GetTickerTime());
             model.setValue(RoomObjectVariable.FURNITURE_USAGE_POLICY, data.usagePolicy);
             model.setValue(RoomObjectVariable.FURNITURE_OWNER_ID, data.ownerId);
             model.setValue(RoomObjectVariable.FURNITURE_OWNER_NAME, data.ownerName);
@@ -1604,7 +1507,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         instanceData.setModelName(name);
     }
 
-    public getRoomTileObjectMap(k: number): TileObjectMap
+    public getRoomTileObjectMap(k: number): ITileObjectMap
     {
         const roomInstance = this.getRoomInstanceData(k);
 
@@ -1627,7 +1530,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return instanceData.roomCamera;
     }
 
-    public getSelectedRoomObjectData(roomId: number): SelectedRoomObjectData
+    public getSelectedRoomObjectData(roomId: number): ISelectedRoomObjectData
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -1636,7 +1539,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return instanceData.selectedObject;
     }
 
-    public setSelectedRoomObjectData(roomId: number, data: SelectedRoomObjectData): void
+    public setSelectedRoomObjectData(roomId: number, data: ISelectedRoomObjectData): void
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -1647,7 +1550,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         if(data) instanceData.setPlacedObject(null);
     }
 
-    public getPlacedRoomObjectData(roomId: number): SelectedRoomObjectData
+    public getPlacedRoomObjectData(roomId: number): ISelectedRoomObjectData
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -1656,7 +1559,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return instanceData.placedObject;
     }
 
-    public setPlacedRoomObjectData(roomId: number, data: SelectedRoomObjectData): void
+    public setPlacedRoomObjectData(roomId: number, data: ISelectedRoomObjectData): void
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -1672,7 +1575,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         this._roomObjectEventHandler.cancelRoomObjectPlacement(this._activeRoomId);
     }
 
-    public getFurnitureStackingHeightMap(roomId: number): FurnitureStackingHeightMap
+    public getFurnitureStackingHeightMap(roomId: number): IFurnitureStackingHeightMap
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -1681,7 +1584,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return instanceData.furnitureStackingHeightMap;
     }
 
-    public setFurnitureStackingHeightMap(roomId: number, heightMap: FurnitureStackingHeightMap): void
+    public setFurnitureStackingHeightMap(roomId: number, heightMap: IFurnitureStackingHeightMap): void
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -1690,7 +1593,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         instanceData.setFurnitureStackingHeightMap(heightMap);
     }
 
-    public getLegacyWallGeometry(roomId: number): LegacyWallGeometry
+    public getLegacyWallGeometry(roomId: number): ILegacyWallGeometry
     {
         const instanceData = this.getRoomInstanceData(roomId);
 
@@ -2027,7 +1930,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         if(!object) return false;
 
         object.model.setValue(RoomObjectVariable.FURNITURE_EXPIRY_TIME, expires);
-        object.model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, Nitro.instance.time);
+        object.model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, GetTickerTime());
 
         return true;
     }
@@ -2039,7 +1942,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         if(!object) return false;
 
         object.model.setValue(RoomObjectVariable.FURNITURE_EXPIRY_TIME, expires);
-        object.model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, Nitro.instance.time);
+        object.model.setValue(RoomObjectVariable.FURNITURE_EXPIRTY_TIMESTAMP, GetTickerTime());
 
         return true;
     }
@@ -2810,7 +2713,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
     {
         let type: string = null;
         let colorIndex = 0;
-        let imageResult: ImageResult = null;
+        let imageResult: IImageResult = null;
         const scale = 1;
 
         if(_arg_3)
@@ -2876,7 +2779,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         }
     }
 
-    public getRoomObjectImage(roomId: number, objectId: number, category: number, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0): ImageResult
+    public getRoomObjectImage(roomId: number, objectId: number, category: number, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0): IImageResult
     {
         if(!this._roomManager) return null;
 
@@ -2942,7 +2845,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return null;
     }
 
-    public getFurnitureFloorIcon(typeId: number, listener: IGetImageListener, extras: string = null, objectData: IObjectData = null): ImageResult
+    public getFurnitureFloorIcon(typeId: number, listener: IGetImageListener, extras: string = null, objectData: IObjectData = null): IImageResult
     {
         return this.getFurnitureFloorImage(typeId, new Vector3d(), 1, listener, 0, extras, -1, -1, objectData);
     }
@@ -2963,12 +2866,12 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return null;
     }
 
-    public getFurnitureWallIcon(typeId: number, listener: IGetImageListener, extras: string = null): ImageResult
+    public getFurnitureWallIcon(typeId: number, listener: IGetImageListener, extras: string = null): IImageResult
     {
         return this.getFurnitureWallImage(typeId, new Vector3d(), 1, listener, 0, extras);
     }
 
-    public getFurnitureFloorImage(typeId: number, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, state: number = -1, frameCount: number = -1, objectData: IObjectData = null): ImageResult
+    public getFurnitureFloorImage(typeId: number, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, state: number = -1, frameCount: number = -1, objectData: IObjectData = null): IImageResult
     {
         let type: string = null;
         let color = '';
@@ -2987,7 +2890,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return this.getGenericRoomObjectImage(type, color, direction, scale, listener, bgColor, extras, objectData, state, frameCount);
     }
 
-    public getFurnitureWallImage(typeId: number, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, state: number = -1, frameCount: number = -1): ImageResult
+    public getFurnitureWallImage(typeId: number, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, state: number = -1, frameCount: number = -1): IImageResult
     {
         let type: string = null;
         let color = '';
@@ -3006,7 +2909,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return this.getGenericRoomObjectImage(type, color, direction, scale, listener, bgColor, extras, null, state, frameCount);
     }
 
-    public getRoomObjectPetImage(typeId: number, paletteId: number, color: number, direction: IVector3D, scale: number, listener: IGetImageListener, headOnly: boolean = false, bgColor: number = 0, customParts: PetCustomPart[] = null, posture: string = null): ImageResult
+    public getRoomObjectPetImage(typeId: number, paletteId: number, color: number, direction: IVector3D, scale: number, listener: IGetImageListener, headOnly: boolean = false, bgColor: number = 0, customParts: IPetCustomPart[] = null, posture: string = null): IImageResult
     {
         let type: string = null;
         let value = ((((typeId + ' ') + paletteId) + ' ') + color.toString(16));
@@ -3028,7 +2931,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return this.getGenericRoomObjectImage(type, value, direction, scale, listener, bgColor, null, null, -1, -1, posture);
     }
 
-    public getGenericRoomObjectImage(type: string, value: string, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, objectData: IObjectData = null, state: number = -1, frameCount: number = -1, posture: string = null, originalId: number = -1): ImageResult
+    public getGenericRoomObjectImage(type: string, value: string, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, objectData: IObjectData = null, state: number = -1, frameCount: number = -1, posture: string = null, originalId: number = -1): IImageResult
     {
         if(!this._roomManager) return null;
 
@@ -3168,7 +3071,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return imageResult;
     }
 
-    public getGenericRoomObjectThumbnail(type: string, param: string, listener: IGetImageListener, extraData: string = null, stuffData: IObjectData = null): ImageResult
+    public getGenericRoomObjectThumbnail(type: string, param: string, listener: IGetImageListener, extraData: string = null, stuffData: IObjectData = null): IImageResult
     {
         if(!this._roomManager) return null;
 
@@ -3463,7 +3366,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
             //return new RenderRoomThumbnailMessageComposer(_local_12, _local_10, _local_11, this._activeRoomId, this._sessionDataManager._Str_8500);
         }
 
-        console.log(_local_10, _local_11, _local_12);
+        NitroLogger.log(_local_10, _local_11, _local_12);
 
         //return new RenderRoomMessageComposer(_local_12, _local_10, _local_11, this._activeRoomId, this._sessionDataManager._Str_8500);
 
@@ -3595,14 +3498,14 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return (this._roomContentLoader.getCollection(name) !== null);
     }
 
-    public getPetColorResult(petIndex: number, paletteIndex: number): PetColorResult
+    public getPetColorResult(petIndex: number, paletteIndex: number): IPetColorResult
     {
         if(!this._roomContentLoader) return null;
 
         return this._roomContentLoader.getPetColorResult(petIndex, paletteIndex);
     }
 
-    public getPetColorResultsForTag(petIndex: number, tagName: string): PetColorResult[]
+    public getPetColorResultsForTag(petIndex: number, tagName: string): IPetColorResult[]
     {
         if(!this._roomContentLoader) return null;
 
@@ -3681,7 +3584,7 @@ export class RoomEngine extends NitroManager implements IRoomEngine, IRoomCreato
         return this._ready;
     }
 
-    public get roomContentLoader(): RoomContentLoader
+    public get roomContentLoader(): IRoomContentLoader
     {
         return this._roomContentLoader;
     }

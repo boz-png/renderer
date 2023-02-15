@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { InstantMessageErrorParser } from '../../parser/friendlist/InstantMessageErrorParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { InstantMessageErrorParser } from '../../parser';
 
 export class InstantMessageErrorEvent extends MessageEvent implements IMessageEvent
 {

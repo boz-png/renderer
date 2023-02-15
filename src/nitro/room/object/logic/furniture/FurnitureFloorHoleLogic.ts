@@ -1,8 +1,7 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { Vector3d } from '../../../../../room/utils/Vector3d';
-import { RoomObjectFloorHoleEvent } from '../../../events/RoomObjectFloorHoleEvent';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable, Vector3d } from '../../../../../api';
+import { RoomObjectFloorHoleEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureFloorHoleLogic extends FurnitureMultiStateLogic
@@ -22,7 +21,7 @@ export class FurnitureFloorHoleLogic extends FurnitureMultiStateLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectFloorHoleEvent.ADD_HOLE, RoomObjectFloorHoleEvent.REMOVE_HOLE ];
+        const types = [RoomObjectFloorHoleEvent.ADD_HOLE, RoomObjectFloorHoleEvent.REMOVE_HOLE];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

@@ -1,12 +1,6 @@
 import { Resource, Texture } from '@pixi/core';
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { Disposable } from '../../../../../core/common/disposable/Disposable';
-import { IObjectVisualizationData } from '../../../../../room/object/visualization/IRoomObjectVisualizationData';
-import { AvatarScaleType } from '../../../../avatar/enum/AvatarScaleType';
-import { IAvatarEffectListener } from '../../../../avatar/IAvatarEffectListener';
-import { IAvatarImage } from '../../../../avatar/IAvatarImage';
-import { IAvatarImageListener } from '../../../../avatar/IAvatarImageListener';
-import { IAvatarRenderManager } from '../../../../avatar/IAvatarRenderManager';
+import { AvatarScaleType, IAssetData, IAvatarEffectListener, IAvatarImage, IAvatarImageListener, IAvatarRenderManager, IObjectVisualizationData } from '../../../../../api';
+import { Disposable } from '../../../../../core';
 
 export class AvatarVisualizationData extends Disposable implements IObjectVisualizationData
 {

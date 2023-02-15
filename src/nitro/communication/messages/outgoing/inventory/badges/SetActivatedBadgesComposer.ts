@@ -1,4 +1,4 @@
-import { IMessageComposer } from '../../../../../../core/communication/messages/IMessageComposer';
+import { IMessageComposer } from '../../../../../../api';
 
 export class SetActivatedBadgesComposer implements IMessageComposer<any[]>
 {
@@ -8,18 +8,10 @@ export class SetActivatedBadgesComposer implements IMessageComposer<any[]>
     {
         const data = [];
 
-        for(let i = 0; i < this._badges.length; i++)
+        for(let i = 1; i <= this._badges.length; i++)
         {
-            if(i <= this._badges.length)
-            {
-                data.push(i + 1);
-                data.push(this._badges[i]);
-            }
-            else
-            {
-                data.push(i + 1);
-                data.push('');
-            }
+            data.push(i);
+            data.push(this._badges[i - 1]);
         }
 
         return data;

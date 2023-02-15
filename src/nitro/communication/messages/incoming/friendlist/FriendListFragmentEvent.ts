@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { FriendListFragmentParser } from '../../parser/friendlist/FriendListFragmentMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { FriendListFragmentParser } from '../../parser';
 
 export class FriendListFragmentEvent extends MessageEvent implements IMessageEvent
 {

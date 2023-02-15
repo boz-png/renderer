@@ -1,13 +1,12 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
+import { IMessageDataWrapper, IMessageParser, IQuestion } from '../../../../../api';
 
 export class QuestionParser implements IMessageParser
 {
-    private _pollType:string = null;
-    private _pollId= -1;
+    private _pollType: string = null;
+    private _pollId = -1;
     private _questionId = -1;
     private _duration = -1;
-    private _question:IQuestion = null;
+    private _question: IQuestion = null;
 
     flush(): boolean
     {
@@ -51,41 +50,28 @@ export class QuestionParser implements IMessageParser
         return true;
     }
 
-    public get pollType():string
+    public get pollType(): string
     {
         return this._pollType;
     }
 
-    public get pollId():number
+    public get pollId(): number
     {
         return this._pollId;
     }
 
-    public get questionId():number
+    public get questionId(): number
     {
         return this._questionId;
     }
 
-    public get duration():number
+    public get duration(): number
     {
         return this._duration;
     }
 
-    public get question():IQuestion
+    public get question(): IQuestion
     {
         return this._question;
     }
-}
-
-export interface IQuestion
-{
-    id: number;
-    number: number;
-    type: number;
-    content: string;
-    selection_min?: number;
-    selections?: string[];
-    selection_values?: string[];
-    selection_count?: number;
-    selection_max?: number;
 }

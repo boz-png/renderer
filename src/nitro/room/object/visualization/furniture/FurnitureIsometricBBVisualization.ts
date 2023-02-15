@@ -1,8 +1,7 @@
 import { RenderTexture, Resource, Texture } from '@pixi/core';
 import { Matrix } from '@pixi/math';
-import { NitroSprite } from '../../../../../core/utils/proxy/NitroSprite';
-import { IGraphicAsset } from '../../../../../room/object/visualization/utils/IGraphicAsset';
-import { Nitro } from '../../../../Nitro';
+import { GetAssetManager, IGraphicAsset } from '../../../../../api';
+import { NitroSprite, PixiApplicationProxy } from '../../../../../pixi-proxy';
 import { FurnitureBBVisualization } from './FurnitureBBVisualization';
 import { FurnitureBrandedImageVisualization } from './FurnitureBrandedImageVisualization';
 
@@ -24,7 +23,7 @@ export class FurnitureIsometricBBVisualization extends FurnitureBBVisualization
 
             if(!texture) continue;
 
-            const existingAsset = this.getAsset(`${ this._imageUrl }_${ i }`);
+            const existingAsset = this.getAsset(`${this._imageUrl}_${i}`);
 
             if(!existingAsset) continue;
 
@@ -67,14 +66,14 @@ export class FurnitureIsometricBBVisualization extends FurnitureBBVisualization
                 height: (asset.height + matrix.ty)
             });
 
-            Nitro.instance.renderer.render(sprite, {
+            PixiApplicationProxy.instance.renderer.render(sprite, {
                 renderTexture,
                 clear: true,
                 transform: matrix
             });
 
-            this.asset.disposeAsset(`${ this._imageUrl }_${ i }`);
-            this.asset.addAsset(`${ this._imageUrl }_${ i }`, renderTexture, true, asset.x, asset.y, asset.flipH, asset.flipV);
+            this.asset.disposeAsset(`${this._imageUrl}_${i}`);
+            this.asset.addAsset(`${this._imageUrl}_${i}`, renderTexture, true, asset.x, asset.y, asset.flipH, asset.flipV);
         }
 
         this._needsTransform = false;
@@ -121,14 +120,14 @@ export class FurnitureIsometricBBVisualization extends FurnitureBBVisualization
             height: (asset.height + matrix.ty)
         });
 
-        Nitro.instance.renderer.render(sprite, {
+        PixiApplicationProxy.instance.renderer.render(sprite, {
             renderTexture,
             clear: true,
             transform: matrix
         });
 
-        this.asset.disposeAsset(`${ this._imageUrl }_0`);
-        this.asset.addAsset(`${ this._imageUrl }_0`, renderTexture, true, sprite.x, sprite.y, asset.flipH, asset.flipV);
+        this.asset.disposeAsset(`${this._imageUrl}_0`);
+        this.asset.addAsset(`${this._imageUrl}_0`, renderTexture, true, sprite.x, sprite.y, asset.flipH, asset.flipV);
 
         this._needsTransform = false;
     }
@@ -154,11 +153,11 @@ export class FurnitureIsometricBBVisualization extends FurnitureBBVisualization
                 }
                 else
                 {
-                    this.generateTransformedImage(Nitro.instance.core.asset.getTexture(this._imageUrl), this.getAsset(super.getSpriteAssetName(scale, layerId)));
+                    this.generateTransformedImage(GetAssetManager().getTexture(this._imageUrl), this.getAsset(super.getSpriteAssetName(scale, layerId)));
                 }
             }
 
-            return `${ this._imageUrl }_${ this.getFrameNumber(scale, layerId) }`;
+            return `${this._imageUrl}_${this.getFrameNumber(scale, layerId)}`;
         }
 
         return super.getSpriteAssetName(scale, layerId);

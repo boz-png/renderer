@@ -1,5 +1,4 @@
-import { IActionDefinition } from './IActionDefinition';
-import { IActiveActionData } from './IActiveActionData';
+import { IActionDefinition, IActiveActionData } from '../../../api';
 
 export class ActiveActionData implements IActiveActionData
 {

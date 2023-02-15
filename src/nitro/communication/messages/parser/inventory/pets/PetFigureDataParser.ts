@@ -1,6 +1,6 @@
-import { IMessageDataWrapper } from '../../../../../../core';
+import { IMessageDataWrapper, IPetFigureData } from '../../../../../../api';
 
-export class PetFigureDataParser
+export class PetFigureDataParser implements IPetFigureData
 {
     private _typeId: number;
     private _paletteId: number;

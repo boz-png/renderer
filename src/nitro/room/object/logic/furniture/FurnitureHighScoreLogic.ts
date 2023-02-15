@@ -1,7 +1,7 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureHighScoreLogic extends FurnitureLogic
@@ -12,7 +12,7 @@ export class FurnitureHighScoreLogic extends FurnitureLogic
 
     public getEventTypes(): string[]
     {
-        return [ RoomObjectWidgetRequestEvent.HIGH_SCORE_DISPLAY, RoomObjectWidgetRequestEvent.HIDE_HIGH_SCORE_DISPLAY ];
+        return [RoomObjectWidgetRequestEvent.HIGH_SCORE_DISPLAY, RoomObjectWidgetRequestEvent.HIDE_HIGH_SCORE_DISPLAY];
     }
 
     public tearDown(): void

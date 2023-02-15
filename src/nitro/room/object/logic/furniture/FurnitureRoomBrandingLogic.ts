@@ -1,16 +1,10 @@
 import { BaseTexture, Texture } from '@pixi/core';
 import { decompressFrames, parseGIF } from 'gifuct-js';
-import { IAssetData } from '../../../../../core';
-import { IRoomGeometry, RoomSpriteMouseEvent } from '../../../../../room';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
+import { GetAssetManager, IAssetData, IRoomGeometry, MapDataType, MouseEventType, RoomObjectVariable, RoomWidgetEnumItemExtradataParameter } from '../../../../../api';
+import { RoomObjectRoomAdEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
 import { Nitro } from '../../../../Nitro';
-import { MouseEventType } from '../../../../ui';
-import { RoomWidgetEnumItemExtradataParameter } from '../../../../ui/widget/enums/RoomWidgetEnumItemExtradataParameter';
-import { RoomObjectRoomAdEvent } from '../../../events';
-import { ObjectAdUpdateMessage } from '../../../messages/ObjectAdUpdateMessage';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { MapDataType } from '../../data/type/MapDataType';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { ObjectAdUpdateMessage, ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureRoomBrandingLogic extends FurnitureLogic
@@ -35,7 +29,7 @@ export class FurnitureRoomBrandingLogic extends FurnitureLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectRoomAdEvent.ROOM_AD_LOAD_IMAGE ];
+        const types = [RoomObjectRoomAdEvent.ROOM_AD_LOAD_IMAGE];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }
@@ -140,7 +134,7 @@ export class FurnitureRoomBrandingLogic extends FurnitureLogic
         super.mouseEvent(event, geometry);
     }
 
-    private downloadBackground(): void
+    private async downloadBackground(): Promise<void>
     {
         const model = this.object && this.object.model;
 
@@ -182,17 +176,17 @@ export class FurnitureRoomBrandingLogic extends FurnitureLogic
                         {
                             for(let i = 0; i < dims.width; i++)
                             {
-                                const pixel = pixels[j*dims.width + i];
+                                const pixel = pixels[j * dims.width + i];
                                 const coord = (j + dims.top) * width + (i + dims.left);
 
                                 if(trans !== pixel)
                                 {
                                     const c = colorTable[pixel];
 
-                                    frame[ 4 * coord ] = c[0];
-                                    frame[ 4 * coord + 1 ] = c[1];
-                                    frame[ 4 * coord + 2 ] = c[2];
-                                    frame[ 4 * coord + 3 ] = 255;
+                                    frame[4 * coord] = c[0];
+                                    frame[4 * coord + 1] = c[1];
+                                    frame[4 * coord + 2] = c[2];
+                                    frame[4 * coord + 3] = 255;
                                 }
                             }
                         }
@@ -214,7 +208,7 @@ export class FurnitureRoomBrandingLogic extends FurnitureLogic
         }
         else
         {
-            const asset = Nitro.instance.core && Nitro.instance.core.asset;
+            const asset = GetAssetManager();
 
             if(!asset) return;
 
@@ -222,17 +216,16 @@ export class FurnitureRoomBrandingLogic extends FurnitureLogic
 
             if(!texture)
             {
-                asset.downloadAsset(imageUrl, (flag: boolean) =>
+                const status = await asset.downloadAsset(imageUrl);
+
+                if(!status)
                 {
-                    if(flag)
-                    {
-                        this.processUpdateMessage(new ObjectAdUpdateMessage(ObjectAdUpdateMessage.IMAGE_LOADED));
-                    }
-                    else
-                    {
-                        this.processUpdateMessage(new ObjectAdUpdateMessage(ObjectAdUpdateMessage.IMAGE_LOADING_FAILED));
-                    }
-                });
+                    this.processUpdateMessage(new ObjectAdUpdateMessage(ObjectAdUpdateMessage.IMAGE_LOADING_FAILED));
+                }
+                else
+                {
+                    this.processUpdateMessage(new ObjectAdUpdateMessage(ObjectAdUpdateMessage.IMAGE_LOADED));
+                }
 
                 return;
             }

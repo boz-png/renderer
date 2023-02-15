@@ -1,5 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { IMessageParser } from './../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 
 export class ConcurrentUsersGoalProgressMessageParser implements IMessageParser
 {
@@ -15,7 +14,7 @@ export class ConcurrentUsersGoalProgressMessageParser implements IMessageParser
         return true;
     }
 
-    public parse(wrapper:IMessageDataWrapper): boolean
+    public parse(wrapper: IMessageDataWrapper): boolean
     {
         if(!wrapper) return false;
 

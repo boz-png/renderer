@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { IssuePickFailedMessageParser } from '../../parser/moderation/IssuePickFailedMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { IssuePickFailedMessageParser } from '../../parser';
 
 export class IssuePickFailedMessageEvent extends MessageEvent implements IMessageEvent
 {

@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { NavigatorHomeRoomParser } from '../../parser/navigator/NavigatorHomeRoomParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { NavigatorHomeRoomParser } from '../../parser';
 
 export class NavigatorHomeRoomEvent extends MessageEvent implements IMessageEvent
 {

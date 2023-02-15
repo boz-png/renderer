@@ -1,79 +1,13 @@
-import { Disposable } from '../../core/common/disposable/Disposable';
-import { NitroLogger } from '../../core/common/logger/NitroLogger';
-import { RoomId } from '../../room';
-import { RoomObjectEvent } from '../../room/events/RoomObjectEvent';
-import { RoomObjectMouseEvent } from '../../room/events/RoomObjectMouseEvent';
-import { RoomSpriteMouseEvent } from '../../room/events/RoomSpriteMouseEvent';
-import { RoomObjectUpdateMessage } from '../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObject } from '../../room/object/IRoomObject';
-import { IRoomObjectController } from '../../room/object/IRoomObjectController';
-import { IRoomCanvasMouseListener } from '../../room/renderer/IRoomCanvasMouseListener';
-import { IRoomGeometry } from '../../room/utils/IRoomGeometry';
-import { IVector3D } from '../../room/utils/IVector3D';
-import { RoomEnterEffect } from '../../room/utils/RoomEnterEffect';
-import { Vector3d } from '../../room/utils/Vector3d';
-import { FurnitureGroupInfoComposer, SetObjectDataMessageComposer } from '../communication';
-import { GetResolutionAchievementsMessageComposer } from '../communication/messages/outgoing/game/GetResolutionAchievementsMessageComposer';
-import { BotPlaceComposer } from '../communication/messages/outgoing/room/engine/BotPlaceComposer';
-import { GetItemDataComposer } from '../communication/messages/outgoing/room/engine/GetItemDataComposer';
-import { PetMoveComposer } from '../communication/messages/outgoing/room/engine/PetMoveComposer';
-import { PetPlaceComposer } from '../communication/messages/outgoing/room/engine/PetPlaceComposer';
-import { RemoveWallItemComposer } from '../communication/messages/outgoing/room/engine/RemoveWallItemComposer';
-import { SetItemDataMessageComposer } from '../communication/messages/outgoing/room/engine/SetItemDataMessageComposer';
-import { FurnitureFloorUpdateComposer } from '../communication/messages/outgoing/room/furniture/floor/FurnitureFloorUpdateComposer';
-import { FurniturePickupComposer } from '../communication/messages/outgoing/room/furniture/FurniturePickupComposer';
-import { FurniturePlaceComposer } from '../communication/messages/outgoing/room/furniture/FurniturePlaceComposer';
-import { FurniturePostItPlaceComposer } from '../communication/messages/outgoing/room/furniture/FurniturePostItPlaceComposer';
-import { FurnitureColorWheelComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureColorWheelComposer';
-import { FurnitureDiceActivateComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureDiceActivateComposer';
-import { FurnitureDiceDeactivateComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureDiceDeactivateComposer';
-import { FurnitureMultiStateComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureMultiStateComposer';
-import { FurnitureOneWayDoorComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureOneWayDoorComposer';
-import { FurnitureRandomStateComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureRandomStateComposer';
-import { FurnitureWallMultiStateComposer } from '../communication/messages/outgoing/room/furniture/logic/FurnitureWallMultiStateComposer';
-import { FurnitureWallUpdateComposer } from '../communication/messages/outgoing/room/furniture/wall/FurnitureWallUpdateComposer';
-import { RoomUnitLookComposer } from '../communication/messages/outgoing/room/unit/RoomUnitLookComposer';
-import { RoomUnitWalkComposer } from '../communication/messages/outgoing/room/unit/RoomUnitWalkComposer';
+import { IFurnitureStackingHeightMap, ILegacyWallGeometry, IObjectData, IRoomCanvasMouseListener, IRoomEngineServices, IRoomGeometry, IRoomObject, IRoomObjectController, IRoomObjectEventManager, ISelectedRoomObjectData, IVector3D, MouseEventType, NitroConfiguration, NitroLogger, RoomObjectCategory, RoomObjectOperationType, RoomObjectPlacementSource, RoomObjectType, RoomObjectUserType, RoomObjectVariable, Vector3d } from '../../api';
+import { Disposable } from '../../core';
+import { RoomEngineDimmerStateEvent, RoomEngineObjectEvent, RoomEngineObjectPlacedEvent, RoomEngineObjectPlacedOnUserEvent, RoomEngineObjectPlaySoundEvent, RoomEngineRoomAdEvent, RoomEngineSamplePlaybackEvent, RoomEngineTriggerWidgetEvent, RoomEngineUseProductEvent, RoomObjectBadgeAssetEvent, RoomObjectDataRequestEvent, RoomObjectDimmerStateUpdateEvent, RoomObjectEvent, RoomObjectFloorHoleEvent, RoomObjectFurnitureActionEvent, RoomObjectHSLColorEnabledEvent, RoomObjectHSLColorEnableEvent, RoomObjectMouseEvent, RoomObjectMoveEvent, RoomObjectPlaySoundIdEvent, RoomObjectRoomAdEvent, RoomObjectSamplePlaybackEvent, RoomObjectSoundMachineEvent, RoomObjectStateChangedEvent, RoomObjectTileMouseEvent, RoomObjectWallMouseEvent, RoomObjectWidgetRequestEvent, RoomSpriteMouseEvent } from '../../events';
+import { RoomEnterEffect, RoomId, RoomObjectUpdateMessage } from '../../room';
+import { BotPlaceComposer, FurnitureColorWheelComposer, FurnitureDiceActivateComposer, FurnitureDiceDeactivateComposer, FurnitureFloorUpdateComposer, FurnitureGroupInfoComposer, FurnitureMultiStateComposer, FurnitureOneWayDoorComposer, FurniturePickupComposer, FurniturePlaceComposer, FurniturePostItPlaceComposer, FurnitureRandomStateComposer, FurnitureWallMultiStateComposer, FurnitureWallUpdateComposer, GetItemDataComposer, GetResolutionAchievementsMessageComposer, PetMoveComposer, PetPlaceComposer, RemoveWallItemComposer, RoomUnitLookComposer, RoomUnitWalkComposer, SetItemDataMessageComposer, SetObjectDataMessageComposer } from '../communication';
 import { Nitro } from '../Nitro';
-import { MouseEventType } from '../ui/MouseEventType';
-import { RoomObjectPlacementSource } from './enums/RoomObjectPlacementSource';
-import { RoomEngineObjectPlaySoundEvent, RoomEngineRoomAdEvent, RoomEngineUseProductEvent, RoomObjectPlaySoundIdEvent, RoomObjectRoomAdEvent, RoomObjectSoundMachineEvent } from './events';
-import { RoomEngineDimmerStateEvent } from './events/RoomEngineDimmerStateEvent';
-import { RoomEngineObjectEvent } from './events/RoomEngineObjectEvent';
-import { RoomEngineObjectPlacedEvent } from './events/RoomEngineObjectPlacedEvent';
-import { RoomEngineObjectPlacedOnUserEvent } from './events/RoomEngineObjectPlacedOnUserEvent';
-import { RoomEngineSamplePlaybackEvent } from './events/RoomEngineSamplePlaybackEvent';
-import { RoomEngineTriggerWidgetEvent } from './events/RoomEngineTriggerWidgetEvent';
-import { RoomObjectBadgeAssetEvent } from './events/RoomObjectBadgeAssetEvent';
-import { RoomObjectDataRequestEvent } from './events/RoomObjectDataRequestEvent';
-import { RoomObjectDimmerStateUpdateEvent } from './events/RoomObjectDimmerStateUpdateEvent';
-import { RoomObjectFloorHoleEvent } from './events/RoomObjectFloorHoleEvent';
-import { RoomObjectFurnitureActionEvent } from './events/RoomObjectFurnitureActionEvent';
-import { RoomObjectHSLColorEnabledEvent } from './events/RoomObjectHSLColorEnabledEvent';
-import { RoomObjectHSLColorEnableEvent } from './events/RoomObjectHSLColorEnableEvent';
-import { RoomObjectMoveEvent } from './events/RoomObjectMoveEvent';
-import { RoomObjectSamplePlaybackEvent } from './events/RoomObjectSamplePlaybackEvent';
-import { RoomObjectStateChangedEvent } from './events/RoomObjectStateChangedEvent';
-import { RoomObjectTileMouseEvent } from './events/RoomObjectTileMouseEvent';
-import { RoomObjectWallMouseEvent } from './events/RoomObjectWallMouseEvent';
-import { RoomObjectWidgetRequestEvent } from './events/RoomObjectWidgetRequestEvent';
-import { IRoomEngineServices } from './IRoomEngineServices';
-import { ObjectAvatarSelectedMessage } from './messages/ObjectAvatarSelectedMessage';
-import { ObjectDataUpdateMessage } from './messages/ObjectDataUpdateMessage';
-import { ObjectSelectedMessage } from './messages/ObjectSelectedMessage';
-import { ObjectTileCursorUpdateMessage } from './messages/ObjectTileCursorUpdateMessage';
-import { ObjectVisibilityUpdateMessage } from './messages/ObjectVisibilityUpdateMessage';
-import { IObjectData } from './object/data/IObjectData';
-import { RoomObjectCategory } from './object/RoomObjectCategory';
-import { RoomObjectOperationType } from './object/RoomObjectOperationType';
-import { RoomObjectType } from './object/RoomObjectType';
-import { RoomObjectUserType } from './object/RoomObjectUserType';
-import { RoomObjectVariable } from './object/RoomObjectVariable';
-import { FurnitureStackingHeightMap } from './utils/FurnitureStackingHeightMap';
-import { LegacyWallGeometry } from './utils/LegacyWallGeometry';
-import { SelectedRoomObjectData } from './utils/SelectedRoomObjectData';
+import { ObjectAvatarSelectedMessage, ObjectDataUpdateMessage, ObjectSelectedMessage, ObjectTileCursorUpdateMessage, ObjectVisibilityUpdateMessage } from './messages';
+import { SelectedRoomObjectData } from './utils';
 
-export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMouseListener
+export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMouseListener, IRoomObjectEventManager
 {
     private _roomEngine: IRoomEngineServices;
 
@@ -362,6 +296,9 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
             case RoomObjectMouseEvent.CLICK:
                 this.handleRoomObjectMouseClickEvent(event, roomId);
                 return;
+            case RoomObjectMouseEvent.DOUBLE_CLICK:
+                this.handleRoomObjectMouseDoubleClickEvent(event, roomId);
+                return;
             case RoomObjectMouseEvent.MOUSE_MOVE:
                 this.handleRoomObjectMouseMoveEvent(event, roomId);
                 return;
@@ -554,6 +491,18 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
 
                 this.setSelectedAvatar(roomId, 0, false);
             }
+        }
+    }
+
+    private handleRoomObjectMouseDoubleClickEvent(event: RoomObjectMouseEvent, roomId: number): void
+    {
+        const id = event.objectId;
+        const type = event.objectType;
+        const category = this._roomEngine.getRoomObjectCategoryForType(type);
+
+        if(this._roomEngine.events)
+        {
+            this._roomEngine.events.dispatchEvent(new RoomEngineObjectEvent(RoomEngineObjectEvent.DOUBLE_CLICK, roomId, id, category));
         }
     }
 
@@ -1095,7 +1044,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
                 event.object.model.setValue(RoomObjectVariable.SESSION_CURRENT_USER_ID, this._roomEngine.sessionDataManager.userId);
                 return;
             case RoomObjectDataRequestEvent.RODRE_URL_PREFIX:
-                event.object.model.setValue(RoomObjectVariable.SESSION_URL_PREFIX, Nitro.instance.getConfiguration('url.prefix'));
+                event.object.model.setValue(RoomObjectVariable.SESSION_URL_PREFIX, NitroConfiguration.getValue('url.prefix'));
                 return;
         }
     }
@@ -1308,7 +1257,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         }
     }
 
-    private handleFurnitureMove(roomObject: IRoomObjectController, selectedObjectData: SelectedRoomObjectData, x: number, y: number, stackingHeightMap: FurnitureStackingHeightMap): boolean
+    private handleFurnitureMove(roomObject: IRoomObjectController, selectedObjectData: ISelectedRoomObjectData, x: number, y: number, stackingHeightMap: IFurnitureStackingHeightMap): boolean
     {
         if(!roomObject || !selectedObjectData) return false;
 
@@ -1347,7 +1296,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         return true;
     }
 
-    private handleWallItemMove(k: IRoomObjectController, _arg_2: SelectedRoomObjectData, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: IVector3D, _arg_6: number, _arg_7: number, _arg_8: number): boolean
+    private handleWallItemMove(k: IRoomObjectController, _arg_2: ISelectedRoomObjectData, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: IVector3D, _arg_6: number, _arg_7: number, _arg_8: number): boolean
     {
         if(!k || !_arg_2) return false;
 
@@ -1362,7 +1311,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         return true;
     }
 
-    private validateFurnitureLocation(k: IRoomObject, _arg_2: IVector3D, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: FurnitureStackingHeightMap): Vector3d
+    private validateFurnitureLocation(k: IRoomObject, _arg_2: IVector3D, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: IFurnitureStackingHeightMap): Vector3d
     {
         if(!k || !k.model || !_arg_2) return null;
 
@@ -1432,7 +1381,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         return null;
     }
 
-    private validateWallItemLocation(k: IRoomObject, _arg_2: IVector3D, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: number, _arg_6: number, _arg_7: SelectedRoomObjectData): Vector3d
+    private validateWallItemLocation(k: IRoomObject, _arg_2: IVector3D, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: number, _arg_6: number, _arg_7: ISelectedRoomObjectData): Vector3d
     {
         if((((((k == null) || (k.model == null)) || (_arg_2 == null)) || (_arg_3 == null)) || (_arg_4 == null)) || (_arg_7 == null)) return null;
 
@@ -1999,7 +1948,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         return direction;
     }
 
-    private isValidLocation(object: IRoomObject, goalDirection: IVector3D, stackingHeightMap: FurnitureStackingHeightMap): boolean
+    private isValidLocation(object: IRoomObject, goalDirection: IVector3D, stackingHeightMap: IFurnitureStackingHeightMap): boolean
     {
         if(!object || !object.model || !goalDirection) return false;
 
@@ -2208,7 +2157,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         }
     }
 
-    private getSelectedRoomObjectData(roomId: number): SelectedRoomObjectData
+    private getSelectedRoomObjectData(roomId: number): ISelectedRoomObjectData
     {
         if(!this._roomEngine) return null;
 
@@ -2254,7 +2203,7 @@ export class RoomObjectEventHandler extends Disposable implements IRoomCanvasMou
         this._roomEngine.setSelectedRoomObjectData(roomId, selectedData);
     }
 
-    private handleUserPlace(roomObject: IRoomObjectController, x: number, y: number, wallGeometry: LegacyWallGeometry): boolean
+    private handleUserPlace(roomObject: IRoomObjectController, x: number, y: number, wallGeometry: ILegacyWallGeometry): boolean
     {
         if(!wallGeometry.isRoomTile(x, y)) return false;
 

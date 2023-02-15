@@ -1,7 +1,7 @@
 import { Resource, Texture } from '@pixi/core';
 import { Sprite } from '@pixi/sprite';
-import { AlphaTolerance, TextureUtils } from '../../../../../..';
-import { IRoomObjectSprite } from '../../../../../../room/object/visualization/IRoomObjectSprite';
+import { AlphaTolerance, IRoomObjectSprite } from '../../../../../../api';
+import { TextureUtils } from '../../../../../../pixi-proxy';
 import { IAvatarAddition } from './IAvatarAddition';
 
 export class GameClickTargetAddition implements IAvatarAddition

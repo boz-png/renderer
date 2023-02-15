@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { GuildForumThread } from './GuildForumThread';
 
 export class PostThreadMessageParser implements IMessageParser

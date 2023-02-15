@@ -1,10 +1,9 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 
 export class ModeratorMessageParser implements IMessageParser
 {
-    private _message:string;
-    private _url:string;
+    private _message: string;
+    private _url: string;
 
     public flush(): boolean
     {
@@ -24,12 +23,12 @@ export class ModeratorMessageParser implements IMessageParser
         return true;
     }
 
-    public get message():string
+    public get message(): string
     {
         return this._message;
     }
 
-    public get url():string
+    public get url(): string
     {
         return this._url;
     }

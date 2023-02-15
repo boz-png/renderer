@@ -1,4 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../core';
+import { IMessageDataWrapper } from '../../../../../api';
 import { IssueInfoMessageParser } from './IssueInfoMessageParser';
 import { IssueMessageData } from './IssueMessageData';
 
@@ -6,7 +6,7 @@ export class ModeratorInitData
 {
     private _messageTemplates: string[];
     private _roomMessageTemplates: string[];
-    private _issues:IssueMessageData[];
+    private _issues: IssueMessageData[];
     private _cfhPermission: boolean;
     private _chatlogsPermission: boolean;
     private _alertPermission: boolean;
@@ -22,7 +22,7 @@ export class ModeratorInitData
         const local2 = new IssueInfoMessageParser();
         this._issues = [];
         this._messageTemplates = [];
-        this._roomMessageTemplates= [];
+        this._roomMessageTemplates = [];
 
         let local3 = wrapper.readInt();
         let i = 0;
@@ -68,7 +68,7 @@ export class ModeratorInitData
 
 
     }
-    public dispose():void
+    public dispose(): void
     {
         if(this._disposed)
         {
@@ -95,7 +95,7 @@ export class ModeratorInitData
         return this._roomMessageTemplates;
     }
 
-    public get issues():IssueMessageData[]
+    public get issues(): IssueMessageData[]
     {
         return this._issues;
     }

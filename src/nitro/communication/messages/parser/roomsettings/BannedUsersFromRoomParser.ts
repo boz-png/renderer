@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { BannedUserData } from '../../incoming/roomsettings/BannedUserData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { BannedUserData } from './BannedUserData';
 
 export class BannedUsersFromRoomParser implements IMessageParser
 {

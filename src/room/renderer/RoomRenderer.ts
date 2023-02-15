@@ -1,7 +1,4 @@
-import { IRoomObject } from '../object/IRoomObject';
-import { IRoomRenderer } from './IRoomRenderer';
-import { IRoomRenderingCanvas } from './IRoomRenderingCanvas';
-import { IRoomSpriteCanvasContainer } from './IRoomSpriteCanvasContainer';
+import { IRoomObject, IRoomRenderer, IRoomRenderingCanvas, IRoomSpriteCanvasContainer } from '../../api';
 import { RoomSpriteCanvas } from './RoomSpriteCanvas';
 
 export class RoomRenderer implements IRoomRenderer, IRoomSpriteCanvasContainer
@@ -27,7 +24,7 @@ export class RoomRenderer implements IRoomRenderer, IRoomSpriteCanvasContainer
 
         if(this._canvases)
         {
-            for(const [ key, canvas ] of this._canvases.entries())
+            for(const [key, canvas] of this._canvases.entries())
             {
                 this._canvases.delete(key);
 

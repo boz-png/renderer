@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { SanctionStatusMessageParser } from '../../parser/callforhelp';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { SanctionStatusMessageParser } from '../../parser';
 
 export class SanctionStatusEvent extends MessageEvent implements IMessageEvent
 {

@@ -1,8 +1,5 @@
-﻿import { IAssetAnimationFramePart } from '../../../core/asset/interfaces/animation/IAssetAnimationFramePart';
-import { ActiveActionData } from '../actions/ActiveActionData';
-import { IActionDefinition } from '../actions/IActionDefinition';
-import { IActiveActionData } from '../actions/IActiveActionData';
-import { IAnimationLayerData } from './IAnimationLayerData';
+﻿import { IActionDefinition, IActiveActionData, IAnimationLayerData, IAssetAnimationFramePart } from '../../../api';
+import { ActiveActionData } from '../actions';
 
 export class AvatarAnimationLayerData implements IAnimationLayerData
 {

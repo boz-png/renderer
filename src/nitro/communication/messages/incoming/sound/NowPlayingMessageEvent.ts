@@ -1,5 +1,5 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
 import { NowPlayingMessageParser } from '../../parser';
 
 export class NowPlayingMessageEvent extends MessageEvent implements IMessageEvent

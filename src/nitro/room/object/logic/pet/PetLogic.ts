@@ -1,23 +1,8 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomObjectMouseEvent } from '../../../../../room/events/RoomObjectMouseEvent';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObjectModel } from '../../../../../room/object/IRoomObjectModel';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { Vector3d } from '../../../../../room/utils/Vector3d';
-import { PetFigureData } from '../../../../avatar/pets/PetFigureData';
-import { PetType } from '../../../../avatar/pets/PetType';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectMoveEvent } from '../../../events/RoomObjectMoveEvent';
-import { ObjectAvatarExperienceUpdateMessage } from '../../../messages';
-import { ObjectAvatarChatUpdateMessage } from '../../../messages/ObjectAvatarChatUpdateMessage';
-import { ObjectAvatarFigureUpdateMessage } from '../../../messages/ObjectAvatarFigureUpdateMessage';
-import { ObjectAvatarPetGestureUpdateMessage } from '../../../messages/ObjectAvatarPetGestureUpdateMessage';
-import { ObjectAvatarPostureUpdateMessage } from '../../../messages/ObjectAvatarPostureUpdateMessage';
-import { ObjectAvatarSelectedMessage } from '../../../messages/ObjectAvatarSelectedMessage';
-import { ObjectAvatarSleepUpdateMessage } from '../../../messages/ObjectAvatarSleepUpdateMessage';
-import { ObjectAvatarUpdateMessage } from '../../../messages/ObjectAvatarUpdateMessage';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, IRoomGeometry, IRoomObjectModel, MouseEventType, PetType, RoomObjectVariable, Vector3d } from '../../../../../api';
+import { RoomObjectMouseEvent, RoomObjectMoveEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { PetFigureData } from '../../../../avatar';
+import { ObjectAvatarChatUpdateMessage, ObjectAvatarExperienceUpdateMessage, ObjectAvatarFigureUpdateMessage, ObjectAvatarPetGestureUpdateMessage, ObjectAvatarPostureUpdateMessage, ObjectAvatarSelectedMessage, ObjectAvatarSleepUpdateMessage, ObjectAvatarUpdateMessage } from '../../../messages';
 import { MovingObjectLogic } from '../MovingObjectLogic';
 
 export class PetLogic extends MovingObjectLogic
@@ -51,7 +36,7 @@ export class PetLogic extends MovingObjectLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectMouseEvent.CLICK, RoomObjectMoveEvent.POSITION_CHANGED ];
+        const types = [RoomObjectMouseEvent.CLICK, RoomObjectMoveEvent.POSITION_CHANGED];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

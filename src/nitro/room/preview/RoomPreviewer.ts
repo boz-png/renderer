@@ -2,27 +2,12 @@ import { RenderTexture, Texture } from '@pixi/core';
 import { Container, DisplayObject } from '@pixi/display';
 import { Point, Rectangle } from '@pixi/math';
 import { Sprite } from '@pixi/sprite';
-import { NitroSprite } from '../../../core';
-import { IRoomObjectController } from '../../../room/object/IRoomObjectController';
-import { IRoomRenderingCanvas } from '../../../room/renderer/IRoomRenderingCanvas';
-import { IVector3D } from '../../../room/utils/IVector3D';
-import { RoomId } from '../../../room/utils/RoomId';
-import { Vector3d } from '../../../room/utils/Vector3d';
-import { FloorHeightMapMessageParser } from '../../communication/messages/parser/room/mapping/FloorHeightMapMessageParser';
-import { RoomEntryTileMessageParser } from '../../communication/messages/parser/room/mapping/RoomEntryTileMessageParser';
-import { Nitro } from '../../Nitro';
-import { RoomEngineEvent } from '../events/RoomEngineEvent';
-import { RoomEngineObjectEvent } from '../events/RoomEngineObjectEvent';
-import { IGetImageListener } from '../IGetImageListener';
-import { ImageResult } from '../ImageResult';
-import { IRoomCreator } from '../IRoomCreator';
-import { IRoomEngine } from '../IRoomEngine';
-import { ObjectRoomMapUpdateMessage } from '../messages/ObjectRoomMapUpdateMessage';
-import { IObjectData } from '../object/data/IObjectData';
-import { LegacyDataType } from '../object/data/type/LegacyDataType';
-import { RoomObjectCategory } from '../object/RoomObjectCategory';
-import { RoomObjectUserType } from '../object/RoomObjectUserType';
-import { RoomObjectVariable } from '../object/RoomObjectVariable';
+import { IGetImageListener, IImageResult, IObjectData, IRoomEngine, IRoomObjectController, IRoomRenderingCanvas, IVector3D, LegacyDataType, RoomObjectCategory, RoomObjectUserType, RoomObjectVariable, Vector3d } from '../../../api';
+import { RoomEngineEvent, RoomEngineObjectEvent } from '../../../events';
+import { GetTickerTime, NitroSprite } from '../../../pixi-proxy';
+import { RoomId } from '../../../room';
+import { FloorHeightMapMessageParser, RoomEntryTileMessageParser } from '../../communication';
+import { ObjectRoomMapUpdateMessage } from '../messages';
 import { RoomPlaneParser } from '../object/RoomPlaneParser';
 import { RoomEngine } from '../RoomEngine';
 import { LegacyWallGeometry } from '../utils/LegacyWallGeometry';
@@ -266,7 +251,7 @@ export class RoomPreviewer
 
             if(this._roomEngine.addFurnitureFloor(this._previewRoomId, RoomPreviewer.PREVIEW_OBJECT_ID, classId, new Vector3d(RoomPreviewer.PREVIEW_OBJECT_LOCATION_X, RoomPreviewer.PREVIEW_OBJECT_LOCATION_Y, 0), direction, 0, objectData, NaN, -1, 0, -1, '', true, false))
             {
-                this._previousAutomaticStateChangeTime = Nitro.instance.time;
+                this._previousAutomaticStateChangeTime = GetTickerTime();
                 this._automaticStateChange = true;
 
                 const roomObject = this._roomEngine.getRoomObject(this._previewRoomId, RoomPreviewer.PREVIEW_OBJECT_ID, this._currentPreviewObjectCategory);
@@ -296,7 +281,7 @@ export class RoomPreviewer
 
             if(this._roomEngine.addFurnitureWall(this._previewRoomId, RoomPreviewer.PREVIEW_OBJECT_ID, classId, new Vector3d(0.5, 2.3, 1.8), direction, 0, objectData, 0, 0, -1, '', false))
             {
-                this._previousAutomaticStateChangeTime = Nitro.instance.time;
+                this._previousAutomaticStateChangeTime = GetTickerTime();
                 this._automaticStateChange = true;
 
                 this.updatePreviewRoomView();
@@ -320,7 +305,7 @@ export class RoomPreviewer
 
             if(this._roomEngine.addRoomObjectUser(this._previewRoomId, RoomPreviewer.PREVIEW_OBJECT_ID, new Vector3d(RoomPreviewer.PREVIEW_OBJECT_LOCATION_X, RoomPreviewer.PREVIEW_OBJECT_LOCATION_Y, 0), new Vector3d(90, 0, 0), 135, RoomObjectUserType.getTypeNumber(RoomObjectUserType.USER), figure))
             {
-                this._previousAutomaticStateChangeTime = Nitro.instance.time;
+                this._previousAutomaticStateChangeTime = GetTickerTime();
                 this._automaticStateChange = true;
 
                 this.updateUserGesture(1);
@@ -348,7 +333,7 @@ export class RoomPreviewer
 
             if(this._roomEngine.addRoomObjectUser(this._previewRoomId, RoomPreviewer.PREVIEW_OBJECT_ID, new Vector3d(RoomPreviewer.PREVIEW_OBJECT_LOCATION_X, RoomPreviewer.PREVIEW_OBJECT_LOCATION_Y, 0), new Vector3d(90, 0, 0), 90, RoomObjectUserType.getTypeNumber(RoomObjectUserType.PET), figure))
             {
-                this._previousAutomaticStateChangeTime = Nitro.instance.time;
+                this._previousAutomaticStateChangeTime = GetTickerTime();
                 this._automaticStateChange = false;
 
                 this.updateUserGesture(1);
@@ -435,7 +420,7 @@ export class RoomPreviewer
     {
         if(this._automaticStateChange)
         {
-            const time = Nitro.instance.time;
+            const time = GetTickerTime();
 
             if(time > (this._previousAutomaticStateChangeTime + RoomPreviewer.AUTOMATIC_STATE_CHANGE_INTERVAL))
             {
@@ -802,7 +787,7 @@ export class RoomPreviewer
         return renderingCanvas;
     }
 
-    public getGenericRoomObjectImage(type: string, value: string, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, objectData: IObjectData = null, state: number = -1, frame: number = -1, posture: string = null): ImageResult
+    public getGenericRoomObjectImage(type: string, value: string, direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0, extras: string = null, objectData: IObjectData = null, state: number = -1, frame: number = -1, posture: string = null): IImageResult
     {
         if(this.isRoomEngineReady)
         {
@@ -812,7 +797,7 @@ export class RoomPreviewer
         return null;
     }
 
-    public getRoomObjectImage(direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0): ImageResult
+    public getRoomObjectImage(direction: IVector3D, scale: number, listener: IGetImageListener, bgColor: number = 0): IImageResult
     {
         if(this.isRoomEngineReady)
         {

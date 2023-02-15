@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { NavigatorSavedSearch } from './utils/NavigatorSavedSearch';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { NavigatorSavedSearch } from './utils';
 
 export class NavigatorSearchesParser implements IMessageParser
 {

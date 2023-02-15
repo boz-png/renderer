@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { CfhChatlogData } from '../../incoming/moderation/CfhChatlogData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { CfhChatlogData } from './CfhChatlogData';
 
 export class CfhChatlogMessageParser implements IMessageParser
 {

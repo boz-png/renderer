@@ -1,7 +1,5 @@
-import { AdvancedMap } from '../../../../../core';
-import { RoomWidgetEnum } from '../../../../ui';
-import { RoomObjectDataRequestEvent } from '../../../events';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { AdvancedMap, RoomObjectVariable, RoomWidgetEnum } from '../../../../../api';
+import { RoomObjectDataRequestEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureRentableSpaceLogic extends FurnitureLogic

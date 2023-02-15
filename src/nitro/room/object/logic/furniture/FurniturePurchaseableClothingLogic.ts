@@ -1,5 +1,5 @@
-import { ContextMenuEnum } from '../../../../ui';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
+import { ContextMenuEnum } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurniturePurchaseableClothingLogic extends FurnitureMultiStateLogic

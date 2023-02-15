@@ -1,4 +1,4 @@
-﻿import { IRoomGeometry } from '../../../../../../../room/utils/IRoomGeometry';
+﻿import { IRoomGeometry } from '../../../../../../../api';
 import { PlaneVisualization } from './PlaneVisualization';
 import { PlaneVisualizationLayer } from './PlaneVisualizationLayer';
 
@@ -85,7 +85,7 @@ export class Plane
         return sizeIndex;
     }
 
-    protected getPlaneVisualization(size: number): PlaneVisualization
+    public getPlaneVisualization(size: number): PlaneVisualization
     {
         if(size === this._lastSize) return this._lastPlaneVisualization;
 

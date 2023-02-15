@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { MiniMailNewMessageParser } from '../../parser/friendlist/MiniMailNewMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { MiniMailNewMessageParser } from '../../parser';
 
 export class MiniMailNewMessageEvent extends MessageEvent implements IMessageEvent
 {

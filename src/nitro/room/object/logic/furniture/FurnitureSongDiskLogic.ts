@@ -1,6 +1,5 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { RoomWidgetEnumItemExtradataParameter } from '../../../../ui';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable, RoomWidgetEnumItemExtradataParameter } from '../../../../../api';
+import { RoomObjectUpdateMessage } from '../../../../../room';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureSongDiskLogic extends FurnitureLogic

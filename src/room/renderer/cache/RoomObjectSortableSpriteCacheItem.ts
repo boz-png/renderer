@@ -1,4 +1,4 @@
-﻿import { SortableSprite } from '../utils/SortableSprite';
+﻿import { SortableSprite } from '../utils';
 
 export class RoomObjectSortableSpriteCacheItem
 {

@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { TalentTrackLevel } from './TalentTrackLevel';
 import { TalentTrackRewardProduct } from './TalentTrackRewardProduct';
 import { TalentTrackTask } from './TalentTrackTask';

@@ -1,11 +1,10 @@
-﻿import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
-import { AdvancedMap } from '../../../../../../core/utils/AdvancedMap';
+﻿import { AdvancedMap, IAdvancedMap, IMessageDataWrapper, IMessageParser } from '../../../../../../api';
 
 export class BadgesParser implements IMessageParser
 {
     private _allBadgeCodes: string[];
-    private _activeBadgeCodes: AdvancedMap<string, number>;
-    private _badgeIds: AdvancedMap<string, number>;
+    private _activeBadgeCodes: string[];
+    private _badgeIds: IAdvancedMap<string, number>;
 
     public flush(): boolean
     {
@@ -21,7 +20,7 @@ export class BadgesParser implements IMessageParser
         if(!wrapper) return false;
 
         this._allBadgeCodes = [];
-        this._activeBadgeCodes = new AdvancedMap();
+        this._activeBadgeCodes = [];
         this._badgeIds = new AdvancedMap();
 
         let count = wrapper.readInt();
@@ -45,7 +44,7 @@ export class BadgesParser implements IMessageParser
             const badgeSlot = wrapper.readInt();
             const badgeCode = wrapper.readString();
 
-            this._activeBadgeCodes.add(badgeCode, badgeSlot);
+            this._activeBadgeCodes.push(badgeCode);
 
             count--;
         }
@@ -57,12 +56,6 @@ export class BadgesParser implements IMessageParser
     {
         return this._badgeIds.getValue(code);
     }
-
-    public getActiveBadgeSlot(code: string): number
-    {
-        return this._activeBadgeCodes.getValue(code);
-    }
-
     public getAllBadgeCodes(): string[]
     {
         return this._allBadgeCodes;
@@ -70,6 +63,6 @@ export class BadgesParser implements IMessageParser
 
     public getActiveBadgeCodes(): string[]
     {
-        return this._activeBadgeCodes.getKeys();
+        return this._activeBadgeCodes;
     }
 }

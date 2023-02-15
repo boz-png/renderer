@@ -1,4 +1,4 @@
-﻿import { IVector3D } from '../../../room/utils/IVector3D';
+﻿import { IVector3D } from '../../../api';
 import { RoomMapMaskData } from './RoomMapMaskData';
 import { RoomPlaneBitmapMaskData } from './RoomPlaneBitmapMaskData';
 
@@ -89,7 +89,7 @@ export class RoomPlaneBitmapMaskParser
     {
         const data = new RoomMapMaskData();
 
-        for(const [ key, mask ] of this._masks.entries())
+        for(const [key, mask] of this._masks.entries())
         {
             if(!mask) continue;
 

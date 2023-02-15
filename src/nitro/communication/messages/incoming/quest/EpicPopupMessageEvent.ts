@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { EpicPopupMessageParser } from '../../parser/quest/EpicPopupMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { EpicPopupMessageParser } from '../../parser';
 
 export class EpicPopupMessageEvent extends MessageEvent implements IMessageEvent
 {

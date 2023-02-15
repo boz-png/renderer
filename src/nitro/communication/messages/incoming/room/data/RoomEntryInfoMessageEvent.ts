@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { RoomEntryInfoMessageParser } from '../../../parser/room/data/RoomEntryInfoMessageParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { RoomEntryInfoMessageParser } from '../../../parser';
 
 export class RoomEntryInfoMessageEvent extends MessageEvent implements IMessageEvent
 {

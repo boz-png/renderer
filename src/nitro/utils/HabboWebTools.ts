@@ -1,4 +1,4 @@
-﻿import { NitroLogger } from '../../core/common/logger/NitroLogger';
+﻿import { NitroLogger } from '../../api';
 import { LegacyExternalInterface } from '../externalInterface/LegacyExternalInterface';
 
 export class HabboWebTools
@@ -39,7 +39,7 @@ export class HabboWebTools
 
         catch (e)
         {
-            NitroLogger.log(('Failed to open web page ' + pageUrl));
+            NitroLogger.log('Failed to open web page', pageUrl);
         }
     }
 
@@ -76,7 +76,7 @@ export class HabboWebTools
 
         catch (e)
         {
-            NitroLogger.log(('Failed to open web page ' + pageUrl));
+            NitroLogger.log('Failed to open web page', pageUrl);
         }
     }
 
@@ -96,7 +96,7 @@ export class HabboWebTools
         }
     }
 
-    public static openHabblet(name: string, param: string=null): void
+    public static openHabblet(name: string, param: string = null): void
     {
         try
         {
@@ -108,11 +108,11 @@ export class HabboWebTools
 
         catch (e)
         {
-            NitroLogger.log(('Failed to open Habblet ' + name));
+            NitroLogger.log('Failed to open Habblet', name);
         }
     }
 
-    public static closeHabblet(name: string, param: string=null): void
+    public static closeHabblet(name: string, param: string = null): void
     {
         try
         {
@@ -124,7 +124,7 @@ export class HabboWebTools
 
         catch (e)
         {
-            NitroLogger.log(('Failed to close Habblet ' + name));
+            NitroLogger.log('Failed to close Habblet', name);
         }
     }
 
@@ -156,7 +156,7 @@ export class HabboWebTools
 
         catch (e)
         {
-            NitroLogger.log(('Failed to open game: ' + e));
+            NitroLogger.log('Failed to open game', e);
         }
     }
 

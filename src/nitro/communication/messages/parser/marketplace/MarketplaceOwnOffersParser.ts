@@ -1,8 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { IObjectData } from '../../../../room/object/data/IObjectData';
-import { ObjectDataFactory } from '../../../../room/object/data/ObjectDataFactory';
-import { LegacyDataType } from '../../../../room/object/data/type/LegacyDataType';
-import { MarketplaceOffer } from '../../incoming/marketplace/MarketplaceOffer';
+import { IMessageDataWrapper, IMessageParser, IObjectData, LegacyDataType, ObjectDataFactory } from '../../../../../api';
+import { MarketplaceOffer } from './MarketplaceOffer';
 
 export class MarketplaceOwnOffersParser implements IMessageParser
 {
@@ -34,7 +31,7 @@ export class MarketplaceOwnOffersParser implements IMessageParser
 
             let furniId;
             let extraData;
-            let stuffData:IObjectData;
+            let stuffData: IObjectData;
             if(furniType == 1)
             {
                 furniId = wrapper.readInt();
@@ -71,7 +68,7 @@ export class MarketplaceOwnOffersParser implements IMessageParser
         return true;
     }
 
-    public get offers():MarketplaceOffer[]
+    public get offers(): MarketplaceOffer[]
     {
         return this._offers;
     }

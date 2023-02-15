@@ -1,476 +1,5 @@
-import { IMessageConfiguration } from '../../core/communication/messages/IMessageConfiguration';
-import { AchievementNotificationMessageEvent, ActivityPointNotificationMessageEvent, AddFavouriteRoomMessageComposer, AddJukeboxDiskComposer, ApproveNameMessageComposer, ApproveNameMessageEvent, AvailabilityTimeMessageEvent, BadgePointLimitsEvent, BadgeReceivedEvent, BonusRareInfoMessageEvent, BuildersClubFurniCountMessageEvent, BuildersClubSubscriptionStatusMessageEvent, BundleDiscountRulesetMessageEvent, BuyMarketplaceOfferMessageComposer, BuyMarketplaceTokensMessageComposer, CallForHelpFromForumMessageMessageComposer, CallForHelpFromForumThreadMessageComposer, CallForHelpFromIMMessageComposer, CallForHelpFromPhotoMessageComposer, CallForHelpFromSelfieMessageComposer, CallForHelpMessageComposer, CallForHelpPendingCallsDeletedMessageEvent, CallForHelpPendingCallsMessageEvent, CallForHelpReplyMessageEvent, CancelEventMessageComposer, CancelMarketplaceOfferMessageComposer, CanCreateRoomEvent, CanCreateRoomMessageComposer, CategoriesWithVisitorCountEvent, ChangeUserNameMessageComposer, ChangeUserNameResultMessageEvent, ChatReviewGuideDecidesOnOfferMessageComposer, ChatReviewGuideDetachedMessageComposer, ChatReviewGuideVoteMessageComposer, ChatReviewSessionCreateMessageComposer, ChatReviewSessionDetachedMessageEvent, ChatReviewSessionOfferedToGuideMessageEvent, ChatReviewSessionResultsMessageEvent, ChatReviewSessionStartedMessageEvent, ChatReviewSessionVotingStatusMessageEvent, CheckUserNameMessageComposer, CheckUserNameResultMessageEvent, CloseIssueDefaultActionMessageComposer, CloseIssuesMessageComposer, ClubGiftNotificationEvent, CompetitionRoomsDataMessageEvent, CompetitionRoomsSearchMessageComposer, ControlYoutubeDisplayPlaybackMessageComposer, ConvertedRoomIdEvent, CustomUserNotificationMessageEvent, DeleteFavouriteRoomMessageComposer, DeleteFurniComposer, DeletePendingCallsForHelpMessageComposer, DirectSMSClubBuyAvailableMessageEvent, DoorbellMessageEvent, EditEventMessageComposer, FavouriteChangedEvent, FavouritesEvent, FigureUpdateEvent, FlatAccessDeniedMessageEvent, FlatCreatedEvent, ForwardToARandomPromotedRoomMessageComposer, ForwardToASubmittableRoomMessageComposer, ForwardToRandomCompetitionRoomMessageComposer, ForwardToSomeRoomMessageComposer, FurnitureGroupInfoComposer, GetBonusRareInfoMessageComposer, GetCatalogPageExpirationComposer, GetCatalogPageWithEarliestExpiryComposer, GetCategoriesWithUserCountMessageComposer, GetCfhChatlogMessageComposer, GetCfhStatusMessageComposer, GetCurrentTimingCodeMessageComposer, GetDirectClubBuyAvailableComposer, GetExtendedProfileByNameMessageComposer, GetFaqCategoryMessageComposer, GetFaqTextMessageComposer, GetForumsListMessageComposer, GetForumStatsMessageComposer, GetGiftMessageComposer, GetGuestRoomMessageComposer, GetGuestRoomResultEvent, GetGuideReportingStatusMessageComposer, GetHabboBasicMembershipExtendOfferComposer, GetHabboClubExtendOfferMessageComposer, GetHabboGroupBadgesMessageComposer, GetInterstitialMessageComposer, GetJukeboxPlayListMessageComposer, GetLimitedOfferAppearingNextComposer, GetMarketplaceConfigurationMessageComposer, GetMarketplaceItemStatsComposer, GetMarketplaceOffersMessageComposer, GetMarketplaceOwnOffersMessageComposer, GetMessagesMessageComposer, GetNextTargetedOfferComposer, GetNowPlayingMessageComposer, GetOfficialRoomsMessageComposer, GetOfficialSongIdMessageComposer, GetPendingCallsForHelpMessageComposer, GetPopularRoomTagsMessageComposer, GetQuizQuestionsComposer, GetRoomAdPurchaseInfoComposer, GetSeasonalCalendarDailyOfferComposer, GetSecondsUntilMessageComposer, GetSongInfoMessageComposer, GetSoundMachinePlayListMessageComposer, GetThreadMessageComposer, GetThreadsMessageComposer, GetUnreadForumsCountMessageComposer, GetUserSongDisksMessageComposer, GetYoutubeDisplayStatusMessageComposer, GoToFlatMessageComposer, GuideOnDutyStatusMessageEvent, GuideSessionAttachedMessageEvent, GuideSessionCreateMessageComposer, GuideSessionDetachedMessageEvent, GuideSessionEndedMessageEvent, GuideSessionErrorMessageEvent, GuideSessionFeedbackMessageComposer, GuideSessionGetRequesterRoomMessageComposer, GuideSessionGuideDecidesMessageComposer, GuideSessionInvitedToGuideRoomMessageEvent, GuideSessionInviteRequesterMessageComposer, GuideSessionIsTypingMessageComposer, GuideSessionMessageMessageComposer, GuideSessionMessageMessageEvent, GuideSessionOnDutyUpdateMessageComposer, GuideSessionPartnerIsTypingMessageEvent, GuideSessionReportMessageComposer, GuideSessionRequesterCancelsMessageComposer, GuideSessionRequesterRoomMessageEvent, GuideSessionResolvedMessageComposer, GuideSessionStartedMessageEvent, GuideTicketCreationResultMessageEvent, GuideTicketResolutionMessageEvent, GuildBaseSearchMessageComposer, HabboClubExtendOfferMessageEvent, HabboGroupBadgesMessageEvent, HotelClosedAndOpensEvent, HotelClosesAndWillOpenAtEvent, HotelMergeNameChangeEvent, HotelWillCloseInMinutesEvent, InfoFeedEnableMessageEvent, InterstitialMessageEvent, InterstitialShownMessageComposer, IsBadgeRequestFulfilledEvent, IsOfferGiftableMessageEvent, IssueCloseNotificationMessageEvent, JukeboxPlayListFullMessageEvent, JukeboxSongDisksMessageEvent, LimitedOfferAppearingNextMessageEvent, MaintenanceStatusMessageEvent, MarkCatalogNewAdditionsPageOpenedComposer, ModerateMessageMessageComposer, ModerateThreadMessageComposer, ModToolPreferencesComposer, ModToolSanctionComposer, MyFavouriteRoomsSearchMessageComposer, MyFrequentRoomHistorySearchMessageComposer, MyFriendsRoomsSearchMessageComposer, MyGuildBasesSearchMessageComposer, MyRecommendedRoomsMessageComposer, MyRoomHistorySearchMessageComposer, MyRoomRightsSearchMessageComposer, MyRoomsSearchMessageComposer, MysteryBoxKeysEvent, NotEnoughBalanceMessageEvent, NowPlayingMessageEvent, OfficialSongIdMessageEvent, OpenCampaignCalendarDoorAsStaffComposer, OpenCampaignCalendarDoorComposer, PetExperienceEvent, PetMountComposer, PetSupplementComposer, PetSupplementedNotificationEvent, PickIssuesMessageComposer, PlayListMessageEvent, PlayListSongAddedMessageEvent, PollAnswerComposer, PollContentsEvent, PollErrorEvent, PollOfferEvent, PollRejectComposer, PollStartComposer, PopularRoomsSearchMessageComposer, PostMessageMessageComposer, PostQuizAnswersComposer, PurchaseBasicMembershipExtensionComposer, PurchaseRoomAdMessageComposer, PurchaseTargetedOfferComposer, PurchaseVipMembershipExtensionComposer, QuestionAnsweredEvent, QuestionEvent, QuestionFinishedEvent, QuizDataMessageEvent, QuizResultsMessageEvent, RateFlatMessageComposer, RedeemMarketplaceOfferCreditsMessageComposer, ReleaseIssuesMessageComposer, RemoveAllRightsMessageComposer, RemoveJukeboxDiskComposer, RemoveOwnRoomRightsRoomMessageComposer, RemovePetSaddleComposer, ResetPhoneNumberStateMessageComposer, RoomAdErrorEvent, RoomAdEventTabAdClickedComposer, RoomAdEventTabViewedComposer, RoomAdPurchaseInfoEvent, RoomAdSearchMessageComposer, RoomCompetitionInitMessageComposer, RoomEventCancelEvent, RoomEventEvent, RoomsWhereMyFriendsAreSearchMessageComposer, RoomsWithHighestScoreSearchMessageComposer, RoomTextSearchMessageComposer, RoomThumbnailUpdateResultEvent, RoomUnitGiveHandItemPetComposer, ScrGetKickbackInfoMessageComposer, ScrSendKickbackInfoMessageEvent, SearchFaqsMessageComposer, SeasonalCalendarDailyOfferMessageEvent, SellablePetPalettesMessageEvent, SetPhoneNumberVerificationStatusMessageComposer, SetRoomSessionTagsMessageComposer, SetTargetedOfferStateComposer, SetYoutubeDisplayPlaylistMessageComposer, ShopTargetedOfferViewedComposer, SubmitRoomToCompetitionMessageComposer, TalentTrackMessageEvent, TargetedOfferEvent, TargetedOfferNotFoundEvent, TogglePetBreedingComposer, TogglePetRidingComposer, ToggleStaffPickMessageComposer, TraxSongInfoMessageEvent, TryPhoneNumberMessageComposer, UnseenResetCategoryComposer, UnseenResetItemsComposer, UpdateForumReadMarkerMessageComposer, UpdateForumSettingsMessageComposer, UpdateHomeRoomMessageComposer, UpdateRoomThumbnailMessageComposer, UpdateThreadMessageComposer, UsePetProductComposer, UserSongDisksInventoryMessageEvent, VerifyCodeMessageComposer, VoteForRoomMessageComposer, WardrobeMessageEvent } from './messages';
-import { AvailabilityStatusMessageEvent } from './messages/incoming/availability/AvailabilityStatusMessageEvent';
-import { BotAddedToInventoryEvent, BotInventoryMessageEvent, BotReceivedMessageEvent, BotRemovedFromInventoryEvent } from './messages/incoming/bots';
-import { CfhSanctionMessageEvent, CfhTopicsInitEvent, SanctionStatusEvent } from './messages/incoming/callforhelp';
-import { CameraPublishStatusMessageEvent } from './messages/incoming/camera/CameraPublishStatusMessageEvent';
-import { CameraPurchaseOKMessageEvent } from './messages/incoming/camera/CameraPurchaseOKMessageEvent';
-import { CameraStorageUrlMessageEvent } from './messages/incoming/camera/CameraStorageUrlMessageEvent';
-import { CompetitionStatusMessageEvent } from './messages/incoming/camera/CompetitionStatusMessageEvent';
-import { InitCameraMessageEvent } from './messages/incoming/camera/InitCameraMessageEvent';
-import { ThumbnailStatusMessageEvent } from './messages/incoming/camera/ThumbnailStatusMessageEvent';
-import { CampaignCalendarDataMessageEvent, CampaignCalendarDoorOpenedMessageEvent } from './messages/incoming/campaign';
-import { CatalogPageExpirationEvent, CatalogPageMessageEvent, CatalogPagesListEvent, CatalogPageWithEarliestExpiryMessageEvent, CatalogPublishedMessageEvent, ClubGiftInfoEvent, ClubGiftSelectedEvent, GiftReceiverNotFoundEvent, GiftWrappingConfigurationEvent, HabboClubOffersMessageEvent, LimitedEditionSoldOutEvent, ProductOfferEvent, PurchaseErrorMessageEvent, PurchaseNotAllowedMessageEvent, PurchaseOKMessageEvent, VoucherRedeemErrorMessageEvent, VoucherRedeemOkMessageEvent } from './messages/incoming/catalog';
-import { ClientPingEvent } from './messages/incoming/client/ClientPingEvent';
-import { CompetitionEntrySubmitResultEvent } from './messages/incoming/competition/CompetitionEntrySubmitResultEvent';
-import { CompetitionVotingInfoMessageEvent } from './messages/incoming/competition/CompetitionVotingInfoMessageEvent';
-import { CurrentTimingCodeMessageEvent } from './messages/incoming/competition/CurrentTimingCodeMessageEvent';
-import { IsUserPartOfCompetitionMessageEvent } from './messages/incoming/competition/IsUserPartOfCompetitionMessageEvent';
-import { NoOwnedRoomsAlertMessageEvent } from './messages/incoming/competition/NoOwnedRoomsAlertMessageEvent';
-import { SecondsUntilMessageEvent } from './messages/incoming/competition/SecondsUntilMessageEvent';
-import { CraftableProductsEvent } from './messages/incoming/crafting/CraftableProductsEvent';
-import { CraftingRecipeEvent } from './messages/incoming/crafting/CraftingRecipeEvent';
-import { CraftingRecipesAvailableEvent } from './messages/incoming/crafting/CraftingRecipesAvailableEvent';
-import { CraftingResultEvent } from './messages/incoming/crafting/CraftingResultEvent';
-import { DesktopViewEvent } from './messages/incoming/desktop/DesktopViewEvent';
-import { AcceptFriendResultEvent } from './messages/incoming/friendlist/AcceptFriendResultEvent';
-import { FindFriendsProcessResultEvent } from './messages/incoming/friendlist/FindFriendsProcessResultEvent';
-import { FollowFriendFailedEvent } from './messages/incoming/friendlist/FollowFriendFailedEvent';
-import { FriendListFragmentEvent } from './messages/incoming/friendlist/FriendListFragmentEvent';
-import { FriendListUpdateEvent } from './messages/incoming/friendlist/FriendListUpdateEvent';
-import { FriendNotificationEvent } from './messages/incoming/friendlist/FriendNotificationEvent';
-import { FriendRequestsEvent } from './messages/incoming/friendlist/FriendRequestsEvent';
-import { HabboSearchResultEvent } from './messages/incoming/friendlist/HabboSearchResultEvent';
-import { InstantMessageErrorEvent } from './messages/incoming/friendlist/InstantMessageErrorEvent';
-import { MessageErrorEvent } from './messages/incoming/friendlist/MessageErrorEvent';
-import { MessengerInitEvent } from './messages/incoming/friendlist/MessengerInitEvent';
-import { MiniMailNewMessageEvent } from './messages/incoming/friendlist/MiniMailNewMessageEvent';
-import { MiniMailUnreadCountEvent } from './messages/incoming/friendlist/MiniMailUnreadCountEvent';
-import { NewConsoleMessageEvent } from './messages/incoming/friendlist/NewConsoleMessageEvent';
-import { NewFriendRequestEvent } from './messages/incoming/friendlist/NewFriendRequestEvent';
-import { RoomInviteErrorEvent } from './messages/incoming/friendlist/RoomInviteErrorEvent';
-import { RoomInviteEvent } from './messages/incoming/friendlist/RoomInviteEvent';
-import { LoadGameUrlEvent } from './messages/incoming/game/LoadGameUrlEvent';
-import { GenericErrorEvent } from './messages/incoming/generic/GenericErrorEvent';
-import { GroupBadgePartsEvent } from './messages/incoming/group/GroupBadgePartsEvent';
-import { GroupBuyDataEvent } from './messages/incoming/group/GroupBuyDataEvent';
-import { GroupConfirmMemberRemoveEvent } from './messages/incoming/group/GroupConfirmMemberRemoveEvent';
-import { GroupInformationEvent } from './messages/incoming/group/GroupInformationEvent';
-import { GroupMembersEvent } from './messages/incoming/group/GroupMembersEvent';
-import { GroupPurchasedEvent } from './messages/incoming/group/GroupPurchasedEvent';
-import { GroupSettingsEvent } from './messages/incoming/group/GroupSettingsEvent';
-import { HabboGroupDeactivatedMessageEvent } from './messages/incoming/group/HabboGroupDeactivatedMessageEvent';
-import { ForumDataMessageEvent, ForumsListMessageEvent, GuildForumThreadsEvent, PostMessageMessageEvent, PostThreadMessageEvent, ThreadMessagesMessageEvent, UnreadForumsCountMessageEvent, UpdateMessageMessageEvent, UpdateThreadMessageEvent } from './messages/incoming/groupforums';
-import { NoobnessLevelMessageEvent } from './messages/incoming/handshake/NoobnessLevelMessageEvent';
-import { CallForHelpDisabledNotifyMessageEvent } from './messages/incoming/help/CallForHelpDisabledNotifyMessageEvent';
-import { CallForHelpResultMessageEvent } from './messages/incoming/help/CallForHelpResultMessageEvent';
-import { GuideReportingStatusMessageEvent } from './messages/incoming/help/GuideReportingStatusMessageEvent';
-import { IncomingHeader } from './messages/incoming/IncomingHeader';
-import { AchievementEvent } from './messages/incoming/inventory/achievements/AchievementEvent';
-import { AchievementsEvent } from './messages/incoming/inventory/achievements/AchievementsEvent';
-import { AchievementsScoreEvent } from './messages/incoming/inventory/achievements/AchievementsScoreEvent';
-import { AvatarEffectActivatedEvent } from './messages/incoming/inventory/avatareffect/AvatarEffectActivatedEvent';
-import { AvatarEffectAddedEvent } from './messages/incoming/inventory/avatareffect/AvatarEffectAddedEvent';
-import { AvatarEffectExpiredEvent } from './messages/incoming/inventory/avatareffect/AvatarEffectExpiredEvent';
-import { AvatarEffectsEvent } from './messages/incoming/inventory/avatareffect/AvatarEffectsEvent';
-import { BadgesEvent } from './messages/incoming/inventory/badges/BadgesEvent';
-import { FigureSetIdsMessageEvent } from './messages/incoming/inventory/clothes/FigureSetIdsMessageEvent';
-import { FurnitureListAddOrUpdateEvent } from './messages/incoming/inventory/furni/FurnitureListAddOrUpdateEvent';
-import { FurnitureListEvent } from './messages/incoming/inventory/furni/FurnitureListEvent';
-import { FurnitureListInvalidateEvent } from './messages/incoming/inventory/furni/FurnitureListInvalidateEvent';
-import { FurnitureListRemovedEvent } from './messages/incoming/inventory/furni/FurnitureListRemovedEvent';
-import { FurniturePostItPlacedEvent } from './messages/incoming/inventory/furni/FurniturePostItPlacedEvent';
-import { PresentOpenedMessageEvent } from './messages/incoming/inventory/furni/gifts/PresentOpenedMessageEvent';
-import { PetAddedToInventoryEvent } from './messages/incoming/inventory/pets/PetAddedToInventoryEvent';
-import { PetInventoryEvent } from './messages/incoming/inventory/pets/PetInventoryEvent';
-import { PetReceivedMessageEvent } from './messages/incoming/inventory/pets/PetReceivedMessageEvent';
-import { PetRemovedFromInventory } from './messages/incoming/inventory/pets/PetRemovedFromInventoryEvent';
-import { TradingAcceptEvent } from './messages/incoming/inventory/trading/TradingAcceptEvent';
-import { TradingCloseEvent } from './messages/incoming/inventory/trading/TradingCloseEvent';
-import { TradingCompletedEvent } from './messages/incoming/inventory/trading/TradingCompletedEvent';
-import { TradingConfirmationEvent } from './messages/incoming/inventory/trading/TradingConfirmationEvent';
-import { TradingListItemEvent } from './messages/incoming/inventory/trading/TradingListItemEvent';
-import { TradingNotOpenEvent } from './messages/incoming/inventory/trading/TradingNotOpenEvent';
-import { TradingOpenEvent } from './messages/incoming/inventory/trading/TradingOpenEvent';
-import { TradingOpenFailedEvent } from './messages/incoming/inventory/trading/TradingOpenFailedEvent';
-import { TradingOtherNotAllowedEvent } from './messages/incoming/inventory/trading/TradingOtherNotAllowedEvent';
-import { TradingYouAreNotAllowedEvent } from './messages/incoming/inventory/trading/TradingYouAreNotAllowedEvent';
-import { PromoArticlesMessageEvent } from './messages/incoming/landingview/PromoArticlesMessageEvent';
-import { CommunityGoalVoteMessageEvent } from './messages/incoming/landingview/votes/CommunityGoalVoteMessageEvent';
-import { MarketplaceBuyOfferResultEvent } from './messages/incoming/marketplace/MarketplaceBuyOfferResultEvent';
-import { MarketplaceCancelOfferResultEvent } from './messages/incoming/marketplace/MarketplaceCancelOfferResultEvent';
-import { MarketplaceCanMakeOfferResult } from './messages/incoming/marketplace/MarketplaceCanMakeOfferResult';
-import { MarketplaceConfigurationEvent } from './messages/incoming/marketplace/MarketplaceConfigurationEvent';
-import { MarketplaceItemStatsEvent } from './messages/incoming/marketplace/MarketplaceItemStatsEvent';
-import { MarketplaceMakeOfferResult } from './messages/incoming/marketplace/MarketplaceMakeOfferResult';
-import { MarketPlaceOffersEvent } from './messages/incoming/marketplace/MarketplaceOffersEvent';
-import { MarketplaceOwnOffersEvent } from './messages/incoming/marketplace/MarketplaceOwnOffersEvent';
-import { CfhChatlogEvent, IssueDeletedMessageEvent, IssueInfoMessageEvent, IssuePickFailedMessageEvent, ModeratorActionResultMessageEvent, ModeratorInitMessageEvent, ModeratorMessageEvent, ModeratorRoomInfoEvent, ModeratorToolPreferencesEvent, ModeratorUserInfoEvent, RoomChatlogEvent, RoomVisitsEvent, UserBannedMessageEvent, UserChatlogEvent } from './messages/incoming/moderation';
-import { ModeratorCautionEvent } from './messages/incoming/moderation/ModeratorCautionEvent';
-import { CanCreateRoomEventEvent } from './messages/incoming/navigator/CanCreateRoomEventEvent';
-import { GuestRoomSearchResultEvent } from './messages/incoming/navigator/GuestRoomSearchResultEvent';
-import { NavigatorCollapsedEvent } from './messages/incoming/navigator/NavigatorCollapsedEvent';
-import { NavigatorHomeRoomEvent } from './messages/incoming/navigator/NavigatorHomeRoomEvent';
-import { NavigatorLiftedEvent } from './messages/incoming/navigator/NavigatorLiftedEvent';
-import { NavigatorMetadataEvent } from './messages/incoming/navigator/NavigatorMetadataEvent';
-import { NavigatorOpenRoomCreatorEvent } from './messages/incoming/navigator/NavigatorOpenRoomCreatorEvent';
-import { NavigatorSearchesEvent } from './messages/incoming/navigator/NavigatorSearchesEvent';
-import { NavigatorSearchEvent } from './messages/incoming/navigator/NavigatorSearchEvent';
-import { NavigatorSettingsEvent } from './messages/incoming/navigator/NavigatorSettingsEvent';
-import { RoomSettingsUpdatedEvent } from './messages/incoming/navigator/RoomSettingsUpdatedEvent';
-import { UserEventCatsEvent } from './messages/incoming/navigator/UserEventCatsEvent';
-import { UserFlatCatsEvent } from './messages/incoming/navigator/UserFlatCatsEvent';
-import { BotErrorEvent } from './messages/incoming/notifications/BotErrorEvent';
-import { HabboBroadcastMessageEvent } from './messages/incoming/notifications/HabboBroadcastMessageEvent';
-import { MOTDNotificationEvent } from './messages/incoming/notifications/MOTDNotificationEvent';
-import { NotificationDialogMessageEvent } from './messages/incoming/notifications/NotificationDialogMessageEvent';
-import { PetLevelNotificationEvent } from './messages/incoming/notifications/PetLevelNotificationEvent';
-import { PetPlacingErrorEvent } from './messages/incoming/notifications/PetPlacingErrorEvent';
-import { UnseenItemsEvent } from './messages/incoming/notifications/UnseenItemsEvent';
-import { PerkAllowancesMessageEvent } from './messages/incoming/perk';
-import { CommunityGoalEarnedPrizesMessageEvent } from './messages/incoming/quest/CommunityGoalEarnedPrizesMessageEvent';
-import { CommunityGoalHallOfFameMessageEvent } from './messages/incoming/quest/CommunityGoalHallOfFameMessageEvent';
-import { CommunityGoalProgressMessageEvent } from './messages/incoming/quest/CommunityGoalProgressMessageEvent';
-import { ConcurrentUsersGoalProgressMessageEvent } from './messages/incoming/quest/ConcurrentUsersGoalProgressMessageEvent';
-import { EpicPopupMessageEvent } from './messages/incoming/quest/EpicPopupMessageEvent';
-import { QuestCancelledMessageEvent } from './messages/incoming/quest/QuestCancelledMessageEvent';
-import { QuestCompletedMessageEvent } from './messages/incoming/quest/QuestCompletedMessageEvent';
-import { QuestDailyMessageEvent } from './messages/incoming/quest/QuestDailyMessageEvent';
-import { QuestMessageEvent } from './messages/incoming/quest/QuestMessageEvent';
-import { QuestsMessageEvent } from './messages/incoming/quest/QuestsMessageEvent';
-import { SeasonalQuestsMessageEvent } from './messages/incoming/quest/SeasonalQuestsMessageEvent';
-import { RoomDoorbellAcceptedEvent } from './messages/incoming/room/access/doorbell/RoomDoorbellAcceptedEvent';
-import { RoomRightsClearEvent } from './messages/incoming/room/access/rights/RoomRightsClearEvent';
-import { RoomRightsEvent } from './messages/incoming/room/access/rights/RoomRightsEvent';
-import { RoomRightsOwnerEvent } from './messages/incoming/room/access/rights/RoomRightsOwnerEvent';
-import { RoomEnterErrorEvent } from './messages/incoming/room/access/RoomEnterErrorEvent';
-import { RoomEnterEvent } from './messages/incoming/room/access/RoomEnterEvent';
-import { RoomForwardEvent } from './messages/incoming/room/access/RoomForwardEvent';
-import { BotCommandConfigurationEvent } from './messages/incoming/room/bots/BotCommandConfigurationEvent';
-import { RoomChatSettingsEvent } from './messages/incoming/room/data/RoomChatSettingsEvent';
-import { RoomEntryInfoMessageEvent } from './messages/incoming/room/data/RoomEntryInfoMessageEvent';
-import { RoomScoreEvent } from './messages/incoming/room/data/RoomScoreEvent';
-import { FavoriteMembershipUpdateMessageEvent } from './messages/incoming/room/engine/FavoriteMembershipUpdateMessageEvent';
-import { ObjectsDataUpdateEvent } from './messages/incoming/room/engine/ObjectsDataUpdateEvent';
-import { ObjectsRollingEvent } from './messages/incoming/room/engine/ObjectsRollingEvent';
-import { DiceValueMessageEvent } from './messages/incoming/room/furniture/DiceValueMessageEvent';
-import { FurnitureFloorAddEvent } from './messages/incoming/room/furniture/floor/FurnitureFloorAddEvent';
-import { FurnitureFloorEvent } from './messages/incoming/room/furniture/floor/FurnitureFloorEvent';
-import { FurnitureFloorRemoveEvent } from './messages/incoming/room/furniture/floor/FurnitureFloorRemoveEvent';
-import { FurnitureFloorUpdateEvent } from './messages/incoming/room/furniture/floor/FurnitureFloorUpdateEvent';
-import { FurnitureAliasesEvent } from './messages/incoming/room/furniture/FurnitureAliasesEvent';
-import { FurnitureDataEvent } from './messages/incoming/room/furniture/FurnitureDataEvent';
-import { FurnitureStackHeightEvent } from './messages/incoming/room/furniture/FurnitureStackHeightEvent';
-import { GroupFurniContextMenuInfoMessageEvent } from './messages/incoming/room/furniture/GroupFurniContextMenuInfoMessageEvent';
-import { ItemDataUpdateMessageEvent } from './messages/incoming/room/furniture/ItemDataUpdateMessageEvent';
-import { LoveLockFurniFinishedEvent } from './messages/incoming/room/furniture/LoveLockFurniFinishedEvent';
-import { LoveLockFurniFriendConfirmedEvent } from './messages/incoming/room/furniture/LoveLockFurniFriendConfirmedEvent';
-import { LoveLockFurniStartEvent } from './messages/incoming/room/furniture/LoveLockFurniStartEvent';
-import { OneWayDoorStatusMessageEvent } from './messages/incoming/room/furniture/OneWayDoorStatusMessageEvent';
-import { RequestSpamWallPostItMessageEvent } from './messages/incoming/room/furniture/RequestSpamWallPostItMessageEvent';
-import { RoomDimmerPresetsEvent } from './messages/incoming/room/furniture/RoomDimmerPresetsMessageEvent';
-import { FurnitureWallAddEvent } from './messages/incoming/room/furniture/wall/FurnitureWallAddEvent';
-import { FurnitureWallEvent } from './messages/incoming/room/furniture/wall/FurnitureWallEvent';
-import { FurnitureWallRemoveEvent } from './messages/incoming/room/furniture/wall/FurnitureWallRemoveEvent';
-import { FurnitureWallUpdateEvent } from './messages/incoming/room/furniture/wall/FurnitureWallUpdateEvent';
-import { YoutubeControlVideoMessageEvent } from './messages/incoming/room/furniture/youtube/YoutubeControlVideoMessageEvent';
-import { YoutubeDisplayPlaylistsEvent } from './messages/incoming/room/furniture/youtube/YoutubeDisplayPlaylistsEvent';
-import { YoutubeDisplayVideoMessageEvent } from './messages/incoming/room/furniture/youtube/YoutubeDisplayVideoMessageEvent';
-import { FloorHeightMapEvent } from './messages/incoming/room/mapping/FloorHeightMapEvent';
-import { RoomEntryTileMessageEvent } from './messages/incoming/room/mapping/RoomEntryTileMessageEvent';
-import { RoomHeightMapEvent } from './messages/incoming/room/mapping/RoomHeightMapEvent';
-import { RoomHeightMapUpdateEvent } from './messages/incoming/room/mapping/RoomHeightMapUpdateEvent';
-import { RoomOccupiedTilesMessageEvent } from './messages/incoming/room/mapping/RoomOccupiedTilesMessageEvent';
-import { RoomPaintEvent } from './messages/incoming/room/mapping/RoomPaintEvent';
-import { RoomReadyMessageEvent } from './messages/incoming/room/mapping/RoomReadyMessageEvent';
-import { RoomVisualizationSettingsEvent } from './messages/incoming/room/mapping/RoomVisualizationSettingsEvent';
-import { PetFigureUpdateEvent } from './messages/incoming/room/pet/PetFigureUpdateEvent';
-import { PetInfoEvent } from './messages/incoming/room/pet/PetInfoEvent';
-import { PetStatusUpdateEvent } from './messages/incoming/room/pet/PetStatusUpdateEvent';
-import { YouArePlayingGameEvent } from './messages/incoming/room/session/YouArePlayingGameEvent';
-import { YouAreSpectatorMessageEvent } from './messages/incoming/room/session/YouAreSpectatorMessageEvent';
-import { FloodControlEvent } from './messages/incoming/room/unit/chat/FloodControlEvent';
-import { RemainingMuteEvent } from './messages/incoming/room/unit/chat/RemainingMuteEvent';
-import { RoomUnitChatEvent } from './messages/incoming/room/unit/chat/RoomUnitChatEvent';
-import { RoomUnitChatShoutEvent } from './messages/incoming/room/unit/chat/RoomUnitChatShoutEvent';
-import { RoomUnitChatWhisperEvent } from './messages/incoming/room/unit/chat/RoomUnitChatWhisperEvent';
-import { RoomUnitTypingEvent } from './messages/incoming/room/unit/chat/RoomUnitTypingEvent';
-import { RoomUnitDanceEvent } from './messages/incoming/room/unit/RoomUnitDanceEvent';
-import { RoomUnitEffectEvent } from './messages/incoming/room/unit/RoomUnitEffectEvent';
-import { RoomUnitEvent } from './messages/incoming/room/unit/RoomUnitEvent';
-import { RoomUnitExpressionEvent } from './messages/incoming/room/unit/RoomUnitExpressionEvent';
-import { RoomUnitHandItemEvent } from './messages/incoming/room/unit/RoomUnitHandItemEvent';
-import { RoomUnitHandItemReceivedEvent } from './messages/incoming/room/unit/RoomUnitHandItemReceivedEvent';
-import { RoomUnitIdleEvent } from './messages/incoming/room/unit/RoomUnitIdleEvent';
-import { RoomUnitInfoEvent } from './messages/incoming/room/unit/RoomUnitInfoEvent';
-import { RoomUnitNumberEvent } from './messages/incoming/room/unit/RoomUnitNumberEvent';
-import { RoomUnitRemoveEvent } from './messages/incoming/room/unit/RoomUnitRemoveEvent';
-import { RoomUnitStatusEvent } from './messages/incoming/room/unit/RoomUnitStatusEvent';
-import { WiredFurniActionEvent } from './messages/incoming/roomevents/WiredFurniActionEvent';
-import { WiredFurniConditionEvent } from './messages/incoming/roomevents/WiredFurniConditionEvent';
-import { WiredFurniTriggerEvent } from './messages/incoming/roomevents/WiredFurniTriggerEvent';
-import { WiredOpenEvent } from './messages/incoming/roomevents/WiredOpenEvent';
-import { WiredRewardResultMessageEvent } from './messages/incoming/roomevents/WiredRewardResultMessageEvent';
-import { WiredSaveSuccessEvent } from './messages/incoming/roomevents/WiredSaveSuccessEvent';
-import { WiredValidationErrorEvent } from './messages/incoming/roomevents/WiredValidationErrorEvent';
-import { BannedUsersFromRoomEvent } from './messages/incoming/roomsettings/BannedUsersFromRoomEvent';
-import { FlatControllerAddedEvent } from './messages/incoming/roomsettings/FlatControllerAddedEvent';
-import { FlatControllerRemovedEvent } from './messages/incoming/roomsettings/FlatControllerRemovedEvent';
-import { FlatControllersEvent } from './messages/incoming/roomsettings/FlatControllersEvent';
-import { MuteAllInRoomEvent } from './messages/incoming/roomsettings/MuteAllInRoomEvent';
-import { NoSuchFlatEvent } from './messages/incoming/roomsettings/NoSuchFlatEvent';
-import { RoomSettingsDataEvent } from './messages/incoming/roomsettings/RoomSettingsDataEvent';
-import { RoomSettingsErrorEvent } from './messages/incoming/roomsettings/RoomSettingsErrorEvent';
-import { RoomSettingsSavedEvent } from './messages/incoming/roomsettings/RoomSettingsSavedEvent';
-import { RoomSettingsSaveErrorEvent } from './messages/incoming/roomsettings/RoomSettingsSaveErrorEvent';
-import { ShowEnforceRoomCategoryDialogEvent } from './messages/incoming/roomsettings/ShowEnforceRoomCategoryDialogEvent';
-import { UserUnbannedFromRoomEvent } from './messages/incoming/roomsettings/UserUnbannedFromRoomEvent';
-import { AuthenticatedEvent } from './messages/incoming/security/AuthenticatedEvent';
-import { UserPermissionsEvent } from './messages/incoming/user/access/UserPermissionsEvent';
-import { RelationshipStatusInfoEvent } from './messages/incoming/user/data/RelationshipStatusInfoEvent';
-import { UserCurrentBadgesEvent } from './messages/incoming/user/data/UserCurrentBadgesEvent';
-import { UserInfoEvent } from './messages/incoming/user/data/UserInfoEvent';
-import { UserNameChangeMessageEvent } from './messages/incoming/user/data/UserNameChangeMessageEvent';
-import { UserProfileEvent } from './messages/incoming/user/data/UserProfileEvent';
-import { UserSettingsEvent } from './messages/incoming/user/data/UserSettingsEvent';
-import { GuildMembershipsMessageEvent } from './messages/incoming/user/GuildMembershipsMessageEvent';
-import { IgnoredUsersEvent } from './messages/incoming/user/IgnoredUsersEvent';
-import { IgnoreResultEvent } from './messages/incoming/user/IgnoreResultEvent';
-import { InClientLinkEvent } from './messages/incoming/user/InClientLinkEvent';
-import { UserCreditsEvent } from './messages/incoming/user/inventory/currency/UserCreditsEvent';
-import { UserCurrencyEvent } from './messages/incoming/user/inventory/currency/UserCurrencyEvent';
-import { UserSubscriptionEvent } from './messages/incoming/user/inventory/subscription/UserSubscriptionEvent';
-import { PetRespectNoficationEvent } from './messages/incoming/user/PetRespectNoficationEvent';
-import { RespectReceivedEvent } from './messages/incoming/user/RespectReceivedEvent';
-import { UserWardrobePageEvent } from './messages/incoming/user/wardrobe/UserWardrobePageEvent';
-import { RequestAchievementsMessageComposer } from './messages/outgoing/advertisement/RequestAchievementsMessageComposer';
-import { GetWardrobeMessageComposer } from './messages/outgoing/avatar/GetWardrobeMessageComposer';
-import { SaveWardrobeOutfitMessageComposer } from './messages/outgoing/avatar/SaveWardrobeOutfitMessageComposer';
-import { PhotoCompetitionMessageComposer } from './messages/outgoing/camera/PhotoCompetitionMessageComposer';
-import { PublishPhotoMessageComposer } from './messages/outgoing/camera/PublishPhotoMessageComposer';
-import { PurchasePhotoMessageComposer } from './messages/outgoing/camera/PurchasePhotoMessageComposer';
-import { RenderRoomMessageComposer } from './messages/outgoing/camera/RenderRoomMessageComposer';
-import { RenderRoomThumbnailMessageComposer } from './messages/outgoing/camera/RenderRoomThumbnailMessageComposer';
-import { RequestCameraConfigurationComposer } from './messages/outgoing/camera/RequestCameraConfigurationComposer';
-import { BuildersClubPlaceRoomItemMessageComposer } from './messages/outgoing/catalog/BuildersClubPlaceRoomItemMessageComposer';
-import { BuildersClubPlaceWallItemMessageComposer } from './messages/outgoing/catalog/BuildersClubPlaceWallItemMessageComposer';
-import { BuildersClubQueryFurniCountMessageComposer } from './messages/outgoing/catalog/BuildersClubQueryFurniCountMessageComposer';
-import { GetBundleDiscountRulesetComposer } from './messages/outgoing/catalog/GetBundleDiscountRulesetComposer';
-import { GetCatalogIndexComposer } from './messages/outgoing/catalog/GetCatalogIndexComposer';
-import { GetCatalogPageComposer } from './messages/outgoing/catalog/GetCatalogPageComposer';
-import { GetClubGiftInfo } from './messages/outgoing/catalog/GetClubGiftInfo';
-import { GetClubOffersMessageComposer } from './messages/outgoing/catalog/GetClubOffersMessageComposer';
-import { GetGiftWrappingConfigurationComposer } from './messages/outgoing/catalog/GetGiftWrappingConfigurationComposer';
-import { GetIsOfferGiftableComposer } from './messages/outgoing/catalog/GetIsOfferGiftableComposer';
-import { GetProductOfferComposer } from './messages/outgoing/catalog/GetProductOfferComposer';
-import { GetSellablePetPalettesComposer } from './messages/outgoing/catalog/GetSellablePetPalettesComposer';
-import { GetTargetedOfferComposer } from './messages/outgoing/catalog/GetTargetedOfferComposer';
-import { PurchaseFromCatalogAsGiftComposer } from './messages/outgoing/catalog/PurchaseFromCatalogAsGiftComposer';
-import { PurchaseFromCatalogComposer } from './messages/outgoing/catalog/PurchaseFromCatalogComposer';
-import { RedeemVoucherMessageComposer } from './messages/outgoing/catalog/RedeemVoucherMessageComposer';
-import { RoomAdPurchaseInitiatedComposer } from './messages/outgoing/catalog/RoomAdPurchaseInitiatedComposer';
-import { SelectClubGiftComposer } from './messages/outgoing/catalog/SelectClubGiftComposer';
-import { ForwardToACompetitionRoomMessageComposer } from './messages/outgoing/competition/ForwardToACompetitionRoomMessageComposer';
-import { GetIsUserPartOfCompetitionMessageComposer } from './messages/outgoing/competition/GetIsUserPartOfCompetitionMessageComposer';
-import { CraftComposer } from './messages/outgoing/crafting/CraftComposer';
-import { CraftSecretComposer } from './messages/outgoing/crafting/CraftSecretComposer';
-import { GetCraftableProductsComposer } from './messages/outgoing/crafting/GetCraftableProductsComposer';
-import { GetCraftingRecipeComposer } from './messages/outgoing/crafting/GetCraftingRecipeComposer';
-import { GetCraftingRecipesAvailableComposer } from './messages/outgoing/crafting/GetCraftingRecipesAvailableComposer';
-import { DesktopViewComposer } from './messages/outgoing/desktop/DesktopViewComposer';
-import { FriendFurniConfirmLockMessageComposer } from './messages/outgoing/friendfurni/FriendFurniConfirmLockMessageComposer';
-import { AcceptFriendMessageComposer } from './messages/outgoing/friendlist/AcceptFriendMessageComposer';
-import { DeclineFriendMessageComposer } from './messages/outgoing/friendlist/DeclineFriendMessageComposer';
-import { FindNewFriendsMessageComposer } from './messages/outgoing/friendlist/FindNewFriendsMessageComposer';
-import { FollowFriendMessageComposer } from './messages/outgoing/friendlist/FollowFriendMessageComposer';
-import { FriendListUpdateComposer } from './messages/outgoing/friendlist/FriendListUpdateComposer';
-import { GetFriendRequestsComposer } from './messages/outgoing/friendlist/GetFriendRequestsComposer';
-import { HabboSearchComposer } from './messages/outgoing/friendlist/HabboSearchComposer';
-import { MessengerInitComposer } from './messages/outgoing/friendlist/MessengerInitComposer';
-import { RemoveFriendComposer } from './messages/outgoing/friendlist/RemoveFriendComposer';
-import { RequestFriendComposer } from './messages/outgoing/friendlist/RequestFriendComposer';
-import { SendMessageComposer } from './messages/outgoing/friendlist/SendMessageComposer';
-import { SendRoomInviteComposer } from './messages/outgoing/friendlist/SendRoomInviteComposer';
-import { SetRelationshipStatusComposer } from './messages/outgoing/friendlist/SetRelationshipStatusComposer';
-import { VisitUserComposer } from './messages/outgoing/friendlist/VisitUserComposer';
-import { GetResolutionAchievementsMessageComposer } from './messages/outgoing/game/GetResolutionAchievementsMessageComposer';
-import { GroupAdminGiveComposer } from './messages/outgoing/group/GroupAdminGiveComposer';
-import { GroupAdminTakeComposer } from './messages/outgoing/group/GroupAdminTakeComposer';
-import { GroupBadgePartsComposer } from './messages/outgoing/group/GroupBadgePartsComposer';
-import { GroupBuyComposer } from './messages/outgoing/group/GroupBuyComposer';
-import { GroupBuyDataComposer } from './messages/outgoing/group/GroupBuyDataComposer';
-import { GroupConfirmRemoveMemberComposer } from './messages/outgoing/group/GroupConfirmRemoveMemberComposer';
-import { GroupDeleteComposer } from './messages/outgoing/group/GroupDeleteComposer';
-import { GroupFavoriteComposer } from './messages/outgoing/group/GroupFavoriteComposer';
-import { GroupInformationComposer } from './messages/outgoing/group/GroupInformationComposer';
-import { GroupJoinComposer } from './messages/outgoing/group/GroupJoinComposer';
-import { GroupMembersComposer } from './messages/outgoing/group/GroupMembersComposer';
-import { GroupMembershipAcceptComposer } from './messages/outgoing/group/GroupMembershipAcceptComposer';
-import { GroupMembershipDeclineComposer } from './messages/outgoing/group/GroupMembershipDeclineComposer';
-import { GroupRemoveMemberComposer } from './messages/outgoing/group/GroupRemoveMemberComposer';
-import { GroupSaveBadgeComposer } from './messages/outgoing/group/GroupSaveBadgeComposer';
-import { GroupSaveColorsComposer } from './messages/outgoing/group/GroupSaveColorsComposer';
-import { GroupSaveInformationComposer } from './messages/outgoing/group/GroupSaveInformationComposer';
-import { GroupSavePreferencesComposer } from './messages/outgoing/group/GroupSavePreferencesComposer';
-import { GroupSettingsComposer } from './messages/outgoing/group/GroupSettingsComposer';
-import { GroupUnfavoriteComposer } from './messages/outgoing/group/GroupUnfavoriteComposer';
-import { AuthenticationMessageComposer } from './messages/outgoing/handshake/AuthenticationMessageComposer';
-import { ClientHelloMessageComposer } from './messages/outgoing/handshake/ClientHelloMessageComposer';
-import { DisconnectMessageComposer } from './messages/outgoing/handshake/DisconnectMessageComposer';
-import { InfoRetrieveMessageComposer } from './messages/outgoing/handshake/InfoRetrieveMessageComposer';
-import { PongMessageComposer } from './messages/outgoing/handshake/PongMessageComposer';
-import { SSOTicketMessageComposer } from './messages/outgoing/handshake/SSOTicketMessageComposer';
-import { UniqueIDMessageComposer } from './messages/outgoing/handshake/UniqueIDMessageComposer';
-import { VersionCheckMessageComposer } from './messages/outgoing/handshake/VersionCheckMessageComposer';
-import { RequestBadgesComposer } from './messages/outgoing/inventory/badges/RequestBadgesComposer';
-import { SetActivatedBadgesComposer } from './messages/outgoing/inventory/badges/SetActivatedBadgesComposer';
-import { GetBotInventoryComposer } from './messages/outgoing/inventory/bots/GetBotInventoryComposer';
-import { FurnitureList2Composer } from './messages/outgoing/inventory/furni/FurnitureList2Composer';
-import { FurnitureListComposer } from './messages/outgoing/inventory/furni/FurnitureListComposer';
-import { RequestPetsComposer } from './messages/outgoing/inventory/pets/RequestPetsComposer';
-import { TradingAcceptComposer } from './messages/outgoing/inventory/trading/TradingAcceptComposer';
-import { TradingCancelComposer } from './messages/outgoing/inventory/trading/TradingCancelComposer';
-import { TradingCloseComposer } from './messages/outgoing/inventory/trading/TradingCloseComposer';
-import { TradingConfirmationComposer } from './messages/outgoing/inventory/trading/TradingConfirmationComposer';
-import { TradingListAddItemComposer } from './messages/outgoing/inventory/trading/TradingListAddItemComposer';
-import { TradingListAddItemsComposer } from './messages/outgoing/inventory/trading/TradingListAddItemsComposer';
-import { TradingListItemRemoveComposer } from './messages/outgoing/inventory/trading/TradingListRemoveItemComposer';
-import { TradingOpenComposer } from './messages/outgoing/inventory/trading/TradingOpenComposer';
-import { TradingUnacceptComposer } from './messages/outgoing/inventory/trading/TradingUnacceptComposer';
-import { GetPromoArticlesComposer } from './messages/outgoing/landingview/GetPromoArticlesComposer';
-import { CommunityGoalVoteMessageComposer } from './messages/outgoing/landingview/votes/CommunityGoalVoteMessageComposer';
-import { GetMarketplaceCanMakeOfferComposer } from './messages/outgoing/marketplace/GetMarketplaceCanMakeOfferComposer';
-import { MakeOfferMessageComposer } from './messages/outgoing/marketplace/MakeOfferMessageComposer';
-import { DefaultSanctionMessageComposer } from './messages/outgoing/moderation/DefaultSanctionMessageComposer';
-import { GetModeratorRoomInfoMessageComposer } from './messages/outgoing/moderation/GetModeratorRoomInfoMessageComposer';
-import { GetModeratorUserInfoMessageComposer } from './messages/outgoing/moderation/GetModeratorUserInfoMessageComposer';
-import { GetRoomChatlogMessageComposer } from './messages/outgoing/moderation/GetRoomChatlogMessageComposer';
-import { GetRoomVisitsMessageComposer } from './messages/outgoing/moderation/GetRoomVisitsMessageComposer';
-import { GetUserChatlogMessageComposer } from './messages/outgoing/moderation/GetUserChatlogMessageComposer';
-import { ModAlertMessageComposer } from './messages/outgoing/moderation/ModAlertMessageComposer';
-import { ModBanMessageComposer } from './messages/outgoing/moderation/ModBanMessageComposer';
-import { ModerateRoomMessageComposer } from './messages/outgoing/moderation/ModerateRoomMessageComposer';
-import { ModeratorActionMessageComposer } from './messages/outgoing/moderation/ModeratorActionMessageComposer';
-import { ModKickMessageComposer } from './messages/outgoing/moderation/ModKickMessageComposer';
-import { ModMessageMessageComposer } from './messages/outgoing/moderation/ModMessageMessageComposer';
-import { ModMuteMessageComposer } from './messages/outgoing/moderation/ModMuteMessageComposer';
-import { ModTradingLockMessageComposer } from './messages/outgoing/moderation/ModTradingLockMessageComposer';
-import { ConvertGlobalRoomIdMessageComposer } from './messages/outgoing/navigator/ConvertGlobalRoomIdComposer';
-import { CreateFlatMessageComposer } from './messages/outgoing/navigator/CreateFlatMessageComposer';
-import { GetUserEventCatsMessageComposer } from './messages/outgoing/navigator/GetUserEventCatsMessageComposer';
-import { GetUserFlatCatsMessageComposer } from './messages/outgoing/navigator/GetUserFlatCatsMessageComposer';
-import { NavigatorCategoryListModeComposer } from './messages/outgoing/navigator/NavigatorCategoryListModeComposer';
-import { NavigatorInitComposer } from './messages/outgoing/navigator/NavigatorInitComposer';
-import { NavigatorSearchCloseComposer } from './messages/outgoing/navigator/NavigatorSearchCloseComposer';
-import { NavigatorSearchComposer } from './messages/outgoing/navigator/NavigatorSearchComposer';
-import { NavigatorSearchOpenComposer } from './messages/outgoing/navigator/NavigatorSearchOpenComposer';
-import { NavigatorSearchSaveComposer } from './messages/outgoing/navigator/NavigatorSearchSaveComposer';
-import { NavigatorSettingsSaveComposer } from './messages/outgoing/navigator/NavigatorSettingsSaveComposer';
-import { OutgoingHeader } from './messages/outgoing/OutgoingHeader';
-import { PetRespectComposer } from './messages/outgoing/pet/PetRespectComposer';
-import { RequestPetInfoComposer } from './messages/outgoing/pet/RequestPetInfoComposer';
-import { AcceptQuestMessageComposer } from './messages/outgoing/quest/AcceptQuestMessageComposer';
-import { ActivateQuestMessageComposer } from './messages/outgoing/quest/ActivateQuestMessageComposer';
-import { CancelQuestMessageComposer } from './messages/outgoing/quest/CancelQuestMessageComposer';
-import { FriendRequestQuestCompleteMessageComposer } from './messages/outgoing/quest/FriendRequestQuestCompleteMessageComposer';
-import { GetCommunityGoalEarnedPrizesMessageComposer } from './messages/outgoing/quest/GetCommunityGoalEarnedPrizesMessageComposer';
-import { GetCommunityGoalHallOfFameMessageComposer } from './messages/outgoing/quest/GetCommunityGoalHallOfFameMessageComposer';
-import { GetCommunityGoalProgressMessageComposer } from './messages/outgoing/quest/GetCommunityGoalProgressMessageComposer';
-import { GetConcurrentUsersGoalProgressMessageComposer } from './messages/outgoing/quest/GetConcurrentUsersGoalProgressMessageComposer';
-import { GetConcurrentUsersRewardMessageComposer } from './messages/outgoing/quest/GetConcurrentUsersRewardMessageComposer';
-import { GetDailyQuestMessageComposer } from './messages/outgoing/quest/GetDailyQuestMessageComposer';
-import { GetQuestsMessageComposer } from './messages/outgoing/quest/GetQuestsMessageComposer';
-import { GetSeasonalQuestsOnlyMessageComposer } from './messages/outgoing/quest/GetSeasonalQuestsOnlyMessageComposer';
-import { OpenQuestTrackerMessageComposer } from './messages/outgoing/quest/OpenQuestTrackerMessageComposer';
-import { RedeemCommunityGoalPrizeMessageComposer } from './messages/outgoing/quest/RedeemCommunityGoalPrizeMessageComposer';
-import { RejectQuestMessageComposer } from './messages/outgoing/quest/RejectQuestMessageComposer';
-import { StartCampaignMessageComposer } from './messages/outgoing/quest/StartCampaignMessageComposer';
-import { RoomDoorbellAccessComposer } from './messages/outgoing/room/access/RoomDoorbellAccessComposer';
-import { RoomEnterComposer } from './messages/outgoing/room/access/RoomEnterComposer';
-import { RoomAmbassadorAlertComposer } from './messages/outgoing/room/action/RoomAmbassadorAlertComposer';
-import { RoomBanUserComposer } from './messages/outgoing/room/action/RoomBanUserComposer';
-import { RoomDeleteComposer } from './messages/outgoing/room/action/RoomDeleteComposer';
-import { RoomGiveRightsComposer } from './messages/outgoing/room/action/RoomGiveRightsComposer';
-import { RoomKickUserComposer } from './messages/outgoing/room/action/RoomKickUserComposer';
-import { RoomMuteUserComposer } from './messages/outgoing/room/action/RoomMuteUserComposer';
-import { RoomTakeRightsComposer } from './messages/outgoing/room/action/RoomTakeRightsComposer';
-import { RoomUnbanUserComposer } from './messages/outgoing/room/action/RoomUnbanUserComposer';
-import { RequestBotCommandConfigurationComposer } from './messages/outgoing/room/bots/RequestBotConfigurationComposer';
-import { RoomBannedUsersComposer } from './messages/outgoing/room/data/RoomBannedUsersComposer';
-import { RoomSettingsComposer } from './messages/outgoing/room/data/RoomSettingsComposer';
-import { RoomUsersWithRightsComposer } from './messages/outgoing/room/data/RoomUsersWithRightsComposer';
-import { SaveRoomSettingsComposer } from './messages/outgoing/room/data/SaveRoomSettingsComposer';
-import { BotPlaceComposer } from './messages/outgoing/room/engine/BotPlaceComposer';
-import { BotRemoveComposer } from './messages/outgoing/room/engine/BotRemoveComposer';
-import { BotSkillSaveComposer } from './messages/outgoing/room/engine/BotSkillSaveComposer';
-import { CompostPlantMessageComposer } from './messages/outgoing/room/engine/CompostPlantMessageComposer';
-import { GetItemDataComposer } from './messages/outgoing/room/engine/GetItemDataComposer';
-import { HarvestPetMessageComposer } from './messages/outgoing/room/engine/HarvestPetMessageComposer';
-import { PetMoveComposer } from './messages/outgoing/room/engine/PetMoveComposer';
-import { PetPlaceComposer } from './messages/outgoing/room/engine/PetPlaceComposer';
-import { PetRemoveComposer } from './messages/outgoing/room/engine/PetRemoveComposer';
-import { RemoveWallItemComposer } from './messages/outgoing/room/engine/RemoveWallItemComposer';
-import { SetItemDataMessageComposer } from './messages/outgoing/room/engine/SetItemDataMessageComposer';
-import { SetObjectDataMessageComposer } from './messages/outgoing/room/engine/SetObjectDataMessageComposer';
-import { AddSpamWallPostItMessageComposer } from './messages/outgoing/room/furniture/AddSpamWallPostItMessageComposer';
-import { MoodlightSettingsComposer } from './messages/outgoing/room/furniture/dimmer/MoodlightSettingsComposer';
-import { MoodlightSettingsSaveComposer } from './messages/outgoing/room/furniture/dimmer/MoodlightSettingsSaveComposer';
-import { MoodlightTogggleStateComposer } from './messages/outgoing/room/furniture/dimmer/MoodlightTogggleStateComposer';
-import { FurnitureFloorUpdateComposer } from './messages/outgoing/room/furniture/floor/FurnitureFloorUpdateComposer';
-import { FurnitureAliasesComposer } from './messages/outgoing/room/furniture/FurnitureAliasesComposer';
-import { FurniturePickupComposer } from './messages/outgoing/room/furniture/FurniturePickupComposer';
-import { FurniturePlaceComposer } from './messages/outgoing/room/furniture/FurniturePlaceComposer';
-import { FurniturePlacePaintComposer } from './messages/outgoing/room/furniture/FurniturePlacePaintComposer';
-import { FurniturePostItPlaceComposer } from './messages/outgoing/room/furniture/FurniturePostItPlaceComposer';
-import { FurnitureColorWheelComposer } from './messages/outgoing/room/furniture/logic/FurnitureColorWheelComposer';
-import { FurnitureDiceActivateComposer } from './messages/outgoing/room/furniture/logic/FurnitureDiceActivateComposer';
-import { FurnitureDiceDeactivateComposer } from './messages/outgoing/room/furniture/logic/FurnitureDiceDeactivateComposer';
-import { FurnitureExchangeComposer } from './messages/outgoing/room/furniture/logic/FurnitureExchangeComposer';
-import { FurnitureMultiStateComposer } from './messages/outgoing/room/furniture/logic/FurnitureMultiStateComposer';
-import { FurnitureOneWayDoorComposer } from './messages/outgoing/room/furniture/logic/FurnitureOneWayDoorComposer';
-import { FurnitureRandomStateComposer } from './messages/outgoing/room/furniture/logic/FurnitureRandomStateComposer';
-import { FurnitureStackHeightComposer } from './messages/outgoing/room/furniture/logic/FurnitureStackHeightComposer';
-import { FurnitureWallMultiStateComposer } from './messages/outgoing/room/furniture/logic/FurnitureWallMultiStateComposer';
-import { FurnitureMannequinSaveLookComposer } from './messages/outgoing/room/furniture/mannequin/FurnitureMannequinSaveLookComposer';
-import { FurnitureMannequinSaveNameComposer } from './messages/outgoing/room/furniture/mannequin/FurnitureMannequinSaveNameComposer';
-import { OpenPresentComposer } from './messages/outgoing/room/furniture/presents/OpenPresentComposer';
-import { ApplyTonerComposer } from './messages/outgoing/room/furniture/toner/ApplyTonerComposer';
-import { FurnitureWallUpdateComposer } from './messages/outgoing/room/furniture/wall/FurnitureWallUpdateComposer';
-import { GetOccupiedTilesMessageComposer } from './messages/outgoing/room/layout/GetOccupiedTilesMessageComposer';
-import { GetRoomEntryDataMessageComposer } from './messages/outgoing/room/layout/GetRoomEntryDataMessageComposer';
-import { GetRoomEntryTileMessageComposer } from './messages/outgoing/room/layout/GetRoomEntryTileMessageComposer';
-import { UpdateFloorPropertiesMessageComposer } from './messages/outgoing/room/layout/UpdateFloorPropertiesMessageComposer';
-import { RedeemItemClothingComposer } from './messages/outgoing/room/RedeemItemClothingComposer';
-import { RoomUnitChatComposer } from './messages/outgoing/room/unit/chat/RoomUnitChatComposer';
-import { RoomUnitChatShoutComposer } from './messages/outgoing/room/unit/chat/RoomUnitChatShoutComposer';
-import { RoomUnitChatStyleComposer } from './messages/outgoing/room/unit/chat/RoomUnitChatStyleComposer';
-import { RoomUnitChatWhisperComposer } from './messages/outgoing/room/unit/chat/RoomUnitChatWhisperComposer';
-import { RoomUnitTypingStartComposer } from './messages/outgoing/room/unit/chat/RoomUnitTypingStartComposer';
-import { RoomUnitTypingStopComposer } from './messages/outgoing/room/unit/chat/RoomUnitTypingStopComposer';
-import { RoomUnitActionComposer } from './messages/outgoing/room/unit/RoomUnitActionComposer';
-import { RoomUnitDanceComposer } from './messages/outgoing/room/unit/RoomUnitDanceComposer';
-import { RoomUnitDropHandItemComposer } from './messages/outgoing/room/unit/RoomUnitDropHandItemComposer';
-import { RoomUnitGiveHandItemComposer } from './messages/outgoing/room/unit/RoomUnitGiveHandItemComposer';
-import { RoomUnitLookComposer } from './messages/outgoing/room/unit/RoomUnitLookComposer';
-import { RoomUnitPostureComposer } from './messages/outgoing/room/unit/RoomUnitPostureComposer';
-import { RoomUnitSignComposer } from './messages/outgoing/room/unit/RoomUnitSignComposer';
-import { RoomUnitWalkComposer } from './messages/outgoing/room/unit/RoomUnitWalkComposer';
-import { ApplySnapshotMessageComposer } from './messages/outgoing/roomevents/ApplySnapshotMessageComposer';
-import { OpenMessageComposer } from './messages/outgoing/roomevents/OpenMessageComposer';
-import { RoomMuteComposer } from './messages/outgoing/roomevents/RoomMuteComposer';
-import { UpdateActionMessageComposer } from './messages/outgoing/roomevents/UpdateActionMessageComposer';
-import { UpdateConditionMessageComposer } from './messages/outgoing/roomevents/UpdateConditionMessageComposer';
-import { UpdateTriggerMessageComposer } from './messages/outgoing/roomevents/UpdateTriggerMessageComposer';
-import { GetSoundSettingsComposer } from './messages/outgoing/sound/GetSoundSettingsComposer';
-import { TalentTrackComposer } from './messages/outgoing/talent/TalentTrackComposer';
-import { CatalogGroupsComposer } from './messages/outgoing/user/CatalogGroupsComposer';
-import { GetIgnoredUsersComposer } from './messages/outgoing/user/data/GetIgnoredUsersComposer';
-import { IgnoreUserComposer } from './messages/outgoing/user/data/IgnoreUserComposer';
-import { IgnoreUserIdComposer } from './messages/outgoing/user/data/IgnoreUserIdComposer';
-import { UnignoreUserComposer } from './messages/outgoing/user/data/UnignoreUserComposer';
-import { UserCurrentBadgesComposer } from './messages/outgoing/user/data/UserCurrentBadgesComposer';
-import { UserFigureComposer } from './messages/outgoing/user/data/UserFigureComposer';
-import { UserMottoComposer } from './messages/outgoing/user/data/UserMottoComposer';
-import { UserProfileComposer } from './messages/outgoing/user/data/UserProfileComposer';
-import { UserRelationshipsComposer } from './messages/outgoing/user/data/UserRelationshipsComposer';
-import { WhisperGroupComposer } from './messages/outgoing/user/data/WhisperGroupComposer';
-import { UserCurrencyComposer } from './messages/outgoing/user/inventory/currency/UserCurrencyComposer';
-import { UserSubscriptionComposer } from './messages/outgoing/user/inventory/subscription/UserSubscriptionComposer';
-import { UserSettingsCameraFollowComposer } from './messages/outgoing/user/settings/UserSettingsCameraFollowComposer';
-import { UserSettingsOldChatComposer } from './messages/outgoing/user/settings/UserSettingsOldChatComposer';
-import { UserSettingsRoomInvitesComposer } from './messages/outgoing/user/settings/UserSettingsRoomInvitesComposer';
-import { UserSettingsSoundComposer } from './messages/outgoing/user/settings/UserSettingsSoundComposer';
-import { UserRespectComposer } from './messages/outgoing/user/UserRespectComposer';
+import { IMessageConfiguration } from '../../api';
+import { AcceptFriendMessageComposer, AcceptFriendResultEvent, AcceptGameInviteMessageComposer, AcceptQuestMessageComposer, AccountSafetyLockStatusChangeMessageEvent, AchievementEvent, AchievementNotificationMessageEvent, AchievementResolutionCompletedMessageEvent, AchievementResolutionProgressMessageEvent, AchievementResolutionsMessageEvent, AchievementsEvent, AchievementsScoreEvent, ActivateQuestMessageComposer, ActivityPointNotificationMessageEvent, AddFavouriteRoomMessageComposer, AddJukeboxDiskComposer, AddSpamWallPostItMessageComposer, ApplySnapshotMessageComposer, ApplyTonerComposer, ApproveAllMembershipRequestsMessageComposer, ApproveNameMessageComposer, ApproveNameMessageEvent, AuthenticatedEvent, AuthenticationMessageComposer, AvailabilityStatusMessageEvent, AvailabilityTimeMessageEvent, AvatarEffectActivatedComposer, AvatarEffectActivatedEvent, AvatarEffectAddedEvent, AvatarEffectExpiredEvent, AvatarEffectSelectedComposer, AvatarEffectSelectedEvent, AvatarEffectsEvent, BadgePointLimitsEvent, BadgeReceivedEvent, BadgesEvent, BannedUsersFromRoomEvent, BonusRareInfoMessageEvent, BotAddedToInventoryEvent, BotCommandConfigurationEvent, BotErrorEvent, BotForceOpenContextMenuEvent, BotInventoryMessageEvent, BotPlaceComposer, BotReceivedMessageEvent, BotRemoveComposer, BotRemovedFromInventoryEvent, BotSkillListUpdateEvent, BotSkillSaveComposer, BreedPetsMessageComposer, BuildersClubFurniCountMessageEvent, BuildersClubPlaceRoomItemMessageComposer, BuildersClubPlaceWallItemMessageComposer, BuildersClubQueryFurniCountMessageComposer, BuildersClubSubscriptionStatusMessageEvent, BundleDiscountRulesetMessageEvent, BuyMarketplaceOfferMessageComposer, BuyMarketplaceTokensMessageComposer, CallForHelpDisabledNotifyMessageEvent, CallForHelpFromForumMessageMessageComposer, CallForHelpFromForumThreadMessageComposer, CallForHelpFromIMMessageComposer, CallForHelpFromPhotoMessageComposer, CallForHelpFromSelfieMessageComposer, CallForHelpMessageComposer, CallForHelpPendingCallsDeletedMessageEvent, CallForHelpPendingCallsMessageEvent, CallForHelpReplyMessageEvent, CallForHelpResultMessageEvent, CameraPublishStatusMessageEvent, CameraPurchaseOKMessageEvent, CameraStorageUrlMessageEvent, CampaignCalendarDataMessageEvent, CampaignCalendarDoorOpenedMessageEvent, CancelEventMessageComposer, CancelMarketplaceOfferMessageComposer, CancelMysteryBoxWaitMessageEvent, CancelPetBreedingComposer, CancelQuestMessageComposer, CanCreateRoomEvent, CanCreateRoomEventEvent, CanCreateRoomMessageComposer, CatalogGroupsComposer, CatalogPageExpirationEvent, CatalogPageMessageEvent, CatalogPagesListEvent, CatalogPageWithEarliestExpiryMessageEvent, CatalogPublishedMessageEvent, CategoriesWithVisitorCountEvent, CfhChatlogEvent, CfhSanctionMessageEvent, CfhTopicsInitEvent, ChangeEmailComposer, ChangeEmailResultEvent, ChangeQueueMessageComposer, ChangeUserNameMessageComposer, ChangeUserNameResultMessageEvent, ChatReviewGuideDecidesOnOfferMessageComposer, ChatReviewGuideDetachedMessageComposer, ChatReviewGuideVoteMessageComposer, ChatReviewSessionCreateMessageComposer, ChatReviewSessionDetachedMessageEvent, ChatReviewSessionOfferedToGuideMessageEvent, ChatReviewSessionResultsMessageEvent, ChatReviewSessionStartedMessageEvent, ChatReviewSessionVotingStatusMessageEvent, CheckUserNameMessageComposer, CheckUserNameResultMessageEvent, ClientHelloMessageComposer, ClientPingEvent, CloseIssueDefaultActionMessageComposer, CloseIssuesMessageComposer, ClubGiftInfoEvent, ClubGiftNotificationEvent, ClubGiftSelectedEvent, CommunityGoalEarnedPrizesMessageEvent, CommunityGoalHallOfFameMessageEvent, CommunityGoalProgressMessageEvent, CommunityGoalVoteMessageComposer, CommunityGoalVoteMessageEvent, CompetitionEntrySubmitResultEvent, CompetitionRoomsDataMessageEvent, CompetitionRoomsSearchMessageComposer, CompetitionStatusMessageEvent, CompetitionVotingInfoMessageEvent, CompleteDiffieHandshakeEvent, CompleteDiffieHandshakeMessageComposer, CompostPlantMessageComposer, ConcurrentUsersGoalProgressMessageEvent, ConfirmPetBreedingComposer, ConnectionErrorEvent, ControlYoutubeDisplayPlaybackMessageComposer, ConvertedRoomIdEvent, ConvertGlobalRoomIdMessageComposer, CraftableProductsEvent, CraftComposer, CraftingRecipeEvent, CraftingRecipesAvailableEvent, CraftingResultEvent, CraftSecretComposer, CreateFlatMessageComposer, CurrentTimingCodeMessageEvent, CustomUserNotificationMessageEvent, DeclineFriendMessageComposer, DefaultSanctionMessageComposer, DeleteFavouriteRoomMessageComposer, DeleteFurniComposer, DeletePendingCallsForHelpMessageComposer, DesktopViewComposer, DesktopViewEvent, DiceValueMessageEvent, DirectSMSClubBuyAvailableMessageEvent, DisconnectMessageComposer, DisconnectReasonEvent, DoorbellMessageEvent, EditEventMessageComposer, ElementPointerMessageEvent, EmailStatusResultEvent, EpicPopupMessageEvent, ExtendedProfileChangedMessageEvent, ExtendRentOrBuyoutFurniMessageComposer, ExtendRentOrBuyoutStripItemMessageComposer, FavoriteMembershipUpdateMessageEvent, FavouriteChangedEvent, FavouritesEvent, FigureSetIdsMessageEvent, FigureUpdateEvent, FindFriendsProcessResultEvent, FindNewFriendsMessageComposer, FlatAccessDeniedMessageEvent, FlatControllerAddedEvent, FlatControllerRemovedEvent, FlatControllersEvent, FlatCreatedEvent, FloodControlEvent, FloorHeightMapEvent, FollowFriendFailedEvent, FollowFriendMessageComposer, ForumDataMessageEvent, ForumsListMessageEvent, ForwardToACompetitionRoomMessageComposer, ForwardToARandomPromotedRoomMessageComposer, ForwardToASubmittableRoomMessageComposer, ForwardToRandomCompetitionRoomMessageComposer, ForwardToSomeRoomMessageComposer, FriendFurniConfirmLockMessageComposer, FriendListFragmentEvent, FriendListUpdateComposer, FriendListUpdateEvent, FriendNotificationEvent, FriendRequestQuestCompleteMessageComposer, FriendRequestsEvent, FurniRentOrBuyoutOfferMessageEvent, FurnitureAliasesComposer, FurnitureAliasesEvent, FurnitureColorWheelComposer, FurnitureDataEvent, FurnitureDiceActivateComposer, FurnitureDiceDeactivateComposer, FurnitureExchangeComposer, FurnitureFloorAddEvent, FurnitureFloorEvent, FurnitureFloorRemoveEvent, FurnitureFloorUpdateComposer, FurnitureFloorUpdateEvent, FurnitureGroupInfoComposer, FurnitureListAddOrUpdateEvent, FurnitureListComposer, FurnitureListEvent, FurnitureListInvalidateEvent, FurnitureListRemovedEvent, FurnitureMannequinSaveLookComposer, FurnitureMannequinSaveNameComposer, FurnitureMultiStateComposer, FurnitureOneWayDoorComposer, FurniturePickupComposer, FurniturePlaceComposer, FurniturePlacePaintComposer, FurniturePostItPlaceComposer, FurniturePostItPlacedEvent, FurnitureRandomStateComposer, FurnitureStackHeightComposer, FurnitureStackHeightEvent, FurnitureWallAddEvent, FurnitureWallEvent, FurnitureWallMultiStateComposer, FurnitureWallRemoveEvent, FurnitureWallUpdateComposer, FurnitureWallUpdateEvent, Game2AccountGameStatusMessageEvent, Game2CheckGameDirectoryStatusMessageComposer, Game2ExitGameMessageComposer, Game2GameChatMessageComposer, Game2GameDirectoryStatusMessageEvent, Game2GetAccountGameStatusMessageComposer, Game2GetWeeklyFriendsLeaderboardComposer, Game2GetWeeklyLeaderboardComposer, Game2InArenaQueueMessageEvent, Game2JoiningGameFailedMessageEvent, Game2LoadStageReadyMessageComposer, Game2PlayAgainMessageComposer, Game2RequestFullStatusUpdateMessageComposer, Game2StartingGameFailedMessageEvent, Game2StopCounterMessageEvent, Game2UserLeftGameMessageEvent, Game2WeeklyFriendsLeaderboardEvent, Game2WeeklyLeaderboardEvent, GameAchievementsMessageEvent, GameInviteMessageEvent, GameListMessageEvent, GameStatusMessageEvent, GameUnloadedMessageComposer, GenericErrorEvent, GetBadgePointLimitsComposer, GetBonusRareInfoMessageComposer, GetBotInventoryComposer, GetBundleDiscountRulesetComposer, GetCatalogIndexComposer, GetCatalogPageComposer, GetCatalogPageExpirationComposer, GetCatalogPageWithEarliestExpiryComposer, GetCategoriesWithUserCountMessageComposer, GetCfhChatlogMessageComposer, GetCfhStatusMessageComposer, GetClubGiftInfo, GetClubOffersMessageComposer, GetCommunityGoalEarnedPrizesMessageComposer, GetCommunityGoalHallOfFameMessageComposer, GetCommunityGoalProgressMessageComposer, GetConcurrentUsersGoalProgressMessageComposer, GetConcurrentUsersRewardMessageComposer, GetCraftableProductsComposer, GetCraftingRecipeComposer, GetCraftingRecipesAvailableComposer, GetCurrentTimingCodeMessageComposer, GetCustomRoomFilterMessageComposer, GetDailyQuestMessageComposer, GetDirectClubBuyAvailableComposer, GetEmailStatusComposer, GetExtendedProfileByNameMessageComposer, GetFaqCategoryMessageComposer, GetFaqTextMessageComposer, GetForumsListMessageComposer, GetForumStatsMessageComposer, GetFriendRequestsComposer, GetGameAchievementsMessageComposer, GetGameListMessageComposer, GetGameStatusMessageComposer, GetGiftMessageComposer, GetGiftWrappingConfigurationComposer, GetGuestRoomMessageComposer, GetGuestRoomResultEvent, GetGuideReportingStatusMessageComposer, GetHabboBasicMembershipExtendOfferComposer, GetHabboClubExtendOfferMessageComposer, GetHabboGroupBadgesMessageComposer, GetIgnoredUsersComposer, GetInterstitialMessageComposer, GetIsBadgeRequestFulfilledComposer, GetIsOfferGiftableComposer, GetIsUserPartOfCompetitionMessageComposer, GetItemDataComposer, GetJukeboxPlayListMessageComposer, GetLimitedOfferAppearingNextComposer, GetMarketplaceCanMakeOfferComposer, GetMarketplaceConfigurationMessageComposer, GetMarketplaceItemStatsComposer, GetMarketplaceOffersMessageComposer, GetMarketplaceOwnOffersMessageComposer, GetMessagesMessageComposer, GetModeratorRoomInfoMessageComposer, GetModeratorUserInfoMessageComposer, GetNextTargetedOfferComposer, GetNowPlayingMessageComposer, GetOccupiedTilesMessageComposer, GetOfficialRoomsMessageComposer, GetOfficialSongIdMessageComposer, GetPendingCallsForHelpMessageComposer, GetPetCommandsComposer, GetPopularRoomTagsMessageComposer, GetProductOfferComposer, GetPromoArticlesComposer, GetQuestsMessageComposer, GetQuizQuestionsComposer, GetRecyclerStatusMessageComposer, GetRentOrBuyoutOfferMessageComposer, GetResolutionAchievementsMessageComposer, GetRoomAdPurchaseInfoComposer, GetRoomChatlogMessageComposer, GetRoomEntryDataMessageComposer, GetRoomEntryTileMessageComposer, GetRoomVisitsMessageComposer, GetSeasonalCalendarDailyOfferComposer, GetSeasonalQuestsOnlyMessageComposer, GetSecondsUntilMessageComposer, GetSellablePetPalettesComposer, GetSongInfoMessageComposer, GetSoundMachinePlayListMessageComposer, GetSoundSettingsComposer, GetTalentTrackLevelMessageComposer, GetTargetedOfferComposer, GetThreadMessageComposer, GetThreadsMessageComposer, GetUnreadForumsCountMessageComposer, GetUserChatlogMessageComposer, GetUserEventCatsMessageComposer, GetUserFlatCatsMessageComposer, GetUserGameAchievementsMessageComposer, GetUserSongDisksMessageComposer, GetUserTagsComposer, GetWardrobeMessageComposer, GetWeeklyGameRewardComposer, GetWeeklyGameRewardWinnersComposer, GetYoutubeDisplayStatusMessageComposer, GiftReceiverNotFoundEvent, GiftWrappingConfigurationEvent, GotMysteryBoxPrizeMessageEvent, GoToFlatMessageComposer, GroupAdminGiveComposer, GroupAdminTakeComposer, GroupBadgePartsComposer, GroupBadgePartsEvent, GroupBuyComposer, GroupBuyDataComposer, GroupBuyDataEvent, GroupConfirmMemberRemoveEvent, GroupConfirmRemoveMemberComposer, GroupDeleteComposer, GroupDetailsChangedMessageEvent, GroupFavoriteComposer, GroupFurniContextMenuInfoMessageEvent, GroupInformationComposer, GroupInformationEvent, GroupJoinComposer, GroupMembersComposer, GroupMembersEvent, GroupMembershipAcceptComposer, GroupMembershipDeclineComposer, GroupMembershipRequestedMessageEvent, GroupPurchasedEvent, GroupRemoveMemberComposer, GroupSaveBadgeComposer, GroupSaveColorsComposer, GroupSaveInformationComposer, GroupSavePreferencesComposer, GroupSettingsComposer, GroupSettingsEvent, GroupUnfavoriteComposer, GuestRoomSearchResultEvent, GuideOnDutyStatusMessageEvent, GuideReportingStatusMessageEvent, GuideSessionAttachedMessageEvent, GuideSessionCreateMessageComposer, GuideSessionDetachedMessageEvent, GuideSessionEndedMessageEvent, GuideSessionErrorMessageEvent, GuideSessionFeedbackMessageComposer, GuideSessionGetRequesterRoomMessageComposer, GuideSessionGuideDecidesMessageComposer, GuideSessionInvitedToGuideRoomMessageEvent, GuideSessionInviteRequesterMessageComposer, GuideSessionIsTypingMessageComposer, GuideSessionMessageMessageComposer, GuideSessionMessageMessageEvent, GuideSessionOnDutyUpdateMessageComposer, GuideSessionPartnerIsTypingMessageEvent, GuideSessionReportMessageComposer, GuideSessionRequesterCancelsMessageComposer, GuideSessionRequesterRoomMessageEvent, GuideSessionResolvedMessageComposer, GuideSessionStartedMessageEvent, GuideTicketCreationResultMessageEvent, GuideTicketResolutionMessageEvent, GuildBaseSearchMessageComposer, GuildEditFailedMessageEvent, GuildForumThreadsEvent, GuildMemberMgmtFailedMessageEvent, GuildMembershipsMessageEvent, HabboBroadcastMessageEvent, HabboClubExtendOfferMessageEvent, HabboClubOffersMessageEvent, HabboGroupBadgesMessageEvent, HabboGroupDeactivatedMessageEvent, HabboGroupJoinFailedMessageEvent, HabboSearchComposer, HabboSearchResultEvent, HarvestPetMessageComposer, HotelClosedAndOpensEvent, HotelClosesAndWillOpenAtEvent, HotelMergeNameChangeEvent, HotelWillCloseInMinutesEvent, IdentityAccountsEvent, IgnoredUsersEvent, IgnoreResultEvent, IgnoreUserComposer, IgnoreUserIdComposer, InClientLinkEvent, IncomingHeader, InfoFeedEnableMessageEvent, InfoRetrieveMessageComposer, InitCameraMessageEvent, InitDiffieHandshakeEvent, InitDiffieHandshakeMessageComposer, InstantMessageErrorEvent, InterstitialMessageEvent, InterstitialShownMessageComposer, IsBadgeRequestFulfilledEvent, IsOfferGiftableMessageEvent, IssueCloseNotificationMessageEvent, IssueDeletedMessageEvent, IssueInfoMessageEvent, IssuePickFailedMessageEvent, IsUserPartOfCompetitionMessageEvent, ItemDataUpdateMessageEvent, JoinedQueueMessageEvent, JoiningQueueFailedMessageEvent, JoinQueueMessageComposer, JukeboxPlayListFullMessageEvent, JukeboxSongDisksMessageEvent, LagWarningReportMessageComposer, LeaveQueueMessageComposer, LeftQueueMessageEvent, LimitedEditionSoldOutEvent, LimitedOfferAppearingNextMessageEvent, LoadGameMessageEvent, LoadGameUrlEvent, LoveLockFurniFinishedEvent, LoveLockFurniFriendConfirmedEvent, LoveLockFurniStartEvent, MaintenanceStatusMessageEvent, MakeOfferMessageComposer, MarkCatalogNewAdditionsPageOpenedComposer, MarketplaceBuyOfferResultEvent, MarketplaceCancelOfferResultEvent, MarketplaceCanMakeOfferResult, MarketplaceConfigurationEvent, MarketplaceItemStatsEvent, MarketplaceMakeOfferResult, MarketPlaceOffersEvent, MarketplaceOwnOffersEvent, MessageErrorEvent, MessengerInitComposer, MessengerInitEvent, MiniMailNewMessageEvent, MiniMailUnreadCountEvent, ModAlertMessageComposer, ModBanMessageComposer, ModerateMessageMessageComposer, ModerateRoomMessageComposer, ModerateThreadMessageComposer, ModeratorActionMessageComposer, ModeratorActionResultMessageEvent, ModeratorCautionEvent, ModeratorInitMessageEvent, ModeratorMessageEvent, ModeratorRoomInfoEvent, ModeratorToolPreferencesEvent, ModeratorUserInfoEvent, ModKickMessageComposer, ModMessageMessageComposer, ModMuteMessageComposer, ModToolPreferencesComposer, ModToolSanctionComposer, ModTradingLockMessageComposer, MoodlightSettingsComposer, MoodlightSettingsSaveComposer, MoodlightTogggleStateComposer, MOTDNotificationEvent, MuteAllInRoomEvent, MyFavouriteRoomsSearchMessageComposer, MyFrequentRoomHistorySearchMessageComposer, MyFriendsRoomsSearchMessageComposer, MyGuildBasesSearchMessageComposer, MyRecommendedRoomsMessageComposer, MyRoomHistorySearchMessageComposer, MyRoomRightsSearchMessageComposer, MyRoomsSearchMessageComposer, MysteryBoxKeysEvent, MysteryBoxWaitingCanceledMessageComposer, NavigatorCategoryListModeComposer, NavigatorCollapsedEvent, NavigatorDeleteSavedSearchComposer, NavigatorHomeRoomEvent, NavigatorInitComposer, NavigatorLiftedEvent, NavigatorMetadataEvent, NavigatorOpenRoomCreatorEvent, NavigatorSearchCloseComposer, NavigatorSearchComposer, NavigatorSearchesEvent, NavigatorSearchEvent, NavigatorSearchOpenComposer, NavigatorSearchSaveComposer, NavigatorSettingsEvent, NavigatorSettingsSaveComposer, NewConsoleMessageEvent, NewFriendRequestEvent, NewUserExperienceGetGiftsComposer, NewUserExperienceGiftOfferMessageEvent, NewUserExperienceNotCompleteEvent, NewUserExperienceScriptProceedComposer, NoobnessLevelMessageEvent, NoOwnedRoomsAlertMessageEvent, NoSuchFlatEvent, NotEnoughBalanceMessageEvent, NotificationDialogMessageEvent, NowPlayingMessageEvent, ObjectsDataUpdateEvent, ObjectsRollingEvent, OfficialSongIdMessageEvent, OneWayDoorStatusMessageEvent, OpenCampaignCalendarDoorAsStaffComposer, OpenCampaignCalendarDoorComposer, OpenMessageComposer, OpenMysteryTrophyMessageComposer, OpenPetPackageMessageComposer, OpenPetPackageRequestedMessageEvent, OpenPetPackageResultMessageEvent, OpenPresentComposer, OpenQuestTrackerMessageComposer, OpenWelcomeGiftComposer, OutgoingHeader, PeerUsersClassificationMessageComposer, PerformanceLogMessageComposer, PerkAllowancesMessageEvent, PetAddedToInventoryEvent, PetBreedingResultEvent, PetExperienceEvent, PetFigureUpdateEvent, PetInfoEvent, PetInventoryEvent, PetLevelNotificationEvent, PetLevelUpdateMessageEvent, PetMountComposer, PetMoveComposer, PetPlaceComposer, PetPlacingErrorEvent, PetReceivedMessageEvent, PetRemoveComposer, PetRemovedFromInventory, PetRespectComposer, PetRespectNoficationEvent, PetScratchFailedMessageEvent, PetSelectedMessageComposer, PetStatusUpdateEvent, PetSupplementComposer, PetSupplementedNotificationEvent, PetTrainingPanelMessageEvent, PhoneCollectionStateMessageEvent, PhotoCompetitionMessageComposer, PickIssuesMessageComposer, PlayListMessageEvent, PlayListSongAddedMessageEvent, PollAnswerComposer, PollContentsEvent, PollErrorEvent, PollOfferEvent, PollRejectComposer, PollStartComposer, PongMessageComposer, PopularRoomsSearchMessageComposer, PopularRoomTagsResultEvent, PostMessageMessageComposer, PostMessageMessageEvent, PostQuizAnswersComposer, PostThreadMessageEvent, PresentOpenedMessageEvent, ProductOfferEvent, PromoArticlesMessageEvent, PublishPhotoMessageComposer, PurchaseBasicMembershipExtensionComposer, PurchaseErrorMessageEvent, PurchaseFromCatalogAsGiftComposer, PurchaseFromCatalogComposer, PurchaseNotAllowedMessageEvent, PurchaseOKMessageEvent, PurchasePhotoMessageComposer, PurchaseRoomAdMessageComposer, PurchaseTargetedOfferComposer, PurchaseVipMembershipExtensionComposer, QuestCancelledMessageEvent, QuestCompletedMessageEvent, QuestDailyMessageEvent, QuestionAnsweredEvent, QuestionEvent, QuestionFinishedEvent, QuestMessageEvent, QuestsMessageEvent, QuizDataMessageEvent, QuizResultsMessageEvent, RateFlatMessageComposer, RecycleItemsMessageComposer, RecyclerFinishedMessageEvent, RecyclerStatusMessageEvent, RedeemCommunityGoalPrizeMessageComposer, RedeemItemClothingComposer, RedeemMarketplaceOfferCreditsMessageComposer, RedeemVoucherMessageComposer, RejectQuestMessageComposer, RelationshipStatusInfoEvent, ReleaseIssuesMessageComposer, RemainingMuteEvent, RemoveAllRightsMessageComposer, RemoveFriendComposer, RemoveJukeboxDiskComposer, RemoveOwnRoomRightsRoomMessageComposer, RemovePetSaddleComposer, RemoveWallItemComposer, RenderRoomMessageComposer, RenderRoomThumbnailMessageComposer, RentableSpaceCancelRentMessageComposer, RentableSpaceRentFailedMessageEvent, RentableSpaceRentMessageComposer, RentableSpaceRentOkMessageEvent, RentableSpaceStatusMessageComposer, RentableSpaceStatusMessageEvent, RequestABadgeComposer, RequestAchievementsMessageComposer, RequestBadgesComposer, RequestBotCommandConfigurationComposer, RequestCameraConfigurationComposer, RequestFriendComposer, RequestFurniInventoryWhenNotInRoomComposer, RequestPetInfoComposer, RequestPetsComposer, RequestSpamWallPostItMessageEvent, ResetPhoneNumberStateMessageComposer, ResetResolutionAchievementMessageComposer, RespectReceivedEvent, RoomAdErrorEvent, RoomAdEventTabAdClickedComposer, RoomAdEventTabViewedComposer, RoomAdPurchaseInfoEvent, RoomAdPurchaseInitiatedComposer, RoomAdSearchMessageComposer, RoomAmbassadorAlertComposer, RoomBannedUsersComposer, RoomBanUserComposer, RoomChatlogEvent, RoomChatSettingsEvent, RoomCompetitionInitMessageComposer, RoomDeleteComposer, RoomDimmerPresetsEvent, RoomDoorbellAcceptedEvent, RoomDoorbellAccessComposer, RoomEnterComposer, RoomEnterErrorEvent, RoomEnterEvent, RoomEntryInfoMessageEvent, RoomEntryTileMessageEvent, RoomEventCancelEvent, RoomEventEvent, RoomFilterSettingsMessageEvent, RoomForwardEvent, RoomGiveRightsComposer, RoomHeightMapEvent, RoomHeightMapUpdateEvent, RoomInviteErrorEvent, RoomInviteEvent, RoomKickUserComposer, RoomMessageNotificationMessageEvent, RoomMuteComposer, RoomMuteUserComposer, RoomNetworkOpenConnectionMessageComposer, RoomOccupiedTilesMessageEvent, RoomPaintEvent, RoomReadyMessageEvent, RoomRightsClearEvent, RoomRightsEvent, RoomRightsOwnerEvent, RoomScoreEvent, RoomSettingsComposer, RoomSettingsDataEvent, RoomSettingsErrorEvent, RoomSettingsSavedEvent, RoomSettingsSaveErrorEvent, RoomSettingsUpdatedEvent, RoomsWhereMyFriendsAreSearchMessageComposer, RoomsWithHighestScoreSearchMessageComposer, RoomTakeRightsComposer, RoomTextSearchMessageComposer, RoomThumbnailUpdateResultEvent, RoomUnbanUserComposer, RoomUnitActionComposer, RoomUnitChatComposer, RoomUnitChatEvent, RoomUnitChatShoutComposer, RoomUnitChatShoutEvent, RoomUnitChatStyleComposer, RoomUnitChatWhisperComposer, RoomUnitChatWhisperEvent, RoomUnitDanceComposer, RoomUnitDanceEvent, RoomUnitDropHandItemComposer, RoomUnitEffectEvent, RoomUnitEvent, RoomUnitExpressionEvent, RoomUnitGiveHandItemComposer, RoomUnitGiveHandItemPetComposer, RoomUnitHandItemEvent, RoomUnitHandItemReceivedEvent, RoomUnitIdleEvent, RoomUnitInfoEvent, RoomUnitLookComposer, RoomUnitNumberEvent, RoomUnitPostureComposer, RoomUnitRemoveEvent, RoomUnitSignComposer, RoomUnitStatusEvent, RoomUnitTypingEvent, RoomUnitTypingStartComposer, RoomUnitTypingStopComposer, RoomUnitWalkComposer, RoomUsersClassificationMessageComposer, RoomUsersWithRightsComposer, RoomVisitsEvent, RoomVisualizationSettingsEvent, SanctionStatusEvent, SaveRoomSettingsComposer, SaveWardrobeOutfitMessageComposer, ScrGetKickbackInfoMessageComposer, ScrSendKickbackInfoMessageEvent, SearchFaqsMessageComposer, SeasonalCalendarDailyOfferMessageEvent, SeasonalQuestsMessageEvent, SecondsUntilMessageEvent, SelectClubGiftComposer, SellablePetPalettesMessageEvent, SendMessageComposer, SendRoomInviteComposer, SetActivatedBadgesComposer, SetClothingChangeDataMessageComposer, SetItemDataMessageComposer, SetObjectDataMessageComposer, SetPhoneNumberVerificationStatusMessageComposer, SetRelationshipStatusComposer, SetRoomSessionTagsMessageComposer, SetTargetedOfferStateComposer, SetYoutubeDisplayPlaylistMessageComposer, ShopTargetedOfferViewedComposer, ShowEnforceRoomCategoryDialogEvent, ShowMysteryBoxWaitMessageEvent, SimpleAlertMessageEvent, SSOTicketMessageComposer, StartCampaignMessageComposer, SubmitRoomToCompetitionMessageComposer, TalentLevelUpEvent, TalentTrackComposer, TalentTrackLevelMessageEvent, TalentTrackMessageEvent, TargetedOfferEvent, TargetedOfferNotFoundEvent, ThreadMessagesMessageEvent, ThumbnailStatusMessageEvent, TogglePetBreedingComposer, TogglePetRidingComposer, ToggleStaffPickMessageComposer, TradingAcceptComposer, TradingAcceptEvent, TradingCancelComposer, TradingCloseComposer, TradingCloseEvent, TradingCompletedEvent, TradingConfirmationComposer, TradingConfirmationEvent, TradingListAddItemComposer, TradingListAddItemsComposer, TradingListItemEvent, TradingListItemRemoveComposer, TradingNoSuchItemEvent, TradingNotOpenEvent, TradingOpenComposer, TradingOpenEvent, TradingOpenFailedEvent, TradingOtherNotAllowedEvent, TradingUnacceptComposer, TradingYouAreNotAllowedEvent, TraxSongInfoMessageEvent, TryPhoneNumberMessageComposer, TryPhoneNumberResultMessageEvent, TryVerificationCodeResultMessageEvent, UnblockGroupMemberMessageComposer, UnignoreUserComposer, UniqueIDMessageComposer, UnloadGameMessageEvent, UnreadForumsCountMessageEvent, UnseenItemsEvent, UnseenResetCategoryComposer, UnseenResetItemsComposer, UpdateActionMessageComposer, UpdateConditionMessageComposer, UpdateFloorPropertiesMessageComposer, UpdateForumReadMarkerMessageComposer, UpdateForumSettingsMessageComposer, UpdateHomeRoomMessageComposer, UpdateMessageMessageEvent, UpdateRoomCategoryAndTradeSettingsComposer, UpdateRoomFilterMessageComposer, UpdateRoomThumbnailMessageComposer, UpdateThreadMessageComposer, UpdateThreadMessageEvent, UpdateTriggerMessageComposer, UsePetProductComposer, UserBannedMessageEvent, UserChatlogEvent, UserClassificationMessageEvent, UserCreditsEvent, UserCurrencyComposer, UserCurrencyEvent, UserCurrentBadgesComposer, UserCurrentBadgesEvent, UserEventCatsEvent, UserFigureComposer, UserFlatCatsEvent, UserGameAchievementsMessageEvent, UserInfoEvent, UserMottoComposer, UserNameChangeMessageEvent, UserPermissionsEvent, UserProfileComposer, UserProfileEvent, UserRelationshipsComposer, UserRespectComposer, UserSettingsCameraFollowComposer, UserSettingsEvent, UserSettingsOldChatComposer, UserSettingsRoomInvitesComposer, UserSettingsSoundComposer, UserSongDisksInventoryMessageEvent, UserSubscriptionComposer, UserSubscriptionEvent, UserTagsMessageEvent, UserUnbannedFromRoomEvent, UserWardrobePageEvent, VerifyCodeMessageComposer, VersionCheckMessageComposer, VisitUserComposer, VoteForRoomMessageComposer, VoucherRedeemErrorMessageEvent, VoucherRedeemOkMessageEvent, WardrobeMessageEvent, WeeklyCompetitiveFriendsLeaderboardEvent, WeeklyCompetitiveLeaderboardEvent, WeeklyGameRewardEvent, WeeklyGameRewardWinnersEvent, WelcomeGiftChangeEmailComposer, WelcomeGiftChangeEmailResultEvent, WelcomeGiftStatusEvent, WhisperGroupComposer, WiredFurniActionEvent, WiredFurniConditionEvent, WiredFurniTriggerEvent, WiredOpenEvent, WiredRewardResultMessageEvent, WiredSaveSuccessEvent, WiredValidationErrorEvent, YouArePlayingGameEvent, YouAreSpectatorMessageEvent, YoutubeControlVideoMessageEvent, YoutubeDisplayPlaylistsEvent, YoutubeDisplayVideoMessageEvent } from './messages';
 
 export class NitroMessages implements IMessageConfiguration
 {
@@ -602,7 +131,33 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.MESSENGER_INVITE, RoomInviteEvent);
 
         // GAMES
+        this._events.set(IncomingHeader.ACHIEVEMENTRESOLUTIONCOMPLETED, AchievementResolutionCompletedMessageEvent);
+        this._events.set(IncomingHeader.ACHIEVEMENTRESOLUTIONPROGRESS, AchievementResolutionProgressMessageEvent);
+        this._events.set(IncomingHeader.ACHIEVEMENTRESOLUTIONS, AchievementResolutionsMessageEvent);
         this._events.set(IncomingHeader.LOAD_GAME_URL, LoadGameUrlEvent);
+        this._events.set(IncomingHeader.LOADGAME, LoadGameMessageEvent);
+        this._events.set(IncomingHeader.UNLOADGAME, UnloadGameMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_GAME_LIST, GameListMessageEvent);
+        this._events.set(IncomingHeader.GAMESTATUSMESSAGE, GameStatusMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_ACHIEVEMENTS, UserGameAchievementsMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_STATUS, Game2AccountGameStatusMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_IN_ARENA_QUEUE, Game2InArenaQueueMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_STOP_COUNTER, Game2StopCounterMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_USER_LEFT_GAME, Game2UserLeftGameMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_DIRECTORY_STATUS, Game2GameDirectoryStatusMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_STARTING_GAME_FAILED, Game2StartingGameFailedMessageEvent);
+        this._events.set(IncomingHeader.GAME_CENTER_JOINING_FAILED, Game2JoiningGameFailedMessageEvent);
+        this._events.set(IncomingHeader.GAMEACHIEVEMENTS, GameAchievementsMessageEvent);
+        this._events.set(IncomingHeader.GAMEINVITE, GameInviteMessageEvent);
+        this._events.set(IncomingHeader.JOINEDQUEUEMESSAGE, JoinedQueueMessageEvent);
+        this._events.set(IncomingHeader.JOININGQUEUEFAILED, JoiningQueueFailedMessageEvent);
+        this._events.set(IncomingHeader.LEFTQUEUE, LeftQueueMessageEvent);
+        this._events.set(IncomingHeader.WEEKLY_GAME_REWARD, WeeklyGameRewardEvent);
+        this._events.set(IncomingHeader.WEEKLY_GAME_REWARD_WINNERS, WeeklyGameRewardWinnersEvent);
+        this._events.set(IncomingHeader.WEEKLY_COMPETITIVE_LEADERBOARD, WeeklyCompetitiveLeaderboardEvent);
+        this._events.set(IncomingHeader.WEEKLY_COMPETITIVE_FRIENDS_LEADERBOARD, WeeklyCompetitiveFriendsLeaderboardEvent);
+        this._events.set(IncomingHeader.WEEKLY_GAME2_FRIENDS_LEADERBOARD, Game2WeeklyFriendsLeaderboardEvent);
+        this._events.set(IncomingHeader.WEEKLY_GAME2_LEADERBOARD, Game2WeeklyLeaderboardEvent);
 
         // GROUP
         this._events.set(IncomingHeader.GROUP_INFO, GroupInformationEvent);
@@ -614,6 +169,9 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.GROUP_PURCHASED, GroupPurchasedEvent);
         this._events.set(IncomingHeader.GROUP_BADGES, HabboGroupBadgesMessageEvent);
         this._events.set(IncomingHeader.GROUP_DEACTIVATE, HabboGroupDeactivatedMessageEvent);
+        this._events.set(IncomingHeader.GROUP_MEMBERSHIP_REQUESTED, GroupMembershipRequestedMessageEvent);
+        this._events.set(IncomingHeader.GROUP_DETAILS_CHANGED, GroupDetailsChangedMessageEvent);
+        this._events.set(IncomingHeader.GROUP_HABBO_JOIN_FAILED, HabboGroupJoinFailedMessageEvent);
 
         // GROUP FORUMS
         this._events.set(IncomingHeader.GROUP_FORUM_DATA, ForumDataMessageEvent);
@@ -663,6 +221,7 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.USER_EFFECT_LIST_ADD, AvatarEffectAddedEvent);
         this._events.set(IncomingHeader.USER_EFFECT_LIST_REMOVE, AvatarEffectExpiredEvent);
         this._events.set(IncomingHeader.USER_EFFECT_LIST, AvatarEffectsEvent);
+        this._events.set(IncomingHeader.AVATAR_EFFECT_SELECTED, AvatarEffectSelectedEvent);
         this._events.set(IncomingHeader.USER_BADGES, BadgesEvent);
         this._events.set(IncomingHeader.USER_BADGES_ADD, BadgeReceivedEvent);
         this._events.set(IncomingHeader.BADGE_POINT_LIMITS, BadgePointLimitsEvent);
@@ -693,6 +252,7 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.TRADE_OPEN, TradingOpenEvent);
         this._events.set(IncomingHeader.TRADE_OTHER_NOT_ALLOWED, TradingOtherNotAllowedEvent);
         this._events.set(IncomingHeader.TRADE_YOU_NOT_ALLOWED, TradingYouAreNotAllowedEvent);
+        this._events.set(IncomingHeader.TRADE_NO_SUCH_ITEM, TradingNoSuchItemEvent);
 
         // LANDING VIEW
         this._events.set(IncomingHeader.COMMUNITY_GOAL_VOTE_EVENT, CommunityGoalVoteMessageEvent);
@@ -727,6 +287,9 @@ export class NitroMessages implements IMessageConfiguration
 
         // MYSTERY BOX
         this._events.set(IncomingHeader.MYSTERY_BOX_KEYS, MysteryBoxKeysEvent);
+        this._events.set(IncomingHeader.GOTMYSTERYBOXPRIZEMESSAGE, GotMysteryBoxPrizeMessageEvent);
+        this._events.set(IncomingHeader.CANCELMYSTERYBOXWAITMESSAGE, CancelMysteryBoxWaitMessageEvent);
+        this._events.set(IncomingHeader.SHOWMYSTERYBOXWAITMESSAGE, ShowMysteryBoxWaitMessageEvent);
 
         // NAVIGATOR
         this._events.set(IncomingHeader.CAN_CREATE_ROOM, CanCreateRoomEvent);
@@ -768,9 +331,19 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.ACTIVITY_POINT_NOTIFICATION, ActivityPointNotificationMessageEvent);
         this._events.set(IncomingHeader.BOT_ERROR, BotErrorEvent);
         this._events.set(IncomingHeader.PET_LEVEL_NOTIFICATION, PetLevelNotificationEvent);
+        this._events.set(IncomingHeader.NOTIFICATION_SIMPLE_ALERT, SimpleAlertMessageEvent);
+        this._events.set(IncomingHeader.NOTIFICATION_ELEMENT_POINTER, ElementPointerMessageEvent);
 
         // PERK
         this._events.set(IncomingHeader.USER_PERKS, PerkAllowancesMessageEvent);
+
+        // PETS
+        this._events.set(IncomingHeader.PET_TRAINING_PANEL, PetTrainingPanelMessageEvent);
+        this._events.set(IncomingHeader.PET_LEVEL_UPDATE, PetLevelUpdateMessageEvent);
+        this._events.set(IncomingHeader.PET_SCRATCH_FAILED, PetScratchFailedMessageEvent);
+        this._events.set(IncomingHeader.PET_OPEN_PACKAGE_REQUESTED, OpenPetPackageRequestedMessageEvent);
+        this._events.set(IncomingHeader.PET_OPEN_PACKAGE_RESULT, OpenPetPackageResultMessageEvent);
+        this._events.set(IncomingHeader.PET_BREEDING_RESULT, PetBreedingResultEvent);
 
         // POLL
         this._events.set(IncomingHeader.QUESTION, QuestionEvent);
@@ -802,6 +375,8 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.ROOM_RIGHTS_OWNER, RoomRightsOwnerEvent);
         this._events.set(IncomingHeader.ROOM_RIGHTS, RoomRightsEvent);
         this._events.set(IncomingHeader.BOT_COMMAND_CONFIGURATION, BotCommandConfigurationEvent);
+        this._events.set(IncomingHeader.BOT_SKILL_LIST_UPDATE, BotSkillListUpdateEvent);
+        this._events.set(IncomingHeader.BOT_FORCE_OPEN_CONTEXT_MENU, BotForceOpenContextMenuEvent);
         this._events.set(IncomingHeader.ROOM_SETTINGS_CHAT, RoomChatSettingsEvent);
         this._events.set(IncomingHeader.ROOM_INFO_OWNER, RoomEntryInfoMessageEvent);
         this._events.set(IncomingHeader.ROOM_SCORE, RoomScoreEvent);
@@ -829,6 +404,8 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.FURNITURE_POSTIT_STICKY_POLE_OPEN, RequestSpamWallPostItMessageEvent);
         this._events.set(IncomingHeader.ROOM_SPECTATOR, YouAreSpectatorMessageEvent);
         this._events.set(IncomingHeader.CUSTOM_USER_NOTIFICATION, CustomUserNotificationMessageEvent);
+        this._events.set(IncomingHeader.ROOM_MESSAGE_NOTIFICATION, RoomMessageNotificationMessageEvent);
+        this._events.set(IncomingHeader.ROOM_POPULAR_TAGS_RESULT, PopularRoomTagsResultEvent);
 
         // ROOM SETTINGS
         this._events.set(IncomingHeader.ROOM_RIGHTS_LIST, FlatControllersEvent);
@@ -856,6 +433,7 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.ROOM_MODEL_NAME, RoomReadyMessageEvent);
         this._events.set(IncomingHeader.ROOM_PAINT, RoomPaintEvent);
         this._events.set(IncomingHeader.ROOM_THICKNESS, RoomVisualizationSettingsEvent);
+        this._events.set(IncomingHeader.ROOM_GET_FILTER_WORDS, RoomFilterSettingsMessageEvent);
         this._events.set(IncomingHeader.ROOM_MODEL_BLOCKED_TILES, RoomOccupiedTilesMessageEvent);
         this._events.set(IncomingHeader.PET_FIGURE_UPDATE, PetFigureUpdateEvent);
         this._events.set(IncomingHeader.PET_INFO, PetInfoEvent);
@@ -904,6 +482,8 @@ export class NitroMessages implements IMessageConfiguration
 
         // TALENT
         this._events.set(IncomingHeader.HELPER_TALENT_TRACK, TalentTrackMessageEvent);
+        this._events.set(IncomingHeader.TALENT_TRACK_LEVEL, TalentTrackLevelMessageEvent);
+        this._events.set(IncomingHeader.TALENT_TRACK_LEVEL_UP, TalentLevelUpEvent);
 
         // USER
         this._events.set(IncomingHeader.IN_CLIENT_LINK, InClientLinkEvent);
@@ -922,16 +502,55 @@ export class NitroMessages implements IMessageConfiguration
         this._events.set(IncomingHeader.USER_CURRENCY, UserCurrencyEvent);
         this._events.set(IncomingHeader.USER_SUBSCRIPTION, UserSubscriptionEvent);
         this._events.set(IncomingHeader.USER_WARDROBE_PAGE, UserWardrobePageEvent);
+        this._events.set(IncomingHeader.USER_CLASSIFICATION, UserClassificationMessageEvent);
+        this._events.set(IncomingHeader.GET_USER_TAGS, UserTagsMessageEvent);
         this._events.set(IncomingHeader.SCR_SEND_KICKBACK_INFO, ScrSendKickbackInfoMessageEvent);
         this._events.set(IncomingHeader.PET_RESPECTED, PetRespectNoficationEvent);
         this._events.set(IncomingHeader.PET_SUPPLEMENT, PetSupplementedNotificationEvent);
+        this._events.set(IncomingHeader.ACCOUNT_SAFETY_LOCK_STATUS_CHANGE, AccountSafetyLockStatusChangeMessageEvent);
 
         this._events.set(IncomingHeader.GENERIC_ERROR, GenericErrorEvent);
         this._events.set(IncomingHeader.GROUP_LIST, GuildMembershipsMessageEvent);
         this._events.set(IncomingHeader.CATALOG_APPROVE_NAME_RESULT, ApproveNameMessageEvent);
+        this._events.set(IncomingHeader.CONNECTION_ERROR, ConnectionErrorEvent);
+
+        // GUILD
+        this._events.set(IncomingHeader.GUILD_EDIT_FAILED, GuildEditFailedMessageEvent);
+        this._events.set(IncomingHeader.GUILD_MEMBER_MGMT_FAILED, GuildMemberMgmtFailedMessageEvent);
+        this._events.set(IncomingHeader.EXTENDED_PROFILE_CHANGED, ExtendedProfileChangedMessageEvent);
 
         // HANDSHAKE
         this._events.set(IncomingHeader.NOOBNESS_LEVEL, NoobnessLevelMessageEvent);
+        this._events.set(IncomingHeader.DISCONNECT_REASON, DisconnectReasonEvent);
+        this._events.set(IncomingHeader.HANDSHAKE_INIT_DIFFIE, InitDiffieHandshakeEvent);
+        this._events.set(IncomingHeader.HANDSHAKE_COMPLETE_DIFFIE, CompleteDiffieHandshakeEvent);
+        this._events.set(IncomingHeader.HANDSHAKE_IDENTITY_ACCOUNT, IdentityAccountsEvent);
+
+        // NUX
+        this._events.set(IncomingHeader.NEW_USER_EXPERIENCE_GIFT_OFFER, NewUserExperienceGiftOfferMessageEvent);
+        this._events.set(IncomingHeader.NEW_USER_EXPERIENCE_NOT_COMPLETE, NewUserExperienceNotCompleteEvent);
+
+        // PHONE
+        this._events.set(IncomingHeader.PHONE_COLLECTION_STATE, PhoneCollectionStateMessageEvent);
+        this._events.set(IncomingHeader.PHONE_TRY_NUMBER_RESULT, TryPhoneNumberResultMessageEvent);
+        this._events.set(IncomingHeader.PHONE_TRY_VERIFICATION_CODE_RESULT, TryVerificationCodeResultMessageEvent);
+
+        // WELCOME
+        this._events.set(IncomingHeader.WELCOME_GIFT_CHANGE_EMAIL_RESULT, WelcomeGiftChangeEmailResultEvent);
+        this._events.set(IncomingHeader.WELCOME_GIFT_STATUS, WelcomeGiftStatusEvent);
+        // RENTABLE SPACE
+        this._events.set(IncomingHeader.RENTABLE_SPACE_RENT_OK, RentableSpaceRentOkMessageEvent);
+        this._events.set(IncomingHeader.RENTABLE_SPACE_STATUS, RentableSpaceStatusMessageEvent);
+        this._events.set(IncomingHeader.RENTABLE_SPACE_RENT_FAILED, RentableSpaceRentFailedMessageEvent);
+        // RECYCLER
+        this._events.set(IncomingHeader.RECYCLER_STATUS, RecyclerStatusMessageEvent);
+        this._events.set(IncomingHeader.RECYCLER_FINISHED, RecyclerFinishedMessageEvent);
+        // EMAIL
+        this._events.set(IncomingHeader.EMAIL_STATUS, EmailStatusResultEvent);
+        this._events.set(IncomingHeader.CHANGE_EMAIL_RESULT, ChangeEmailResultEvent);
+
+        // RENTABLE FURNI
+        this._events.set(IncomingHeader.RENTABLE_FURNI_RENT_OR_BUYOUT_OFFER, FurniRentOrBuyoutOfferMessageEvent);
     }
 
     private registerComposers(): void
@@ -1036,7 +655,28 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.SET_RELATIONSHIP_STATUS, SetRelationshipStatusComposer);
         this._composers.set(OutgoingHeader.VISIT_USER, VisitUserComposer);
 
-        // todo: game
+        // GAME
+        this._composers.set(OutgoingHeader.ACHIEVEMENT_RESOLUTION_OPEN, GetResolutionAchievementsMessageComposer);
+        this._composers.set(OutgoingHeader.ACCEPTGAMEINVITE, AcceptGameInviteMessageComposer);
+        this._composers.set(OutgoingHeader.GAMEUNLOADEDMESSAGE, GameUnloadedMessageComposer);
+        this._composers.set(OutgoingHeader.GETGAMEACHIEVEMENTSMESSAGE, GetGameAchievementsMessageComposer);
+        this._composers.set(OutgoingHeader.GAMES_LIST, GetGameListMessageComposer);
+        this._composers.set(OutgoingHeader.GETGAMESTATUSMESSAGE, GetGameStatusMessageComposer);
+        this._composers.set(OutgoingHeader.GETUSERGAMEACHIEVEMENTSMESSAGE, GetUserGameAchievementsMessageComposer);
+        this._composers.set(OutgoingHeader.JOINQUEUEMESSAGE, JoinQueueMessageComposer);
+        this._composers.set(OutgoingHeader.LEAVEQUEUEMESSAGE, LeaveQueueMessageComposer);
+        this._composers.set(OutgoingHeader.RESETRESOLUTIONACHIEVEMENTMESSAGE, ResetResolutionAchievementMessageComposer);
+        this._composers.set(OutgoingHeader.GAMES_INIT, GetWeeklyGameRewardComposer);
+        this._composers.set(OutgoingHeader.GETWEEKLYGAMEREWARDWINNERS, GetWeeklyGameRewardWinnersComposer);
+        this._composers.set(OutgoingHeader.GAME2GETACCOUNTGAMESTATUSMESSAGE, Game2GetAccountGameStatusMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2CHECKGAMEDIRECTORYSTATUSMESSAGE, Game2CheckGameDirectoryStatusMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2EXITGAMEMESSAGE, Game2ExitGameMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2GAMECHATMESSAGE, Game2GameChatMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2LOADSTAGEREADYMESSAGE, Game2LoadStageReadyMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2PLAYAGAINMESSAGE, Game2PlayAgainMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2REQUESTFULLSTATUSUPDATEMESSAGE, Game2RequestFullStatusUpdateMessageComposer);
+        this._composers.set(OutgoingHeader.GAME2GETWEEKLYFRIENDSLEADERBOARD, Game2GetWeeklyFriendsLeaderboardComposer);
+        this._composers.set(OutgoingHeader.GAME2GETWEEKLYLEADERBOARD, Game2GetWeeklyLeaderboardComposer);
 
         // GIFTS
         this._composers.set(OutgoingHeader.GET_GIFT, GetGiftMessageComposer);
@@ -1067,6 +707,8 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.DISCONNECT, DisconnectMessageComposer);
         this._composers.set(OutgoingHeader.SECURITY_MACHINE, UniqueIDMessageComposer);
         this._composers.set(OutgoingHeader.CLIENT_VARIABLES, VersionCheckMessageComposer);
+        this._composers.set(OutgoingHeader.HANDSHAKE_INIT_DIFFIE, InitDiffieHandshakeMessageComposer);
+        this._composers.set(OutgoingHeader.HANDSHAKE_COMPLETE_DIFFIE, CompleteDiffieHandshakeMessageComposer);
 
         // HELP
         this._composers.set(OutgoingHeader.CALL_FOR_HELP_FROM_FORUM_MESSAGE, CallForHelpFromForumMessageMessageComposer);
@@ -1125,6 +767,8 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.GROUP_FAVORITE, GroupFavoriteComposer);
         this._composers.set(OutgoingHeader.GROUP_UNFAVORITE, GroupUnfavoriteComposer);
         this._composers.set(OutgoingHeader.GROUP_BADGES, GetHabboGroupBadgesMessageComposer);
+        this._composers.set(OutgoingHeader.APPROVE_ALL_MEMBERSHIP_REQUESTS, ApproveAllMembershipRequestsMessageComposer);
+        this._composers.set(OutgoingHeader.GROUP_UNBLOCK_MEMBER, UnblockGroupMemberMessageComposer);
 
         // NAVIGATOR
         this._composers.set(OutgoingHeader.ROOM_FAVORITE, AddFavouriteRoomMessageComposer);
@@ -1163,6 +807,8 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.ROOMS_WITH_HIGHEST_SCORE_SEARCH, RoomsWithHighestScoreSearchMessageComposer);
         this._composers.set(OutgoingHeader.SET_ROOM_SESSION_TAGS, SetRoomSessionTagsMessageComposer);
         this._composers.set(OutgoingHeader.ROOM_STAFF_PICK, ToggleStaffPickMessageComposer);
+        this._composers.set(OutgoingHeader.ROOM_FILTER_WORDS, GetCustomRoomFilterMessageComposer);
+        this._composers.set(OutgoingHeader.ROOM_FILTER_WORDS_MODIFY, UpdateRoomFilterMessageComposer);
         this._composers.set(OutgoingHeader.USER_HOME_ROOM, UpdateHomeRoomMessageComposer);
         this._composers.set(OutgoingHeader.UPDATE_ROOM_THUMBNAIL, UpdateRoomThumbnailMessageComposer);
         // NEW NAVIGATOR
@@ -1173,6 +819,7 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.NAVIGATOR_SEARCH_SAVE, NavigatorSearchSaveComposer);
         this._composers.set(OutgoingHeader.NAVIGATOR_SETTINGS_SAVE, NavigatorSettingsSaveComposer);
         this._composers.set(OutgoingHeader.NAVIGATOR_CATEGORY_LIST_MODE, NavigatorCategoryListModeComposer);
+        this._composers.set(OutgoingHeader.NAVIGATOR_DELETE_SAVED_SEARCH, NavigatorDeleteSavedSearchComposer);
 
         // POLL
         this._composers.set(OutgoingHeader.POLL_ANSWER, PollAnswerComposer);
@@ -1181,16 +828,24 @@ export class NitroMessages implements IMessageConfiguration
 
         // INVENTORY
 
+        // EFFECTS
+        this._composers.set(OutgoingHeader.USER_EFFECT_ACTIVATE, AvatarEffectActivatedComposer);
+        this._composers.set(OutgoingHeader.USER_EFFECT_ENABLE, AvatarEffectSelectedComposer);
+
         // BADGES
         this._composers.set(OutgoingHeader.USER_BADGES, RequestBadgesComposer);
         this._composers.set(OutgoingHeader.USER_BADGES_CURRENT_UPDATE, SetActivatedBadgesComposer);
+        this._composers.set(OutgoingHeader.GET_BADGE_POINTS_LIMITS, GetBadgePointLimitsComposer);
+        this._composers.set(OutgoingHeader.REQUESTABADGE, RequestABadgeComposer);
+        this._composers.set(OutgoingHeader.GETISBADGEREQUESTFULFILLED, GetIsBadgeRequestFulfilledComposer);
 
         // BOTS
         this._composers.set(OutgoingHeader.USER_BOTS, GetBotInventoryComposer);
 
         // FURNI
+
         this._composers.set(OutgoingHeader.USER_FURNITURE, FurnitureListComposer);
-        this._composers.set(OutgoingHeader.USER_FURNITURE2, FurnitureList2Composer);
+        this._composers.set(OutgoingHeader.REQUESTFURNIINVENTORYWHENNOTINROOM, RequestFurniInventoryWhenNotInRoomComposer);
         this._composers.set(OutgoingHeader.DELETE_FURNI, DeleteFurniComposer)
 
         // PETS
@@ -1223,6 +878,12 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.TOGGLE_PET_BREEDING, TogglePetBreedingComposer);
         this._composers.set(OutgoingHeader.TOGGLE_PET_RIDING, TogglePetRidingComposer);
         this._composers.set(OutgoingHeader.USE_PET_PRODUCT, UsePetProductComposer);
+        this._composers.set(OutgoingHeader.GET_PET_TRAINING_PANEL, GetPetCommandsComposer);
+        this._composers.set(OutgoingHeader.PET_OPEN_PACKAGE, OpenPetPackageMessageComposer);
+        this._composers.set(OutgoingHeader.PET_SELECTED, PetSelectedMessageComposer);
+        this._composers.set(OutgoingHeader.PETS_BREED, BreedPetsMessageComposer);
+        this._composers.set(OutgoingHeader.PET_CANCEL_BREEDING, CancelPetBreedingComposer);
+        this._composers.set(OutgoingHeader.PET_CONFIRM_BREEDING, ConfirmPetBreedingComposer);
 
         // ROOM
 
@@ -1230,6 +891,7 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.ROOM_ENTER, RoomEnterComposer);
         this._composers.set(OutgoingHeader.ROOM_DOORBELL, RoomDoorbellAccessComposer);
         this._composers.set(OutgoingHeader.GO_TO_FLAT, GoToFlatMessageComposer);
+        this._composers.set(OutgoingHeader.CHANGE_QUEUE, ChangeQueueMessageComposer);
 
         // ACTION
         this._composers.set(OutgoingHeader.ROOM_AMBASSADOR_ALERT, RoomAmbassadorAlertComposer);
@@ -1248,6 +910,7 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.ROOM_SETTINGS_SAVE, SaveRoomSettingsComposer);
         this._composers.set(OutgoingHeader.ROOM_RIGHTS_LIST, RoomUsersWithRightsComposer);
         this._composers.set(OutgoingHeader.ROOM_BAN_LIST, RoomBannedUsersComposer);
+        this._composers.set(OutgoingHeader.ROOM_SETTINGS_UPDATE_ROOM_CATEGORY_AND_TRADE, UpdateRoomCategoryAndTradeSettingsComposer);
 
         // BOTS
         this._composers.set(OutgoingHeader.BOT_CONFIGURATION, RequestBotCommandConfigurationComposer);
@@ -1265,6 +928,7 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.SET_OBJECT_DATA, SetObjectDataMessageComposer);
         this._composers.set(OutgoingHeader.COMPOST_PLANT, CompostPlantMessageComposer);
         this._composers.set(OutgoingHeader.HARVEST_PET, HarvestPetMessageComposer);
+        this._composers.set(OutgoingHeader.SET_CLOTHING_CHANGE_DATA, SetClothingChangeDataMessageComposer);
 
         // FURNITURE
         this._composers.set(OutgoingHeader.FURNITURE_ALIASES, FurnitureAliasesComposer);
@@ -1341,9 +1005,13 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.APPROVE_NAME, ApproveNameMessageComposer);
         this._composers.set(OutgoingHeader.USER_RESPECT, UserRespectComposer);
         this._composers.set(OutgoingHeader.SCR_GET_KICKBACK_INFO, ScrGetKickbackInfoMessageComposer);
-        this._composers.set(OutgoingHeader.WHISPER_GROUP, WhisperGroupComposer)
+
+        // USER CLASSIFICATION
+        this._composers.set(OutgoingHeader.PEER_USERS_CLASSIFICATION, PeerUsersClassificationMessageComposer);
+        this._composers.set(OutgoingHeader.USER_CLASSIFICATION, RoomUsersClassificationMessageComposer);
 
         // DATA
+        this._composers.set(OutgoingHeader.WHISPER_GROUP, WhisperGroupComposer)
         this._composers.set(OutgoingHeader.USER_IGNORED, GetIgnoredUsersComposer);
         this._composers.set(OutgoingHeader.USER_IGNORE, IgnoreUserComposer);
         this._composers.set(OutgoingHeader.USER_IGNORE_ID, IgnoreUserIdComposer);
@@ -1353,6 +1021,7 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.USER_MOTTO, UserMottoComposer);
         this._composers.set(OutgoingHeader.USER_PROFILE, UserProfileComposer);
         this._composers.set(OutgoingHeader.USER_PROFILE_BY_NAME, GetExtendedProfileByNameMessageComposer);
+        this._composers.set(OutgoingHeader.USER_TAGS, GetUserTagsComposer);
         this._composers.set(OutgoingHeader.MESSENGER_RELATIONSHIPS, UserRelationshipsComposer);
 
         // MANNEQUIN
@@ -1411,6 +1080,10 @@ export class NitroMessages implements IMessageConfiguration
         this._composers.set(OutgoingHeader.PICK_ISSUES, PickIssuesMessageComposer);
         this._composers.set(OutgoingHeader.RELEASE_ISSUES, ReleaseIssuesMessageComposer);
 
+        // MYSTERYBOX
+        this._composers.set(OutgoingHeader.MYSTERYBOXWAITINGCANCELEDMESSAGE, MysteryBoxWaitingCanceledMessageComposer);
+        this._composers.set(OutgoingHeader.MYSTERYBOX_OPEN_TROPHY, OpenMysteryTrophyMessageComposer);
+
         // SETTINGS
         this._composers.set(OutgoingHeader.USER_SETTINGS_CAMERA, UserSettingsCameraFollowComposer);
         this._composers.set(OutgoingHeader.USER_SETTINGS_OLD_CHAT, UserSettingsOldChatComposer);
@@ -1452,8 +1125,38 @@ export class NitroMessages implements IMessageConfiguration
 
         // TALENT
         this._composers.set(OutgoingHeader.HELPER_TALENT_TRACK, TalentTrackComposer);
+        this._composers.set(OutgoingHeader.TALENT_TRACK_GET_LEVEL, GetTalentTrackLevelMessageComposer);
 
-        this._composers.set(OutgoingHeader.ACHIEVEMENT_RESOLUTION_OPEN, GetResolutionAchievementsMessageComposer);
+        //NUX
+        this._composers.set(OutgoingHeader.NEW_USER_EXPERIENCE_GET_GIFTS, NewUserExperienceGetGiftsComposer);
+        this._composers.set(OutgoingHeader.NEW_USER_EXPERIENCE_SCRIPT_PROCEED, NewUserExperienceScriptProceedComposer);
+
+        // WELCOME
+        this._composers.set(OutgoingHeader.WELCOME_OPEN_GIFT, OpenWelcomeGiftComposer);
+        this._composers.set(OutgoingHeader.WELCOME_GIFT_CHANGE_EMAIL, WelcomeGiftChangeEmailComposer);
+
+        // EMAIL
+        this._composers.set(OutgoingHeader.EMAIL_GET_STATUS, GetEmailStatusComposer);
+        this._composers.set(OutgoingHeader.EMAIL_CHANGE, ChangeEmailComposer);
+        // RENTABLE
+        this._composers.set(OutgoingHeader.RENTABLE_SPACE_CANCEL_RENT, RentableSpaceCancelRentMessageComposer);
+        this._composers.set(OutgoingHeader.RENTABLE_SPACE_RENT, RentableSpaceRentMessageComposer);
+        this._composers.set(OutgoingHeader.RENTABLE_SPACE_STATUS, RentableSpaceStatusMessageComposer);
+        // RECYCLER
+        this._composers.set(OutgoingHeader.RECYCLER_STATUS, GetRecyclerStatusMessageComposer);
+        this._composers.set(OutgoingHeader.RECYCLER_ITEMS, RecycleItemsMessageComposer);
+
+        // TRACKING
+        this._composers.set(OutgoingHeader.TRACKING_PERFORMANCE_LOG, PerformanceLogMessageComposer);
+        this._composers.set(OutgoingHeader.TRACKING_LAG_WARNING_REPORT, LagWarningReportMessageComposer);
+
+        // ROOM DIRECTORY
+        this._composers.set(OutgoingHeader.ROOM_DIRECTORY_ROOM_NETWORK_OPEN_CONNECTION, RoomNetworkOpenConnectionMessageComposer);
+
+        // RENTABLE
+        this._composers.set(OutgoingHeader.RENTABLE_EXTEND_RENT_OR_BUYOUT_STRIP_ITEM, ExtendRentOrBuyoutStripItemMessageComposer);
+        this._composers.set(OutgoingHeader.RENTABLE_EXTEND_RENT_OR_BUYOUT_FURNI, ExtendRentOrBuyoutFurniMessageComposer);
+        this._composers.set(OutgoingHeader.RENTABLE_GET_RENT_OR_BUYOUT_OFFER, GetRentOrBuyoutOfferMessageComposer);
     }
 
     public get events(): Map<number, Function>

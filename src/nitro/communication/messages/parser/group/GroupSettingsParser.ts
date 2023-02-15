@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { GroupDataBadgePart } from './utils/GroupDataBadgePart';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { GroupDataBadgePart } from './utils';
 
 export class GroupSettingsParser implements IMessageParser
 {

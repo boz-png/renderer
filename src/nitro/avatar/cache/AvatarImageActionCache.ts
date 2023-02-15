@@ -1,4 +1,4 @@
-﻿import { Nitro } from '../../Nitro';
+﻿import { GetTickerTime } from '../../../pixi-proxy';
 import { AvatarImageDirectionCache } from './AvatarImageDirectionCache';
 
 export class AvatarImageActionCache
@@ -10,7 +10,7 @@ export class AvatarImageActionCache
     {
         this._cache = new Map();
 
-        this.setLastAccessTime(Nitro.instance.time);
+        this.setLastAccessTime(GetTickerTime());
     }
 
     public dispose(): void

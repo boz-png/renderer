@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { WiredActionDefinition } from '../../incoming/roomevents/WiredActionDefinition';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { WiredActionDefinition } from './WiredActionDefinition';
 
 export class WiredFurniActionParser implements IMessageParser
 {

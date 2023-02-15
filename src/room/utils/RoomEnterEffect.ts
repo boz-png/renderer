@@ -1,4 +1,4 @@
-﻿import { Nitro } from '../../nitro/Nitro';
+﻿import { GetTickerTime } from '../../pixi-proxy';
 
 export class RoomEnterEffect
 {
@@ -19,7 +19,7 @@ export class RoomEnterEffect
         RoomEnterEffect._currentDelta = 0;
         RoomEnterEffect._startDelayMs = delay;
         RoomEnterEffect._effectDurationMs = duration;
-        RoomEnterEffect._initializationTimeMs = Nitro.instance.time;
+        RoomEnterEffect._initializationTimeMs = GetTickerTime();
         RoomEnterEffect._state = RoomEnterEffect.STATE_START_DELAY;
     }
 
@@ -27,7 +27,7 @@ export class RoomEnterEffect
     {
         if((RoomEnterEffect._state === RoomEnterEffect.STATE_NOT_INITIALIZED) || (RoomEnterEffect._state === RoomEnterEffect.STATE_OVER)) return;
 
-        const k = (Nitro.instance.time - RoomEnterEffect._initializationTimeMs);
+        const k = (GetTickerTime() - RoomEnterEffect._initializationTimeMs);
 
         if(k > (RoomEnterEffect._startDelayMs + RoomEnterEffect._effectDurationMs))
         {

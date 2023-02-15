@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { CompetitionRoomsData } from './utils/CompetitionRoomsData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { CompetitionRoomsData } from './utils';
 
 export class CompetitionRoomsDataMessageParser implements IMessageParser
 {
@@ -20,7 +19,7 @@ export class CompetitionRoomsDataMessageParser implements IMessageParser
         return true;
     }
 
-    public get data():CompetitionRoomsData
+    public get data(): CompetitionRoomsData
     {
         return this._data;
     }

@@ -1,4 +1,4 @@
-﻿import { IAssetAnimationAdd } from '../../../core/asset/interfaces';
+﻿import { IAssetAnimationAdd } from '../../../api';
 
 export class AddDataContainer
 {

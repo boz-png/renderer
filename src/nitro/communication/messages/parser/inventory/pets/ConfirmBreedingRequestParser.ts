@@ -1,6 +1,5 @@
-﻿import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
-import { BreedingPetInfo } from '../../../incoming/room/pet/BreedingPetInfo';
-import { RarityCategoryData } from '../../../incoming/room/pet/RarityCategoryData';
+﻿import { IMessageDataWrapper, IMessageParser } from '../../../../../../api';
+import { BreedingPetInfo, RarityCategoryData } from '../../room';
 
 export class ConfirmBreedingRequestParser implements IMessageParser
 {
@@ -60,12 +59,12 @@ export class ConfirmBreedingRequestParser implements IMessageParser
         return this._nestId;
     }
 
-    public get pet1():BreedingPetInfo
+    public get pet1(): BreedingPetInfo
     {
         return this._pet1;
     }
 
-    public get pet2():BreedingPetInfo
+    public get pet2(): BreedingPetInfo
     {
         return this._pet2;
     }

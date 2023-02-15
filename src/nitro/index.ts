@@ -1,8 +1,6 @@
 export * from './avatar';
 export * from './camera';
 export * from './communication';
-export * from './enums';
-export * from './events';
 export * from './externalInterface';
 export * from './game';
 export * from './INitro';
@@ -10,6 +8,6 @@ export * from './localization';
 export * from './Nitro';
 export * from './room';
 export * from './session';
-export * from './ui';
+export * from './sound';
 export * from './utils';
 export * from './window';

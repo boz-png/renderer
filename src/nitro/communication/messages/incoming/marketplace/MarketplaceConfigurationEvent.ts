@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { MarketplaceConfigurationMessageParser } from '../../parser/marketplace/MarketplaceConfigurationMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { MarketplaceConfigurationMessageParser } from '../../parser';
 
 export class MarketplaceConfigurationEvent extends MessageEvent implements IMessageEvent
 {

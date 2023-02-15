@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { YouArePlayingGameParser } from '../../../parser/room/session/YouArePlayingGameParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { YouArePlayingGameParser } from '../../../parser';
 
 export class YouArePlayingGameEvent extends MessageEvent implements IMessageEvent
 {

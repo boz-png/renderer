@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { RoomEntryData } from '../user';
 
 export class RoomAdPurchaseInfoEventParser implements IMessageParser

@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { FriendParser } from '../../incoming/friendlist/FriendParser';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { FriendParser } from './FriendParser';
 
 export class FriendListFragmentParser implements IMessageParser
 {

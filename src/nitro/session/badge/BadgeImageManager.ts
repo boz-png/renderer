@@ -1,13 +1,8 @@
 import { Resource, Texture } from '@pixi/core';
-import { NitroContainer, NitroTexture } from '../../..';
-import { IAssetManager } from '../../../core/asset/IAssetManager';
-import { IMessageEvent } from '../../../core/communication/messages/IMessageEvent';
-import { NitroSprite } from '../../../core/utils/proxy/NitroSprite';
-import { GroupBadgePartsEvent } from '../../communication/messages/incoming/group/GroupBadgePartsEvent';
-import { Nitro } from '../../Nitro';
-import { BadgeImageReadyEvent } from '../events/BadgeImageReadyEvent';
-import { IDisposable } from './../../../core/common/disposable/IDisposable';
-import { TextureUtils } from './../../../room/utils/TextureUtils';
+import { IAssetManager, IDisposable, IMessageEvent, NitroConfiguration } from '../../../api';
+import { BadgeImageReadyEvent } from '../../../events';
+import { NitroContainer, NitroSprite, NitroTexture, TextureUtils } from '../../../pixi-proxy';
+import { GroupBadgePartsEvent } from '../../communication';
 import { SessionDataManager } from './../SessionDataManager';
 import { BadgeInfo } from './BadgeInfo';
 import { GroupBadge } from './GroupBadge';
@@ -111,17 +106,22 @@ export class BadgeImageManager implements IDisposable
 
             this._requestedBadges.set(badgeName, true);
 
-            this._assets.downloadAsset(url, (flag: boolean) =>
-            {
-                if(flag)
+            this._assets
+                .downloadAsset(url)
+                .then(status =>
                 {
+                    if(!status) return;
+
                     this._requestedBadges.delete(badgeName);
 
                     const texture = this._assets.getTexture(url);
 
                     if(texture && this._sessionDataManager) this._sessionDataManager.events.dispatchEvent(new BadgeImageReadyEvent(badgeName, texture.clone()));
-                }
-            });
+                })
+                .catch(err =>
+                {
+
+                });
         }
 
         else if(type === BadgeImageManager.GROUP_BADGE)
@@ -138,7 +138,7 @@ export class BadgeImageManager implements IDisposable
 
     private getBadgePlaceholder(): Texture<Resource>
     {
-        const url = (Nitro.instance.getConfiguration<string>('images.url') + '/loading_icon.png');
+        const url = (NitroConfiguration.getValue<string>('images.url') + '/loading_icon.png');
         const existing = this._assets.getTexture(url);
 
         if(!existing) return null;
@@ -153,7 +153,7 @@ export class BadgeImageManager implements IDisposable
         switch(type)
         {
             case BadgeImageManager.NORMAL_BADGE:
-                url = (Nitro.instance.getConfiguration<string>('badge.asset.url')).replace('%badgename%', badge);
+                url = (NitroConfiguration.getValue<string>('badge.asset.url')).replace('%badgename%', badge);
                 break;
             case BadgeImageManager.GROUP_BADGE:
                 url = badge;

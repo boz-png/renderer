@@ -1,9 +1,5 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, IRoomGeometry, MouseEventType, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent, RoomSpriteMouseEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureEditableInternalLinkLogic extends FurnitureLogic
@@ -21,7 +17,7 @@ export class FurnitureEditableInternalLinkLogic extends FurnitureLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.INERNAL_LINK ];
+        const types = [RoomObjectWidgetRequestEvent.INERNAL_LINK];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

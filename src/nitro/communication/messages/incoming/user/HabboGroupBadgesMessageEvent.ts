@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { HabboGroupBadgesMessageParser } from '../../parser/user/HabboGroupBadgesMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { HabboGroupBadgesMessageParser } from '../../parser';
 
 export class HabboGroupBadgesMessageEvent extends MessageEvent implements IMessageEvent
 {

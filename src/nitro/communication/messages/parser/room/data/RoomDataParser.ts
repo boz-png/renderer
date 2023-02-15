@@ -1,4 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../../core/communication/messages';
+import { IMessageDataWrapper } from '../../../../../../api';
 
 export class RoomDataParser
 {

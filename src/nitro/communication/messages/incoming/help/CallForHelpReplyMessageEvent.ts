@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { CallForHelpReplyMessageParser } from '../../parser/help/CallForHelpReplyMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { CallForHelpReplyMessageParser } from '../../parser';
 
 export class CallForHelpReplyMessageEvent extends MessageEvent implements IMessageEvent
 {

@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { NavigatorEventCategoryDataParser } from './NavigatorEventCategoryDataParser';
 
 export class UserEventCatsMessageParser implements IMessageParser

@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { AuthenticatedParser } from '../../parser/security/AuthenticatedParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { AuthenticatedParser } from '../../parser';
 
 export class AuthenticatedEvent extends MessageEvent implements IMessageEvent
 {

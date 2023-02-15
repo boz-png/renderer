@@ -1,5 +1,5 @@
-﻿import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
-import { AchievementData } from '../../../incoming/inventory/achievements/AchievementData';
+﻿import { IMessageDataWrapper, IMessageParser } from '../../../../../../api';
+import { AchievementData } from './AchievementData';
 
 export class AchievementParser implements IMessageParser
 {

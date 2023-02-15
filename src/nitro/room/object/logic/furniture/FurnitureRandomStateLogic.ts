@@ -1,4 +1,4 @@
-import { RoomObjectStateChangedEvent } from '../../../events';
+import { RoomObjectStateChangedEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureRandomStateLogic extends FurnitureLogic

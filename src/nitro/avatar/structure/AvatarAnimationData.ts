@@ -1,6 +1,5 @@
-import { IActionDefinition } from '../actions/IActionDefinition';
-import { AnimationAction } from './animation/AnimationAction';
-import { IFigureSetData } from './IFigureSetData';
+import { IActionDefinition, IFigureSetData } from '../../../api';
+import { AnimationAction } from './animation';
 
 export class AvatarAnimationData implements IFigureSetData
 {

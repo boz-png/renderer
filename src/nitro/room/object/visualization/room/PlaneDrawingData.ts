@@ -1,5 +1,5 @@
 ﻿import { Point } from '@pixi/math';
-import { IPlaneDrawingData } from '../../../../../room/object/visualization/IPlaneDrawingData';
+import { IPlaneDrawingData } from '../../../../../api';
 
 export class PlaneDrawingData implements IPlaneDrawingData
 {

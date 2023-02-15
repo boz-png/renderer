@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { NoobnessLevelMessageParser } from '../../parser/handshake/NoobnessLevelMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { NoobnessLevelMessageParser } from '../../parser';
 
 export class NoobnessLevelMessageEvent extends MessageEvent implements IMessageEvent
 {

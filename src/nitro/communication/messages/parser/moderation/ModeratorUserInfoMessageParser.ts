@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { ModeratorUserInfoData } from '../../incoming/moderation/ModeratorUserInfoData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { ModeratorUserInfoData } from './ModeratorUserInfoData';
 
 export class ModeratorUserInfoMessageParser implements IMessageParser
 {

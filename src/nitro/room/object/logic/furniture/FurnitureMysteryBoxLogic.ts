@@ -1,12 +1,12 @@
-import { ContextMenuEnum } from '../../../../ui';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
+import { ContextMenuEnum } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureMysteryBoxLogic extends FurnitureMultiStateLogic
 {
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.MYSTERYBOX_OPEN_DIALOG ];
+        const types = [RoomObjectWidgetRequestEvent.MYSTERYBOX_OPEN_DIALOG];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

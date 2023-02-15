@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { RoomThumbnailUpdateResultMessageParser } from '../../parser/navigator/RoomThumbnailUpdateResultMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { RoomThumbnailUpdateResultMessageParser } from '../../parser';
 
 export class RoomThumbnailUpdateResultEvent extends MessageEvent implements IMessageEvent
 {

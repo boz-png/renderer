@@ -1,10 +1,9 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 
 export class ConvertedRoomIdMessageParser implements IMessageParser
 {
-    private _globalId:string;
-    private _convertedId:number;
+    private _globalId: string;
+    private _convertedId: number;
 
     public flush(): boolean
     {

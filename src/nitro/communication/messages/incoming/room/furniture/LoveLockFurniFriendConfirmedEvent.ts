@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { LoveLockFurniFriendConfirmedParser } from '../../../parser/room/furniture/LoveLockFurniFriendConfirmedParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { LoveLockFurniFriendConfirmedParser } from '../../../parser';
 
 export class LoveLockFurniFriendConfirmedEvent extends MessageEvent implements IMessageEvent
 {

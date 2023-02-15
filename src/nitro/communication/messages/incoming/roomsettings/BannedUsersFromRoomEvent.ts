@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { BannedUsersFromRoomParser } from '../../parser/roomsettings/BannedUsersFromRoomParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { BannedUsersFromRoomParser } from '../../parser';
 
 export class BannedUsersFromRoomEvent extends MessageEvent implements IMessageEvent
 {

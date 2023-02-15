@@ -1,7 +1,6 @@
-import { IRoomObjectModel } from '../../../../../room/object/IRoomObjectModel';
+import { IRoomObjectModel, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectRoomAdEvent } from '../../../../../events';
 import { HabboWebTools } from '../../../../utils';
-import { RoomObjectRoomAdEvent } from '../../../events';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
 import { FurnitureRoomBrandingLogic } from './FurnitureRoomBrandingLogic';
 
 export class FurnitureRoomBillboardLogic extends FurnitureRoomBrandingLogic
@@ -18,7 +17,7 @@ export class FurnitureRoomBillboardLogic extends FurnitureRoomBrandingLogic
         return model.getValue<string>(RoomObjectVariable.FURNITURE_BRANDING_URL);
     }
 
-    protected handleAdClick(objectId: number, objectType: string, clickUrl: string):void
+    protected handleAdClick(objectId: number, objectType: string, clickUrl: string): void
     {
         if(clickUrl.indexOf('http') === 0)
         {

@@ -1,15 +1,12 @@
-import { AdvancedMap } from '../../../../core/utils/AdvancedMap';
-import { IFigureDataSetType } from '../../interfaces';
+import { AdvancedMap, IAdvancedMap, IFigureDataSetType, IFigurePartSet, ISetType } from '../../../../api';
 import { FigurePartSet } from './FigurePartSet';
-import { IFigurePartSet } from './IFigurePartSet';
-import { ISetType } from './ISetType';
 
 export class SetType implements ISetType
 {
     private _type: string;
     private _paletteId: number;
     private _isMandatory: { [index: string]: boolean[] };
-    private _partSets: AdvancedMap<string, IFigurePartSet>;
+    private _partSets: IAdvancedMap<string, IFigurePartSet>;
 
     constructor(data: IFigureDataSetType)
     {
@@ -18,8 +15,8 @@ export class SetType implements ISetType
         this._type = data.type;
         this._paletteId = data.paletteId;
         this._isMandatory = {};
-        this._isMandatory['F'] = [ data.mandatory_f_0, data.mandatory_f_1 ];
-        this._isMandatory['M'] = [ data.mandatory_m_0, data.mandatory_m_1 ];
+        this._isMandatory['F'] = [data.mandatory_f_0, data.mandatory_f_1];
+        this._isMandatory['M'] = [data.mandatory_m_0, data.mandatory_m_1];
         this._partSets = new AdvancedMap();
 
         this.append(data);
@@ -99,7 +96,7 @@ export class SetType implements ISetType
         return _local_2.indexOf(false);
     }
 
-    public get partSets(): AdvancedMap<string, IFigurePartSet>
+    public get partSets(): IAdvancedMap<string, IFigurePartSet>
     {
         return this._partSets;
     }

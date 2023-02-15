@@ -1,5 +1,5 @@
+import { IActionDefinition } from '../../../api';
 import { ActionType } from './ActionType';
-import { IActionDefinition } from './IActionDefinition';
 
 export class ActionDefinition implements IActionDefinition
 {

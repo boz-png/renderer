@@ -1,6 +1,5 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomToObjectOwnAvatarMoveEvent } from '../../../events/RoomToObjectOwnAvatarMoveEvent';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, RoomObjectVariable } from '../../../../../api';
+import { RoomToObjectOwnAvatarMoveEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureChangeStateWhenStepOnLogic extends FurnitureLogic
@@ -40,7 +39,7 @@ export class FurnitureChangeStateWhenStepOnLogic extends FurnitureLogic
 
         const direction = (((Math.floor(this.object.getDirection().x) + 45) % 360) / 90);
 
-        if((direction === 1) || (direction === 3)) [ sizeX, sizeY ] = [ sizeY, sizeX ];
+        if((direction === 1) || (direction === 3)) [sizeX, sizeY] = [sizeY, sizeX];
 
         if(((targetLocation.x >= location.x) && (targetLocation.x < (location.x + sizeX))) && ((targetLocation.y >= location.y) && (targetLocation.y < (location.y + sizeY))))
         {

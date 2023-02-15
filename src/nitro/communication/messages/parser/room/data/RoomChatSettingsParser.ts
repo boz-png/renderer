@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
-import { RoomChatSettings } from '../../../incoming/roomsettings/RoomChatSettings';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../../api';
+import { RoomChatSettings } from '../../roomsettings';
 
 export class RoomChatSettingsParser implements IMessageParser
 {

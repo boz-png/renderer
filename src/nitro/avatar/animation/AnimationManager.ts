@@ -1,9 +1,6 @@
-import { IAssetAnimation } from '../../../core/asset/interfaces';
+import { IAnimation, IAnimationLayerData, IAnimationManager, IAssetAnimation } from '../../../api';
 import { AvatarStructure } from '../AvatarStructure';
 import { Animation } from './Animation';
-import { IAnimation } from './IAnimation';
-import { IAnimationLayerData } from './IAnimationLayerData';
-import { IAnimationManager } from './IAnimationManager';
 
 export class AnimationManager implements IAnimationManager
 {
@@ -16,6 +13,8 @@ export class AnimationManager implements IAnimationManager
 
     public registerAnimation(structure: AvatarStructure, _arg_2: { [index: string]: IAssetAnimation }): boolean
     {
+        if(!_arg_2) return false;
+
         const animationData = _arg_2[Object.keys(_arg_2)[0]];
 
         const animation = new Animation(structure, animationData);

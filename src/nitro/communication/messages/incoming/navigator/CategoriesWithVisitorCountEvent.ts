@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { CategoriesWithVisitorCountParser } from '../../parser/navigator/CategoriesWithVisitorCountParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { CategoriesWithVisitorCountParser } from '../../parser';
 
 export class CategoriesWithVisitorCountEvent extends MessageEvent implements IMessageEvent
 {

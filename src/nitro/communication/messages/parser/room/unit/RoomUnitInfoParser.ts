@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../../api';
 
 export class RoomUnitInfoParser implements IMessageParser
 {
@@ -6,8 +6,7 @@ export class RoomUnitInfoParser implements IMessageParser
     private _figure: string;
     private _gender: string;
     private _motto: string;
-    private _achievementScore: number; 
-
+    private _achievementScore: number;
 
     public flush(): boolean
     {

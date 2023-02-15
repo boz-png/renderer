@@ -1,5 +1,5 @@
 ﻿import { Point } from '@pixi/math';
-import { AvatarScaleType } from '../enum/AvatarScaleType';
+import { AvatarScaleType } from '../../../api';
 
 export class AvatarCanvas
 {

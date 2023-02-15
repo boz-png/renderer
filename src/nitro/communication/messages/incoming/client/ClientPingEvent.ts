@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { ClientPingParser } from '../../parser/client/ClientPingParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { ClientPingParser } from '../../parser';
 
 export class ClientPingEvent extends MessageEvent implements IMessageEvent
 {

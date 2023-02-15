@@ -1,7 +1,5 @@
 import { Point } from '@pixi/math';
-import { IRoomGeometry } from './IRoomGeometry';
-import { IVector3D } from './IVector3D';
-import { Vector3d } from './Vector3d';
+import { IRoomGeometry, IVector3D, Vector3d } from '../../api';
 
 export class RoomGeometry implements IRoomGeometry
 {
@@ -9,13 +7,13 @@ export class RoomGeometry implements IRoomGeometry
     public static SCALE_ZOOMED_OUT: number = 32;
 
     private _updateId: number = 0;
-    private _x: Vector3d;
-    private _y: Vector3d;
-    private _z: Vector3d;
-    private _directionAxis: Vector3d;
-    private _location: Vector3d;
-    private _direction: Vector3d;
-    private _depth: Vector3d;
+    private _x: IVector3D;
+    private _y: IVector3D;
+    private _z: IVector3D;
+    private _directionAxis: IVector3D;
+    private _location: IVector3D;
+    private _direction: IVector3D;
+    private _depth: IVector3D;
     private _scale: number = 1;
     private _x_scale: number = 1;
     private _y_scale: number = 1;
@@ -23,8 +21,8 @@ export class RoomGeometry implements IRoomGeometry
     private _x_scale_internal: number = 1;
     private _y_scale_internal: number = 1;
     private _z_scale_internal: number = 1;
-    private _loc: Vector3d;
-    private _dir: Vector3d;
+    private _loc: IVector3D;
+    private _dir: IVector3D;
     private _clipNear: number = -500;
     private _clipFar: number = 500;
     private _displacements: Map<string, IVector3D> = null;
@@ -65,9 +63,9 @@ export class RoomGeometry implements IRoomGeometry
         {
             return null;
         }
-        const _local_6: Vector3d = Vector3d.dif(k, _arg_3);
+        const _local_6: IVector3D = Vector3d.dif(k, _arg_3);
         const _local_7: number = (-(Vector3d.dotProduct(_arg_4, _local_6)) / _local_5);
-        const _local_8: Vector3d = Vector3d.sum(k, Vector3d.product(_arg_2, _local_7));
+        const _local_8: IVector3D = Vector3d.sum(k, Vector3d.product(_arg_2, _local_7));
         return _local_8;
     }
 
@@ -82,16 +80,16 @@ export class RoomGeometry implements IRoomGeometry
         return this._scale / Math.sqrt(0.5);
     }
 
-    public set scale(k: number)
+    public set scale(scale: number)
     {
-        if(k <= 1)
+        if(scale <= 1)
         {
-            k = 1;
+            scale = 1;
         }
-        k = (k * Math.sqrt(0.5));
-        if(k != this._scale)
+        scale = (scale * Math.sqrt(0.5));
+        if(scale != this._scale)
         {
-            this._scale = k;
+            this._scale = scale;
             this._updateId++;
         }
     }
@@ -110,9 +108,9 @@ export class RoomGeometry implements IRoomGeometry
         return this._location;
     }
 
-    public set location(k: IVector3D)
+    public set location(location: IVector3D)
     {
-        if(k == null)
+        if(location == null)
         {
             return;
         }
@@ -123,7 +121,7 @@ export class RoomGeometry implements IRoomGeometry
         const _local_2: number = this._loc.x;
         const _local_3: number = this._loc.y;
         const _local_4: number = this._loc.z;
-        this._loc.assign(k);
+        this._loc.assign(location);
         this._loc.x = (this._loc.x / this._x_scale);
         this._loc.y = (this._loc.y / this._y_scale);
         this._loc.z = (this._loc.z / this._z_scale);
@@ -138,14 +136,14 @@ export class RoomGeometry implements IRoomGeometry
         return this._direction;
     }
 
-    public set direction(k: IVector3D)
+    public set direction(direction: IVector3D)
     {
         let _local_21: number;
         let _local_22: number;
-        let _local_23: Vector3d;
-        let _local_24: Vector3d;
-        let _local_25: Vector3d;
-        if(k == null)
+        let _local_23: IVector3D;
+        let _local_24: IVector3D;
+        let _local_25: IVector3D;
+        if(direction == null)
         {
             return;
         }
@@ -156,28 +154,28 @@ export class RoomGeometry implements IRoomGeometry
         const _local_2: number = this._dir.x;
         const _local_3: number = this._dir.y;
         const _local_4: number = this._dir.z;
-        this._dir.assign(k);
-        this._direction.assign(k);
+        this._dir.assign(direction);
+        this._direction.assign(direction);
         if((((!(this._dir.x == _local_2)) || (!(this._dir.y == _local_3))) || (!(this._dir.z == _local_4))))
         {
             this._updateId++;
         }
-        const _local_5: Vector3d = new Vector3d(0, 1, 0);
-        const _local_6: Vector3d = new Vector3d(0, 0, 1);
-        const _local_7: Vector3d = new Vector3d(1, 0, 0);
-        const _local_8: number = ((k.x / 180) * Math.PI);
-        const _local_9: number = ((k.y / 180) * Math.PI);
-        const _local_10: number = ((k.z / 180) * Math.PI);
+        const _local_5: IVector3D = new Vector3d(0, 1, 0);
+        const _local_6: IVector3D = new Vector3d(0, 0, 1);
+        const _local_7: IVector3D = new Vector3d(1, 0, 0);
+        const _local_8: number = ((direction.x / 180) * Math.PI);
+        const _local_9: number = ((direction.y / 180) * Math.PI);
+        const _local_10: number = ((direction.z / 180) * Math.PI);
         const _local_11: number = Math.cos(_local_8);
         const _local_12: number = Math.sin(_local_8);
-        const _local_13: Vector3d = Vector3d.sum(Vector3d.product(_local_5, _local_11), Vector3d.product(_local_7, -(_local_12)));
-        const _local_14: Vector3d = new Vector3d(_local_6.x, _local_6.y, _local_6.z);
-        const _local_15: Vector3d = Vector3d.sum(Vector3d.product(_local_5, _local_12), Vector3d.product(_local_7, _local_11));
+        const _local_13: IVector3D = Vector3d.sum(Vector3d.product(_local_5, _local_11), Vector3d.product(_local_7, -(_local_12)));
+        const _local_14: IVector3D = new Vector3d(_local_6.x, _local_6.y, _local_6.z);
+        const _local_15: IVector3D = Vector3d.sum(Vector3d.product(_local_5, _local_12), Vector3d.product(_local_7, _local_11));
         const _local_16: number = Math.cos(_local_9);
         const _local_17: number = Math.sin(_local_9);
-        const _local_18: Vector3d = new Vector3d(_local_13.x, _local_13.y, _local_13.z);
-        const _local_19: Vector3d = Vector3d.sum(Vector3d.product(_local_14, _local_16), Vector3d.product(_local_15, _local_17));
-        const _local_20: Vector3d = Vector3d.sum(Vector3d.product(_local_14, -(_local_17)), Vector3d.product(_local_15, _local_16));
+        const _local_18: IVector3D = new Vector3d(_local_13.x, _local_13.y, _local_13.z);
+        const _local_19: IVector3D = Vector3d.sum(Vector3d.product(_local_14, _local_16), Vector3d.product(_local_15, _local_17));
+        const _local_20: IVector3D = Vector3d.sum(Vector3d.product(_local_14, -(_local_17)), Vector3d.product(_local_15, _local_16));
         if(_local_10 != 0)
         {
             _local_21 = Math.cos(_local_10);
@@ -199,29 +197,29 @@ export class RoomGeometry implements IRoomGeometry
         }
     }
 
-    public set x_scale(k: number)
+    public set x_scale(xScale: number)
     {
-        if(this._x_scale != (k * this._x_scale_internal))
+        if(this._x_scale != (xScale * this._x_scale_internal))
         {
-            this._x_scale = (k * this._x_scale_internal);
+            this._x_scale = (xScale * this._x_scale_internal);
             this._updateId++;
         }
     }
 
-    public set y_scale(k: number)
+    public set y_scale(yScale: number)
     {
-        if(this._y_scale != (k * this._y_scale_internal))
+        if(this._y_scale != (yScale * this._y_scale_internal))
         {
-            this._y_scale = (k * this._y_scale_internal);
+            this._y_scale = (yScale * this._y_scale_internal);
             this._updateId++;
         }
     }
 
-    public set z_scale(k: number)
+    public set z_scale(zScale: number)
     {
-        if(this._z_scale != (k * this._z_scale_internal))
+        if(this._z_scale != (zScale * this._z_scale_internal))
         {
-            this._z_scale = (k * this._z_scale_internal);
+            this._z_scale = (zScale * this._z_scale_internal);
             this._updateId++;
         }
     }
@@ -245,7 +243,7 @@ export class RoomGeometry implements IRoomGeometry
     public setDisplacement(k: IVector3D, _arg_2: IVector3D): void
     {
         let _local_3: string;
-        let _local_4: Vector3d;
+        let _local_4: IVector3D;
         if(((k == null) || (_arg_2 == null)))
         {
             return;
@@ -276,25 +274,25 @@ export class RoomGeometry implements IRoomGeometry
     {
         let _local_18: number;
         let _local_19: number;
-        let _local_20: Vector3d;
-        let _local_21: Vector3d;
-        let _local_22: Vector3d;
-        const _local_2: Vector3d = new Vector3d(0, 1, 0);
-        const _local_3: Vector3d = new Vector3d(0, 0, 1);
-        const _local_4: Vector3d = new Vector3d(1, 0, 0);
+        let _local_20: IVector3D;
+        let _local_21: IVector3D;
+        let _local_22: IVector3D;
+        const _local_2: IVector3D = new Vector3d(0, 1, 0);
+        const _local_3: IVector3D = new Vector3d(0, 0, 1);
+        const _local_4: IVector3D = new Vector3d(1, 0, 0);
         const _local_5: number = ((k.x / 180) * Math.PI);
         const _local_6: number = ((k.y / 180) * Math.PI);
         const _local_7: number = ((k.z / 180) * Math.PI);
         const _local_8: number = Math.cos(_local_5);
         const _local_9: number = Math.sin(_local_5);
-        const _local_10: Vector3d = Vector3d.sum(Vector3d.product(_local_2, _local_8), Vector3d.product(_local_4, -(_local_9)));
-        const _local_11: Vector3d = new Vector3d(_local_3.x, _local_3.y, _local_3.z);
-        const _local_12: Vector3d = Vector3d.sum(Vector3d.product(_local_2, _local_9), Vector3d.product(_local_4, _local_8));
+        const _local_10: IVector3D = Vector3d.sum(Vector3d.product(_local_2, _local_8), Vector3d.product(_local_4, -(_local_9)));
+        const _local_11: IVector3D = new Vector3d(_local_3.x, _local_3.y, _local_3.z);
+        const _local_12: IVector3D = Vector3d.sum(Vector3d.product(_local_2, _local_9), Vector3d.product(_local_4, _local_8));
         const _local_13: number = Math.cos(_local_6);
         const _local_14: number = Math.sin(_local_6);
-        const _local_15: Vector3d = new Vector3d(_local_10.x, _local_10.y, _local_10.z);
-        const _local_16: Vector3d = Vector3d.sum(Vector3d.product(_local_11, _local_13), Vector3d.product(_local_12, _local_14));
-        const _local_17: Vector3d = Vector3d.sum(Vector3d.product(_local_11, -(_local_14)), Vector3d.product(_local_12, _local_13));
+        const _local_15: IVector3D = new Vector3d(_local_10.x, _local_10.y, _local_10.z);
+        const _local_16: IVector3D = Vector3d.sum(Vector3d.product(_local_11, _local_13), Vector3d.product(_local_12, _local_14));
+        const _local_17: IVector3D = Vector3d.sum(Vector3d.product(_local_11, -(_local_14)), Vector3d.product(_local_12, _local_13));
         if(_local_7 != 0)
         {
             _local_18 = Math.cos(_local_7);
@@ -317,8 +315,8 @@ export class RoomGeometry implements IRoomGeometry
         {
             return;
         }
-        const _local_3: Vector3d = Vector3d.product(this._z, -(_arg_2));
-        const _local_4: Vector3d = new Vector3d((k.x + _local_3.x), (k.y + _local_3.y), (k.z + _local_3.z));
+        const _local_3: IVector3D = Vector3d.product(this._z, -(_arg_2));
+        const _local_4: IVector3D = new Vector3d((k.x + _local_3.x), (k.y + _local_3.y), (k.z + _local_3.z));
         this.location = _local_4;
     }
 
@@ -331,13 +329,13 @@ export class RoomGeometry implements IRoomGeometry
         const _local_2: number = Vector3d.scalarProjection(k, this._x);
         const _local_3: number = Vector3d.scalarProjection(k, this._y);
         const _local_4: number = Vector3d.scalarProjection(k, this._z);
-        const _local_5: Vector3d = new Vector3d(_local_2, _local_3, _local_4);
+        const _local_5: IVector3D = new Vector3d(_local_2, _local_3, _local_4);
         return _local_5;
     }
 
     public getScreenPosition(k: IVector3D): IVector3D
     {
-        let _local_2: Vector3d = Vector3d.dif(k, this._loc);
+        let _local_2: IVector3D = Vector3d.dif(k, this._loc);
         _local_2.x = (_local_2.x * this._x_scale);
         _local_2.y = (_local_2.y * this._y_scale);
         _local_2.z = (_local_2.z * this._z_scale);
@@ -383,16 +381,16 @@ export class RoomGeometry implements IRoomGeometry
         let _local_16: number;
         const _local_5: number = (k.x / this._scale);
         const _local_6: number = (-(k.y) / this._scale);
-        const _local_7: Vector3d = Vector3d.product(this._x, _local_5);
+        const _local_7: IVector3D = Vector3d.product(this._x, _local_5);
         _local_7.add(Vector3d.product(this._y, _local_6));
-        const _local_8: Vector3d = new Vector3d((this._loc.x * this._x_scale), (this._loc.y * this._y_scale), (this._loc.z * this._z_scale));
+        const _local_8: IVector3D = new Vector3d((this._loc.x * this._x_scale), (this._loc.y * this._y_scale), (this._loc.z * this._z_scale));
         _local_8.add(_local_7);
         const _local_9: IVector3D = this._z;
-        const _local_10: Vector3d = new Vector3d((_arg_2.x * this._x_scale), (_arg_2.y * this._y_scale), (_arg_2.z * this._z_scale));
-        const _local_11: Vector3d = new Vector3d((_arg_3.x * this._x_scale), (_arg_3.y * this._y_scale), (_arg_3.z * this._z_scale));
-        const _local_12: Vector3d = new Vector3d((_arg_4.x * this._x_scale), (_arg_4.y * this._y_scale), (_arg_4.z * this._z_scale));
+        const _local_10: IVector3D = new Vector3d((_arg_2.x * this._x_scale), (_arg_2.y * this._y_scale), (_arg_2.z * this._z_scale));
+        const _local_11: IVector3D = new Vector3d((_arg_3.x * this._x_scale), (_arg_3.y * this._y_scale), (_arg_3.z * this._z_scale));
+        const _local_12: IVector3D = new Vector3d((_arg_4.x * this._x_scale), (_arg_4.y * this._y_scale), (_arg_4.z * this._z_scale));
         const _local_13: IVector3D = Vector3d.crossProduct(_local_11, _local_12);
-        const _local_14: Vector3d = new Vector3d();
+        const _local_14: IVector3D = new Vector3d();
         _local_14.assign(RoomGeometry.getIntersectionVector(_local_8, _local_9, _local_10, _local_13));
         if(_local_14 != null)
         {

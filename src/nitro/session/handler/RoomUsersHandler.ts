@@ -1,28 +1,6 @@
-import { IConnection } from '../../../core/communication/connections/IConnection';
-import { PetFigureUpdateEvent } from '../../communication';
-import { NewFriendRequestEvent } from '../../communication/messages/incoming/friendlist/NewFriendRequestEvent';
-import { DoorbellMessageEvent } from '../../communication/messages/incoming/navigator/DoorbellMessageEvent';
-import { BotErrorEvent } from '../../communication/messages/incoming/notifications/BotErrorEvent';
-import { PetPlacingErrorEvent } from '../../communication/messages/incoming/notifications/PetPlacingErrorEvent';
-import { FavoriteMembershipUpdateMessageEvent } from '../../communication/messages/incoming/room/engine/FavoriteMembershipUpdateMessageEvent';
-import { PetInfoEvent } from '../../communication/messages/incoming/room/pet/PetInfoEvent';
-import { PetStatusUpdateEvent } from '../../communication/messages/incoming/room/pet/PetStatusUpdateEvent';
-import { RoomUnitDanceEvent } from '../../communication/messages/incoming/room/unit/RoomUnitDanceEvent';
-import { RoomUnitEvent } from '../../communication/messages/incoming/room/unit/RoomUnitEvent';
-import { RoomUnitInfoEvent } from '../../communication/messages/incoming/room/unit/RoomUnitInfoEvent';
-import { RoomUnitRemoveEvent } from '../../communication/messages/incoming/room/unit/RoomUnitRemoveEvent';
-import { UserCurrentBadgesEvent } from '../../communication/messages/incoming/user/data/UserCurrentBadgesEvent';
-import { UserNameChangeMessageEvent } from '../../communication/messages/incoming/user/data/UserNameChangeMessageEvent';
-import { RoomSessionPetFigureUpdateEvent, RoomSessionPetStatusUpdateEvent, RoomSessionUserFigureUpdateEvent } from '../events';
-import { RoomSessionDanceEvent } from '../events/RoomSessionDanceEvent';
-import { RoomSessionDoorbellEvent } from '../events/RoomSessionDoorbellEvent';
-import { RoomSessionErrorMessageEvent } from '../events/RoomSessionErrorMessageEvent';
-import { RoomSessionFavoriteGroupUpdateEvent } from '../events/RoomSessionFavoriteGroupUpdateEvent';
-import { RoomSessionFriendRequestEvent } from '../events/RoomSessionFriendRequestEvent';
-import { RoomSessionPetInfoUpdateEvent } from '../events/RoomSessionPetInfoUpdateEvent';
-import { RoomSessionUserBadgesEvent } from '../events/RoomSessionUserBadgesEvent';
-import { RoomSessionUserDataUpdateEvent } from '../events/RoomSessionUserDataUpdateEvent';
-import { IRoomHandlerListener } from '../IRoomHandlerListener';
+import { IConnection, IRoomHandlerListener, IRoomUserData } from '../../../api';
+import { RoomSessionConfirmPetBreedingEvent, RoomSessionConfirmPetBreedingResultEvent, RoomSessionDanceEvent, RoomSessionDoorbellEvent, RoomSessionErrorMessageEvent, RoomSessionFavoriteGroupUpdateEvent, RoomSessionFriendRequestEvent, RoomSessionNestBreedingSuccessEvent, RoomSessionPetBreedingEvent, RoomSessionPetBreedingResultEvent, RoomSessionPetFigureUpdateEvent, RoomSessionPetInfoUpdateEvent, RoomSessionPetLevelUpdateEvent, RoomSessionPetStatusUpdateEvent, RoomSessionUserBadgesEvent, RoomSessionUserDataUpdateEvent, RoomSessionUserFigureUpdateEvent } from '../../../events';
+import { BotErrorEvent, ConfirmBreedingRequestEvent, ConfirmBreedingResultEvent, DoorbellMessageEvent, FavoriteMembershipUpdateMessageEvent, NestBreedingSuccessEvent, NewFriendRequestEvent, PetBreedingMessageEvent, PetBreedingResultEvent, PetFigureUpdateEvent, PetInfoEvent, PetLevelUpdateMessageEvent, PetPlacingErrorEvent, PetStatusUpdateEvent, RoomUnitDanceEvent, RoomUnitEvent, RoomUnitInfoEvent, RoomUnitRemoveEvent, UserCurrentBadgesEvent, UserNameChangeMessageEvent } from '../../communication';
 import { RoomPetData } from '../RoomPetData';
 import { RoomUserData } from '../RoomUserData';
 import { BaseHandler } from './BaseHandler';
@@ -43,7 +21,13 @@ export class RoomUsersHandler extends BaseHandler
         connection.addMessageEvent(new NewFriendRequestEvent(this.onNewFriendRequestEvent.bind(this)));
         connection.addMessageEvent(new PetInfoEvent(this.onPetInfoEvent.bind(this)));
         connection.addMessageEvent(new PetStatusUpdateEvent(this.onPetStatusUpdateEvent.bind(this)));
+        connection.addMessageEvent(new PetBreedingMessageEvent(this.onPetBreedingMessageEvent.bind(this)));
+        connection.addMessageEvent(new PetLevelUpdateMessageEvent(this.onPetLevelUpdateMessageEvent.bind(this)));
+        connection.addMessageEvent(new ConfirmBreedingResultEvent(this.onConfirmBreedingResultEvent.bind(this)));
+        connection.addMessageEvent(new NestBreedingSuccessEvent(this.onNestBreedingSuccessEvent.bind(this)));
+        connection.addMessageEvent(new ConfirmBreedingRequestEvent(this.onConfirmBreedingRequestEvent.bind(this)));
         connection.addMessageEvent(new PetFigureUpdateEvent(this.onPetFigureUpdateEvent.bind(this)));
+        connection.addMessageEvent(new PetBreedingResultEvent(this.onPetBreedingResultEvent.bind(this)));
         connection.addMessageEvent(new PetPlacingErrorEvent(this.onPetPlacingError.bind(this)));
         connection.addMessageEvent(new BotErrorEvent(this.onBotError.bind(this)));
         connection.addMessageEvent(new FavoriteMembershipUpdateMessageEvent(this.onFavoriteMembershipUpdateMessageEvent.bind(this)));
@@ -59,7 +43,7 @@ export class RoomUsersHandler extends BaseHandler
 
         const users = event.getParser().users;
 
-        const usersToAdd: RoomUserData[] = [];
+        const usersToAdd: IRoomUserData[] = [];
 
         if(users && users.length)
         {
@@ -276,6 +260,83 @@ export class RoomUsersHandler extends BaseHandler
         this.listener.events.dispatchEvent(new RoomSessionPetStatusUpdateEvent(session, parser.petId, parser.canBreed, parser.canHarvest, parser.canRevive, parser.hasBreedingPermission));
     }
 
+    private onPetBreedingMessageEvent(event: PetBreedingMessageEvent): void
+    {
+        if(!this.listener) return;
+
+        const parser = event.getParser();
+
+        if(!parser) return;
+
+        const session = this.listener.getSession(this.roomId);
+
+        if(!session) return;
+
+        this.listener.events.dispatchEvent(new RoomSessionPetBreedingEvent(session, parser.state, parser.ownPetId, parser.otherPetId));
+    }
+
+    private onPetLevelUpdateMessageEvent(event: PetLevelUpdateMessageEvent): void
+    {
+        if(!this.listener) return;
+
+        const parser = event.getParser();
+
+        if(!parser) return;
+
+        const session = this.listener.getSession(this.roomId);
+
+        if(!session) return;
+
+        session.userDataManager.updatePetLevel(parser.roomIndex, parser.level);
+
+        this.listener.events.dispatchEvent(new RoomSessionPetLevelUpdateEvent(session, parser.petId, parser.level));
+    }
+
+    private onConfirmBreedingResultEvent(event: ConfirmBreedingResultEvent): void
+    {
+        if(!this.listener) return;
+
+        const parser = event.getParser();
+
+        if(!parser) return;
+
+        const session = this.listener.getSession(this.roomId);
+
+        if(!session) return;
+
+        this.listener.events.dispatchEvent(new RoomSessionConfirmPetBreedingResultEvent(session, parser.breedingNestStuffId, parser.result));
+    }
+
+    private onNestBreedingSuccessEvent(event: NestBreedingSuccessEvent): void
+    {
+        if(!this.listener) return;
+
+        const parser = event.getParser();
+
+        if(!parser) return;
+
+        const session = this.listener.getSession(this.roomId);
+
+        if(!session) return;
+
+        this.listener.events.dispatchEvent(new RoomSessionNestBreedingSuccessEvent(session, parser.petId, parser.rarityCategory));
+    }
+
+    private onConfirmBreedingRequestEvent(event: ConfirmBreedingRequestEvent): void
+    {
+        if(!this.listener) return;
+
+        const parser = event.getParser();
+
+        if(!parser) return;
+
+        const session = this.listener.getSession(this.roomId);
+
+        if(!session) return;
+
+        this.listener.events.dispatchEvent(new RoomSessionConfirmPetBreedingEvent(session, parser.nestId, parser.pet1, parser.pet2, parser.rarityCategories, parser.resultPetType));
+    }
+
     private onPetFigureUpdateEvent(event: PetFigureUpdateEvent): void
     {
         if(!this.listener) return;
@@ -293,6 +354,21 @@ export class RoomUsersHandler extends BaseHandler
         session.userDataManager.updateFigure(parser.roomIndex, figure, '', parser.hasSaddle, parser.isRiding);
 
         this.listener.events.dispatchEvent(new RoomSessionPetFigureUpdateEvent(session, parser.petId, figure));
+    }
+
+    private onPetBreedingResultEvent(event: PetBreedingResultEvent): void
+    {
+        if(!this.listener) return;
+
+        const parser = event.getParser();
+
+        if(!parser) return;
+
+        const session = this.listener.getSession(this.roomId);
+
+        if(!session) return;
+
+        this.listener.events.dispatchEvent(new RoomSessionPetBreedingResultEvent(session, parser.resultData, parser.otherResultData));
     }
 
     private onPetPlacingError(event: PetPlacingErrorEvent): void

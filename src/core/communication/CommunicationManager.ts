@@ -1,9 +1,6 @@
-import { Disposable } from '../common/disposable/Disposable';
-import { IUpdateReceiver } from '../common/IUpdateReceiver';
-import { IConnection } from './connections/IConnection';
-import { IConnectionStateListener } from './connections/IConnectionStateListener';
-import { SocketConnection } from './connections/SocketConnection';
-import { ICommunicationManager } from './ICommunicationManager';
+import { ICommunicationManager, IConnection, IConnectionStateListener, IUpdateReceiver } from '../../api';
+import { Disposable } from '../common';
+import { SocketConnection } from './SocketConnection';
 
 export class CommunicationManager extends Disposable implements ICommunicationManager, IUpdateReceiver
 {

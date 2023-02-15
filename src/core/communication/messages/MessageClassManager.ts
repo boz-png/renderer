@@ -1,7 +1,5 @@
-import { IMessageComposer } from './IMessageComposer';
-import { IMessageConfiguration } from './IMessageConfiguration';
-import { IMessageEvent } from './IMessageEvent';
-import { MessageEvent } from './MessageEvent';
+import { IMessageComposer, IMessageConfiguration, IMessageEvent } from '../../../api';
+import { MessageEvent } from '../../../events';
 
 export class MessageClassManager
 {
@@ -25,9 +23,9 @@ export class MessageClassManager
 
     public registerMessages(configuration: IMessageConfiguration): void
     {
-        for(const [ header, handler ] of configuration.events) this.registerMessageEventClass(header, handler);
+        for(const [header, handler] of configuration.events) this.registerMessageEventClass(header, handler);
 
-        for(const [ header, handler ] of configuration.composers) this.registerMessageComposerClass(header, handler);
+        for(const [header, handler] of configuration.composers) this.registerMessageComposerClass(header, handler);
     }
 
     private registerMessageEventClass(header: number, handler: Function): void
@@ -76,7 +74,7 @@ export class MessageClassManager
 
         if(!existing) return;
 
-        for(const [ index, message ] of existing.entries())
+        for(const [index, message] of existing.entries())
         {
             if(!message) continue;
 

@@ -1,9 +1,9 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { UserChatlogData } from '../../incoming/moderation/UserChatlogData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { UserChatlogData } from './UserChatlogData';
 
 export class UserChatlogMessageParser implements IMessageParser
 {
-    private _data:UserChatlogData;
+    private _data: UserChatlogData;
 
     public flush(): boolean
     {
@@ -21,7 +21,7 @@ export class UserChatlogMessageParser implements IMessageParser
         return true;
     }
 
-    public get data():UserChatlogData
+    public get data(): UserChatlogData
     {
         return this._data;
     }

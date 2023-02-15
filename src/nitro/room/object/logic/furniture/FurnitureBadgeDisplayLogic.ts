@@ -1,18 +1,15 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { Nitro } from '../../../../Nitro';
-import { RoomObjectBadgeAssetEvent } from '../../../events/RoomObjectBadgeAssetEvent';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { ObjectGroupBadgeUpdateMessage } from '../../../messages/ObjectGroupBadgeUpdateMessage';
-import { StringDataType } from '../../data/type/StringDataType';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable, StringDataType } from '../../../../../api';
+import { RoomObjectBadgeAssetEvent, RoomObjectWidgetRequestEvent } from '../../../../../events';
+import { GetTickerTime } from '../../../../../pixi-proxy';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage, ObjectGroupBadgeUpdateMessage } from '../../../messages';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureBadgeDisplayLogic extends FurnitureLogic
 {
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.BADGE_DISPLAY_ENGRAVING, RoomObjectBadgeAssetEvent.LOAD_BADGE ];
+        const types = [RoomObjectWidgetRequestEvent.BADGE_DISPLAY_ENGRAVING, RoomObjectBadgeAssetEvent.LOAD_BADGE];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }
@@ -39,7 +36,7 @@ export class FurnitureBadgeDisplayLogic extends FurnitureLogic
                 this.object.model.setValue(RoomObjectVariable.FURNITURE_BADGE_ASSET_NAME, message.assetName);
                 this.object.model.setValue(RoomObjectVariable.FURNITURE_BADGE_IMAGE_STATUS, 1);
 
-                this.update(Nitro.instance.time);
+                this.update(GetTickerTime());
             }
 
             return;

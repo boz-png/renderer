@@ -1,35 +1,7 @@
-import { Disposable } from '../../core/common/disposable/Disposable';
-import { IConnection } from '../../core/communication/connections/IConnection';
-import { CompostPlantMessageComposer, FurnitureMultiStateComposer, HarvestPetMessageComposer, PetMountComposer, PollAnswerComposer, PollRejectComposer, PollStartComposer, RemovePetSaddleComposer, TogglePetBreedingComposer, TogglePetRidingComposer, UsePetProductComposer } from '../communication';
-import { RoomModerationSettings } from '../communication/messages/incoming/roomsettings/RoomModerationSettings';
-import { RoomDoorbellAccessComposer } from '../communication/messages/outgoing/room/access/RoomDoorbellAccessComposer';
-import { RoomEnterComposer } from '../communication/messages/outgoing/room/access/RoomEnterComposer';
-import { RoomAmbassadorAlertComposer } from '../communication/messages/outgoing/room/action/RoomAmbassadorAlertComposer';
-import { RoomBanUserComposer } from '../communication/messages/outgoing/room/action/RoomBanUserComposer';
-import { RoomGiveRightsComposer } from '../communication/messages/outgoing/room/action/RoomGiveRightsComposer';
-import { RoomKickUserComposer } from '../communication/messages/outgoing/room/action/RoomKickUserComposer';
-import { RoomMuteUserComposer } from '../communication/messages/outgoing/room/action/RoomMuteUserComposer';
-import { RoomTakeRightsComposer } from '../communication/messages/outgoing/room/action/RoomTakeRightsComposer';
-import { BotRemoveComposer } from '../communication/messages/outgoing/room/engine/BotRemoveComposer';
-import { PetRemoveComposer } from '../communication/messages/outgoing/room/engine/PetRemoveComposer';
-import { MoodlightSettingsComposer } from '../communication/messages/outgoing/room/furniture/dimmer/MoodlightSettingsComposer';
-import { MoodlightSettingsSaveComposer } from '../communication/messages/outgoing/room/furniture/dimmer/MoodlightSettingsSaveComposer';
-import { MoodlightTogggleStateComposer } from '../communication/messages/outgoing/room/furniture/dimmer/MoodlightTogggleStateComposer';
-import { OpenPresentComposer } from '../communication/messages/outgoing/room/furniture/presents/OpenPresentComposer';
-import { RoomUnitChatComposer } from '../communication/messages/outgoing/room/unit/chat/RoomUnitChatComposer';
-import { RoomUnitChatShoutComposer } from '../communication/messages/outgoing/room/unit/chat/RoomUnitChatShoutComposer';
-import { RoomUnitChatWhisperComposer } from '../communication/messages/outgoing/room/unit/chat/RoomUnitChatWhisperComposer';
-import { RoomUnitTypingStartComposer } from '../communication/messages/outgoing/room/unit/chat/RoomUnitTypingStartComposer';
-import { RoomUnitTypingStopComposer } from '../communication/messages/outgoing/room/unit/chat/RoomUnitTypingStopComposer';
-import { RoomUnitActionComposer } from '../communication/messages/outgoing/room/unit/RoomUnitActionComposer';
-import { RoomUnitDanceComposer } from '../communication/messages/outgoing/room/unit/RoomUnitDanceComposer';
-import { RoomUnitPostureComposer } from '../communication/messages/outgoing/room/unit/RoomUnitPostureComposer';
-import { RoomUnitSignComposer } from '../communication/messages/outgoing/room/unit/RoomUnitSignComposer';
-import { UserMottoComposer } from '../communication/messages/outgoing/user/data/UserMottoComposer';
-import { RoomControllerLevel } from './enum/RoomControllerLevel';
-import { RoomTradingLevelEnum } from './enum/RoomTradingLevelEnum';
-import { RoomSessionEvent } from './events/RoomSessionEvent';
-import { IRoomSession } from './IRoomSession';
+import { IConnection, IRoomSession, RoomControllerLevel, RoomTradingLevelEnum } from '../../api';
+import { Disposable } from '../../core';
+import { RoomSessionEvent } from '../../events';
+import { BotRemoveComposer, ChangeQueueMessageComposer, CompostPlantMessageComposer, FurnitureMultiStateComposer, GetPetCommandsComposer, HarvestPetMessageComposer, MoodlightSettingsComposer, MoodlightSettingsSaveComposer, MoodlightTogggleStateComposer, NewUserExperienceScriptProceedComposer, OpenPetPackageMessageComposer, OpenPresentComposer, PeerUsersClassificationMessageComposer, PetMountComposer, PetRemoveComposer, PollAnswerComposer, PollRejectComposer, PollStartComposer, RemovePetSaddleComposer, RoomAmbassadorAlertComposer, RoomBanUserComposer, RoomDoorbellAccessComposer, RoomEnterComposer, RoomGiveRightsComposer, RoomKickUserComposer, RoomModerationSettings, RoomMuteUserComposer, RoomTakeRightsComposer, RoomUnitActionComposer, RoomUnitChatComposer, RoomUnitChatShoutComposer, RoomUnitChatWhisperComposer, RoomUnitDanceComposer, RoomUnitPostureComposer, RoomUnitSignComposer, RoomUnitTypingStartComposer, RoomUnitTypingStopComposer, RoomUsersClassificationMessageComposer, SetClothingChangeDataMessageComposer, TogglePetBreedingComposer, TogglePetRidingComposer, UsePetProductComposer, UserMottoComposer } from '../communication';
 import { UserDataManager } from './UserDataManager';
 
 export class RoomSession extends Disposable implements IRoomSession
@@ -240,6 +212,21 @@ export class RoomSession extends Disposable implements IRoomSession
         this._connection.send(new PollAnswerComposer(pollId, questionId, answers));
     }
 
+    public sendPeerUsersClassificationMessage(userClassType: string): void
+    {
+        this._connection.send(new PeerUsersClassificationMessageComposer(userClassType));
+    }
+
+    public sendOpenPetPackageMessage(objectId: number, petName: string): void
+    {
+        this._connection.send(new OpenPetPackageMessageComposer(objectId, petName));
+    }
+
+    public sendRoomUsersClassificationMessage(userClassType: string): void
+    {
+        this._connection.send(new RoomUsersClassificationMessageComposer(userClassType));
+    }
+
     public updateMoodlightData(id: number, effectId: number, color: number, brightness: number, apply: boolean): void
     {
         let colorString = '000000' + color.toString(16).toUpperCase();
@@ -322,6 +309,26 @@ export class RoomSession extends Disposable implements IRoomSession
     public compostPlant(id: number): void
     {
         this._connection.send(new CompostPlantMessageComposer(id));
+    }
+
+    public requestPetCommands(id: number):void
+    {
+        this._connection.send(new GetPetCommandsComposer(id));
+    }
+
+    public sendScriptProceed(): void
+    {
+        this._connection.send(new NewUserExperienceScriptProceedComposer());
+    }
+
+    public sendUpdateClothingChangeFurniture(objectId: number, gender: string, look: string):void
+    {
+        this._connection.send(new SetClothingChangeDataMessageComposer(objectId, gender, look));
+    }
+
+    public changeQueue(targetQueue: number): void
+    {
+        this._connection.send(new ChangeQueueMessageComposer(targetQueue));
     }
 
     public get connection(): IConnection

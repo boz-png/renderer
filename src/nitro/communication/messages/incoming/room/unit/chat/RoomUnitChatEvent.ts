@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../../core/communication/messages/MessageEvent';
-import { RoomUnitChatParser } from '../../../../parser/room/unit/chat/RoomUnitChatParser';
+import { IMessageEvent } from '../../../../../../../api';
+import { MessageEvent } from '../../../../../../../events';
+import { RoomUnitChatParser } from '../../../../parser';
 
 export class RoomUnitChatEvent extends MessageEvent implements IMessageEvent
 {

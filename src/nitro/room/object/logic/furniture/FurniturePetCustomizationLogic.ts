@@ -1,14 +1,13 @@
+import { RoomObjectVariable, RoomWidgetEnumItemExtradataParameter } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { RoomObjectUpdateMessage } from '../../../../../room';
-import { RoomWidgetEnumItemExtradataParameter } from '../../../../ui';
-import { RoomObjectWidgetRequestEvent } from '../../../events';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurniturePetCustomizationLogic extends FurnitureLogic
 {
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.PET_PRODUCT_MENU ];
+        const types = [RoomObjectWidgetRequestEvent.PET_PRODUCT_MENU];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

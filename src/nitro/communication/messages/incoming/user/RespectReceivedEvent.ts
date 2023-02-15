@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { RespectReceivedParser } from '../../parser/user/RespectReceivedParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { RespectReceivedParser } from '../../parser';
 
 export class RespectReceivedEvent extends MessageEvent implements IMessageEvent
 {

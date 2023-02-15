@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../../core/communication/messages/MessageEvent';
-import { YoutubeDisplayVideoMessageParser } from '../../../../parser/room/furniture/youtube/YoutubeDisplayVideoMessageParser';
+import { IMessageEvent } from '../../../../../../../api';
+import { MessageEvent } from '../../../../../../../events';
+import { YoutubeDisplayVideoMessageParser } from '../../../../parser';
 
 export class YoutubeDisplayVideoMessageEvent extends MessageEvent implements IMessageEvent
 {

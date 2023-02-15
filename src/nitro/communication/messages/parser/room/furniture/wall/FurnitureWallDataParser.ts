@@ -1,4 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../../../core';
+import { IMessageDataWrapper } from '../../../../../../../api';
 
 export class FurnitureWallDataParser
 {
@@ -68,7 +68,7 @@ export class FurnitureWallDataParser
 
         const state = parseFloat(this._stuffData);
 
-        if(!isNaN(state)) this._state = state;
+        if(!isNaN(state)) this._state = Math.trunc(state);
 
         if(this._location.indexOf(':') === 0)
         {

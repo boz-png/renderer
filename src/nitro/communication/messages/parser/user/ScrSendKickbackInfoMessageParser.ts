@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { ScrKickbackData } from '../../incoming/user/ScrKickbackData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { ScrKickbackData } from './ScrKickbackData';
 
 export class ScrSendKickbackInfoMessageParser implements IMessageParser
 {
@@ -17,7 +16,7 @@ export class ScrSendKickbackInfoMessageParser implements IMessageParser
         return true;
     }
 
-    public get data():ScrKickbackData
+    public get data(): ScrKickbackData
     {
         return this._data;
     }

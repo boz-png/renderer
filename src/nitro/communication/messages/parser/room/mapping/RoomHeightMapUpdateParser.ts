@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../../api';
 import { RoomHeightMapParser } from './RoomHeightMapParser';
 
 export class RoomHeightMapUpdateParser implements IMessageParser

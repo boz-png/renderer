@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { GuideTicketCreationResultMessageParser } from '../../parser/help/GuideTicketCreationResultMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { GuideTicketCreationResultMessageParser } from '../../parser';
 
 export class GuideTicketCreationResultMessageEvent extends MessageEvent implements IMessageEvent
 {

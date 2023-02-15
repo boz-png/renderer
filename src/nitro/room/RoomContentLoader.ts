@@ -1,30 +1,11 @@
 import { BaseTexture, Resource, Texture } from '@pixi/core';
-import { Loader, LoaderResource } from '@pixi/loaders';
 import { Spritesheet } from '@pixi/spritesheet';
-import { IAssetData } from '../../core/asset/interfaces';
-import { NitroBundle } from '../../core/asset/NitroBundle';
-import { INitroLogger } from '../../core/common/logger/INitroLogger';
-import { NitroLogger } from '../../core/common/logger/NitroLogger';
-import { IEventDispatcher } from '../../core/events/IEventDispatcher';
-import { NitroEvent } from '../../core/events/NitroEvent';
-import { RoomContentLoadedEvent } from '../../room/events/RoomContentLoadedEvent';
-import { IRoomObject } from '../../room/object/IRoomObject';
-import { GraphicAssetCollection } from '../../room/object/visualization/utils/GraphicAssetCollection';
-import { GraphicAssetGifCollection } from '../../room/object/visualization/utils/GraphicAssetGifCollection';
-import { IGraphicAssetCollection } from '../../room/object/visualization/utils/IGraphicAssetCollection';
-import { Nitro } from '../Nitro';
-import { FurnitureType } from '../session/furniture/FurnitureType';
-import { IFurnitureData } from '../session/furniture/IFurnitureData';
-import { IFurnitureDataListener } from '../session/furniture/IFurnitureDataListener';
-import { ISessionDataManager } from '../session/ISessionDataManager';
-import { IRoomContentListener } from './IRoomContentListener';
-import { RoomObjectCategory } from './object/RoomObjectCategory';
-import { RoomObjectUserType } from './object/RoomObjectUserType';
-import { RoomObjectVariable } from './object/RoomObjectVariable';
-import { RoomObjectVisualizationType } from './object/RoomObjectVisualizationType';
+import { FurnitureType, GetAssetManager, GraphicAssetCollection, GraphicAssetGifCollection, IAssetData, IEventDispatcher, IFurnitureData, IFurnitureDataListener, IGraphicAssetCollection, IGraphicAssetGifCollection, IPetColorResult, IRoomContentListener, IRoomContentLoader, IRoomObject, ISessionDataManager, NitroBundle, NitroConfiguration, NitroLogger, RoomObjectCategory, RoomObjectUserType, RoomObjectVariable, RoomObjectVisualizationType } from '../../api';
+import { NitroEvent } from '../../events';
+import { RoomContentLoadedEvent } from '../../events/room/RoomContentLoadedEvent';
 import { PetColorResult } from './PetColorResult';
 
-export class RoomContentLoader implements IFurnitureDataListener
+export class RoomContentLoader implements IFurnitureDataListener, IRoomContentLoader
 {
     private static PLACE_HOLDER: string = 'place_holder';
     private static PLACE_HOLDER_WALL: string = 'place_holder_wall';
@@ -37,7 +18,6 @@ export class RoomContentLoader implements IFurnitureDataListener
     public static LOADER_READY: string = 'RCL_LOADER_READY';
     public static MANDATORY_LIBRARIES: string[] = [RoomContentLoader.PLACE_HOLDER, RoomContentLoader.PLACE_HOLDER_WALL, RoomContentLoader.PLACE_HOLDER_PET, RoomContentLoader.ROOM, RoomContentLoader.TILE_CURSOR, RoomContentLoader.SELECTION_ARROW];
 
-    private _logger: INitroLogger;
     private _stateEvents: IEventDispatcher;
     private _sessionDataManager: ISessionDataManager;
     private _waitingForSessionDataManager: boolean;
@@ -56,7 +36,7 @@ export class RoomContentLoader implements IFurnitureDataListener
     private _wallItemTypeIds: Map<string, number>;
     private _furniRevisions: Map<string, number>;
     private _pets: { [index: string]: number };
-    private _petColors: Map<number, Map<number, PetColorResult>>;
+    private _petColors: Map<number, Map<number, IPetColorResult>>;
     private _objectAliases: Map<string, string>;
     private _objectOriginalNames: Map<string, string>;
 
@@ -65,7 +45,6 @@ export class RoomContentLoader implements IFurnitureDataListener
 
     constructor()
     {
-        this._logger = new NitroLogger(this.constructor.name);
         this._stateEvents = null;
         this._sessionDataManager = null;
         this._waitingForSessionDataManager = false;
@@ -98,7 +77,7 @@ export class RoomContentLoader implements IFurnitureDataListener
 
         this.setFurnitureData();
 
-        for(const [index, name] of Nitro.instance.getConfiguration<string[]>('pet.types').entries()) this._pets[name] = index;
+        for(const [index, name] of NitroConfiguration.getValue<string[]>('pet.types').entries()) this._pets[name] = index;
     }
 
     public dispose(): void
@@ -267,7 +246,7 @@ export class RoomContentLoader implements IFurnitureDataListener
         return value;
     }
 
-    public getPetColorResult(petIndex: number, paletteIndex: number): PetColorResult
+    public getPetColorResult(petIndex: number, paletteIndex: number): IPetColorResult
     {
         const colorResults = this._petColors.get(petIndex);
 
@@ -276,10 +255,10 @@ export class RoomContentLoader implements IFurnitureDataListener
         return colorResults.get(paletteIndex);
     }
 
-    public getPetColorResultsForTag(petIndex: number, tagName: string): PetColorResult[]
+    public getPetColorResultsForTag(petIndex: number, tagName: string): IPetColorResult[]
     {
         const colorResults = this._petColors.get(petIndex);
-        const results: PetColorResult[] = [];
+        const results: IPetColorResult[] = [];
 
         if(colorResults)
         {
@@ -300,7 +279,7 @@ export class RoomContentLoader implements IFurnitureDataListener
 
         if(!existing)
         {
-            const globalCollection = Nitro.instance.core.asset.getCollection(name);
+            const globalCollection = GetAssetManager().getCollection(name);
 
             if(globalCollection)
             {
@@ -315,7 +294,7 @@ export class RoomContentLoader implements IFurnitureDataListener
         return existing;
     }
 
-    public getGifCollection(name: string): GraphicAssetGifCollection
+    public getGifCollection(name: string): IGraphicAssetGifCollection
     {
         if(!name) return null;
 
@@ -370,7 +349,7 @@ export class RoomContentLoader implements IFurnitureDataListener
         if(petIndex !== undefined)
         {
             const keys = collection.getPaletteNames();
-            const palettes: Map<number, PetColorResult> = new Map();
+            const palettes: Map<number, IPetColorResult> = new Map();
 
             for(const key of keys)
             {
@@ -437,7 +416,7 @@ export class RoomContentLoader implements IFurnitureDataListener
 
     public getPetNameForType(type: number): string
     {
-        return Nitro.instance.getConfiguration<string[]>('pet.types')[type] || null;
+        return NitroConfiguration.getValue<string[]>('pet.types')[type] || null;
     }
 
     public isLoaderType(type: string): boolean
@@ -490,7 +469,7 @@ export class RoomContentLoader implements IFurnitureDataListener
             {
                 image.onload = null;
 
-                this._logger.error('Failed to download asset', url);
+                NitroLogger.error('Failed to download asset', url);
 
                 this._iconListener.onRoomContentLoaded(id, [type, param].join('_'), false);
             };
@@ -501,94 +480,53 @@ export class RoomContentLoader implements IFurnitureDataListener
         return false;
     }
 
-    public downloadAsset(type: string, events: IEventDispatcher): void
+    public async downloadAsset(type: string, events: IEventDispatcher): Promise<void>
     {
-        const assetUrls: string[] = this.getAssetUrls(type);
+        const assetUrl: string = this.getAssetUrls(type)?.[0];
 
-        if(!assetUrls || !assetUrls.length) return;
+        if(!assetUrl || !assetUrl.length) return;
 
         if((this._pendingContentTypes.indexOf(type) >= 0) || this.getOrRemoveEventDispatcher(type)) return;
 
         this._pendingContentTypes.push(type);
         this._events.set(type, events);
 
-        const loader = new Loader();
-
-        for(const url of assetUrls)
+        try
         {
-            if(!url || !url.length) continue;
+            const response = await fetch(assetUrl);
+            let contentType = 'application/octet-stream';
 
-            loader
-                .add({
-                    url,
-                    crossOrigin: 'anonymous',
-                    loadType: LoaderResource.LOAD_TYPE.XHR,
-                    xhrType: LoaderResource.XHR_RESPONSE_TYPE.BUFFER
-                });
+            if(response.headers.has('Content-Type'))
+            {
+                contentType = response.headers.get('Content-Type');
+            }
+
+            switch(contentType)
+            {
+                case 'application/octet-stream': {
+                    const nitroBundle = new NitroBundle(await response.arrayBuffer());
+
+                    await this.processAsset(nitroBundle.baseTexture, (nitroBundle.jsonFile as IAssetData));
+
+                    const events = this._events.get(type);
+
+                    if(!events) return;
+
+                    events.dispatchEvent(new RoomContentLoadedEvent(RoomContentLoadedEvent.RCLE_SUCCESS, type));
+                    break;
+                }
+                default:
+                    throw new Error();
+            }
         }
 
-        let remaining = assetUrls.length;
-
-        const onDownloaded = (status: boolean, url: string) =>
+        catch (err)
         {
-            if(!status)
-            {
-                this._logger.error('Failed to download asset', url);
-
-                loader.destroy();
-
-                events.dispatchEvent(new RoomContentLoadedEvent(RoomContentLoadedEvent.RCLE_FAILURE, type));
-
-                return;
-            }
-
-            remaining--;
-
-            if(!remaining)
-            {
-                loader.destroy();
-
-                const events = this._events.get(type);
-
-                if(!events) return;
-
-                events.dispatchEvent(new RoomContentLoadedEvent(RoomContentLoadedEvent.RCLE_SUCCESS, type));
-
-                return;
-            }
-        };
-
-        loader.load((loader, resources) =>
-        {
-            for(const key in resources)
-            {
-                const resource = resources[key];
-
-                if(!resource || resource.error || !resource.xhr)
-                {
-                    onDownloaded(false, resource.url);
-
-                    return;
-                }
-
-                const resourceType = (resource.xhr.getResponseHeader('Content-Type') || 'application/octet-stream');
-
-                if(resourceType === 'application/octet-stream')
-                {
-                    const nitroBundle = new NitroBundle(resource.data);
-
-                    this.processAsset(nitroBundle.baseTexture, (nitroBundle.jsonFile as IAssetData), status =>
-                    {
-                        onDownloaded(status, resource.url);
-                    });
-
-                    continue;
-                }
-            }
-        });
+            events.dispatchEvent(new RoomContentLoadedEvent(RoomContentLoadedEvent.RCLE_FAILURE, type));
+        }
     }
 
-    private processAsset(baseTexture: BaseTexture, data: IAssetData, onDownloaded: (status: boolean) => void): void
+    private async processAsset(baseTexture: BaseTexture, data: IAssetData): Promise<void>
     {
         const spritesheetData = data.spritesheet;
 
@@ -596,30 +534,33 @@ export class RoomContentLoader implements IFurnitureDataListener
         {
             this.createCollection(data, null);
 
-            onDownloaded(true);
-
             return;
         }
 
-        const createAsset = () =>
+        const createAsset = async () =>
         {
             const spritesheet = new Spritesheet(baseTexture, spritesheetData);
 
-            spritesheet.parse(() =>
-            {
-                this.createCollection(data, spritesheet);
+            await spritesheet.parse();
 
-                onDownloaded(true);
-            });
+            this.createCollection(data, spritesheet);
         };
 
         if(baseTexture.valid)
         {
-            createAsset();
+            await createAsset();
         }
         else
         {
-            baseTexture.once('update', () => createAsset());
+            await new Promise<void>((resolve, reject) =>
+            {
+                baseTexture.once('update', async () =>
+                {
+                    await createAsset();
+
+                    return resolve();
+                });
+            });
         }
     }
 
@@ -720,22 +661,22 @@ export class RoomContentLoader implements IFurnitureDataListener
 
     private getAssetUrlWithGenericBase(assetName: string): string
     {
-        return (Nitro.instance.getConfiguration<string>('generic.asset.url').replace(/%libname%/gi, assetName));
+        return (NitroConfiguration.getValue<string>('generic.asset.url').replace(/%libname%/gi, assetName));
     }
 
     public getAssetUrlWithFurniBase(assetName: string): string
     {
-        return (Nitro.instance.getConfiguration<string>('furni.asset.url').replace(/%libname%/gi, assetName));
+        return (NitroConfiguration.getValue<string>('furni.asset.url').replace(/%libname%/gi, assetName));
     }
 
     public getAssetUrlWithFurniIconBase(assetName: string): string
     {
-        return (Nitro.instance.getConfiguration<string>('furni.asset.icon.url').replace(/%libname%/gi, assetName));
+        return (NitroConfiguration.getValue<string>('furni.asset.icon.url').replace(/%libname%/gi, assetName));
     }
 
     public getAssetUrlWithPetBase(assetName: string): string
     {
-        return (Nitro.instance.getConfiguration<string>('pet.asset.url').replace(/%libname%/gi, assetName));
+        return (NitroConfiguration.getValue<string>('pet.asset.url').replace(/%libname%/gi, assetName));
     }
 
     public setRoomObjectRoomId(object: IRoomObject, roomId: string): void

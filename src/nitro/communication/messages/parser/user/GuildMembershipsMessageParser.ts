@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { HabboGroupEntryData } from './HabboGroupEntryData';
 
 export class GuildMembershipsMessageParser implements IMessageParser

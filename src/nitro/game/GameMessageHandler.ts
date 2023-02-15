@@ -1,6 +1,6 @@
-import { IConnection } from '../../core/communication/connections/IConnection';
-import { LoadGameUrlEvent } from '../communication/messages/incoming/game/LoadGameUrlEvent';
-import { LegacyExternalInterface } from '../externalInterface/LegacyExternalInterface';
+import { IConnection } from '../../api';
+import { LoadGameUrlEvent } from '../communication';
+import { LegacyExternalInterface } from '../externalInterface';
 
 export class GameMessageHandler
 {

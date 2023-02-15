@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { FurnitureListAddOrUpdateParser } from '../../../parser/inventory/furniture/FurnitureListAddOrUpdateParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { FurnitureListAddOrUpdateParser } from '../../../parser';
 
 export class FurnitureListAddOrUpdateEvent extends MessageEvent implements IMessageEvent
 {

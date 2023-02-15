@@ -1,35 +1,9 @@
 
-import { RoomObjectMouseEvent } from '../../../../../room/events/RoomObjectMouseEvent';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObjectModel } from '../../../../../room/object/IRoomObjectModel';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { Vector3d } from '../../../../../room/utils/Vector3d';
-import { AvatarAction } from '../../../../avatar/enum/AvatarAction';
-import { Nitro } from '../../../../Nitro';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectFurnitureActionEvent } from '../../../events/RoomObjectFurnitureActionEvent';
-import { RoomObjectMoveEvent } from '../../../events/RoomObjectMoveEvent';
-import { ObjectAvatarCarryObjectUpdateMessage } from '../../../messages/ObjectAvatarCarryObjectUpdateMessage';
-import { ObjectAvatarChatUpdateMessage } from '../../../messages/ObjectAvatarChatUpdateMessage';
-import { ObjectAvatarDanceUpdateMessage } from '../../../messages/ObjectAvatarDanceUpdateMessage';
-import { ObjectAvatarEffectUpdateMessage } from '../../../messages/ObjectAvatarEffectUpdateMessage';
-import { ObjectAvatarExpressionUpdateMessage } from '../../../messages/ObjectAvatarExpressionUpdateMessage';
-import { ObjectAvatarFigureUpdateMessage } from '../../../messages/ObjectAvatarFigureUpdateMessage';
-import { ObjectAvatarFlatControlUpdateMessage } from '../../../messages/ObjectAvatarFlatControlUpdateMessage';
-import { ObjectAvatarGestureUpdateMessage } from '../../../messages/ObjectAvatarGestureUpdateMessage';
-import { ObjectAvatarMutedUpdateMessage } from '../../../messages/ObjectAvatarMutedUpdateMessage';
-import { ObjectAvatarOwnMessage } from '../../../messages/ObjectAvatarOwnMessage';
-import { ObjectAvatarPlayerValueUpdateMessage } from '../../../messages/ObjectAvatarPlayerValueUpdateMessage';
-import { ObjectAvatarPlayingGameUpdateMessage } from '../../../messages/ObjectAvatarPlayingGameUpdateMessage';
-import { ObjectAvatarPostureUpdateMessage } from '../../../messages/ObjectAvatarPostureUpdateMessage';
-import { ObjectAvatarSelectedMessage } from '../../../messages/ObjectAvatarSelectedMessage';
-import { ObjectAvatarSignUpdateMessage } from '../../../messages/ObjectAvatarSignUpdateMessage';
-import { ObjectAvatarSleepUpdateMessage } from '../../../messages/ObjectAvatarSleepUpdateMessage';
-import { ObjectAvatarTypingUpdateMessage } from '../../../messages/ObjectAvatarTypingUpdateMessage';
-import { ObjectAvatarUpdateMessage } from '../../../messages/ObjectAvatarUpdateMessage';
-import { ObjectAvatarUseObjectUpdateMessage } from '../../../messages/ObjectAvatarUseObjectUpdateMessage';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { AvatarAction, IRoomGeometry, IRoomObjectModel, MouseEventType, RoomObjectVariable, Vector3d } from '../../../../../api';
+import { RoomObjectFurnitureActionEvent, RoomObjectMouseEvent, RoomObjectMoveEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { GetTickerTime } from '../../../../../pixi-proxy';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectAvatarCarryObjectUpdateMessage, ObjectAvatarChatUpdateMessage, ObjectAvatarDanceUpdateMessage, ObjectAvatarEffectUpdateMessage, ObjectAvatarExpressionUpdateMessage, ObjectAvatarFigureUpdateMessage, ObjectAvatarFlatControlUpdateMessage, ObjectAvatarGestureUpdateMessage, ObjectAvatarMutedUpdateMessage, ObjectAvatarOwnMessage, ObjectAvatarPlayerValueUpdateMessage, ObjectAvatarPlayingGameUpdateMessage, ObjectAvatarPostureUpdateMessage, ObjectAvatarSelectedMessage, ObjectAvatarSignUpdateMessage, ObjectAvatarSleepUpdateMessage, ObjectAvatarTypingUpdateMessage, ObjectAvatarUpdateMessage, ObjectAvatarUseObjectUpdateMessage } from '../../../messages';
 import { MovingObjectLogic } from '../MovingObjectLogic';
 
 export class AvatarLogic extends MovingObjectLogic
@@ -67,7 +41,7 @@ export class AvatarLogic extends MovingObjectLogic
         this._reportedLocation = null;
         this._effectChangeTimeStamp = 0;
         this._newEffect = 0;
-        this._blinkingStartTimestamp = Nitro.instance.time + this.randomBlinkStartTimestamp();
+        this._blinkingStartTimestamp = GetTickerTime() + this.randomBlinkStartTimestamp();
         this._blinkingEndTimestamp = 0;
         this._talkingEndTimestamp = 0;
         this._talkingPauseStartTimestamp = 0;
@@ -83,7 +57,7 @@ export class AvatarLogic extends MovingObjectLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectMouseEvent.CLICK, RoomObjectMoveEvent.POSITION_CHANGED, RoomObjectMouseEvent.MOUSE_ENTER, RoomObjectMouseEvent.MOUSE_LEAVE, RoomObjectFurnitureActionEvent.MOUSE_BUTTON, RoomObjectFurnitureActionEvent.MOUSE_ARROW ];
+        const types = [RoomObjectMouseEvent.CLICK, RoomObjectMouseEvent.DOUBLE_CLICK, RoomObjectMoveEvent.POSITION_CHANGED, RoomObjectMouseEvent.MOUSE_ENTER, RoomObjectMouseEvent.MOUSE_LEAVE, RoomObjectFurnitureActionEvent.MOUSE_BUTTON, RoomObjectFurnitureActionEvent.MOUSE_ARROW];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }
@@ -436,19 +410,19 @@ export class AvatarLogic extends MovingObjectLogic
     {
         if(effect === AvatarLogic.EFFECT_TYPE_SPLASH)
         {
-            this._effectChangeTimeStamp = (Nitro.instance.time + AvatarLogic.EFFECT_SPLASH_LENGTH);
+            this._effectChangeTimeStamp = (GetTickerTime() + AvatarLogic.EFFECT_SPLASH_LENGTH);
             this._newEffect = AvatarLogic.EFFECT_TYPE_SWIM;
         }
 
         else if(effect === AvatarLogic.EFFECT_TYPE_SPLASH_DARK)
         {
-            this._effectChangeTimeStamp = (Nitro.instance.time + AvatarLogic.EFFECT_SPLASH_LENGTH);
+            this._effectChangeTimeStamp = (GetTickerTime() + AvatarLogic.EFFECT_SPLASH_LENGTH);
             this._newEffect = AvatarLogic.EFFECT_TYPE_SWIM_DARK;
         }
 
         else if(model.getValue<number>(RoomObjectVariable.FIGURE_EFFECT) === AvatarLogic.EFFECT_TYPE_SWIM)
         {
-            this._effectChangeTimeStamp = (Nitro.instance.time + AvatarLogic.EFFECT_SPLASH_LENGTH);
+            this._effectChangeTimeStamp = (GetTickerTime() + AvatarLogic.EFFECT_SPLASH_LENGTH);
             this._newEffect = effect;
 
             effect = AvatarLogic.EFFECT_TYPE_SPLASH;
@@ -456,7 +430,7 @@ export class AvatarLogic extends MovingObjectLogic
 
         else if(model.getValue<number>(RoomObjectVariable.FIGURE_EFFECT) === AvatarLogic.EFFECT_TYPE_SWIM_DARK)
         {
-            this._effectChangeTimeStamp = (Nitro.instance.time + AvatarLogic.EFFECT_SPLASH_LENGTH);
+            this._effectChangeTimeStamp = (GetTickerTime() + AvatarLogic.EFFECT_SPLASH_LENGTH);
             this._newEffect = effect;
 
             effect = AvatarLogic.EFFECT_TYPE_SPLASH_DARK;
@@ -469,7 +443,7 @@ export class AvatarLogic extends MovingObjectLogic
 
         else
         {
-            this._effectChangeTimeStamp = (Nitro.instance.time + delay);
+            this._effectChangeTimeStamp = (GetTickerTime() + delay);
             this._newEffect = effect;
 
             return;
@@ -486,6 +460,9 @@ export class AvatarLogic extends MovingObjectLogic
         {
             case MouseEventType.MOUSE_CLICK:
                 eventType = RoomObjectMouseEvent.CLICK;
+                break;
+            case MouseEventType.DOUBLE_CLICK:
+                eventType = RoomObjectMouseEvent.DOUBLE_CLICK;
                 break;
             case MouseEventType.ROLL_OVER:
                 eventType = RoomObjectMouseEvent.MOUSE_ENTER;

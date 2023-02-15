@@ -1,14 +1,6 @@
-import { IConnection } from '../../../core/communication/connections/IConnection';
-import { DesktopViewEvent } from '../../communication/messages/incoming/desktop/DesktopViewEvent';
-import { FlatAccessDeniedMessageEvent } from '../../communication/messages/incoming/navigator/FlatAccessDeniedMessageEvent';
-import { RoomDoorbellAcceptedEvent } from '../../communication/messages/incoming/room/access/doorbell/RoomDoorbellAcceptedEvent';
-import { RoomEnterEvent } from '../../communication/messages/incoming/room/access/RoomEnterEvent';
-import { RoomReadyMessageEvent } from '../../communication/messages/incoming/room/mapping/RoomReadyMessageEvent';
-import { YouAreSpectatorMessageEvent } from '../../communication/messages/incoming/room/session/YouAreSpectatorMessageEvent';
-import { GoToFlatMessageComposer } from '../../communication/messages/outgoing/room/session/GoToFlatMessageComposer';
-import { RoomSessionDoorbellEvent } from '../events/RoomSessionDoorbellEvent';
-import { IRoomHandlerListener } from '../IRoomHandlerListener';
-import { RoomSessionSpectatorModeEvent } from './../events/RoomSessionSpectatorModeEvent';
+import { IConnection, IRoomHandlerListener } from '../../../api';
+import { RoomSessionDoorbellEvent, RoomSessionSpectatorModeEvent } from '../../../events';
+import { DesktopViewEvent, FlatAccessDeniedMessageEvent, GoToFlatMessageComposer, RoomDoorbellAcceptedEvent, RoomEnterEvent, RoomReadyMessageEvent, YouAreSpectatorMessageEvent } from '../../communication';
 import { BaseHandler } from './BaseHandler';
 
 export class RoomSessionHandler extends BaseHandler

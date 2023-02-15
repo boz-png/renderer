@@ -1,8 +1,7 @@
 import { Resource, Texture } from '@pixi/core';
 import { Matrix } from '@pixi/math';
-import { NitroSprite, NitroTexture } from '../../../../../core';
-import { IGraphicAsset } from '../../../../../room/object/visualization/utils/IGraphicAsset';
-import { TextureUtils } from '../../../../../room/utils/TextureUtils';
+import { IGraphicAsset } from '../../../../../api';
+import { NitroSprite, NitroTexture, TextureUtils } from '../../../../../pixi-proxy';
 import { FurnitureAnimatedVisualization } from './FurnitureAnimatedVisualization';
 
 export class IsometricImageFurniVisualization extends FurnitureAnimatedVisualization
@@ -92,7 +91,7 @@ export class IsometricImageFurniVisualization extends FurnitureAnimatedVisualiza
         }
     }
 
-    private generateTransformedThumbnail(texture: Texture<Resource>, asset: IGraphicAsset): Texture<Resource>
+    protected generateTransformedThumbnail(texture: Texture<Resource>, asset: IGraphicAsset): Texture<Resource>
     {
         if(this._hasOutline)
         {

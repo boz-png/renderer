@@ -1,4 +1,4 @@
-import { IAssetGesture, IAssetPosture } from '../../../../../core/asset/interfaces/visualization';
+import { IAssetGesture, IAssetPosture } from '../../../../../api';
 import { AnimationSizeData } from './AnimationSizeData';
 
 export class PetSizeData extends AnimationSizeData
@@ -81,7 +81,7 @@ export class PetSizeData extends AnimationSizeData
         {
             const keys = this._posturesToAnimations.keys();
 
-            for(;;)
+            for(; ;)
             {
                 const key = keys.next();
 
@@ -102,7 +102,7 @@ export class PetSizeData extends AnimationSizeData
         {
             const keys = this._gesturesToAnimations.keys();
 
-            for(;;)
+            for(; ;)
             {
                 const key = keys.next();
 

@@ -1,6 +1,5 @@
-import { IAssetManager } from '../../../core/asset/IAssetManager';
+import { IActiveActionData, IAssetManager } from '../../../api';
 import { ActionDefinition } from './ActionDefinition';
-import { IActiveActionData } from './IActiveActionData';
 
 export class AvatarActionManager
 {
@@ -54,7 +53,7 @@ export class AvatarActionManager
                 const y = (canvasOffset.y || 0);
                 const z = (canvasOffset.z || 0);
 
-                action.setOffsets(size, direction, [ x, y, z ]);
+                action.setOffsets(size, direction, [x, y, z]);
             }
         }
     }

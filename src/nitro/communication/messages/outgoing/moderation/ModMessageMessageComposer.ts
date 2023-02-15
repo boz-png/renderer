@@ -1,4 +1,4 @@
-import { IMessageComposer } from '../../../../../core/communication/messages/IMessageComposer';
+import { IMessageComposer } from '../../../../../api';
 import { ModBanMessageComposer } from './ModBanMessageComposer';
 
 export class ModMessageMessageComposer implements IMessageComposer<any>

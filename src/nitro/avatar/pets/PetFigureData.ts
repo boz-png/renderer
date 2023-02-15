@@ -1,3 +1,4 @@
+import { IPetCustomPart } from '../../../api';
 import { PetCustomPart } from './PetCustomPart';
 
 export class PetFigureData
@@ -7,7 +8,7 @@ export class PetFigureData
     private _color: number;
     private _headOnly: boolean;
 
-    private _customParts: PetCustomPart[];
+    private _customParts: IPetCustomPart[];
     private _customLayerIds: number[];
     private _customPartIds: number[];
     private _customPaletteIds: number[];
@@ -66,12 +67,12 @@ export class PetFigureData
         return this._customPaletteIds;
     }
 
-    public get customParts(): PetCustomPart[]
+    public get customParts(): IPetCustomPart[]
     {
         return this._customParts;
     }
 
-    public getCustomPart(k: number): PetCustomPart
+    public getCustomPart(k: number): IPetCustomPart
     {
         if(this._customParts)
         {

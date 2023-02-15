@@ -1,15 +1,10 @@
-import { IObjectVisualizationData } from '../../../../../room/object/visualization/IRoomObjectVisualizationData';
-import { AvatarSetType } from '../../../../avatar/enum/AvatarSetType';
-import { IAvatarImageListener } from '../../../../avatar/IAvatarImageListener';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { AvatarSetType, IAvatarImageListener, IObjectVisualizationData, RoomObjectVariable } from '../../../../../api';
 import { FurnitureMannequinVisualizationData } from './FurnitureMannequinVisualizationData';
 import { FurnitureVisualization } from './FurnitureVisualization';
 
 export class FurnitureMannequinVisualization extends FurnitureVisualization implements IAvatarImageListener
 {
     private static AVATAR_IMAGE_SPRITE_TAG: string = 'avatar_image';
-
-    protected _data: FurnitureMannequinVisualizationData;
 
     private _mannequinScale: number;
     private _figure: string;
@@ -104,7 +99,7 @@ export class FurnitureMannequinVisualization extends FurnitureVisualization impl
     {
         if(!this.avatarExists() || forceUpdate)
         {
-            const avatarImage = this._data.createAvatarImage(this._figure, this._mannequinScale, this._gender, this);
+            const avatarImage = this.data.createAvatarImage(this._figure, this._mannequinScale, this._gender, this);
 
             if(avatarImage)
             {
@@ -170,5 +165,10 @@ export class FurnitureMannequinVisualization extends FurnitureVisualization impl
     public get disposed(): boolean
     {
         return this._disposed;
+    }
+
+    protected get data(): FurnitureMannequinVisualizationData
+    {
+        return this._data as FurnitureMannequinVisualizationData;
     }
 }

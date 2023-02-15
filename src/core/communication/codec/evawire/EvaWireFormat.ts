@@ -1,15 +1,11 @@
-import { IConnection } from '../../connections/IConnection';
-import { IMessageDataWrapper } from '../../messages/IMessageDataWrapper';
-import { BinaryReader } from '../BinaryReader';
-import { BinaryWriter } from '../BinaryWriter';
+import { BinaryReader, BinaryWriter, IBinaryWriter, ICodec, IConnection, IMessageDataWrapper } from '../../../../api';
 import { Byte } from '../Byte';
-import { ICodec } from '../ICodec';
 import { Short } from '../Short';
 import { EvaWireDataWrapper } from './EvaWireDataWrapper';
 
 export class EvaWireFormat implements ICodec
 {
-    public encode(header: number, messages: any[]): BinaryWriter
+    public encode(header: number, messages: any[]): IBinaryWriter
     {
         const writer = new BinaryWriter();
 

@@ -1,5 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { IMessageParser } from './../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { CampaignCalendarData } from './CampaignCalendarData';
 
 export class CampaignCalendarDataMessageParser implements IMessageParser

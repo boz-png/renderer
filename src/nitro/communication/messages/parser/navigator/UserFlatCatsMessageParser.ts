@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { NavigatorCategoryDataParser } from './NavigatorCategoryDataParser';
 
 export class UserFlatCatsMessageParser implements IMessageParser

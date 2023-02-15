@@ -1,5 +1,4 @@
-﻿import { IAssetManager } from '../../../core/asset/IAssetManager';
-import { IGraphicAsset } from '../../../room/object/visualization/utils/IGraphicAsset';
+﻿import { IAssetManager, IGraphicAsset } from '../../../api';
 import { AvatarRenderManager } from '../AvatarRenderManager';
 import { AssetAlias } from './AssetAlias';
 

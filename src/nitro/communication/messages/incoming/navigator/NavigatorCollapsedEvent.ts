@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { NavigatorCollapsedParser } from '../../parser/navigator/NavigatorCollapsedParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { NavigatorCollapsedParser } from '../../parser';
 
 export class NavigatorCollapsedEvent extends MessageEvent implements IMessageEvent
 {

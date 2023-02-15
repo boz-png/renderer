@@ -1,11 +1,5 @@
-import { IFigureData } from '../interfaces';
-import { IFigurePartSet } from './figure/IFigurePartSet';
-import { IPalette } from './figure/IPalette';
-import { ISetType } from './figure/ISetType';
-import { Palette } from './figure/Palette';
-import { SetType } from './figure/SetType';
-import { IFigureSetData } from './IFigureSetData';
-import { IStructureData } from './IStructureData';
+import { IFigureData, IFigurePartSet, IFigureSetData, IPalette, ISetType, IStructureData } from '../../../api';
+import { Palette, SetType } from './figure';
 
 export class FigureSetData implements IFigureSetData, IStructureData
 {
@@ -100,13 +94,13 @@ export class FigureSetData implements IFigureSetData, IStructureData
         return types;
     }
 
-    public getDefaultPartSet(k: string, _arg_2: string): IFigurePartSet
+    public getDefaultPartSet(type: string, gender: string): IFigurePartSet
     {
-        const setType = this._setTypes.get(k);
+        const setType = this._setTypes.get(type);
 
         if(!setType) return null;
 
-        return setType.getDefaultPartSet(_arg_2);
+        return setType.getDefaultPartSet(gender);
     }
 
     public getSetType(k: string): ISetType

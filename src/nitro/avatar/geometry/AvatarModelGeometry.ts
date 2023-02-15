@@ -1,5 +1,5 @@
-﻿import { IAvatarImage } from '../IAvatarImage';
-import { AvatarCanvas } from '../structure/AvatarCanvas';
+﻿import { IAvatarImage } from '../../../api';
+import { AvatarCanvas } from '../structure';
 import { AvatarSet } from './AvatarSet';
 import { GeometryBodyPart } from './GeometryBodyPart';
 import { Matrix4x4 } from './Matrix4x4';
@@ -183,7 +183,7 @@ export class AvatarModelGeometry
         return (this.getBodyPartsOfType(k).get(_arg_2) || null);
     }
 
-    public getBodyPartOfItem(k: string, _arg_2: string, _arg_3:IAvatarImage): GeometryBodyPart
+    public getBodyPartOfItem(k: string, _arg_2: string, _arg_3: IAvatarImage): GeometryBodyPart
     {
         const itemIds = this._itemIdToBodyPartMap.get(k);
 
@@ -235,7 +235,7 @@ export class AvatarModelGeometry
 
         const geometryParts = this.getBodyPartsOfType(_arg_3);
         const parts = this.getBodyPartsInAvatarSet(geometryParts, k);
-        const sets: [ number, GeometryBodyPart ][] = [];
+        const sets: [number, GeometryBodyPart][] = [];
         const ids: string[] = [];
 
         this._transformation = Matrix4x4.getYRotationMatrix(_arg_2);
@@ -246,7 +246,7 @@ export class AvatarModelGeometry
 
             part.applyTransform(this._transformation);
 
-            sets.push([ part.getDistance(this._camera), part ]);
+            sets.push([part.getDistance(this._camera), part]);
         }
 
         sets.sort((a, b) =>
@@ -271,7 +271,7 @@ export class AvatarModelGeometry
         return ids;
     }
 
-    public getParts(k: string, _arg_2: string, _arg_3: number, _arg_4: any[], _arg_5:IAvatarImage): string[]
+    public getParts(k: string, _arg_2: string, _arg_3: number, _arg_4: any[], _arg_5: IAvatarImage): string[]
     {
         if(this.hasBodyPart(k, _arg_2))
         {

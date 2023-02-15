@@ -1,6 +1,5 @@
-import { Disposable } from '../../../core/common/disposable/Disposable';
-import { IConnection } from '../../../core/communication/connections/IConnection';
-import { IRoomHandlerListener } from '../IRoomHandlerListener';
+import { IConnection, IRoomHandlerListener } from '../../../api';
+import { Disposable } from '../../../core';
 
 export class BaseHandler extends Disposable
 {

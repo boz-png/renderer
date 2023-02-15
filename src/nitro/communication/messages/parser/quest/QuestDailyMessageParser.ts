@@ -1,10 +1,9 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { QuestMessageData } from '../../incoming/quest/QuestMessageData';
-import { IMessageParser } from './../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { QuestMessageData } from './QuestMessageData';
 
 export class QuestDailyMessageParser implements IMessageParser
 {
-    private _quest:QuestMessageData;
+    private _quest: QuestMessageData;
     private _easyQuestCount: number;
     private _hardQuestCount: number;
 
@@ -14,7 +13,7 @@ export class QuestDailyMessageParser implements IMessageParser
         return true;
     }
 
-    public parse(wrapper:IMessageDataWrapper): boolean
+    public parse(wrapper: IMessageDataWrapper): boolean
     {
         if(!wrapper) return false;
 

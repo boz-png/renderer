@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../../core/communication/messages/MessageEvent';
-import { FloodControlParser } from '../../../../parser/room/unit/chat/FloodControlParser';
+import { IMessageEvent } from '../../../../../../../api';
+import { MessageEvent } from '../../../../../../../events';
+import { FloodControlParser } from '../../../../parser';
 
 export class FloodControlEvent extends MessageEvent implements IMessageEvent
 {

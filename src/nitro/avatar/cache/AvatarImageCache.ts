@@ -1,20 +1,13 @@
 import { Texture } from '@pixi/core';
 import { Matrix, Point, Rectangle } from '@pixi/math';
-import { NitroContainer, NitroSprite } from '../../../core';
-import { RoomObjectSpriteData } from '../../../room/data/RoomObjectSpriteData';
-import { Nitro } from '../../Nitro';
-import { IActiveActionData } from '../actions/IActiveActionData';
-import { AssetAliasCollection } from '../alias/AssetAliasCollection';
-import { AvatarAnimationLayerData } from '../animation/AvatarAnimationLayerData';
+import { AvatarDirectionAngle, AvatarFigurePartType, AvatarScaleType, GeometryType, IActiveActionData, IAvatarImage, RoomObjectSpriteData } from '../../../api';
+import { GetTickerTime, NitroContainer, NitroSprite } from '../../../pixi-proxy';
+import { AssetAliasCollection } from '../alias';
+import { AvatarAnimationLayerData } from '../animation';
 import { AvatarImageBodyPartContainer } from '../AvatarImageBodyPartContainer';
 import { AvatarImagePartContainer } from '../AvatarImagePartContainer';
 import { AvatarStructure } from '../AvatarStructure';
-import { AvatarDirectionAngle } from '../enum/AvatarDirectionAngle';
-import { AvatarFigurePartType } from '../enum/AvatarFigurePartType';
-import { AvatarScaleType } from '../enum/AvatarScaleType';
-import { GeometryType } from '../enum/GeometryType';
-import { IAvatarImage } from '../IAvatarImage';
-import { AvatarCanvas } from '../structure/AvatarCanvas';
+import { AvatarCanvas } from '../structure';
 import { AvatarImageActionCache } from './AvatarImageActionCache';
 import { AvatarImageBodyPartCache } from './AvatarImageBodyPartCache';
 import { AvatarImageDirectionCache } from './AvatarImageDirectionCache';
@@ -87,7 +80,7 @@ export class AvatarImageCache
 
     public disposeInactiveActions(k: number = 60000): void
     {
-        const time = Nitro.instance.time;
+        const time = GetTickerTime();
 
         if(this._cache)
         {
@@ -427,7 +420,7 @@ export class AvatarImageCache
                                     else spriteData.x = (spriteData.x + 65);
                                 }
 
-                                if(container.isColorable) spriteData.color = `${ color }`;
+                                if(container.isColorable) spriteData.color = `${color}`;
 
                                 this._serverRenderData.push(spriteData);
                             }

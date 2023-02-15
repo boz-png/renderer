@@ -1,6 +1,4 @@
-﻿import { IAssetAnimationSprite } from '../../../core/asset/interfaces';
-import { IAnimation } from './IAnimation';
-import { ISpriteDataContainer } from './ISpriteDataContainer';
+﻿import { IAnimation, IAssetAnimationSprite, ISpriteDataContainer } from '../../../api';
 
 export class SpriteDataContainer implements ISpriteDataContainer
 {

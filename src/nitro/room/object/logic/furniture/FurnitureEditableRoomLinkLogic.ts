@@ -1,6 +1,5 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureEditableRoomLinkLogic extends FurnitureLogic
@@ -9,7 +8,7 @@ export class FurnitureEditableRoomLinkLogic extends FurnitureLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.ROOM_LINK ];
+        const types = [RoomObjectWidgetRequestEvent.ROOM_LINK];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

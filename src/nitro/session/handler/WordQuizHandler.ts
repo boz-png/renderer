@@ -1,9 +1,6 @@
-import { IConnection } from '../../../core/communication/connections/IConnection';
-import { QuestionAnsweredEvent } from '../../communication/messages/incoming/poll/QuestionAnsweredEvent';
-import { QuestionEvent } from '../../communication/messages/incoming/poll/QuestionEvent';
-import { QuestionFinishedEvent } from '../../communication/messages/incoming/poll/QuestionFinishedEvent';
-import { RoomSessionWordQuizEvent } from '../events/RoomSessionWordQuizEvent';
-import { IRoomHandlerListener } from '../IRoomHandlerListener';
+import { IConnection, IRoomHandlerListener } from '../../../api';
+import { RoomSessionWordQuizEvent } from '../../../events';
+import { QuestionAnsweredEvent, QuestionEvent, QuestionFinishedEvent } from '../../communication';
 import { BaseHandler } from './BaseHandler';
 
 export class WordQuizHandler extends BaseHandler

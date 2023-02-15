@@ -1,18 +1,17 @@
-import { IMessageDataWrapper } from '../../messages/IMessageDataWrapper';
-import { BinaryReader } from '../BinaryReader';
+import { IBinaryReader, IMessageDataWrapper } from '../../../../api';
 
 export class EvaWireDataWrapper implements IMessageDataWrapper
 {
     private _header: number;
-    private _buffer: BinaryReader;
+    private _buffer: IBinaryReader;
 
-    constructor(header: number, buffer: BinaryReader)
+    constructor(header: number, buffer: IBinaryReader)
     {
         this._header = header;
         this._buffer = buffer;
     }
 
-    public readBytes(length: number): BinaryReader
+    public readBytes(length: number): IBinaryReader
     {
         if(!this._buffer) return null;
 

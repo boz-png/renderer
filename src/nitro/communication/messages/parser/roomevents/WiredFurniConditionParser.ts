@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { ConditionDefinition } from '../../incoming/roomevents/ConditionDefinition';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { ConditionDefinition } from './ConditionDefinition';
 
 export class WiredFurniConditionParser implements IMessageParser
 {

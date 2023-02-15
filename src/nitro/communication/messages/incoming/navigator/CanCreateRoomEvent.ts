@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { CanCreateRoomMessageParser } from '../../parser/navigator/CanCreateRoomMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { CanCreateRoomMessageParser } from '../../parser';
 
 export class CanCreateRoomEvent extends MessageEvent implements IMessageEvent
 {

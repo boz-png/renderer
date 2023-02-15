@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { FurnitureListRemovedParser } from '../../../parser/inventory/furniture/FurnitureListRemovedParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { FurnitureListRemovedParser } from '../../../parser';
 
 export class FurnitureListRemovedEvent extends MessageEvent implements IMessageEvent
 {

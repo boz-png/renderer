@@ -1,6 +1,6 @@
-import { ModeratorToolPreferencesMessageParser } from '../..';
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { ModeratorToolPreferencesMessageParser } from '../../parser';
 
 export class ModeratorToolPreferencesEvent extends MessageEvent implements IMessageEvent
 {

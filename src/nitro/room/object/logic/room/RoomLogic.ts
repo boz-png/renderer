@@ -1,26 +1,9 @@
 import { Point } from '@pixi/math';
-import { RoomObjectEvent } from '../../../../../room/events/RoomObjectEvent';
-import { RoomObjectMouseEvent } from '../../../../../room/events/RoomObjectMouseEvent';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObjectModel } from '../../../../../room/object/IRoomObjectModel';
-import { RoomObjectLogicBase } from '../../../../../room/object/logic/RoomObjectLogicBase';
-import { ColorConverter } from '../../../../../room/utils/ColorConverter';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { Vector3d } from '../../../../../room/utils/Vector3d';
-import { Nitro } from '../../../../Nitro';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectTileMouseEvent } from '../../../events/RoomObjectTileMouseEvent';
-import { RoomObjectWallMouseEvent } from '../../../events/RoomObjectWallMouseEvent';
-import { ObjectRoomColorUpdateMessage } from '../../../messages/ObjectRoomColorUpdateMessage';
-import { ObjectRoomFloorHoleUpdateMessage } from '../../../messages/ObjectRoomFloorHoleUpdateMessage';
-import { ObjectRoomMapUpdateMessage } from '../../../messages/ObjectRoomMapUpdateMessage';
-import { ObjectRoomMaskUpdateMessage } from '../../../messages/ObjectRoomMaskUpdateMessage';
-import { ObjectRoomPlanePropertyUpdateMessage } from '../../../messages/ObjectRoomPlanePropertyUpdateMessage';
-import { ObjectRoomPlaneVisibilityUpdateMessage } from '../../../messages/ObjectRoomPlaneVisibilityUpdateMessage';
-import { ObjectRoomUpdateMessage } from '../../../messages/ObjectRoomUpdateMessage';
+import { IRoomGeometry, IRoomObjectModel, MouseEventType, NitroConfiguration, RoomObjectVariable, Vector3d } from '../../../../../api';
+import { RoomObjectEvent, RoomObjectMouseEvent, RoomObjectTileMouseEvent, RoomObjectWallMouseEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { ColorConverter, RoomObjectLogicBase, RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectRoomColorUpdateMessage, ObjectRoomFloorHoleUpdateMessage, ObjectRoomMapUpdateMessage, ObjectRoomMaskUpdateMessage, ObjectRoomPlanePropertyUpdateMessage, ObjectRoomPlaneVisibilityUpdateMessage, ObjectRoomUpdateMessage } from '../../../messages';
 import { RoomMapData } from '../../RoomMapData';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
 import { RoomPlaneBitmapMaskData } from '../../RoomPlaneBitmapMaskData';
 import { RoomPlaneBitmapMaskParser } from '../../RoomPlaneBitmapMaskParser';
 import { RoomPlaneData } from '../../RoomPlaneData';
@@ -63,7 +46,7 @@ export class RoomLogic extends RoomObjectLogicBase
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectMouseEvent.MOUSE_MOVE, RoomObjectMouseEvent.CLICK ];
+        const types = [RoomObjectMouseEvent.MOUSE_MOVE, RoomObjectMouseEvent.CLICK];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }
@@ -101,7 +84,7 @@ export class RoomLogic extends RoomObjectLogicBase
         this.object.model.setValue(RoomObjectVariable.ROOM_WALL_VISIBILITY, 1);
         this.object.model.setValue(RoomObjectVariable.ROOM_LANDSCAPE_VISIBILITY, 1);
 
-        this._skipColorTransition = (Nitro.instance.getConfiguration<boolean>('room.color.skip.transition') === true);
+        this._skipColorTransition = (NitroConfiguration.getValue<boolean>('room.color.skip.transition') === true);
     }
 
     public update(time: number): void

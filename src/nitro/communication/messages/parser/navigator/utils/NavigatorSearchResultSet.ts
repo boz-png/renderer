@@ -1,4 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../../core';
+import { IMessageDataWrapper } from '../../../../../../api';
 import { NavigatorSearchResultList } from './NavigatorSearchResultList';
 
 export class NavigatorSearchResultSet

@@ -1,7 +1,5 @@
-﻿import { RoomObjectSpriteData } from '../../data/RoomObjectSpriteData';
-import { RoomObjectSpriteType } from '../../object/enum/RoomObjectSpriteType';
-import { IRoomObjectSprite } from '../../object/visualization/IRoomObjectSprite';
-import { SortableSprite } from '../utils/SortableSprite';
+﻿import { IRoomObjectSprite, RoomObjectSpriteData, RoomObjectSpriteType } from '../../../api';
+import { SortableSprite } from '../utils';
 import { RoomObjectCacheItem } from './RoomObjectCacheItem';
 
 export class RoomObjectCache
@@ -21,7 +19,7 @@ export class RoomObjectCache
     {
         if(this._data)
         {
-            for(const [ key, item ] of this._data.entries())
+            for(const [key, item] of this._data.entries())
             {
                 if(!item) continue;
 

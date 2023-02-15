@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { CallForHelpCategoryData } from '../../incoming/callforhelp/CallForHelpCategoryData';
-import { IMessageParser } from './../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { CallForHelpCategoryData } from './CallForHelpCategoryData';
 
 export class CfhTopicsInitMessageParser implements IMessageParser
 {

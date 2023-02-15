@@ -1,5 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../../core';
-import { RoomDataParser } from '../../room/data/RoomDataParser';
+import { IMessageDataWrapper } from '../../../../../../api';
+import { RoomDataParser } from '../../room';
 
 export class NavigatorSearchResultList
 {

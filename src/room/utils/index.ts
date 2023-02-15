@@ -1,6 +1,4 @@
 export * from './ColorConverter';
-export * from './IRoomGeometry';
-export * from './IVector3D';
 export * from './NumberBank';
 export * from './PointMath';
 export * from './Rasterizer';
@@ -10,5 +8,3 @@ export * from './RoomId';
 export * from './RoomRotatingEffect';
 export * from './RoomShakingEffect';
 export * from './SpriteUtilities';
-export * from './TextureUtils';
-export * from './Vector3d';

@@ -1,12 +1,10 @@
-import { AdvancedMap } from '../core/utils/AdvancedMap';
-import { IRoomObjectManager } from './IRoomObjectManager';
-import { IRoomObjectController } from './object/IRoomObjectController';
-import { RoomObject } from './object/RoomObject';
+import { AdvancedMap, IAdvancedMap, IRoomObjectController, IRoomObjectManager } from '../api';
+import { RoomObject } from './object';
 
 export class RoomObjectManager implements IRoomObjectManager
 {
-    private _objects: AdvancedMap<number, IRoomObjectController>;
-    private _objectsPerType: AdvancedMap<string, AdvancedMap<number, IRoomObjectController>>;
+    private _objects: IAdvancedMap<number, IRoomObjectController>;
+    private _objectsPerType: IAdvancedMap<string, AdvancedMap<number, IRoomObjectController>>;
 
     constructor()
     {
@@ -105,7 +103,7 @@ export class RoomObjectManager implements IRoomObjectManager
         this._objectsPerType.reset();
     }
 
-    private getTypeMap(k: string, _arg_2: boolean = true): AdvancedMap<number, IRoomObjectController>
+    private getTypeMap(k: string, _arg_2: boolean = true): IAdvancedMap<number, IRoomObjectController>
     {
         let existing = this._objectsPerType.getValue(k);
 
@@ -119,7 +117,7 @@ export class RoomObjectManager implements IRoomObjectManager
         return existing;
     }
 
-    public get objects(): AdvancedMap<number, IRoomObjectController>
+    public get objects(): IAdvancedMap<number, IRoomObjectController>
     {
         return this._objects;
     }

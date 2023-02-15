@@ -1,8 +1,6 @@
-import { ActionDefinition } from '../actions/ActionDefinition';
-import { IActionDefinition } from '../actions/IActionDefinition';
-import { IFigureSetData } from './IFigureSetData';
-import { ActivePartSet } from './parts/ActivePartSet';
-import { PartDefinition } from './parts/PartDefinition';
+import { IActionDefinition, IFigureSetData } from '../../../api';
+import { ActionDefinition } from '../actions';
+import { ActivePartSet, PartDefinition } from './parts';
 
 export class PartSetsData implements IFigureSetData
 {
@@ -65,7 +63,7 @@ export class PartSetsData implements IFigureSetData
         return false;
     }
 
-    public getActiveParts(k:IActionDefinition): string[]
+    public getActiveParts(k: IActionDefinition): string[]
     {
         const activePartSet = this._activePartSets.get(k.activePartSet);
 

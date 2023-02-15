@@ -1,6 +1,5 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomObjectWidgetRequestEvent } from '../../../events';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureExternalImageLogic extends FurnitureMultiStateLogic

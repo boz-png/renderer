@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { FavouriteChangedMessageParser } from '../../parser/navigator/FavouriteChangedMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { FavouriteChangedMessageParser } from '../../parser';
 
 export class FavouriteChangedEvent extends MessageEvent implements IMessageEvent
 {

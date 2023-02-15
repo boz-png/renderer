@@ -1,7 +1,5 @@
 import { Resource, Texture } from '@pixi/core';
-import { IRoomObjectSprite } from '../../../../../../room/object/visualization/IRoomObjectSprite';
-import { AvatarAction } from '../../../../../avatar/enum/AvatarAction';
-import { AvatarGuideStatus } from '../../../../../avatar/enum/AvatarGuideStatus';
+import { AvatarAction, AvatarGuideStatus, IRoomObjectSprite } from '../../../../../../api';
 import { AvatarVisualization } from '../AvatarVisualization';
 import { IAvatarAddition } from './IAvatarAddition';
 

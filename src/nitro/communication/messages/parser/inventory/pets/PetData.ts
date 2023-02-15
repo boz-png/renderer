@@ -1,4 +1,4 @@
-﻿import { IMessageDataWrapper } from '../../../../../../core';
+﻿import { IMessageDataWrapper } from '../../../../../../api';
 import { PetFigureDataParser } from './PetFigureDataParser';
 
 export class PetData

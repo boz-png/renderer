@@ -1,8 +1,8 @@
-import { AdvancedMap, IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { AdvancedMap, IAdvancedMap, IMessageDataWrapper, IMessageParser } from '../../../../../api';
 
 export class UserSongDisksInventoryMessageParser implements IMessageParser
 {
-    private _songDiskInventory: AdvancedMap<number, number> = new AdvancedMap();
+    private _songDiskInventory: IAdvancedMap<number, number> = new AdvancedMap();
 
     flush(): boolean
     {

@@ -1,15 +1,12 @@
-import { RoomObjectEvent } from '../../../../../room/events/RoomObjectEvent';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectStateChangedEvent } from '../../../events/RoomObjectStateChangedEvent';
+import { IRoomGeometry, MouseEventType } from '../../../../../api';
+import { RoomObjectEvent, RoomObjectStateChangedEvent, RoomSpriteMouseEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureHockeyScoreLogic extends FurnitureLogic
 {
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectStateChangedEvent.STATE_CHANGE ];
+        const types = [RoomObjectStateChangedEvent.STATE_CHANGE];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

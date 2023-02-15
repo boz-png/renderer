@@ -1,5 +1,4 @@
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IRoomGeometry, RoomObjectVariable } from '../../../../../api';
 import { FurnitureFireworksVisualization } from './FurnitureFireworksVisualization';
 
 export class FurnitureGiftWrappedFireworksVisualization extends FurnitureFireworksVisualization
@@ -70,7 +69,7 @@ export class FurnitureGiftWrappedFireworksVisualization extends FurnitureFirewor
         return assetName;
     }
 
-    protected setAnimation(animationId: number):void
+    protected setAnimation(animationId: number): void
     {
         this._lastAnimationId = animationId;
 

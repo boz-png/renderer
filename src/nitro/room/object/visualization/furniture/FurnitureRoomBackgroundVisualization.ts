@@ -1,5 +1,5 @@
 import { Resource, Texture } from '@pixi/core';
-import { DirectionalOffsetData } from '../data/DirectionalOffsetData';
+import { DirectionalOffsetData } from '../data';
 import { FurnitureBrandedImageVisualization } from './FurnitureBrandedImageVisualization';
 
 export class FurnitureRoomBackgroundVisualization extends FurnitureBrandedImageVisualization

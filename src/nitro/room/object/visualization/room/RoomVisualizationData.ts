@@ -1,11 +1,7 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { Disposable } from '../../../../../core/common/disposable/Disposable';
-import { IObjectVisualizationData } from '../../../../../room/object/visualization/IRoomObjectVisualizationData';
-import { IGraphicAssetCollection } from '../../../../../room/object/visualization/utils/IGraphicAssetCollection';
-import { PlaneMaskManager } from './mask/PlaneMaskManager';
-import { LandscapeRasterizer } from './rasterizer/animated/LandscapeRasterizer';
-import { FloorRasterizer } from './rasterizer/basic/FloorRasterizer';
-import { WallRasterizer } from './rasterizer/basic/WallRasterizer';
+import { IAssetData, IGraphicAssetCollection, IObjectVisualizationData } from '../../../../../api';
+import { Disposable } from '../../../../../core';
+import { PlaneMaskManager } from './mask';
+import { FloorRasterizer, LandscapeRasterizer, WallRasterizer } from './rasterizer';
 
 export class RoomVisualizationData extends Disposable implements IObjectVisualizationData
 {
@@ -28,23 +24,21 @@ export class RoomVisualizationData extends Disposable implements IObjectVisualiz
 
     public initialize(asset: IAssetData): boolean
     {
-        //@ts-ignore
-        const wallData = asset.wallData;
+        if(!asset.roomVisualization) return false;
+
+        const wallData = asset.roomVisualization.wallData;
 
         if(wallData) this._wallRasterizer.initialize(wallData);
 
-        //@ts-ignore
-        const floorData = asset.floorData;
+        const floorData = asset.roomVisualization.floorData;
 
         if(floorData) this._floorRasterizer.initialize(floorData);
 
-        //@ts-ignore
-        const landscapeData = asset.landscapeData;
+        const landscapeData = asset.roomVisualization.landscapeData;
 
         if(landscapeData) this._landscapeRasterizer.initialize(landscapeData);
 
-        //@ts-ignore
-        const maskData = asset.maskData;
+        const maskData = asset.roomVisualization.maskData;
 
         if(maskData) this._maskManager.initialize(maskData);
 

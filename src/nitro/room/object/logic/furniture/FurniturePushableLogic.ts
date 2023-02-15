@@ -1,8 +1,6 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { Vector3d } from '../../../../../room/utils/Vector3d';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { ObjectMoveUpdateMessage } from '../../../messages/ObjectMoveUpdateMessage';
-import { LegacyDataType } from '../../data/type/LegacyDataType';
+import { LegacyDataType, Vector3d } from '../../../../../api';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage, ObjectMoveUpdateMessage } from '../../../messages';
 import { MovingObjectLogic } from '../MovingObjectLogic';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 

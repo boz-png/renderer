@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { CfhSanctionTypeData } from '../../incoming/callforhelp';
-import { IMessageParser } from './../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { CfhSanctionTypeData } from './CfhSanctionTypeData';
 
 export class CfhSanctionMessageParser implements IMessageParser
 {

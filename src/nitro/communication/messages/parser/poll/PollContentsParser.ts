@@ -1,5 +1,4 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { PollChoice } from './PollChoice';
 import { PollQuestion } from './PollQuestion';
 
@@ -9,7 +8,7 @@ export class PollContentsParser implements IMessageParser
     private _startMessage = '';
     private _endMessage = '';
     private _numQuestions = 0;
-    private _questionArray:PollQuestion[] = [];
+    private _questionArray: PollQuestion[] = [];
     private _npsPoll = false;
 
     flush(): boolean
@@ -46,7 +45,7 @@ export class PollContentsParser implements IMessageParser
         return true;
     }
 
-    private parsePollQuestion(k:IMessageDataWrapper):PollQuestion
+    private parsePollQuestion(k: IMessageDataWrapper): PollQuestion
     {
         const pollQuestion = new PollQuestion();
         pollQuestion.questionId = k.readInt();
@@ -66,32 +65,32 @@ export class PollContentsParser implements IMessageParser
         return pollQuestion;
     }
 
-    public get id():number
+    public get id(): number
     {
         return this._id;
     }
 
-    public get startMessage():string
+    public get startMessage(): string
     {
         return this._startMessage;
     }
 
-    public get endMessage():string
+    public get endMessage(): string
     {
         return this._endMessage;
     }
 
-    public get numQuestions():number
+    public get numQuestions(): number
     {
         return this._numQuestions;
     }
 
-    public get questionArray():PollQuestion[]
+    public get questionArray(): PollQuestion[]
     {
         return this._questionArray;
     }
 
-    public get npsPoll():boolean
+    public get npsPoll(): boolean
     {
         return this._npsPoll;
     }

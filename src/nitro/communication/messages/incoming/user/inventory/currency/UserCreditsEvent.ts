@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../../core/communication/messages/MessageEvent';
-import { UserCreditsParser } from '../../../../parser/user/inventory/currency/UserCreditsParser';
+import { IMessageEvent } from '../../../../../../../api';
+import { MessageEvent } from '../../../../../../../events';
+import { UserCreditsParser } from '../../../../parser';
 
 export class UserCreditsEvent extends MessageEvent implements IMessageEvent
 {

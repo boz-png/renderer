@@ -1,6 +1,4 @@
-import { AnimationFrame } from '../data/AnimationFrame';
-import { AnimationSizeData } from '../data/AnimationSizeData';
-import { SizeData } from '../data/SizeData';
+import { AnimationFrame, AnimationSizeData, SizeData } from '../data';
 import { FurnitureVisualizationData } from './FurnitureVisualizationData';
 
 export class FurnitureAnimatedVisualizationData extends FurnitureVisualizationData
@@ -81,7 +79,7 @@ export class FurnitureAnimatedVisualizationData extends FurnitureVisualizationDa
         return size.getFrame(animationId, direction, layerId, frameCount);
     }
 
-    public getFrameFromSequence(scale: number, animationId: number, direction: number, layerId: number, sequenceId: number, offset: number, frameCount: number):AnimationFrame
+    public getFrameFromSequence(scale: number, animationId: number, direction: number, layerId: number, sequenceId: number, offset: number, frameCount: number): AnimationFrame
     {
         const size = this.getSizeData(scale) as AnimationSizeData;
 

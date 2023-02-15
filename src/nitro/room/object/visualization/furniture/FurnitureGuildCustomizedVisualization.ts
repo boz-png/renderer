@@ -1,5 +1,4 @@
-import { IGraphicAsset, IRoomObjectSprite } from '../../../../../room';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IGraphicAsset, IRoomObjectSprite, RoomObjectVariable } from '../../../../../api';
 import { FurnitureAnimatedVisualization } from './FurnitureAnimatedVisualization';
 
 export class FurnitureGuildCustomizedVisualization extends FurnitureAnimatedVisualization
@@ -42,11 +41,11 @@ export class FurnitureGuildCustomizedVisualization extends FurnitureAnimatedVisu
 
         const color1 = this.object.model.getValue<number>(RoomObjectVariable.FURNITURE_GUILD_CUSTOMIZED_COLOR_1);
 
-        this._color1 = color1 ? color1: FurnitureGuildCustomizedVisualization.DEFAULT_COLOR_1;
+        this._color1 = color1 ? color1 : FurnitureGuildCustomizedVisualization.DEFAULT_COLOR_1;
 
         const color2 = this.object.model.getValue<number>(RoomObjectVariable.FURNITURE_GUILD_CUSTOMIZED_COLOR_2);
 
-        this._color2 = color2 ? color2: FurnitureGuildCustomizedVisualization.DEFAULT_COLOR_2;
+        this._color2 = color2 ? color2 : FurnitureGuildCustomizedVisualization.DEFAULT_COLOR_2;
 
         return flag;
     }

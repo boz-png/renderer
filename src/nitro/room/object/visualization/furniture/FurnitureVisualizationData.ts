@@ -1,9 +1,5 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { IAssetVisualizationData } from '../../../../../core/asset/interfaces/visualization';
-import { IObjectVisualizationData } from '../../../../../room/object/visualization/IRoomObjectVisualizationData';
-import { ColorData } from '../data/ColorData';
-import { LayerData } from '../data/LayerData';
-import { SizeData } from '../data/SizeData';
+import { IAssetData, IAssetVisualizationData, IObjectVisualizationData } from '../../../../../api';
+import { ColorData, LayerData, SizeData } from '../data';
 
 export class FurnitureVisualizationData implements IObjectVisualizationData
 {

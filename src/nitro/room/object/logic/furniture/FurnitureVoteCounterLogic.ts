@@ -1,8 +1,7 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { Nitro } from '../../../../Nitro';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { VoteDataType } from '../../data/type/VoteDataType';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable, VoteDataType } from '../../../../../api';
+import { GetTickerTime } from '../../../../../pixi-proxy';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureVoteCounterLogic extends FurnitureMultiStateLogic
@@ -45,7 +44,7 @@ export class FurnitureVoteCounterLogic extends FurnitureMultiStateLogic
         {
             this.object.model.setValue(RoomObjectVariable.FURNITURE_VOTE_COUNTER_COUNT, k);
 
-            this._lastUpdate = Nitro.instance.time;
+            this._lastUpdate = GetTickerTime();
 
             return;
         }
@@ -63,7 +62,7 @@ export class FurnitureVoteCounterLogic extends FurnitureMultiStateLogic
                 this._interval = FurnitureVoteCounterLogic.UPDATE_INTERVAL;
             }
 
-            this._lastUpdate = Nitro.instance.time;
+            this._lastUpdate = GetTickerTime();
         }
     }
 

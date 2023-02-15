@@ -1,5 +1,4 @@
-import { IFigureDataColor } from '../../interfaces';
-import { IPartColor } from './IPartColor';
+import { IFigureDataColor, IPartColor } from '../../../../api';
 
 export class PartColor implements IPartColor
 {

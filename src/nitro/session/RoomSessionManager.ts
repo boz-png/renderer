@@ -1,22 +1,7 @@
-import { NitroManager } from '../../core/common/NitroManager';
-import { INitroCommunicationManager } from '../communication/INitroCommunicationManager';
-import { RoomEngineEvent } from '../room/events/RoomEngineEvent';
-import { IRoomEngine } from '../room/IRoomEngine';
-import { RoomSessionEvent } from './events/RoomSessionEvent';
-import { BaseHandler } from './handler/BaseHandler';
-import { GenericErrorHandler } from './handler/GenericErrorHandler';
-import { PollHandler } from './handler/PollHandler';
-import { RoomChatHandler } from './handler/RoomChatHandler';
-import { RoomDataHandler } from './handler/RoomDataHandler';
-import { RoomDimmerPresetsHandler } from './handler/RoomDimmerPresetsHandler';
-import { RoomPermissionsHandler } from './handler/RoomPermissionsHandler';
-import { RoomPresentHandler } from './handler/RoomPresentHandler';
-import { RoomSessionHandler } from './handler/RoomSessionHandler';
-import { RoomUsersHandler } from './handler/RoomUsersHandler';
-import { WordQuizHandler } from './handler/WordQuizHandler';
-import { IRoomHandlerListener } from './IRoomHandlerListener';
-import { IRoomSession } from './IRoomSession';
-import { IRoomSessionManager } from './IRoomSessionManager';
+import { INitroCommunicationManager, IRoomEngine, IRoomHandlerListener, IRoomSession, IRoomSessionManager } from '../../api';
+import { NitroManager } from '../../core';
+import { RoomEngineEvent, RoomSessionEvent } from '../../events';
+import { BaseHandler, GenericErrorHandler, PetPackageHandler, PollHandler, RoomChatHandler, RoomDataHandler, RoomDimmerPresetsHandler, RoomPermissionsHandler, RoomPresentHandler, RoomSessionHandler, RoomUsersHandler, WordQuizHandler } from './handler';
 import { RoomSession } from './RoomSession';
 
 export class RoomSessionManager extends NitroManager implements IRoomSessionManager, IRoomHandlerListener
@@ -81,6 +66,7 @@ export class RoomSessionManager extends NitroManager implements IRoomSessionMana
             new GenericErrorHandler(connection, this),
             new WordQuizHandler(connection, this),
             new PollHandler(connection, this),
+            new PetPackageHandler(connection, this),
         );
     }
 

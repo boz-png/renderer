@@ -1,13 +1,6 @@
-import { AlphaTolerance } from '../../../../../room/object/enum/AlphaTolerance';
-import { IRoomObjectSprite } from '../../../../../room/object/visualization/IRoomObjectSprite';
-import { IObjectVisualizationData } from '../../../../../room/object/visualization/IRoomObjectVisualizationData';
-import { RoomObjectSpriteVisualization } from '../../../../../room/object/visualization/RoomObjectSpriteVisualization';
-import { IGraphicAsset } from '../../../../../room/object/visualization/utils/IGraphicAsset';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
-import { RoomObjectVisualizationType } from '../../RoomObjectVisualizationType';
-import { ColorData } from '../data/ColorData';
-import { LayerData } from '../data/LayerData';
+import { AlphaTolerance, IGraphicAsset, IObjectVisualizationData, IRoomGeometry, IRoomObjectSprite, RoomObjectVariable, RoomObjectVisualizationType } from '../../../../../api';
+import { RoomObjectSpriteVisualization } from '../../../../../room';
+import { ColorData, LayerData } from '../data';
 import { FurnitureVisualizationData } from './FurnitureVisualizationData';
 
 export class FurnitureVisualization extends RoomObjectSpriteVisualization
@@ -586,5 +579,10 @@ export class FurnitureVisualization extends RoomObjectSpriteVisualization
     protected get direction(): number
     {
         return this._direction;
+    }
+
+    protected get data(): FurnitureVisualizationData
+    {
+        return this._data;
     }
 }

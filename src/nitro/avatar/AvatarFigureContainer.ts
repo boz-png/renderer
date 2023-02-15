@@ -1,4 +1,4 @@
-import { IAvatarFigureContainer } from './IAvatarFigureContainer';
+import { IAvatarFigureContainer } from '../../api';
 
 export class AvatarFigureContainer implements IAvatarFigureContainer
 {

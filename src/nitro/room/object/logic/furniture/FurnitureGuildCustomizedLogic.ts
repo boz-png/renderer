@@ -1,12 +1,8 @@
-import { IRoomGeometry, RoomSpriteMouseEvent } from '../../../../../room';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { Nitro } from '../../../../Nitro';
-import { MouseEventType } from '../../../../ui';
-import { RoomObjectBadgeAssetEvent, RoomObjectWidgetRequestEvent } from '../../../events';
-import { ObjectGroupBadgeUpdateMessage, ObjectSelectedMessage } from '../../../messages';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { StringDataType } from '../../data/type/StringDataType';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IRoomGeometry, MouseEventType, RoomObjectVariable, StringDataType } from '../../../../../api';
+import { RoomObjectBadgeAssetEvent, RoomObjectWidgetRequestEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { GetTickerTime } from '../../../../../pixi-proxy';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage, ObjectGroupBadgeUpdateMessage, ObjectSelectedMessage } from '../../../messages';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureGuildCustomizedLogic extends FurnitureMultiStateLogic
@@ -49,7 +45,7 @@ export class FurnitureGuildCustomizedLogic extends FurnitureMultiStateLogic
             {
                 this.object.model.setValue(RoomObjectVariable.FURNITURE_GUILD_CUSTOMIZED_ASSET_NAME, message.assetName);
 
-                this.update(Nitro.instance.time);
+                this.update(GetTickerTime());
             }
         }
 

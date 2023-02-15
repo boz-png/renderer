@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { DiceValueMessageParser } from '../../../parser/room/furniture/DiceValueMessageParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { DiceValueMessageParser } from '../../../parser';
 
 export class DiceValueMessageEvent extends MessageEvent implements IMessageEvent
 {

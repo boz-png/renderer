@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { ForumData } from './ForumData';
 
 export class GetForumsListMessageParser implements IMessageParser

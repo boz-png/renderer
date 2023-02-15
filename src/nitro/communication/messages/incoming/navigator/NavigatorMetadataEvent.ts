@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { NavigatorMetadataParser } from '../../parser/navigator/NavigatorMetadataParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { NavigatorMetadataParser } from '../../parser';
 
 export class NavigatorMetadataEvent extends MessageEvent implements IMessageEvent
 {

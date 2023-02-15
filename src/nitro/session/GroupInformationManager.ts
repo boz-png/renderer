@@ -1,11 +1,8 @@
-import { IDisposable } from '../../core/common/disposable/IDisposable';
-import { IMessageEvent } from '../../core/communication/messages/IMessageEvent';
-import { RoomReadyMessageEvent } from '../communication';
-import { HabboGroupBadgesMessageEvent } from '../communication/messages/incoming/user/HabboGroupBadgesMessageEvent';
-import { GetHabboGroupBadgesMessageComposer } from '../communication/messages/outgoing/user/GetHabboGroupBadgesMessageComposer';
+import { IDisposable, IGroupInformationManager, IMessageEvent } from '../../api';
+import { GetHabboGroupBadgesMessageComposer, HabboGroupBadgesMessageEvent, RoomReadyMessageEvent } from '../communication';
 import { SessionDataManager } from './SessionDataManager';
 
-export class GroupInformationManager implements IDisposable
+export class GroupInformationManager implements IDisposable, IGroupInformationManager
 {
     private _sessionDataManager: SessionDataManager;
     private _groupBadges: Map<number, string>;
@@ -55,7 +52,7 @@ export class GroupInformationManager implements IDisposable
     {
         const parser = event.getParser();
 
-        for(const [ groupId, badgeId ] of parser.badges.entries()) this._groupBadges.set(groupId, badgeId);
+        for(const [groupId, badgeId] of parser.badges.entries()) this._groupBadges.set(groupId, badgeId);
     }
 
     public getGroupBadge(groupId: number): string

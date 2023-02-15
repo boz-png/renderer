@@ -1,4 +1,4 @@
-import { IRoomObjectModel } from './IRoomObjectModel';
+import { IRoomObjectModel } from '../../api';
 
 export class RoomObjectModel implements IRoomObjectModel
 {

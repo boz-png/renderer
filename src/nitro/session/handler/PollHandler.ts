@@ -1,9 +1,6 @@
-import { IConnection } from '../../../core/communication/connections/IConnection';
-import { PollContentsEvent } from '../../communication/messages/incoming/poll/PollContentsEvent';
-import { PollErrorEvent } from '../../communication/messages/incoming/poll/PollErrorEvent';
-import { PollOfferEvent } from '../../communication/messages/incoming/poll/PollOfferEvent';
-import { RoomSessionPollEvent } from '../events/RoomSessionPollEvent';
-import { IRoomHandlerListener } from '../IRoomHandlerListener';
+import { IConnection, IRoomHandlerListener } from '../../../api';
+import { RoomSessionPollEvent } from '../../../events';
+import { PollContentsEvent, PollErrorEvent, PollOfferEvent } from '../../communication';
 import { BaseHandler } from './BaseHandler';
 
 export class PollHandler extends BaseHandler

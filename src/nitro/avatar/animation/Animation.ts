@@ -1,10 +1,9 @@
-﻿import { IAssetAnimation, IAssetAnimationFrame } from '../../../core/asset/interfaces';
+﻿import { IAnimation, IAssetAnimation, IAssetAnimationFrame } from '../../../api';
 import { AvatarStructure } from '../AvatarStructure';
 import { AddDataContainer } from './AddDataContainer';
 import { AvatarAnimationLayerData } from './AvatarAnimationLayerData';
 import { AvatarDataContainer } from './AvatarDataContainer';
 import { DirectionDataContainer } from './DirectionDataContainer';
-import { IAnimation } from './IAnimation';
 import { SpriteDataContainer } from './SpriteDataContainer';
 
 export class Animation implements IAnimation
@@ -195,7 +194,7 @@ export class Animation implements IAnimation
         return layers;
     }
 
-    public getAnimatedBodyPartIds(k: number, _arg_2: string=null): string[]
+    public getAnimatedBodyPartIds(k: number, _arg_2: string = null): string[]
     {
         const _local_3: string[] = [];
 

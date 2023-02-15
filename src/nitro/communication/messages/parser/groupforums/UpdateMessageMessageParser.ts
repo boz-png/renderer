@@ -1,4 +1,4 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
 import { MessageData } from './MessageData';
 
 export class UpdateMessageMessageParser implements IMessageParser

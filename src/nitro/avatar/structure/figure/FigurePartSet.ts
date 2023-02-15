@@ -1,7 +1,5 @@
-import { IFigureDataSet } from '../../interfaces';
+import { IFigureDataSet, IFigurePart, IFigurePartSet } from '../../../../api';
 import { FigurePart } from './FigurePart';
-import { IFigurePart } from './IFigurePart';
-import { IFigurePartSet } from './IFigurePartSet';
 
 export class FigurePartSet implements IFigurePartSet
 {

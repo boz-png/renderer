@@ -1,4 +1,4 @@
-import { Vector3d } from '../../../../../room';
+import { Vector3d } from '../../../../../api';
 
 export class FurniturePlanetSystemVisualizationPlanetObject
 {
@@ -27,7 +27,7 @@ export class FurniturePlanetSystemVisualizationPlanetObject
         this._children = [];
     }
 
-    public dispose():void
+    public dispose(): void
     {
         while(this._children.length > 0)
         {
@@ -37,7 +37,7 @@ export class FurniturePlanetSystemVisualizationPlanetObject
         }
     }
 
-    public update(offsets: Vector3d[], rootPosition: Vector3d, scale: number):void
+    public update(offsets: Vector3d[], rootPosition: Vector3d, scale: number): void
     {
         this._position = (this._position + (this._arcSpeed / FurniturePlanetSystemVisualizationPlanetObject.SYSTEM_TEMPO));
 
@@ -60,7 +60,7 @@ export class FurniturePlanetSystemVisualizationPlanetObject
         return this._positionVector;
     }
 
-    public addChild(planetObject: FurniturePlanetSystemVisualizationPlanetObject):void
+    public addChild(planetObject: FurniturePlanetSystemVisualizationPlanetObject): void
     {
         if(this._children.indexOf(planetObject) >= 0) return;
 

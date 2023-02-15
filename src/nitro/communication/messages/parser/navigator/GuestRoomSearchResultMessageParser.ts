@@ -1,10 +1,9 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { GuestRoomSearchResultData } from './utils/GuestRoomSearchResultData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { GuestRoomSearchResultData } from './utils';
 
 export class GuestRoomSearchResultMessageParser implements IMessageParser
 {
-    _data:GuestRoomSearchResultData;
+    _data: GuestRoomSearchResultData;
 
     public flush(): boolean
     {
@@ -21,7 +20,7 @@ export class GuestRoomSearchResultMessageParser implements IMessageParser
         return true;
     }
 
-    public get data():GuestRoomSearchResultData
+    public get data(): GuestRoomSearchResultData
     {
         return this._data;
     }

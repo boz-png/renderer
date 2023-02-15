@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { GuildForumThreadsParser } from '../../parser/groupforums/GuildForumThreadsParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { GuildForumThreadsParser } from '../../parser';
 
 export class GuildForumThreadsEvent extends MessageEvent implements IMessageEvent
 {

@@ -1,10 +1,9 @@
-import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
-import { IMessageParser } from '../../../../../core/communication/messages/IMessageParser';
-import { CategoriesWithVisitorCountData } from './utils/CategoriesWithVisitorCountData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { CategoriesWithVisitorCountData } from './utils';
 
 export class CategoriesWithVisitorCountParser implements IMessageParser
 {
-    private _data:CategoriesWithVisitorCountData;
+    private _data: CategoriesWithVisitorCountData;
 
     public flush(): boolean
     {
@@ -20,7 +19,7 @@ export class CategoriesWithVisitorCountParser implements IMessageParser
         return true;
     }
 
-    public get data():CategoriesWithVisitorCountData
+    public get data(): CategoriesWithVisitorCountData
     {
         return this._data;
     }

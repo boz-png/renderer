@@ -1,14 +1,7 @@
 ﻿import { Point, Rectangle } from '@pixi/math';
-import { RoomObjectSpriteData } from '../../../room/data/RoomObjectSpriteData';
-import { IPlaneDrawingData } from '../../../room/object/visualization/IPlaneDrawingData';
-import { IPlaneVisualization } from '../../../room/object/visualization/IPlaneVisualization';
-import { IRoomObjectSpriteVisualization } from '../../../room/object/visualization/IRoomObjectSpriteVisualization';
-import { IRoomPlane } from '../../../room/object/visualization/IRoomPlane';
-import { IRoomRenderingCanvas } from '../../../room/renderer/IRoomRenderingCanvas';
-import { Vector3d } from '../../../room/utils/Vector3d';
-import { Nitro } from '../../Nitro';
-import { RoomObjectCategory } from '../object/RoomObjectCategory';
-import { PlaneDrawingData } from '../object/visualization/room/PlaneDrawingData';
+import { IPlaneDrawingData, IPlaneVisualization, IRoomObjectSpriteVisualization, IRoomPlane, IRoomRenderingCanvas, RoomObjectCategory, RoomObjectSpriteData, Vector3d } from '../../../api';
+import { PixiApplicationProxy } from '../../../pixi-proxy';
+import { PlaneDrawingData } from '../object';
 import { RoomEngine } from '../RoomEngine';
 
 export class SpriteDataCollector
@@ -68,7 +61,7 @@ export class SpriteDataCollector
         return -1;
     }
 
-    private static isSpriteInViewPort(k:RoomObjectSpriteData, _arg_2: Rectangle, _arg_3: IRoomRenderingCanvas): boolean
+    private static isSpriteInViewPort(k: RoomObjectSpriteData, _arg_2: Rectangle, _arg_3: IRoomRenderingCanvas): boolean
     {
         return true;
         // var _local_4 = new Rectangle((k.x + _arg_3.screenOffsetX), (k.y + _arg_3.screenOffsetY), k.width, k.height);
@@ -133,7 +126,7 @@ export class SpriteDataCollector
     }
 
 
-    public getFurniData(k: Rectangle, _arg_2:IRoomRenderingCanvas, _arg_3:RoomEngine, _arg_4: number): string
+    public getFurniData(k: Rectangle, _arg_2: IRoomRenderingCanvas, _arg_3: RoomEngine, _arg_4: number): string
     {
         const _local_5: Object[] = [];
         let _local_6 = _arg_2.getSortableSpriteList();
@@ -385,9 +378,9 @@ export class SpriteDataCollector
         return _local_8;
     }
 
-    public getRoomPlanes(k: Rectangle, _arg_2: IRoomRenderingCanvas, _arg_3: RoomEngine, _arg_4: number): PlaneDrawingData[]
+    public getRoomPlanes(k: Rectangle, _arg_2: IRoomRenderingCanvas, _arg_3: RoomEngine, _arg_4: number): IPlaneDrawingData[]
     {
-        const _local_5: PlaneDrawingData[] = [];
+        const _local_5: IPlaneDrawingData[] = [];
 
         const roomObject = _arg_3.getRoomObject(_arg_3.activeRoomId, RoomEngine.ROOM_OBJECT_ID, RoomObjectCategory.ROOM);
         const visualization = (roomObject.visualization as unknown as IPlaneVisualization);
@@ -396,7 +389,7 @@ export class SpriteDataCollector
         {
             const _local_8 = _arg_2.geometry;
             const _local_9 = this.sortRoomPlanes(visualization.planes, _arg_2, _arg_3);
-            const _local_10 = Nitro.instance.stage;
+            const _local_10 = PixiApplicationProxy.instance.stage;
 
             for(const _local_11 of _local_9)
             {

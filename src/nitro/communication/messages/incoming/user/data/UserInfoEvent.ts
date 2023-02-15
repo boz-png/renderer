@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../../core/communication/messages/MessageEvent';
-import { UserInfoParser } from '../../../parser/user/data/UserInfoParser';
+import { IMessageEvent } from '../../../../../../api';
+import { MessageEvent } from '../../../../../../events';
+import { UserInfoParser } from '../../../parser';
 
 export class UserInfoEvent extends MessageEvent implements IMessageEvent
 {

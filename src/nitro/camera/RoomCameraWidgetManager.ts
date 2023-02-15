@@ -1,12 +1,9 @@
 import { Texture } from '@pixi/core';
 import { ColorMatrix, ColorMatrixFilter } from '@pixi/filter-color-matrix';
-import { EventDispatcher, IEventDispatcher, NitroContainer, NitroSprite } from '../../core';
-import { TextureUtils } from '../../room';
-import { Nitro } from '../Nitro';
-import { RoomCameraWidgetManagerEvent } from './events/RoomCameraWidgetManagerEvent';
-import { IRoomCameraWidgetEffect } from './IRoomCameraWidgetEffect';
-import { IRoomCameraWidgetManager } from './IRoomCameraWidgetManager';
-import { IRoomCameraWidgetSelectedEffect } from './IRoomCameraWidgetSelectedEffect';
+import { IEventDispatcher, IRoomCameraWidgetEffect, IRoomCameraWidgetManager, IRoomCameraWidgetSelectedEffect, NitroConfiguration } from '../../api';
+import { EventDispatcher } from '../../core';
+import { RoomCameraWidgetManagerEvent } from '../../events';
+import { NitroContainer, NitroSprite, TextureUtils } from '../../pixi-proxy';
 import { RoomCameraWidgetEffect } from './RoomCameraWidgetEffect';
 
 export class RoomCameraWidgetManager implements IRoomCameraWidgetManager
@@ -28,8 +25,8 @@ export class RoomCameraWidgetManager implements IRoomCameraWidgetManager
 
         this._isLoaded = true;
 
-        const imagesUrl = Nitro.instance.getConfiguration<string>('image.library.url') + 'Habbo-Stories/';
-        const effects = Nitro.instance.getConfiguration<{ name: string, colorMatrix?: ColorMatrix, minLevel: number, blendMode?: number, enabled: boolean }[]>('camera.available.effects');
+        const imagesUrl = NitroConfiguration.getValue<string>('image.library.url') + 'Habbo-Stories/';
+        const effects = NitroConfiguration.getValue<{ name: string, colorMatrix?: ColorMatrix, minLevel: number, blendMode?: number, enabled: boolean }[]>('camera.available.effects');
 
         for(const effect of effects)
         {
@@ -59,6 +56,8 @@ export class RoomCameraWidgetManager implements IRoomCameraWidgetManager
         const sprite = new NitroSprite(texture);
 
         container.addChild(sprite);
+
+        if(isZoomed) sprite.scale.set(2);
 
         for(const selectedEffect of selectedEffects)
         {

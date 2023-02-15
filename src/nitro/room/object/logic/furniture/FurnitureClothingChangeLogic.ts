@@ -1,15 +1,14 @@
-import { IAssetData } from '../../../../../core';
+import { IAssetData, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { RoomObjectUpdateMessage } from '../../../../../room';
-import { RoomObjectWidgetRequestEvent } from '../../../events';
 import { ObjectDataUpdateMessage } from '../../../messages';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureClothingChangeLogic extends FurnitureLogic
 {
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.CLOTHING_CHANGE ];
+        const types = [RoomObjectWidgetRequestEvent.CLOTHING_CHANGE];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }
@@ -34,7 +33,7 @@ export class FurnitureClothingChangeLogic extends FurnitureLogic
     {
         if(!furnitureData || !furnitureData.length) return;
 
-        const [ boyClothing, girlClothing ] = furnitureData.split(',');
+        const [boyClothing, girlClothing] = furnitureData.split(',');
 
         if(boyClothing && boyClothing.length) this.object.model.setValue<string>(RoomObjectVariable.FURNITURE_CLOTHING_BOY, boyClothing);
         if(girlClothing && girlClothing.length) this.object.model.setValue<string>(RoomObjectVariable.FURNITURE_CLOTHING_GIRL, girlClothing);

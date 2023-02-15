@@ -1,6 +1,4 @@
-import { IAssetLogicPlanetSystem } from '../../../../../core';
-import { Vector3d } from '../../../../../room';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetLogicPlanetSystem, RoomObjectVariable, Vector3d } from '../../../../../api';
 import { FurnitureAnimatedVisualization } from './FurnitureAnimatedVisualization';
 import { FurniturePlanetSystemVisualizationPlanetObject } from './FurniturePlanetSystemVisualizationPlanetObject';
 
@@ -19,7 +17,7 @@ export class FurniturePlanetSystemVisualization extends FurnitureAnimatedVisuali
         this._rootPosition = new Vector3d();
     }
 
-    public dispose():void
+    public dispose(): void
     {
         if(this._planetIndex)
         {
@@ -106,7 +104,7 @@ export class FurniturePlanetSystemVisualization extends FurnitureAnimatedVisuali
         return true;
     }
 
-    private addPlanet(name: string, index: number, parentName: string, radius: number, arcSpeed: number, arcOffset: number, height: number):void
+    private addPlanet(name: string, index: number, parentName: string, radius: number, arcSpeed: number, arcOffset: number, height: number): void
     {
         if(!this._planetIndex) return;
 

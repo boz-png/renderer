@@ -1,5 +1,4 @@
-﻿import { IVector3D } from '../../../room/utils/IVector3D';
-import { Vector3d } from '../../../room/utils/Vector3d';
+﻿import { IVector3D, Vector3d } from '../../../api';
 import { RoomPlaneMaskData } from './RoomPlaneMaskData';
 
 export class RoomPlaneData
@@ -140,18 +139,18 @@ export class RoomPlaneData
         {
             return null;
         }
-        const _local_2:Vector3d = new Vector3d();
+        const _local_2: Vector3d = new Vector3d();
         _local_2.assign((this._secondaryNormals[k] as IVector3D));
         return _local_2;
     }
 
     public addMask(k: number, _arg_2: number, _arg_3: number, _arg_4: number): void
     {
-        const _local_5:RoomPlaneMaskData = new RoomPlaneMaskData(k, _arg_2, _arg_3, _arg_4);
+        const _local_5: RoomPlaneMaskData = new RoomPlaneMaskData(k, _arg_2, _arg_3, _arg_4);
         this._masks.push(_local_5);
     }
 
-    private getMask(k: number):RoomPlaneMaskData
+    private getMask(k: number): RoomPlaneMaskData
     {
         if(((k < 0) || (k >= this.maskCount)))
         {
@@ -162,7 +161,7 @@ export class RoomPlaneData
 
     public getMaskLeftSideLoc(k: number): number
     {
-        const _local_2:RoomPlaneMaskData = this.getMask(k);
+        const _local_2: RoomPlaneMaskData = this.getMask(k);
         if(_local_2 != null)
         {
             return _local_2.leftSideLoc;
@@ -172,7 +171,7 @@ export class RoomPlaneData
 
     public getMaskRightSideLoc(k: number): number
     {
-        const _local_2:RoomPlaneMaskData = this.getMask(k);
+        const _local_2: RoomPlaneMaskData = this.getMask(k);
         if(_local_2 != null)
         {
             return _local_2.rightSideLoc;
@@ -182,7 +181,7 @@ export class RoomPlaneData
 
     public getMaskLeftSideLength(k: number): number
     {
-        const _local_2:RoomPlaneMaskData = this.getMask(k);
+        const _local_2: RoomPlaneMaskData = this.getMask(k);
         if(_local_2 != null)
         {
             return _local_2.leftSideLength;
@@ -192,7 +191,7 @@ export class RoomPlaneData
 
     public getMaskRightSideLength(k: number): number
     {
-        const _local_2:RoomPlaneMaskData = this.getMask(k);
+        const _local_2: RoomPlaneMaskData = this.getMask(k);
         if(_local_2 != null)
         {
             return _local_2.rightSideLength;

@@ -1,14 +1,14 @@
-import { IMessageDataWrapper } from '../../../../../../core/communication/messages/IMessageDataWrapper';
-import { RoomDataParser } from '../../room/data/RoomDataParser';
+import { IMessageDataWrapper } from '../../../../../../api';
+import { RoomDataParser } from '../../room';
 import { OfficialRoomEntryData } from './OfficialRoomEntryData';
 
 export class GuestRoomSearchResultData
 {
-    private _searchType:number;
-    private _searchParam:string;
-    private _rooms:RoomDataParser[];
-    private _ad:OfficialRoomEntryData;
-    private _disposed:boolean;
+    private _searchType: number;
+    private _searchParam: string;
+    private _rooms: RoomDataParser[];
+    private _ad: OfficialRoomEntryData;
+    private _disposed: boolean;
 
     constructor(k: IMessageDataWrapper)
     {
@@ -27,7 +27,7 @@ export class GuestRoomSearchResultData
         }
     }
 
-    public dispose():void
+    public dispose(): void
     {
         if(this._disposed)
         {
@@ -49,27 +49,27 @@ export class GuestRoomSearchResultData
         this._rooms = null;
     }
 
-    public get disposed():boolean
+    public get disposed(): boolean
     {
         return this._disposed;
     }
 
-    public get searchType():number
+    public get searchType(): number
     {
         return this._searchType;
     }
 
-    public get _Str_25185():string
+    public get searchParam(): string
     {
         return this._searchParam;
     }
 
-    public get rooms():RoomDataParser[]
+    public get rooms(): RoomDataParser[]
     {
         return this._rooms;
     }
 
-    public get ad():OfficialRoomEntryData
+    public get ad(): OfficialRoomEntryData
     {
         return this._ad;
     }

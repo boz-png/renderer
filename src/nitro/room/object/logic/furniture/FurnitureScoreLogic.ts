@@ -1,6 +1,6 @@
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { Nitro } from '../../../../Nitro';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
+import { GetTickerTime } from '../../../../../pixi-proxy';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureScoreLogic extends FurnitureLogic
@@ -43,7 +43,7 @@ export class FurnitureScoreLogic extends FurnitureLogic
             if((difference * FurnitureScoreLogic.UPDATE_INTERVAL) > FurnitureScoreLogic.MAX_UPDATE_TIME) this._scoreIncreaser = (FurnitureScoreLogic.MAX_UPDATE_TIME / difference);
             else this._scoreIncreaser = FurnitureScoreLogic.UPDATE_INTERVAL;
 
-            this._scoreTimer = Nitro.instance.time;
+            this._scoreTimer = GetTickerTime();
         }
     }
 

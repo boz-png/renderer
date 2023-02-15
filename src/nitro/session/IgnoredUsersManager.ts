@@ -1,14 +1,8 @@
-﻿import { IDisposable } from '../../core/common/disposable/IDisposable';
-import { IMessageEvent } from '../../core/communication/messages/IMessageEvent';
-import { IgnoredUsersEvent } from '../communication/messages/incoming/user/IgnoredUsersEvent';
-import { IgnoreResultEvent } from '../communication/messages/incoming/user/IgnoreResultEvent';
-import { GetIgnoredUsersComposer } from '../communication/messages/outgoing/user/data/GetIgnoredUsersComposer';
-import { IgnoreUserComposer } from '../communication/messages/outgoing/user/data/IgnoreUserComposer';
-import { IgnoreUserIdComposer } from '../communication/messages/outgoing/user/data/IgnoreUserIdComposer';
-import { UnignoreUserComposer } from '../communication/messages/outgoing/user/data/UnignoreUserComposer';
+﻿import { IDisposable, IIgnoredUsersManager, IMessageEvent } from '../../api';
+import { GetIgnoredUsersComposer, IgnoredUsersEvent, IgnoreResultEvent, IgnoreUserComposer, IgnoreUserIdComposer, UnignoreUserComposer } from '../communication';
 import { SessionDataManager } from './SessionDataManager';
 
-export class IgnoredUsersManager implements IDisposable
+export class IgnoredUsersManager implements IDisposable, IIgnoredUsersManager
 {
     private _sessionDataManager: SessionDataManager;
     private _ignoredUsers: string[];

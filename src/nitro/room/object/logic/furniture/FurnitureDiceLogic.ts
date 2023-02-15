@@ -1,8 +1,5 @@
-import { RoomObjectEvent } from '../../../../../room/events/RoomObjectEvent';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectFurnitureActionEvent } from '../../../events/RoomObjectFurnitureActionEvent';
+import { IRoomGeometry, MouseEventType } from '../../../../../api';
+import { RoomObjectEvent, RoomObjectFurnitureActionEvent, RoomSpriteMouseEvent } from '../../../../../events';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurnitureDiceLogic extends FurnitureLogic
@@ -20,7 +17,7 @@ export class FurnitureDiceLogic extends FurnitureLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectFurnitureActionEvent.DICE_ACTIVATE, RoomObjectFurnitureActionEvent.DICE_OFF ];
+        const types = [RoomObjectFurnitureActionEvent.DICE_ACTIVATE, RoomObjectFurnitureActionEvent.DICE_OFF];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

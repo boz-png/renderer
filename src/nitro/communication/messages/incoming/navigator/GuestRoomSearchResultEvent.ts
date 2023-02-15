@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { GuestRoomSearchResultMessageParser } from '../../parser/navigator/GuestRoomSearchResultMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { GuestRoomSearchResultMessageParser } from '../../parser';
 
 export class GuestRoomSearchResultEvent extends MessageEvent implements IMessageEvent
 {

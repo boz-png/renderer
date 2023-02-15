@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { QuestMessageData } from '../../incoming/quest/QuestMessageData';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { QuestMessageData } from './QuestMessageData';
 
 export class QuestsMessageParser implements IMessageParser
 {
@@ -13,7 +13,7 @@ export class QuestsMessageParser implements IMessageParser
         return true;
     }
 
-    public parse(wrapper:IMessageDataWrapper): boolean
+    public parse(wrapper: IMessageDataWrapper): boolean
     {
         if(!wrapper) return false;
 

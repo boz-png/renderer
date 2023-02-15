@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { QuestsMessageParser } from '../../parser/quest/QuestsMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { QuestsMessageParser } from '../../parser';
 
 export class QuestsMessageEvent extends MessageEvent implements IMessageEvent
 {

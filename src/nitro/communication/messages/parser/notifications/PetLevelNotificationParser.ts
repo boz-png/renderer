@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { PetFigureDataParser } from '../inventory/pets/PetFigureDataParser';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { PetFigureDataParser } from '../inventory';
 
 export class PetLevelNotificationParser implements IMessageParser
 {

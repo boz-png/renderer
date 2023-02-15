@@ -1,10 +1,7 @@
-import { RoomObjectEvent } from '../../../../../room/events/RoomObjectEvent';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { RoomObjectBadgeAssetEvent } from '../../../events/RoomObjectBadgeAssetEvent';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { ObjectGroupBadgeUpdateMessage } from '../../../messages/ObjectGroupBadgeUpdateMessage';
-import { ObjectSelectedMessage } from '../../../messages/ObjectSelectedMessage';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable } from '../../../../../api';
+import { RoomObjectBadgeAssetEvent, RoomObjectEvent, RoomObjectWidgetRequestEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectGroupBadgeUpdateMessage, ObjectSelectedMessage } from '../../../messages';
 import { FurnitureBadgeDisplayLogic } from './FurnitureBadgeDisplayLogic';
 
 export class FurnitureAchievementResolutionLogic extends FurnitureBadgeDisplayLogic
@@ -18,7 +15,7 @@ export class FurnitureAchievementResolutionLogic extends FurnitureBadgeDisplayLo
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.ACHIEVEMENT_RESOLUTION_OPEN, RoomObjectWidgetRequestEvent.ACHIEVEMENT_RESOLUTION_ENGRAVING, RoomObjectWidgetRequestEvent.ACHIEVEMENT_RESOLUTION_FAILED, RoomObjectBadgeAssetEvent.LOAD_BADGE ];
+        const types = [RoomObjectWidgetRequestEvent.ACHIEVEMENT_RESOLUTION_OPEN, RoomObjectWidgetRequestEvent.ACHIEVEMENT_RESOLUTION_ENGRAVING, RoomObjectWidgetRequestEvent.ACHIEVEMENT_RESOLUTION_FAILED, RoomObjectBadgeAssetEvent.LOAD_BADGE];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { ActivityPointNotificationParser } from '../../parser/notifications/ActivityPointNotificationParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { ActivityPointNotificationParser } from '../../parser';
 
 export class ActivityPointNotificationMessageEvent extends MessageEvent implements IMessageEvent
 {

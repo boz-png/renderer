@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../../core';
-import { FurnitureListItemParser } from './utils/FurnitureListItemParser';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../../api';
+import { FurnitureListItemParser } from './FurnitureListItemParser';
 
 export class FurnitureListParser implements IMessageParser
 {

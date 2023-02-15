@@ -1,9 +1,8 @@
-﻿import { IVector3D } from './IVector3D';
-import { Vector3d } from './Vector3d';
+﻿import { IVector3D, Vector3d } from '../../api';
 
 export class ColorConverter
 {
-    private static HEX_DIGITS = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' ];
+    private static HEX_DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 
     public static hex2rgb(hex: number, out: Array<number> | Float32Array = []): Array<number> | Float32Array
     {
@@ -52,7 +51,7 @@ export class ColorConverter
         const b = color & 0xFF;
         const g = (color & 0xFF00) >>> 8;
         const r = (color & 0xFF0000) >>> 16;
-        const a = ( (color & 0xFF000000) >>> 24 ) / 255;
+        const a = ((color & 0xFF000000) >>> 24) / 255;
 
         return 'rgba(' + [r, g, b, 1].join(',') + ')';
     }
@@ -300,7 +299,7 @@ export class ColorConverter
         return new Vector3d((((_local_2 * 0.4124) + (_local_3 * 0.3576)) + (_local_4 * 0.1805)), (((_local_2 * 0.2126) + (_local_3 * 0.7152)) + (_local_4 * 0.0722)), (((_local_2 * 0.0193) + (_local_3 * 0.1192)) + (_local_4 * 0.9505)));
     }
 
-    public static xyz2CieLab(k:IVector3D):IVector3D
+    public static xyz2CieLab(k: IVector3D): IVector3D
     {
         let _local_2: number = (k.x / 95.047);
         let _local_3: number = (k.y / 100);
@@ -332,8 +331,23 @@ export class ColorConverter
         return new Vector3d(((116 * _local_3) - 16), (500 * (_local_2 - _local_3)), (200 * (_local_3 - _local_4)));
     }
 
-    public static rgb2CieLab(k: number):IVector3D
+    public static rgb2CieLab(k: number): IVector3D
     {
         return ColorConverter.xyz2CieLab(ColorConverter.rgb2xyz(k));
+    }
+
+    public static colorize(colorA: number, colorB: number): number
+    {
+        if(colorB === 0xFFFFFFFF) return colorA;
+
+        let r = ((colorB >> 16) & 0xFF);
+        let g = ((colorB >> 8) & 0xFF);
+        let b = (colorB & 0xFF);
+
+        r = ((((colorA >> 16) & 0xFF) * r) / 0xFF);
+        g = ((((colorA >> 8) & 0xFF) * g) / 0xFF);
+        b = (((colorA & 0xFF) * b) / 0xFF);
+
+        return ((colorA && 0xFF000000) | (r << 16) | (g << 8) | b);
     }
 }

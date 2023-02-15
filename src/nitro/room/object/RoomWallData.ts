@@ -1,6 +1,5 @@
 ﻿import { Point } from '@pixi/math';
-import { IVector3D } from '../../../room/utils/IVector3D';
-import { Vector3d } from '../../../room/utils/Vector3d';
+import { IVector3D, Vector3d } from '../../../api';
 
 export class RoomWallData
 {
@@ -160,7 +159,7 @@ export class RoomWallData
         let k: number;
         let _local_2: Point;
         let _local_3: Point;
-        let _local_4:IVector3D;
+        let _local_4: IVector3D;
         let _local_5: number;
         if(this._endPoints.length != this.count)
         {

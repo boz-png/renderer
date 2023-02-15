@@ -2,16 +2,15 @@ import { RenderTexture, Texture } from '@pixi/core';
 import { AlphaFilter } from '@pixi/filter-alpha';
 import { Graphics } from '@pixi/graphics';
 import { Matrix } from '@pixi/math';
-import { AdvancedMap, IParticleSystem, NitroPoint, NitroSprite } from '../../../../../core';
-import { IGraphicAsset, IRoomObjectSprite } from '../../../../../room';
+import { AdvancedMap, IAdvancedMap, IGraphicAsset, IParticleSystem, IRoomObjectSprite } from '../../../../../api';
+import { NitroPoint, NitroSprite, PixiApplicationProxy } from '../../../../../pixi-proxy';
 import { Vector3D } from '../../../../avatar';
-import { Nitro } from '../../../../Nitro';
 import { FurnitureAnimatedVisualization } from './FurnitureAnimatedVisualization';
 import { FurnitureParticleSystemEmitter } from './FurnitureParticleSystemEmitter';
 
 export class FurnitureParticleSystem
 {
-    private _emitters: AdvancedMap<number, FurnitureParticleSystemEmitter>;
+    private _emitters: IAdvancedMap<number, FurnitureParticleSystemEmitter>;
     private _visualization: FurnitureAnimatedVisualization;
     private _size: number;
     private _canvasId: number = -1;
@@ -188,9 +187,9 @@ export class FurnitureParticleSystem
 
                         this._particleColorTransform.alpha = particle.alphaMultiplier;
 
-                        sprite.filters = [ this._particleColorTransform ];
+                        sprite.filters = [this._particleColorTransform];
 
-                        Nitro.instance.renderer.render(sprite, {
+                        PixiApplicationProxy.instance.renderer.render(sprite, {
                             renderTexture: this._canvasTexture,
                             transform: this._translationMatrix,
                             clear: false
@@ -204,7 +203,7 @@ export class FurnitureParticleSystem
                         sprite.x = point.x;
                         sprite.y = point.y;
 
-                        Nitro.instance.renderer.render(sprite, {
+                        PixiApplicationProxy.instance.renderer.render(sprite, {
                             renderTexture: this._canvasTexture,
                             clear: false
                         });
@@ -220,7 +219,7 @@ export class FurnitureParticleSystem
                     sprite.width = 2;
                     sprite.height = 2;
 
-                    Nitro.instance.renderer.render(sprite, {
+                    PixiApplicationProxy.instance.renderer.render(sprite, {
                         renderTexture: this._canvasTexture,
                         clear: false
                     });
@@ -291,7 +290,7 @@ export class FurnitureParticleSystem
         }
     }
 
-    public _Str_17988(particleSystem: FurnitureParticleSystem): void
+    public copyStateFrom(particleSystem: FurnitureParticleSystem): void
     {
         let emitterId = 0;
 
@@ -325,7 +324,7 @@ export class FurnitureParticleSystem
         }
         else
         {
-            Nitro.instance.renderer.render(this._emptySprite, {
+            PixiApplicationProxy.instance.renderer.render(this._emptySprite, {
                 renderTexture: this._canvasTexture,
                 clear: true
             });

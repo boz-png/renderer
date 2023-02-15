@@ -1,10 +1,7 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { ContextMenuEnum } from '../../../../ui';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { StringDataType } from '../../data/type/StringDataType';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { ContextMenuEnum, IAssetData, RoomObjectVariable, StringDataType } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
 export class FurnitureFriendFurniLogic extends FurnitureMultiStateLogic
@@ -43,7 +40,7 @@ export class FurnitureFriendFurniLogic extends FurnitureMultiStateLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectWidgetRequestEvent.FRIEND_FURNITURE_ENGRAVING ];
+        const types = [RoomObjectWidgetRequestEvent.FRIEND_FURNITURE_ENGRAVING];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

@@ -1,4 +1,4 @@
-import { IAssetVisualAnimation, IAssetVisualAnimationLayer, IAssetVisualAnimationSequenceFrame } from '../../../../../core/asset/interfaces';
+import { IAssetVisualAnimation, IAssetVisualAnimationLayer, IAssetVisualAnimationSequenceFrame } from '../../../../../api';
 import { AnimationFrame } from './AnimationFrame';
 import { AnimationLayerData } from './AnimationLayerData';
 import { DirectionalOffsetData } from './DirectionalOffsetData';

@@ -1,5 +1,5 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { AchievementLevelUpData } from '../../incoming';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { AchievementLevelUpData } from './AchievementLevelUpData';
 
 export class AchievementNotificationMessageParser implements IMessageParser
 {

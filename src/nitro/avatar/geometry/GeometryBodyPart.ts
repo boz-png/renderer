@@ -1,4 +1,4 @@
-﻿import { IAvatarImage } from '../IAvatarImage';
+﻿import { IAvatarImage } from '../../../api';
 import { GeometryItem } from './GeometryItem';
 import { Matrix4x4 } from './Matrix4x4';
 import { Node3D } from './Node3D';
@@ -123,7 +123,7 @@ export class GeometryBodyPart extends Node3D
 
     public getParts(k: Matrix4x4, _arg_2: Vector3D, _arg_3: any[], _arg_4: IAvatarImage): string[]
     {
-        const parts: [ number, GeometryItem ][] = [];
+        const parts: [number, GeometryItem][] = [];
 
         for(const part of this._parts.values())
         {
@@ -131,7 +131,7 @@ export class GeometryBodyPart extends Node3D
 
             part.applyTransform(k);
 
-            parts.push([ part.getDistance(_arg_2), part ]);
+            parts.push([part.getDistance(_arg_2), part]);
         }
 
         const existingDynamic = this._dynamicParts.get(_arg_4);
@@ -146,7 +146,7 @@ export class GeometryBodyPart extends Node3D
 
                 part.applyTransform(k);
 
-                parts.push([ part.getDistance(_arg_2), part ]);
+                parts.push([part.getDistance(_arg_2), part]);
             }
         }
 

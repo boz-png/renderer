@@ -1,10 +1,8 @@
-﻿import { NitroManager } from '../../core/common/NitroManager';
-import { INitroCommunicationManager } from '../communication/INitroCommunicationManager';
-import { BadgePointLimitsEvent } from '../communication/messages/incoming/inventory/badges/BadgePointLimitsEvent';
-import { Nitro } from '../Nitro';
+﻿import { INitroCommunicationManager, INitroLocalizationManager, NitroConfiguration } from '../../api';
+import { NitroManager } from '../../core';
+import { NitroLocalizationEvent } from '../../events';
+import { BadgePointLimitsEvent } from '../communication';
 import { BadgeBaseAndLevel } from './BadgeBaseAndLevel';
-import { INitroLocalizationManager } from './INitroLocalizationManager';
-import { NitroLocalizationEvent } from './NitroLocalizationEvent';
 
 export class NitroLocalizationManager extends NitroManager implements INitroLocalizationManager
 {
@@ -14,8 +12,6 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
     private _badgePointLimits: Map<string, number>;
     private _romanNumerals: string[];
     private _pendingUrls: string[];
-    private _allowedLangs: string[];
-    private _externalTextsLang: string;
 
     constructor(communication: INitroCommunicationManager)
     {
@@ -33,19 +29,18 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
     {
         this._communication.registerMessageEvent(new BadgePointLimitsEvent(this.onBadgePointLimitsEvent.bind(this)));
 
-        let urls: string[] = Nitro.instance.getConfiguration<string[]>('external.texts.url');
+        let urls: string[] = NitroConfiguration.getValue<string[]>('external.texts.url');
 
         if(!Array.isArray(urls))
         {
-            urls = [ Nitro.instance.getConfiguration<string>('external.texts.url') ];
+            urls = [NitroConfiguration.getValue<string>('external.texts.url')];
         }
 
-        for(let i = 0; i < urls.length; i++) urls[i] = Nitro.instance.core.configuration.interpolate(urls[i]);
+        for(let i = 0; i < urls.length; i++) urls[i] = NitroConfiguration.interpolate(urls[i]);
 
         this._pendingUrls = urls;
-        
+
         this.loadNextLocalization();
-        
     }
 
     private loadNextLocalization(): void
@@ -146,7 +141,7 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
 
         if(!value)
         {
-            value = (Nitro.instance.core.configuration.definitions.get(key) as any);
+            value = (NitroConfiguration.definitions.get(key) as any);
 
             if(value) return value;
         }
@@ -157,7 +152,7 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
 
             if(parameters)
             {
-                for(const [ parameter, replacement ] of parameters)
+                for(const [parameter, replacement] of parameters)
                 {
                     value = value.replace('%' + parameter + '%', replacement);
                 }
@@ -305,9 +300,9 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
     public getBadgeName(key: string): string
     {
         const badge = new BadgeBaseAndLevel(key);
-        const keys = [ 'badge_name_' + key, 'badge_name_' + badge.base ];
+        const keys = ['badge_name_' + key, 'badge_name_' + badge.base];
 
-        let name = this._Str_2103(this.getExistingKey(keys));
+        let name = this.fixBadLocalization(this.getExistingKey(keys));
 
         name = name.replace('%roman%', this.getRomanNumeral(badge.level));
 
@@ -317,9 +312,9 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
     public getBadgeDesc(key: string): string
     {
         const badge = new BadgeBaseAndLevel(key);
-        const keys = [ 'badge_desc_' + key, 'badge_desc_' + badge.base ];
+        const keys = ['badge_desc_' + key, 'badge_desc_' + badge.base];
 
-        let desc = this._Str_2103(this.getExistingKey(keys));
+        let desc = this.fixBadLocalization(this.getExistingKey(keys));
 
         const limit = this.getBadgePointLimit(key);
 
@@ -341,7 +336,7 @@ export class NitroLocalizationManager extends NitroManager implements INitroLoca
         return '';
     }
 
-    private _Str_2103(k: string): string
+    private fixBadLocalization(k: string): string
     {
         return k.replace('${', '$')
             .replace('{', '$')

@@ -1,4 +1,4 @@
-﻿import { IMessageDataWrapper } from '../../../../../core/communication/messages/IMessageDataWrapper';
+﻿import { IMessageDataWrapper } from '../../../../../api';
 import { ForumData } from './ForumData';
 
 export class ExtendedForumData extends ForumData
@@ -15,9 +15,9 @@ export class ExtendedForumData extends ForumData
     private _canChangeSettings: boolean;
     private _isStaff: boolean;
 
-    public static parse(wrapper: IMessageDataWrapper):ExtendedForumData
+    public static parse(wrapper: IMessageDataWrapper): ExtendedForumData
     {
-        const extendedForumData:ExtendedForumData = new ExtendedForumData();
+        const extendedForumData: ExtendedForumData = new ExtendedForumData();
 
         ForumData.fillFromMessage(extendedForumData, wrapper);
 
@@ -61,7 +61,7 @@ export class ExtendedForumData extends ForumData
         return (this._readPermissionError.length === 0);
     }
 
-    public get _Str_21331(): boolean
+    public get canReport(): boolean
     {
         return true;
     }

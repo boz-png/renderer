@@ -1,29 +1,8 @@
 import { BLEND_MODES } from '@pixi/constants';
 import { Resource, Texture } from '@pixi/core';
-import { AdvancedMap } from '../../../../../core/utils/AdvancedMap';
-import { AlphaTolerance } from '../../../../../room/object/enum/AlphaTolerance';
-import { RoomObjectSpriteType } from '../../../../../room/object/enum/RoomObjectSpriteType';
-import { IRoomObject } from '../../../../../room/object/IRoomObject';
-import { IRoomObjectModel } from '../../../../../room/object/IRoomObjectModel';
-import { IObjectVisualizationData } from '../../../../../room/object/visualization/IRoomObjectVisualizationData';
-import { RoomObjectSpriteVisualization } from '../../../../../room/object/visualization/RoomObjectSpriteVisualization';
-import { IGraphicAsset } from '../../../../../room/object/visualization/utils/IGraphicAsset';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { AvatarAction } from '../../../../avatar/enum/AvatarAction';
-import { AvatarGuideStatus } from '../../../../avatar/enum/AvatarGuideStatus';
-import { AvatarSetType } from '../../../../avatar/enum/AvatarSetType';
-import { IAvatarEffectListener } from '../../../../avatar/IAvatarEffectListener';
-import { IAvatarImage } from '../../../../avatar/IAvatarImage';
-import { IAvatarImageListener } from '../../../../avatar/IAvatarImageListener';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
-import { ExpressionAdditionFactory } from './additions/ExpressionAdditionFactory';
-import { FloatingIdleZAddition } from './additions/FloatingIdleZAddition';
-import { GameClickTargetAddition } from './additions/GameClickTargetAddition';
-import { GuideStatusBubbleAddition } from './additions/GuideStatusBubbleAddition';
-import { IAvatarAddition } from './additions/IAvatarAddition';
-import { MutedBubbleAddition } from './additions/MutedBubbleAddition';
-import { NumberBubbleAddition } from './additions/NumberBubbleAddition';
-import { TypingBubbleAddition } from './additions/TypingBubbleAddition';
+import { AdvancedMap, AlphaTolerance, AvatarAction, AvatarGuideStatus, AvatarSetType, IAdvancedMap, IAvatarEffectListener, IAvatarImage, IAvatarImageListener, IGraphicAsset, IObjectVisualizationData, IRoomGeometry, IRoomObject, IRoomObjectModel, RoomObjectSpriteType, RoomObjectVariable } from '../../../../../api';
+import { RoomObjectSpriteVisualization } from '../../../../../room';
+import { ExpressionAdditionFactory, FloatingIdleZAddition, GameClickTargetAddition, GuideStatusBubbleAddition, IAvatarAddition, MutedBubbleAddition, NumberBubbleAddition, TypingBubbleAddition } from './additions';
 import { AvatarVisualizationData } from './AvatarVisualizationData';
 
 export class AvatarVisualization extends RoomObjectSpriteVisualization implements IAvatarImageListener, IAvatarEffectListener
@@ -54,8 +33,8 @@ export class AvatarVisualization extends RoomObjectSpriteVisualization implement
     protected _data: AvatarVisualizationData;
 
     private _avatarImage: IAvatarImage;
-    private _cachedAvatars: AdvancedMap<string, IAvatarImage>;
-    private _cachedAvatarEffects: AdvancedMap<string, IAvatarImage>;
+    private _cachedAvatars: IAdvancedMap<string, IAvatarImage>;
+    private _cachedAvatarEffects: IAdvancedMap<string, IAvatarImage>;
     private _shadow: IGraphicAsset;
     private _lastUpdate: number;
     private _disposed: boolean;

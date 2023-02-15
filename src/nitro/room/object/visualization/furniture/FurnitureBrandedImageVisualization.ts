@@ -1,7 +1,6 @@
 import { Resource, Texture } from '@pixi/core';
-import { GraphicAssetGifCollection } from '../../../../../room/object/visualization/utils/GraphicAssetGifCollection';
+import { GetAssetManager, GraphicAssetGifCollection, RoomObjectVariable } from '../../../../../api';
 import { Nitro } from '../../../../Nitro';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
 import { FurnitureVisualization } from './FurnitureVisualization';
 
 export class FurnitureBrandedImageVisualization extends FurnitureVisualization
@@ -147,7 +146,7 @@ export class FurnitureBrandedImageVisualization extends FurnitureVisualization
             }
             else
             {
-                texture = Nitro.instance.core.asset.getTexture(imageUrl);
+                texture = GetAssetManager().getTexture(imageUrl);
             }
 
             if(!texture) return false;
@@ -183,7 +182,7 @@ export class FurnitureBrandedImageVisualization extends FurnitureVisualization
 
         if(!this._imageUrl) return;
 
-        const texture = Nitro.instance.core.asset.getTexture(this._imageUrl);
+        const texture = GetAssetManager().getTexture(this._imageUrl);
 
         if(!texture) return;
 
@@ -252,7 +251,7 @@ export class FurnitureBrandedImageVisualization extends FurnitureVisualization
                 break;
         }
 
-        this.asset.addAsset(`${ this._imageUrl }_${ frame }`, texture, true, x, y, flipH, flipV);
+        this.asset.addAsset(`${this._imageUrl}_${frame}`, texture, true, x, y, flipH, flipV);
     }
 
     protected getSpriteAssetName(scale: number, layerId: number): string
@@ -261,7 +260,7 @@ export class FurnitureBrandedImageVisualization extends FurnitureVisualization
 
         if((tag === FurnitureBrandedImageVisualization.BRANDED_IMAGE) && this._imageUrl)
         {
-            return `${ this._imageUrl }_${ this.getFrameNumber(scale, layerId) }`;
+            return `${this._imageUrl}_${this.getFrameNumber(scale, layerId)}`;
         }
 
         return super.getSpriteAssetName(scale, layerId);

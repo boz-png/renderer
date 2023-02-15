@@ -1,10 +1,7 @@
-import { NitroLogger } from '../../../core/common/logger/NitroLogger';
-import { EventDispatcher } from '../../../core/events/EventDispatcher';
-import { NitroEvent } from '../../../core/events/NitroEvent';
-import { INitroLocalizationManager } from '../../localization/INitroLocalizationManager';
+import { FurnitureType, IFurnitureData, INitroLocalizationManager, NitroLogger } from '../../../api';
+import { EventDispatcher } from '../../../core';
+import { NitroEvent } from '../../../events';
 import { FurnitureData } from './FurnitureData';
-import { FurnitureType } from './FurnitureType';
-import { IFurnitureData } from './IFurnitureData';
 
 export class FurnitureDataLoader extends EventDispatcher
 {
@@ -14,7 +11,6 @@ export class FurnitureDataLoader extends EventDispatcher
     private _floorItems: Map<number, IFurnitureData>;
     private _wallItems: Map<number, IFurnitureData>;
     private _localization: INitroLocalizationManager;
-    private _nitroLogger: NitroLogger;
 
     constructor(floorItems: Map<number, IFurnitureData>, wallItems: Map<number, IFurnitureData>, localization: INitroLocalizationManager)
     {
@@ -23,7 +19,6 @@ export class FurnitureDataLoader extends EventDispatcher
         this._floorItems = floorItems;
         this._wallItems = wallItems;
         this._localization = localization;
-        this._nitroLogger = new NitroLogger(this.constructor.name);
     }
 
     public loadFurnitureData(url: string): void
@@ -40,7 +35,7 @@ export class FurnitureDataLoader extends EventDispatcher
     {
         if(!data) return;
 
-        if((typeof data.roomitemtypes == 'undefined') || (typeof data.wallitemtypes == 'undefined')) this._nitroLogger.warn('Could not find `roomitemtypes` or `wallitemtypes` in furnidata.');
+        if((typeof data.roomitemtypes == 'undefined') || (typeof data.wallitemtypes == 'undefined')) NitroLogger.warn('Could not find `roomitemtypes` or `wallitemtypes` in furnidata.');
 
         if(data.roomitemtypes) this.parseFloorItems(data.roomitemtypes);
 
@@ -53,7 +48,7 @@ export class FurnitureDataLoader extends EventDispatcher
     {
         if(!error) return;
 
-        console.error(error);
+        NitroLogger.error(error);
 
         this.dispatchEvent(new NitroEvent(FurnitureDataLoader.FURNITURE_DATA_ERROR));
     }

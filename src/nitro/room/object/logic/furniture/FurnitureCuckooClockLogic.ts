@@ -1,5 +1,5 @@
+import { RoomObjectPlaySoundIdEvent } from '../../../../../events';
 import { RoomObjectUpdateMessage } from '../../../../../room';
-import { RoomObjectPlaySoundIdEvent } from '../../../events';
 import { ObjectDataUpdateMessage } from '../../../messages';
 import { FurnitureMultiStateLogic } from './FurnitureMultiStateLogic';
 
@@ -9,7 +9,7 @@ export class FurnitureCuckooClockLogic extends FurnitureMultiStateLogic
 
     public getEventTypes(): string[]
     {
-        const types = [ RoomObjectPlaySoundIdEvent.PLAY_SOUND_AT_PITCH ];
+        const types = [RoomObjectPlaySoundIdEvent.PLAY_SOUND_AT_PITCH];
 
         return this.mergeTypes(super.getEventTypes(), types);
     }

@@ -1,5 +1,5 @@
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { RoomObjectVariable } from '../../../../../api';
+import { RoomObjectWidgetRequestEvent } from '../../../../../events';
 import { FurnitureGuildCustomizedLogic } from './FurnitureGuildCustomizedLogic';
 
 export class FurnitureGroupForumTerminalLogic extends FurnitureGuildCustomizedLogic
@@ -17,7 +17,7 @@ export class FurnitureGroupForumTerminalLogic extends FurnitureGuildCustomizedLo
     {
         super.updateGroupId(id);
 
-        this.object.model.setValue(RoomObjectVariable.FURNITURE_INTERNAL_LINK, `groupforum/${ id }`);
+        this.object.model.setValue(RoomObjectVariable.FURNITURE_INTERNAL_LINK, `groupforum/${id}`);
     }
 
     public useObject(): void

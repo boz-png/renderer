@@ -1,5 +1,4 @@
-import { IAssetData, IAssetLogicPlanetSystem } from '../../../../../core/asset/interfaces';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, IAssetLogicPlanetSystem, RoomObjectVariable } from '../../../../../api';
 import { FurnitureLogic } from './FurnitureLogic';
 
 export class FurniturePlanetSystemLogic extends FurnitureLogic

@@ -1,6 +1,5 @@
-import { IMessageDataWrapper } from '../../../../../core';
-import { CommunityGoalData } from '../../incoming/quest/CommunityGoalData';
-import { IMessageParser } from './../../../../../core';
+import { IMessageDataWrapper, IMessageParser } from '../../../../../api';
+import { CommunityGoalData } from './CommunityGoalData';
 
 export class CommunityGoalProgressMessageParser implements IMessageParser
 {

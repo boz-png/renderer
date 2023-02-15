@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { TalentTrackParser } from '../../parser/talent/TalentTrackParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { TalentTrackParser } from '../../parser';
 
 export class TalentTrackMessageEvent extends MessageEvent implements IMessageEvent
 {

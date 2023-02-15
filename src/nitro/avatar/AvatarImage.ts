@@ -3,31 +3,14 @@ import { Container } from '@pixi/display';
 import { ColorMatrixFilter } from '@pixi/filter-color-matrix';
 import { Rectangle } from '@pixi/math';
 import { Sprite } from '@pixi/sprite';
-import { NitroContainer, NitroSprite } from '../../core';
-import { AdvancedMap } from '../../core/utils/AdvancedMap';
-import { PaletteMapFilter } from '../../core/utils/PaletteMapFilter';
-import { IGraphicAsset } from '../../room/object/visualization/utils/IGraphicAsset';
-import { TextureUtils } from '../../room/utils/TextureUtils';
-import { Nitro } from '../Nitro';
-import { ActiveActionData } from './actions/ActiveActionData';
-import { IActionDefinition } from './actions/IActionDefinition';
-import { IActiveActionData } from './actions/IActiveActionData';
-import { AssetAliasCollection } from './alias/AssetAliasCollection';
-import { IAnimationLayerData } from './animation/IAnimationLayerData';
-import { IAvatarDataContainer } from './animation/IAvatarDataContainer';
-import { ISpriteDataContainer } from './animation/ISpriteDataContainer';
+import { AdvancedMap, AvatarAction, AvatarDirectionAngle, AvatarScaleType, AvatarSetType, IActionDefinition, IActiveActionData, IAdvancedMap, IAnimationLayerData, IAvatarDataContainer, IAvatarEffectListener, IAvatarFigureContainer, IAvatarImage, IGraphicAsset, IPartColor, ISpriteDataContainer } from '../../api';
+import { GetTickerTime, NitroContainer, NitroSprite, PaletteMapFilter, PixiApplicationProxy, TextureUtils } from '../../pixi-proxy';
+import { ActiveActionData } from './actions';
+import { AssetAliasCollection } from './alias';
 import { AvatarFigureContainer } from './AvatarFigureContainer';
 import { AvatarStructure } from './AvatarStructure';
-import { AvatarImageCache } from './cache/AvatarImageCache';
+import { AvatarImageCache } from './cache';
 import { EffectAssetDownloadManager } from './EffectAssetDownloadManager';
-import { AvatarAction } from './enum/AvatarAction';
-import { AvatarDirectionAngle } from './enum/AvatarDirectionAngle';
-import { AvatarScaleType } from './enum/AvatarScaleType';
-import { AvatarSetType } from './enum/AvatarSetType';
-import { IAvatarEffectListener } from './IAvatarEffectListener';
-import { IAvatarFigureContainer } from './IAvatarFigureContainer';
-import { IAvatarImage } from './IAvatarImage';
-import { IPartColor } from './structure/figure/IPartColor';
 
 export class AvatarImage implements IAvatarImage, IAvatarEffectListener
 {
@@ -67,7 +50,7 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
     private _sortedActions: IActiveActionData[];
     private _lastActionsString: string;
     private _currentActionsString: string;
-    private _fullImageCache: AdvancedMap<string, RenderTexture>;
+    private _fullImageCache: IAdvancedMap<string, RenderTexture>;
     private _fullImageCacheSize: number = 5;
     protected _isCachedImage: boolean = false;
     private _useFullImageCache: boolean = false;
@@ -413,10 +396,13 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
 
         if(this._reusableTexture)
         {
-            Nitro.instance.renderer.render(container, {
+            PixiApplicationProxy.instance.renderer.render(container, {
                 renderTexture: this._reusableTexture,
                 clear: true
             });
+
+            //@ts-ignore
+            this._reusableTexture.baseTexture.hitMap = null;
         }
         else
         {
@@ -452,31 +438,31 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
         {
             if(reds.length == 256)
             {
-                let paletteColor = reds[ data[i] ];
+                let paletteColor = reds[data[i]];
                 if(paletteColor === undefined) paletteColor = 0;
 
-                data[ i ] = ((paletteColor >> 16) & 0xFF);
-                data[ i + 1] = ((paletteColor >> 8) & 0xFF);
-                data[ i + 2] = (paletteColor & 0xFF);
+                data[i] = ((paletteColor >> 16) & 0xFF);
+                data[i + 1] = ((paletteColor >> 8) & 0xFF);
+                data[i + 2] = (paletteColor & 0xFF);
             }
 
             if(greens.length == 256)
             {
-                let paletteColor = greens[ data[i + 1] ];
+                let paletteColor = greens[data[i + 1]];
                 if(paletteColor === undefined) paletteColor = 0;
 
-                data[ i ] = ((paletteColor >> 16) & 0xFF);
-                data[ i + 1] = ((paletteColor >> 8) & 0xFF);
-                data[ i + 2] = (paletteColor & 0xFF);
+                data[i] = ((paletteColor >> 16) & 0xFF);
+                data[i + 1] = ((paletteColor >> 8) & 0xFF);
+                data[i + 2] = (paletteColor & 0xFF);
             }
             if(blues.length == 256)
             {
-                let paletteColor = greens[ data[i + 2] ];
+                let paletteColor = greens[data[i + 2]];
                 if(paletteColor === undefined) paletteColor = 0;
 
-                data[ i ] = ((paletteColor >> 16) & 0xFF);
-                data[ i + 1] = ((paletteColor >> 8) & 0xFF);
-                data[ i + 2] = (paletteColor & 0xFF);
+                data[i] = ((paletteColor >> 16) & 0xFF);
+                data[i + 1] = ((paletteColor >> 8) & 0xFF);
+                data[i + 2] = (paletteColor & 0xFF);
             }
         }
 
@@ -484,7 +470,7 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
 
         const newTexture = new Sprite(Texture.from(textureCanvas));
 
-        Nitro.instance.renderer.render(newTexture, {
+        PixiApplicationProxy.instance.renderer.render(newTexture, {
             renderTexture: texture,
             clear: true
         });
@@ -690,7 +676,7 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
 
     public endActionAppends(): void
     {
-        let k:ActiveActionData;
+        let k: ActiveActionData;
 
         if(!this.sortActions()) return;
 
@@ -801,9 +787,9 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
         return true;
     }
 
-    protected addActionData(k: string, _arg_2: string=''): void
+    protected addActionData(k: string, _arg_2: string = ''): void
     {
-        let _local_3:ActiveActionData;
+        let _local_3: ActiveActionData;
         if(!this._actions) this._actions = [];
 
         let _local_4 = 0;
@@ -862,7 +848,7 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
     {
         let _local_2: boolean;
         let _local_3: boolean;
-        let _local_4:ActiveActionData;
+        let _local_4: ActiveActionData;
         let _local_5: number;
         let k: boolean;
 
@@ -872,7 +858,7 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
 
         if(!this._sortedActions)
         {
-            this._canvasOffsets = [ 0, 0, 0 ];
+            this._canvasOffsets = [0, 0, 0];
 
             if(this._lastActionsString !== '')
             {
@@ -927,7 +913,7 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
     {
         if(!this._sortedActions == null) return;
 
-        const _local_3: number = Nitro.instance.time;
+        const _local_3: number = GetTickerTime();
         const _local_4: string[] = [];
 
         for(const k of this._sortedActions) _local_4.push(k.actionType);

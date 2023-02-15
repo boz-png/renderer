@@ -1,5 +1,4 @@
-﻿import { IVector3D } from '../../../room/utils/IVector3D';
-import { Vector3d } from '../../../room/utils/Vector3d';
+﻿import { IVector3D, Vector3d } from '../../../api';
 
 export class RoomPlaneBitmapMaskData
 {
@@ -22,7 +21,7 @@ export class RoomPlaneBitmapMaskData
         return this._loc;
     }
 
-    public set loc(k:IVector3D)
+    public set loc(k: IVector3D)
     {
         if(!this._loc) this._loc = new Vector3d();
 

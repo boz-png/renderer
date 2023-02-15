@@ -1,10 +1,6 @@
-import { RoomObjectUpdateMessage } from '../../../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObjectController } from '../../../../room/object/IRoomObjectController';
-import { RoomObjectLogicBase } from '../../../../room/object/logic/RoomObjectLogicBase';
-import { IVector3D } from '../../../../room/utils/IVector3D';
-import { Vector3d } from '../../../../room/utils/Vector3d';
-import { ObjectMoveUpdateMessage } from '../../messages/ObjectMoveUpdateMessage';
-import { RoomObjectVariable } from '../RoomObjectVariable';
+import { IRoomObjectController, IRoomObjectUpdateMessage, IVector3D, RoomObjectVariable, Vector3d } from '../../../../api';
+import { RoomObjectLogicBase } from '../../../../room';
+import { ObjectMoveUpdateMessage } from '../../messages';
 
 export class MovingObjectLogic extends RoomObjectLogicBase
 {
@@ -111,7 +107,7 @@ export class MovingObjectLogic extends RoomObjectLogicBase
         if(object) this._location.assign(object.getLocation());
     }
 
-    public processUpdateMessage(message: RoomObjectUpdateMessage): void
+    public processUpdateMessage(message: IRoomObjectUpdateMessage): void
     {
         if(!message) return;
 

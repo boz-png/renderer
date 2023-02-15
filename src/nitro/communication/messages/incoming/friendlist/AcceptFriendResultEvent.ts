@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { AcceptFriendResultParser } from '../../parser/friendlist/AcceptFriendResultParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { AcceptFriendResultParser } from '../../parser';
 
 export class AcceptFriendResultEvent extends MessageEvent implements IMessageEvent
 {

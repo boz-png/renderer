@@ -3,28 +3,13 @@ import { Container, DisplayObject } from '@pixi/display';
 import { Graphics } from '@pixi/graphics';
 import { Matrix, Point, Rectangle } from '@pixi/math';
 import { Sprite } from '@pixi/sprite';
-import { NitroContainer, NitroSprite } from '../../core';
+import { IRoomCanvasMouseListener, IRoomGeometry, IRoomObject, IRoomObjectSprite, IRoomObjectSpriteVisualization, IRoomRenderingCanvas, IRoomSpriteCanvasContainer, IRoomSpriteMouseEvent, MouseEventType, RoomObjectSpriteData, RoomObjectSpriteType, Vector3d } from '../../api';
+import { RoomSpriteMouseEvent } from '../../events';
 import { Nitro } from '../../nitro/Nitro';
-import { MouseEventType } from '../../nitro/ui/MouseEventType';
-import { RoomObjectSpriteData } from '../data/RoomObjectSpriteData';
-import { RoomSpriteMouseEvent } from '../events/RoomSpriteMouseEvent';
-import { RoomObjectSpriteType } from '../object/enum/RoomObjectSpriteType';
-import { IRoomObject } from '../object/IRoomObject';
-import { IRoomObjectSprite } from '../object/visualization/IRoomObjectSprite';
-import { IRoomObjectSpriteVisualization } from '../object/visualization/IRoomObjectSpriteVisualization';
-import { RoomRotatingEffect, RoomShakingEffect } from '../utils';
-import { IRoomGeometry } from '../utils/IRoomGeometry';
-import { RoomEnterEffect } from '../utils/RoomEnterEffect';
-import { RoomGeometry } from '../utils/RoomGeometry';
-import { Vector3d } from '../utils/Vector3d';
-import { RoomObjectCache } from './cache/RoomObjectCache';
-import { RoomObjectCacheItem } from './cache/RoomObjectCacheItem';
-import { IRoomCanvasMouseListener } from './IRoomCanvasMouseListener';
-import { IRoomRenderingCanvas } from './IRoomRenderingCanvas';
-import { IRoomSpriteCanvasContainer } from './IRoomSpriteCanvasContainer';
-import { ExtendedSprite } from './utils/ExtendedSprite';
-import { ObjectMouseData } from './utils/ObjectMouseData';
-import { SortableSprite } from './utils/SortableSprite';
+import { GetTicker, NitroContainer, NitroSprite, PixiApplicationProxy } from '../../pixi-proxy';
+import { RoomEnterEffect, RoomGeometry, RoomRotatingEffect, RoomShakingEffect } from '../utils';
+import { RoomObjectCache, RoomObjectCacheItem } from './cache';
+import { ExtendedSprite, ObjectMouseData, SortableSprite } from './utils';
 
 export class RoomSpriteCanvas implements IRoomRenderingCanvas
 {
@@ -60,7 +45,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
     private _mouseCheckCount: number;
     private _mouseSpriteWasHit: boolean;
     private _mouseActiveObjects: Map<string, ObjectMouseData>;
-    private _eventCache: Map<string, RoomSpriteMouseEvent>;
+    private _eventCache: Map<string, IRoomSpriteMouseEvent>;
     private _eventId: number;
     private _scale: number;
 
@@ -88,7 +73,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
         this._container = container;
 
         this._geometry = new RoomGeometry(scale, new Vector3d(-135, 30, 0), new Vector3d(11, 11, 5), new Vector3d(-135, 0.5, 0));
-        this._animationFPS = Nitro.instance.getConfiguration<number>('system.animation.fps', 24);
+        this._animationFPS = Nitro.instance.getConfiguration<number>('system.fps.animation', 24);
         this._renderTimestamp = 0;
         this._totalTimeRunning = 0;
         this._lastFrame = 0;
@@ -337,7 +322,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
     {
         this._canvasUpdated = false;
 
-        this._totalTimeRunning += Nitro.instance.ticker.deltaTime;
+        this._totalTimeRunning += GetTicker().deltaTime;
 
         if(this._totalTimeRunning === this._renderTimestamp) return;
 
@@ -349,8 +334,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
 
         if((this._display.x !== this._screenOffsetX) || (this._display.y !== this._screenOffsetY))
         {
-            this._display.x = this._screenOffsetX;
-            this._display.y = this._screenOffsetY;
+            this._display.position.set(this._screenOffsetX, this._screenOffsetY);
 
             update = true;
         }
@@ -389,15 +373,9 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
             }
         }
 
-        this._sortableSprites.sort((a, b) =>
-        {
-            return b.z - a.z;
-        });
+        this._sortableSprites.sort((a, b) => (b.z - a.z));
 
-        if(spriteCount < this._sortableSprites.length)
-        {
-            this._sortableSprites.splice(spriteCount);
-        }
+        if(spriteCount < this._sortableSprites.length) this._sortableSprites.splice(spriteCount);
 
         let iterator = 0;
 
@@ -847,7 +825,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
         const checkedSprites: string[] = [];
 
         let didHitSprite = false;
-        let mouseEvent: RoomSpriteMouseEvent = null;
+        let mouseEvent: IRoomSpriteMouseEvent = null;
         let spriteId = (this._activeSpriteCount - 1);
 
         while(spriteId >= 0)
@@ -959,16 +937,16 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
         return didHitSprite;
     }
 
-    protected createMouseEvent(x: number, y: number, localX: number, localY: number, type: string, tag: string, altKey: boolean, ctrlKey: boolean, shiftKey: boolean, buttonDown: boolean): RoomSpriteMouseEvent
+    protected createMouseEvent(x: number, y: number, localX: number, localY: number, type: string, tag: string, altKey: boolean, ctrlKey: boolean, shiftKey: boolean, buttonDown: boolean): IRoomSpriteMouseEvent
     {
         const screenX: number = (x - (this._width / 2));
         const screenY: number = (y - (this._height / 2));
-        const canvasName = `canvas_${ this._id }`;
+        const canvasName = `canvas_${this._id}`;
 
         return new RoomSpriteMouseEvent(type, ((canvasName + '_') + this._eventId), canvasName, tag, screenX, screenY, localX, localY, ctrlKey, altKey, shiftKey, buttonDown);
     }
 
-    protected bufferMouseEvent(k: RoomSpriteMouseEvent, _arg_2: string): void
+    protected bufferMouseEvent(k: IRoomSpriteMouseEvent, _arg_2: string): void
     {
         if(!k || !this._eventCache) return;
 
@@ -980,7 +958,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
     {
         if(!this._container || !this._eventCache) return;
 
-        for(const [ key, event ] of this._eventCache.entries())
+        for(const [key, event] of this._eventCache.entries())
         {
             if(!this._eventCache) return;
 
@@ -1028,7 +1006,7 @@ export class RoomSpriteCanvas implements IRoomRenderingCanvas
             height: this._display.height
         });
 
-        Nitro.instance.renderer.render(this._display, {
+        PixiApplicationProxy.instance.renderer.render(this._display, {
             renderTexture,
             clear: true,
             transform: new Matrix(1, 0, 0, 1, -(bounds.x), -(bounds.y))

@@ -1,9 +1,8 @@
-import { IMessageDataWrapper, IMessageParser } from '../../../../../core';
-import { AdvancedMap } from '../../../../../core/utils/AdvancedMap';
+import { AdvancedMap, IAdvancedMap, IMessageDataWrapper, IMessageParser } from '../../../../../api';
 
 export class UnseenItemsParser implements IMessageParser
 {
-    private _items: AdvancedMap<number, number[]>;
+    private _items: IAdvancedMap<number, number[]>;
 
     public flush(): boolean
     {

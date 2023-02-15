@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { NotificationDialogMessageParser } from '../../parser/notifications/NotificationDialogMessageParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { NotificationDialogMessageParser } from '../../parser';
 
 export class NotificationDialogMessageEvent extends MessageEvent implements IMessageEvent
 {

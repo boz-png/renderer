@@ -1,4 +1,4 @@
-import { Nitro } from '../../nitro/Nitro';
+import { GetTickerTime } from '../../pixi-proxy';
 
 export class RoomShakingEffect
 {
@@ -20,7 +20,7 @@ export class RoomShakingEffect
         this._SafeStr_4513 = 0;
         this._SafeStr_4515 = _arg_1;
         this._SafeStr_4516 = _arg_2;
-        this._SafeStr_4514 = Nitro.instance.time;
+        this._SafeStr_4514 = GetTickerTime();
         this._SafeStr_448 = 1;
     }
 
@@ -30,7 +30,7 @@ export class RoomShakingEffect
 
         if(!this._SafeStr_4524) this._SafeStr_4524 = setTimeout(() => this.turnVisualizationOff(), this._SafeStr_4516);
 
-        const _local_1 = (Nitro.instance.time - this._SafeStr_4514);
+        const _local_1 = (GetTickerTime() - this._SafeStr_4514);
 
         if(_local_1 > (this._SafeStr_4515 + this._SafeStr_4516))
         {
@@ -52,7 +52,7 @@ export class RoomShakingEffect
         this._SafeStr_4513 = ((_local_1 - this._SafeStr_4515) / this._SafeStr_4516);
     }
 
-    public static turnVisualizationOff():void
+    public static turnVisualizationOff(): void
     {
         this._SafeStr_4512 = false;
 

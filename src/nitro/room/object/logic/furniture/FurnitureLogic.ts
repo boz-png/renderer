@@ -1,23 +1,7 @@
-import { IAssetData } from '../../../../../core/asset/interfaces';
-import { RoomObjectMouseEvent } from '../../../../../room/events/RoomObjectMouseEvent';
-import { RoomSpriteMouseEvent } from '../../../../../room/events/RoomSpriteMouseEvent';
-import { RoomObjectUpdateMessage } from '../../../../../room/messages/RoomObjectUpdateMessage';
-import { IRoomObjectController } from '../../../../../room/object/IRoomObjectController';
-import { IRoomObjectModel } from '../../../../../room/object/IRoomObjectModel';
-import { IRoomGeometry } from '../../../../../room/utils/IRoomGeometry';
-import { IVector3D } from '../../../../../room/utils/IVector3D';
-import { Vector3d } from '../../../../../room/utils/Vector3d';
-import { Nitro } from '../../../../Nitro';
-import { MouseEventType } from '../../../../ui/MouseEventType';
-import { RoomObjectRoomAdEvent } from '../../../events';
-import { RoomObjectStateChangedEvent } from '../../../events/RoomObjectStateChangedEvent';
-import { RoomObjectWidgetRequestEvent } from '../../../events/RoomObjectWidgetRequestEvent';
-import { ObjectDataUpdateMessage } from '../../../messages/ObjectDataUpdateMessage';
-import { ObjectHeightUpdateMessage } from '../../../messages/ObjectHeightUpdateMessage';
-import { ObjectItemDataUpdateMessage } from '../../../messages/ObjectItemDataUpdateMessage';
-import { ObjectMoveUpdateMessage } from '../../../messages/ObjectMoveUpdateMessage';
-import { ObjectSelectedMessage } from '../../../messages/ObjectSelectedMessage';
-import { RoomObjectVariable } from '../../RoomObjectVariable';
+import { IAssetData, IRoomGeometry, IRoomObjectController, IRoomObjectModel, IVector3D, MouseEventType, NitroConfiguration, RoomObjectVariable, Vector3d } from '../../../../../api';
+import { RoomObjectMouseEvent, RoomObjectRoomAdEvent, RoomObjectStateChangedEvent, RoomObjectWidgetRequestEvent, RoomSpriteMouseEvent } from '../../../../../events';
+import { RoomObjectUpdateMessage } from '../../../../../room';
+import { ObjectDataUpdateMessage, ObjectHeightUpdateMessage, ObjectItemDataUpdateMessage, ObjectMoveUpdateMessage, ObjectSelectedMessage } from '../../../messages';
 import { MovingObjectLogic } from '../MovingObjectLogic';
 
 export class FurnitureLogic extends MovingObjectLogic
@@ -63,12 +47,12 @@ export class FurnitureLogic extends MovingObjectLogic
 
         if(FurnitureLogic.BOUNCING_STEPS === -1)
         {
-            FurnitureLogic.BOUNCING_STEPS = Nitro.instance.getConfiguration<number>('furni.rotation.bounce.steps', 8);
+            FurnitureLogic.BOUNCING_STEPS = NitroConfiguration.getValue<number>('furni.rotation.bounce.steps', 8);
         }
 
         if(FurnitureLogic.BOUNCING_Z === -1)
         {
-            FurnitureLogic.BOUNCING_Z = Nitro.instance.getConfiguration<number>('furni.rotation.bounce.height', 0.0625);
+            FurnitureLogic.BOUNCING_Z = NitroConfiguration.getValue<number>('furni.rotation.bounce.height', 0.0625);
         }
     }
 
@@ -82,7 +66,7 @@ export class FurnitureLogic extends MovingObjectLogic
             RoomObjectRoomAdEvent.ROOM_AD_TOOLTIP_SHOW,
             RoomObjectRoomAdEvent.ROOM_AD_TOOLTIP_HIDE,
             RoomObjectRoomAdEvent.ROOM_AD_FURNI_DOUBLE_CLICK,
-            RoomObjectRoomAdEvent.ROOM_AD_FURNI_CLICK ];
+            RoomObjectRoomAdEvent.ROOM_AD_FURNI_CLICK];
 
         if(this.widget) types.push(RoomObjectWidgetRequestEvent.OPEN_WIDGET, RoomObjectWidgetRequestEvent.CLOSE_WIDGET);
 
@@ -167,7 +151,7 @@ export class FurnitureLogic extends MovingObjectLogic
         return model.getValue<string>(RoomObjectVariable.FURNITURE_AD_URL);
     }
 
-    protected handleAdClick(objectId: number, objectType: string, clickUrl: string):void
+    protected handleAdClick(objectId: number, objectType: string, clickUrl: string): void
     {
         if(!this.eventDispatcher) return;
 

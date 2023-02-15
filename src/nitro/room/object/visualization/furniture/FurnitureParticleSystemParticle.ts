@@ -1,5 +1,5 @@
-﻿import { IGraphicAsset } from '../../../../../room';
-import { Vector3D } from '../../../../avatar/geometry/Vector3D';
+﻿import { IGraphicAsset } from '../../../../../api';
+import { Vector3D } from '../../../../avatar';
 
 export class FurnitureParticleSystemParticle
 {
@@ -173,7 +173,7 @@ export class FurnitureParticleSystemParticle
 
     public toString(): string
     {
-        return [ this._x, this._y, this._z ].toString();
+        return [this._x, this._y, this._z].toString();
     }
 
     public copy(particle: FurnitureParticleSystemParticle, scale: number): void

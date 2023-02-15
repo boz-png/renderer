@@ -1,4 +1,4 @@
-﻿import { Nitro } from '../../Nitro';
+﻿import { GetTickerFPS, GetTickerTime } from '../../../pixi-proxy';
 import { Motion } from './Motion';
 
 export class Motions
@@ -11,7 +11,7 @@ export class Motions
 
     public static get TIMER_TIME(): number
     {
-        return (1000 / Nitro.instance.ticker.FPS);
+        return (1000 / GetTickerFPS());
     }
 
     public static runMotion(k: Motion): Motion
@@ -35,7 +35,7 @@ export class Motions
         return k;
     }
 
-    public static removeMotion(k:Motion): void
+    public static removeMotion(k: Motion): void
     {
         let _local_2: number = Motions._RUNNING_MOTIONS.indexOf(k);
 
@@ -64,7 +64,7 @@ export class Motions
         }
     }
 
-    public static getMotionByTag(k: string):Motion
+    public static getMotionByTag(k: string): Motion
     {
         for(const _local_2 of Motions._RUNNING_MOTIONS)
         {
@@ -79,7 +79,7 @@ export class Motions
         return null;
     }
 
-    public static getMotionByTarget(k: HTMLElement):Motion
+    public static getMotionByTarget(k: HTMLElement): Motion
     {
         for(const _local_2 of Motions._RUNNING_MOTIONS)
         {
@@ -94,7 +94,7 @@ export class Motions
         return null;
     }
 
-    public static getMotionByTagAndTarget(k: string, _arg_2: HTMLElement):Motion
+    public static getMotionByTagAndTarget(k: string, _arg_2: HTMLElement): Motion
     {
         for(const _local_3 of Motions._RUNNING_MOTIONS)
         {
@@ -123,7 +123,7 @@ export class Motions
     {
         Motions._IS_UPDATING = true;
 
-        const _local_2: number = Nitro.instance.time;
+        const _local_2: number = GetTickerTime();
 
         let _local_3: Motion = null;
 

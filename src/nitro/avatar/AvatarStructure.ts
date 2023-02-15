@@ -1,31 +1,12 @@
 import { Point } from '@pixi/math';
-import { IAssetManager } from '../../core/asset/IAssetManager';
-import { IAssetAnimation } from '../../core/asset/interfaces';
-import { EventDispatcher } from '../../core/events/EventDispatcher';
-import { ActionDefinition } from './actions/ActionDefinition';
-import { AvatarActionManager } from './actions/AvatarActionManager';
-import { IActionDefinition } from './actions/IActionDefinition';
-import { IActiveActionData } from './actions/IActiveActionData';
-import { Animation } from './animation/Animation';
-import { AnimationManager } from './animation/AnimationManager';
-import { AvatarAnimationLayerData } from './animation/AvatarAnimationLayerData';
+import { AvatarDirectionAngle, IActionDefinition, IActiveActionData, IAssetAnimation, IAssetManager, IAvatarFigureContainer, IAvatarImage, IAvatarRenderManager, IFigureData, IFigurePartSet, IPartColor, IStructureData } from '../../api';
+import { EventDispatcher } from '../../core';
+import { ActionDefinition, AvatarActionManager } from './actions';
+import { Animation, AnimationManager, AvatarAnimationLayerData } from './animation';
 import { AvatarImagePartContainer } from './AvatarImagePartContainer';
 import { AvatarRenderManager } from './AvatarRenderManager';
-import { AvatarDirectionAngle } from './enum/AvatarDirectionAngle';
-import { AvatarModelGeometry } from './geometry/AvatarModelGeometry';
-import { IAvatarFigureContainer } from './IAvatarFigureContainer';
-import { IAvatarImage } from './IAvatarImage';
-import { IAvatarRenderManager } from './IAvatarRenderManager';
-import { IFigureData } from './interfaces';
-import { AnimationAction } from './structure/animation/AnimationAction';
-import { AvatarAnimationFrame } from './structure/animation/AvatarAnimationFrame';
-import { AvatarAnimationData } from './structure/AvatarAnimationData';
-import { AvatarCanvas } from './structure/AvatarCanvas';
-import { IFigurePartSet } from './structure/figure/IFigurePartSet';
-import { IPartColor } from './structure/figure/IPartColor';
-import { FigureSetData } from './structure/FigureSetData';
-import { IStructureData } from './structure/IStructureData';
-import { PartSetsData } from './structure/PartSetsData';
+import { AvatarModelGeometry } from './geometry';
+import { AnimationAction, AvatarAnimationData, AvatarAnimationFrame, AvatarCanvas, FigureSetData, PartSetsData } from './structure';
 
 export class AvatarStructure extends EventDispatcher
 {
@@ -337,7 +318,7 @@ export class AvatarStructure extends EventDispatcher
         return this._geometry.getBodyPartsAtAngle(k, _local_4, _arg_2);
     }
 
-    public getFrameBodyPartOffset(k:IActiveActionData, _arg_2: number, _arg_3: number, _arg_4: string): Point
+    public getFrameBodyPartOffset(k: IActiveActionData, _arg_2: number, _arg_3: number, _arg_4: string): Point
     {
         const _local_5 = this._animationData.getAction(k.definition);
 
@@ -346,19 +327,19 @@ export class AvatarStructure extends EventDispatcher
         return AnimationAction.DEFAULT_OFFSET;
     }
 
-    public getParts(k: string, _arg_2:IAvatarFigureContainer, _arg_3:IActiveActionData, _arg_4: string, _arg_5: number, removes: string[], _arg_7: IAvatarImage, _arg_8: Map<string, string> = null): AvatarImagePartContainer[]
+    public getParts(k: string, _arg_2: IAvatarFigureContainer, _arg_3: IActiveActionData, _arg_4: string, _arg_5: number, removes: string[], _arg_7: IAvatarImage, _arg_8: Map<string, string> = null): AvatarImagePartContainer[]
     {
         const _local_10: Animation = null;
         let _local_34: IActionDefinition = null;
 
         let _local_20: AvatarAnimationFrame[] = [];
-        let _local_36:IPartColor = null;
+        let _local_36: IPartColor = null;
 
         if(!_arg_3 == null) return [];
 
         const _local_9 = this._partSetsData.getActiveParts(_arg_3.definition);
         const _local_11: AvatarImagePartContainer[] = [];
-        let _local_14: any[] = [ 0 ];
+        let _local_14: any[] = [0];
         const _local_15 = this._animationData.getAction(_arg_3.definition);
 
         if(_arg_3.definition.isAnimation)

@@ -1,4 +1,4 @@
-import { IAssetVisualAnimation } from '../../../../../core/asset/interfaces/visualization';
+import { IAssetVisualAnimation } from '../../../../../api';
 import { AnimationData } from './AnimationData';
 import { AnimationFrame } from './AnimationFrame';
 import { SizeData } from './SizeData';

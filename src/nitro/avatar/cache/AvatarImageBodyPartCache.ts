@@ -1,4 +1,4 @@
-﻿import { IActiveActionData } from '../actions/IActiveActionData';
+﻿import { IActiveActionData } from '../../../api';
 import { AvatarImageActionCache } from './AvatarImageActionCache';
 
 export class AvatarImageBodyPartCache
@@ -43,7 +43,7 @@ export class AvatarImageBodyPartCache
     {
         if(!this._cache || this._disposed) return;
 
-        for(const [ key, cache ] of this._cache.entries())
+        for(const [key, cache] of this._cache.entries())
         {
             if(!cache) continue;
 
@@ -58,7 +58,7 @@ export class AvatarImageBodyPartCache
         }
     }
 
-    public getAction():IActiveActionData
+    public getAction(): IActiveActionData
     {
         return this._currentAction;
     }
@@ -73,7 +73,7 @@ export class AvatarImageBodyPartCache
         return this._currentDirection;
     }
 
-    public getActionCache(k: IActiveActionData=null): AvatarImageActionCache
+    public getActionCache(k: IActiveActionData = null): AvatarImageActionCache
     {
         if(!this._currentAction) return null;
 

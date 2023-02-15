@@ -1,13 +1,8 @@
-import { IAssetManager } from '../../core/asset/IAssetManager';
-import { EventDispatcher } from '../../core/events/EventDispatcher';
-import { NitroEvent } from '../../core/events/NitroEvent';
-import { Nitro } from '../Nitro';
+import { IAssetManager, IAvatarFigureContainer, IAvatarImageListener, INitroEvent, NitroConfiguration, NitroLogger } from '../../api';
+import { EventDispatcher } from '../../core';
+import { AvatarRenderEvent, AvatarRenderLibraryEvent, NitroEvent } from '../../events';
 import { AvatarAssetDownloadLibrary } from './AvatarAssetDownloadLibrary';
 import { AvatarStructure } from './AvatarStructure';
-import { AvatarRenderEvent } from './events/AvatarRenderEvent';
-import { AvatarRenderLibraryEvent } from './events/AvatarRenderLibraryEvent';
-import { IAvatarFigureContainer } from './IAvatarFigureContainer';
-import { IAvatarImageListener } from './IAvatarImageListener';
 
 export class AvatarAssetDownloadManager extends EventDispatcher
 {
@@ -36,7 +31,7 @@ export class AvatarAssetDownloadManager extends EventDispatcher
         this._assets = assets;
         this._structure = structure;
 
-        this._missingMandatoryLibs = Nitro.instance.getConfiguration<string[]>('avatar.mandatory.libraries');
+        this._missingMandatoryLibs = NitroConfiguration.getValue<string[]>('avatar.mandatory.libraries');
         this._figureMap = new Map();
         this._pendingContainers = [];
         this._figureListeners = new Map();
@@ -60,7 +55,7 @@ export class AvatarAssetDownloadManager extends EventDispatcher
 
         try
         {
-            request.open('GET', Nitro.instance.getConfiguration<string>('avatar.figuremap.url'));
+            request.open('GET', NitroConfiguration.getValue<string>('avatar.figuremap.url'));
 
             request.send();
 
@@ -88,7 +83,7 @@ export class AvatarAssetDownloadManager extends EventDispatcher
 
         catch (e)
         {
-            this.logger.error(e);
+            NitroLogger.error(e);
         }
     }
 
@@ -107,7 +102,7 @@ export class AvatarAssetDownloadManager extends EventDispatcher
 
             this._libraryNames.push(id);
 
-            const downloadLibrary = new AvatarAssetDownloadLibrary(id, revision, this._assets, Nitro.instance.getConfiguration<string>('avatar.asset.url'));
+            const downloadLibrary = new AvatarAssetDownloadLibrary(id, revision, this._assets, NitroConfiguration.getValue<string>('avatar.asset.url'));
 
             downloadLibrary.addEventListener(AvatarRenderLibraryEvent.DOWNLOAD_COMPLETE, this.onLibraryLoaded);
 
@@ -128,7 +123,7 @@ export class AvatarAssetDownloadManager extends EventDispatcher
         }
     }
 
-    private onAvatarRenderReady(event: NitroEvent): void
+    private onAvatarRenderReady(event: INitroEvent): void
     {
         if(!event) return;
 

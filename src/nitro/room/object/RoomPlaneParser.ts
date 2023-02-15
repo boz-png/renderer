@@ -1,6 +1,5 @@
 ﻿import { Point } from '@pixi/math';
-import { IVector3D } from '../../../room/utils/IVector3D';
-import { Vector3d } from '../../../room/utils/Vector3d';
+import { IVector3D, Vector3d } from '../../../api';
 import { RoomFloorHole } from './RoomFloorHole';
 import { RoomMapData } from './RoomMapData';
 import { RoomPlaneData } from './RoomPlaneData';
@@ -582,7 +581,7 @@ export class RoomPlaneParser
         return _local_3[k];
     }
 
-    public initializeFromTileData(k: number=-1): boolean
+    public initializeFromTileData(k: number = -1): boolean
     {
         let _local_2: number;
         let _local_3: number;
@@ -1169,11 +1168,11 @@ export class RoomPlaneParser
     private addWall(k: IVector3D, _arg_2: IVector3D, _arg_3: IVector3D, _arg_4: IVector3D, _arg_5: boolean, _arg_6: boolean, _arg_7: boolean): void
     {
         this.addPlane(RoomPlaneData.PLANE_WALL, k, _arg_2, _arg_3, [_arg_4]);
-        //this.addPlane(RoomPlaneData.PLANE_LANDSCAPE, k, _arg_2, _arg_3, [_arg_4]);
+        this.addPlane(RoomPlaneData.PLANE_LANDSCAPE, k, _arg_2, _arg_3, [_arg_4]);
         const _local_8: number = (RoomPlaneParser.WALL_THICKNESS * this._wallThicknessMultiplier);
         const _local_9: number = (RoomPlaneParser.FLOOR_THICKNESS * this._floorThicknessMultiplier);
-        const _local_10:Vector3d = Vector3d.crossProduct(_arg_2, _arg_3);
-        const _local_11:Vector3d = Vector3d.product(_local_10, ((1 / _local_10.length) * -(_local_8)));
+        const _local_10: Vector3d = Vector3d.crossProduct(_arg_2, _arg_3);
+        const _local_11: Vector3d = Vector3d.product(_local_10, ((1 / _local_10.length) * -(_local_8)));
         this.addPlane(RoomPlaneData.PLANE_WALL, Vector3d.sum(k, _arg_3), _arg_2, _local_11, [_local_10, _arg_4]);
         if(_arg_5)
         {
@@ -1193,8 +1192,8 @@ export class RoomPlaneParser
     private addFloor(k: IVector3D, _arg_2: IVector3D, _arg_3: IVector3D, _arg_4: boolean, _arg_5: boolean, _arg_6: boolean, _arg_7: boolean): void
     {
         let _local_9: number;
-        let _local_10:Vector3d;
-        let _local_11:Vector3d;
+        let _local_10: Vector3d;
+        let _local_11: Vector3d;
         const _local_8: RoomPlaneData = this.addPlane(RoomPlaneData.PLANE_FLOOR, k, _arg_2, _arg_3);
         if(_local_8 != null)
         {
@@ -1339,7 +1338,7 @@ export class RoomPlaneParser
             y++;
         }
 
-        for(const [ holeId, holeData ] of this._floorHoles.entries())
+        for(const [holeId, holeData] of this._floorHoles.entries())
         {
             if(!holeData) continue;
 
@@ -1521,7 +1520,7 @@ export class RoomPlaneParser
         let k: number;
         let _local_2: number;
         let _local_3: boolean[];
-        let _local_5:RoomFloorHole;
+        let _local_5: RoomFloorHole;
         let _local_6: number;
         let _local_7: number;
         let _local_8: number;

@@ -1,6 +1,6 @@
-import { IMessageEvent } from '../../../../../core/communication/messages/IMessageEvent';
-import { MessageEvent } from '../../../../../core/communication/messages/MessageEvent';
-import { QuestionFinishedParser } from '../../parser/poll/QuestionFinishedParser';
+import { IMessageEvent } from '../../../../../api';
+import { MessageEvent } from '../../../../../events';
+import { QuestionFinishedParser } from '../../parser';
 
 export class QuestionFinishedEvent extends MessageEvent implements IMessageEvent
 {

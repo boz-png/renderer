@@ -10,6 +10,7 @@ export class UserSettingsParser implements IMessageParser
     private _cameraFollow: boolean;
     private _flags: number;
     private _chatType: number;
+    private _allowEmojis: boolean;
 
     public flush(): boolean
     {
@@ -21,6 +22,7 @@ export class UserSettingsParser implements IMessageParser
         this._cameraFollow = false;
         this._flags = 0;
         this._chatType = 0;
+        this._allowEmojis = true;
 
         return true;
     }
@@ -37,6 +39,7 @@ export class UserSettingsParser implements IMessageParser
         this._cameraFollow = wrapper.readBoolean();
         this._flags = wrapper.readInt();
         this._chatType = wrapper.readInt();
+        this._allowEmojis = wrapper.readBoolean();
 
         return true;
     }
@@ -79,5 +82,10 @@ export class UserSettingsParser implements IMessageParser
     public get chatType(): number
     {
         return this._chatType;
+    }
+
+    public get allowEmojis(): boolean
+    {
+        return this._allowEmojis;
     }
 }

@@ -251,6 +251,7 @@ export class OutgoingHeader
     public static USER_PROFILE_BY_NAME = 2249;
     public static USER_RESPECT = 2694;
     public static GET_SOUND_SETTINGS = 2388;
+    public static USER_SETTINGS_ALLOW_EMOJI = 1462;
     public static USER_SETTINGS_CAMERA = 1461;
     public static USER_SETTINGS_CHAT_STYLE = 1030;
     public static USER_SETTINGS_INVITES = 1086;

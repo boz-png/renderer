@@ -12,6 +12,7 @@ export class NitroSettingsEvent extends NitroEvent
     private _cameraFollow: boolean;
     private _flags: number;
     private _chatType: number;
+    private _allowEmojis: boolean;
 
     constructor()
     {
@@ -30,6 +31,7 @@ export class NitroSettingsEvent extends NitroEvent
         clone._cameraFollow = this._cameraFollow;
         clone._flags = this._flags;
         clone._chatType = this._chatType;
+        clone._allowEmojis = this._allowEmojis;
 
         return clone;
     }
@@ -112,5 +114,15 @@ export class NitroSettingsEvent extends NitroEvent
     public set chatType(type: number)
     {
         this._chatType = type;
+    }
+
+    public get allowEmojis(): boolean
+    {
+        return this.allowEmojis;
+    }
+
+    public set allowEmojis(value: boolean)
+    {
+        this._allowEmojis = value;
     }
 }

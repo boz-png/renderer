@@ -118,7 +118,7 @@ export class NitroSettingsEvent extends NitroEvent
 
     public get allowEmojis(): boolean
     {
-        return this.allowEmojis;
+        return this._allowEmojis;
     }
 
     public set allowEmojis(value: boolean)

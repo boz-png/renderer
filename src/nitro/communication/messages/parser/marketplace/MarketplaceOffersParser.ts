@@ -64,8 +64,9 @@ export class MarketplaceOffersParser implements IMessageParser
             const timeLeftMinutes = wrapper.readInt();
             const averagePrice = wrapper.readInt();
             const offerCount = wrapper.readInt();
+            const ownerName = wrapper.readString();
 
-            const offerItem = new MarketplaceOffer(offerId, furniId, furniType, extraData, stuffData, price, status, timeLeftMinutes, averagePrice, offerCount);
+            const offerItem = new MarketplaceOffer(ownerName, offerId, furniId, furniType, extraData, stuffData, price, status, timeLeftMinutes, averagePrice, offerCount);
 
             if(i < this.MAX_LIST_LENGTH) this._offers.push(offerItem);
 

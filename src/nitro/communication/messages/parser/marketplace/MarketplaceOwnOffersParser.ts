@@ -57,7 +57,9 @@ export class MarketplaceOwnOffersParser implements IMessageParser
             const price = wrapper.readInt();
             const local9 = wrapper.readInt();
             const local10 = wrapper.readInt();
-            const local13 = new MarketplaceOffer(offerId, furniId, furniType, extraData, stuffData, price, status, local9, local10);
+            const ownerName = wrapper.readString();
+            
+            const local13 = new MarketplaceOffer(ownerName, offerId, furniId, furniType, extraData, stuffData, price, status, local9, local10);
 
             if(i < MarketplaceOwnOffersParser.MAX_LIST_LENGTH)
             {

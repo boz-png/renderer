@@ -345,6 +345,7 @@ export class OutgoingHeader
     public static REJECT_QUEST = 2397;
     public static START_CAMPAIGN = 1697;
     public static GET_BONUS_RARE_INFO = 957;
+    public static CLAIM_BONUS_RARE = 958;
     public static CRAFT = 3591;
     public static CRAFT_SECRET = 1251;
     public static GET_CRAFTABLE_PRODUCTS = 633;

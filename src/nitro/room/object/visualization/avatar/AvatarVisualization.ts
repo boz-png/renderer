@@ -928,8 +928,8 @@ export class AvatarVisualization extends RoomObjectSpriteVisualization implement
         if(this._useObject > 0) this._avatarImage.appendAction(AvatarAction.USE_OBJECT, this._useObject);
 
         if(this._talk) {
-            this._avatarImage.appendAction(AvatarAction.SNOWWAR_THROW);
-            console.log("hola papa <3")
+            this._avatarImage.appendAction(AvatarAction.POSTURE_SIT);
+            console.log("xd")
         }
 
         if(this._sleep || this._blink) this._avatarImage.appendAction(AvatarAction.SLEEP);

@@ -412,6 +412,55 @@ export const HabboAvatarPartSets = {
                         'setType': 'ri'
                     }
                 ]
+            },
+            {
+                'id': 'snowwarrun',
+                'activeParts': [
+                    {
+                        'setType': 'ch'
+                    }
+                ]
+            },
+            {
+                'id': 'snowwarpick',
+                'activeParts': [
+                    {
+                        'setType': 'ch'
+                    },
+                    {
+                        'setType': 'hd'
+                    }
+                ]
+            },
+            {
+                'id': 'snowwardiefront',
+                'activeParts': [
+                    {
+                        'setType': 'ch'
+                    },
+                    {
+                        'setType': 'hd'
+                    }
+                ]
+            },
+            {
+                'id': 'snowwardieback',
+                'activeParts': [
+                    {
+                        'setType': 'ch'
+                    },
+                    {
+                        'setType': 'hd'
+                    }
+                ]
+            },
+            {
+                'id': 'snowwarthrow',
+                'activeParts': [
+                    {
+                        'setType': 'ch'
+                    }
+                ]
             }
         ]
     }

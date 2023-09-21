@@ -736,6 +736,8 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
                             this._useFullImageCache = true;
                         }
 
+                        console.log(_local_3)
+                        
                         this.addActionData(_local_3);
                         break;
                 }

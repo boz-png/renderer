@@ -1231,8 +1231,7 @@ export const HabboAvatarAnimations = {
                         },
                         {
                             'number': 3,
-                            'assetPartDefinition': 'swdie',
-                            'repeats': 100
+                            'assetPartDefinition': 'swdie'
                         }
                     ]
                 }

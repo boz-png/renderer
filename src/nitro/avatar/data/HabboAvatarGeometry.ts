@@ -34,7 +34,7 @@ export const HabboAvatarGeometry = {
                     {
                         'id': 'swhorizontal',
                         'width': 192,
-                        'height': 120,
+                        'height': 130,
                         'dx': 0,
                         'dy': -40
                     }

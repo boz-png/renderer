@@ -412,6 +412,8 @@ export class AvatarImageCache
 
                                 if(assetPartDefinition === 'lay') spriteData.x = (spriteData.x + 53);
 
+                                if(assetPartDefinition === 'swdieback') spriteData.x = (spriteData.x + 53);
+
                                 if(isFlipped)
                                 {
                                     spriteData.flipH = (!(spriteData.flipH));
@@ -441,6 +443,8 @@ export class AvatarImageCache
         const offset = new Point(-(imageData.regPoint.x), (canvasOffset - imageData.regPoint.y));
 
         if(isFlipped && (assetPartDefinition !== 'lay')) offset.x = (offset.x + ((this._scale === AvatarScaleType.LARGE) ? 67 : 31));
+
+        //if(isFlipped && (assetPartDefinition !== 'swrun')) offset.x = (offset.x + ((this._scale === AvatarScaleType.LARGE) ? 67 : 31));
 
         let imageIndex = (this._unionImages.length - 1);
 

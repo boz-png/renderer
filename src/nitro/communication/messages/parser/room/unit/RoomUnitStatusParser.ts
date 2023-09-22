@@ -86,6 +86,19 @@ export class RoomUnitStatusParser implements IMessageParser
 
                             break;
                         }
+                        case 'swrun': {
+                            const values = parts[1].split(',');
+
+                            if(values.length >= 3)
+                            {
+                                targetX = parseInt(values[0]);
+                                targetY = parseInt(values[1]);
+                                targetZ = parseFloat(values[2]);
+                                didMove = true;
+                            }
+
+                            break;
+                        }
                         case 'sit': {
                             const sitHeight = parseFloat(parts[1]);
 
@@ -96,6 +109,14 @@ export class RoomUnitStatusParser implements IMessageParser
                             break;
                         }
                         case 'lay': {
+                            const layHeight = parseFloat(parts[1]);
+
+                            height = Math.abs(layHeight);
+
+                            break;
+                        }
+
+                        case 'swdieback': {
                             const layHeight = parseFloat(parts[1]);
 
                             height = Math.abs(layHeight);

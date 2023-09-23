@@ -1247,7 +1247,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': -10,
+                                        'dx': -15,
                                         'dy': 4
                                     }
                                 ]
@@ -1257,7 +1257,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': -10,
+                                        'dx': -15,
                                         'dy': 5
                                     }
                                 ]
@@ -1267,7 +1267,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': 10,
+                                        'dx': 15,
                                         'dy': 5
                                     }
                                 ]
@@ -1277,7 +1277,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': 10,
+                                        'dx': 15,
                                         'dy': 4
                                     }
                                 ]
@@ -1292,7 +1292,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': -10,
+                                        'dx': -15,
                                         'dy': 4
                                     }
                                 ]
@@ -1302,7 +1302,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': -10,
+                                        'dx': -15,
                                         'dy': 5
                                     }
                                 ]
@@ -1312,7 +1312,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': 10,
+                                        'dx': 15,
                                         'dy': 5
                                     }
                                 ]
@@ -1322,7 +1322,7 @@ export const HabboAvatarAnimations = {
                                 'bodyParts': [
                                     {
                                         'id': 'head',
-                                        'dx': 10,
+                                        'dx': 15,
                                         'dy': 4
                                     }
                                 ]

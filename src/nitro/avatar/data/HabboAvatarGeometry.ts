@@ -33,10 +33,10 @@ export const HabboAvatarGeometry = {
                     },
                     {
                         'id': 'swhorizontal',
-                        'width': 192,
+                        'width': 180,
                         'height': 130,
                         'dx': 0,
-                        'dy': -40
+                        'dy': -20
                     }
                 ]
             },

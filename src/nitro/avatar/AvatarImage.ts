@@ -747,12 +747,10 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
                                 }
                                 else
                                 {
-                                    this.setDirection(AvatarSetType.HEAD, 2);
+                                    this.setDirection(AvatarSetType.HEAD, 4);
                                 }
                             }
 
-                            this._useFullImageCache = true;
-                            this._useFullImageCache = true;
                         }
                         
                         this.addActionData(_local_3);

@@ -26,8 +26,8 @@ export const HabboAvatarGeometry = {
                     },
                     {
                         'id': 'horizontal',
-                        'width': 128,
-                        'height': 80,
+                        'width': 180,
+                        'height': 130,
                         'dx': 30,
                         'dy': 0
                     },
@@ -35,8 +35,8 @@ export const HabboAvatarGeometry = {
                         'id': 'swhorizontal',
                         'width': 180,
                         'height': 130,
-                        'dx': 0,
-                        'dy': -20
+                        'dx': 30,
+                        'dy': 0
                     }
                 ]
             },

@@ -525,7 +525,7 @@ export class AvatarVisualization extends RoomObjectSpriteVisualization implement
             headDirection -= ((headDirection % 90) - 45);
         }
 
-        if((direction !== this._angle) || _arg_4)
+        if((direction !== this._angle) || _arg_4 && !this._isdeadSnow)
         {
             update = true;
 
@@ -537,7 +537,7 @@ export class AvatarVisualization extends RoomObjectSpriteVisualization implement
             this._avatarImage.setDirectionAngle(AvatarSetType.FULL, direction);
         }
 
-        if((headDirection !== this._headAngle) || _arg_4)
+        if((headDirection !== this._headAngle) || _arg_4 && !this._isdeadSnow)
         {
             update = true;
 

@@ -751,6 +751,8 @@ export class AvatarImage implements IAvatarImage, IAvatarEffectListener
                                 }
                             }
 
+                            this._useFullImageCache = true;
+                            this._useFullImageCache = true;
                         }
                         
                         this.addActionData(_local_3);

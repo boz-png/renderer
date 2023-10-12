@@ -306,7 +306,7 @@ export class AvatarRenderManager extends NitroManager implements IAvatarRenderMa
 
                     if(figurePartSet)
                     {
-                        container.updatePart(id, figurePartSet.id, [0]);
+                        container.updatePart(id, figurePartSet.id, ["0"]);
 
                         isValid = true;
                     }
@@ -325,7 +325,7 @@ export class AvatarRenderManager extends NitroManager implements IAvatarRenderMa
 
                             if(partSet)
                             {
-                                container.updatePart(id, partSet.id, [0]);
+                                container.updatePart(id, partSet.id, ["0"]);
 
                                 isValid = true;
                             }

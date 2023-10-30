@@ -5,4 +5,5 @@ export interface IPartColor
     clubLevel: number;
     isSelectable: boolean;
     rgb: number;
+    hex: string;
 }

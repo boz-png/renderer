@@ -2,7 +2,7 @@ import { IFigureDataColor, IPartColor } from '../../../../api';
 
 export class PartColor implements IPartColor
 {
-    private _id: string;
+    private _id: any;
     private _index: number;
     private _clubLevel: number;
     private _isSelectable: boolean;

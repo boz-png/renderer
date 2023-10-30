@@ -1,6 +1,6 @@
 export interface IPartColor
 {
-    id: string;
+    id: any;
     index: number;
     clubLevel: number;
     isSelectable: boolean;

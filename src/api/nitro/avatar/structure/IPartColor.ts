@@ -5,5 +5,4 @@ export interface IPartColor
     clubLevel: number;
     isSelectable: boolean;
     rgb: number;
-    setValues(id: string, index: number): void
 }

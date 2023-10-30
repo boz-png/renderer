@@ -7,6 +7,7 @@ export class PartColor implements IPartColor
     private _clubLevel: number;
     private _isSelectable: boolean;
     private _rgb: number;
+    private _hex: string;
 
     constructor(data?: IFigureDataColor, id?: string, index?: number)
     {
@@ -16,6 +17,7 @@ export class PartColor implements IPartColor
             this._clubLevel = 0;
             this._isSelectable = true;
             this._rgb = parseInt('0x' + id, 16);
+            this._hex = id;
             return;
         };
 
@@ -24,6 +26,7 @@ export class PartColor implements IPartColor
         this._clubLevel = (data.club || 0);
         this._isSelectable = data.selectable;
         this._rgb = parseInt('0x' + data.hexCode, 16);
+        this._hex = data.hexCode;
     }
 
 
@@ -52,13 +55,8 @@ export class PartColor implements IPartColor
         return this._rgb;
     }
 
-    public setValues(id: string, index: number): void
+    public get hex(): string
     {
-        this._id = id;
-        this._index = index;
-        this._clubLevel = 0;
-        this._isSelectable = true;
-        this._rgb = parseInt('0x' + id, 16);
-        return;
+        return this._hex;
     }
 }

@@ -74,6 +74,7 @@ export class RoomUsersHandler extends BaseHandler
                 userData.hasBreedingPermission = user.hasBreedingPermission;
                 userData.petLevel = user.petLevel;
                 userData.botSkills = user.botSkills;
+                userData.banner = user.banner;
                 userData.isModerator = user.isModerator;
 
                 if(!session.userDataManager.getUserData(user.roomIndex)) usersToAdd.push(userData);

@@ -9,6 +9,7 @@ export class RoomUserData implements IRoomUserData
     private _figure: string = '';
     private _custom: string = '';
     private _activityPoints: number;
+    private _banner: string = '';
     private _webID: number = 0;
     private _groupID: number = 0;
     private _groupStatus: number = 0;
@@ -44,6 +45,16 @@ export class RoomUserData implements IRoomUserData
     public set activityPoints(k: number)
     {
         this._activityPoints = k;
+    }
+
+    public get banner(): string
+    {
+        return this._banner;
+    }
+
+    public set banner(k: string)
+    {
+        this._banner = k;
     }
 
     public get name(): string

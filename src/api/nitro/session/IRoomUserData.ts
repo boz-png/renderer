@@ -2,6 +2,7 @@ export interface IRoomUserData
 {
     readonly roomIndex: number;
     activityPoints: number;
+    banner: string;
     name: string;
     type: number;
     sex: string;

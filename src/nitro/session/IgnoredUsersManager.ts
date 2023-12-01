@@ -44,7 +44,7 @@ export class IgnoredUsersManager implements IDisposable, IIgnoredUsersManager
 
     public requestIgnoredUsers(): void
     {
-        this._sessionDataManager.send(new GetIgnoredUsersComposer(this._sessionDataManager.userName));
+        this._sessionDataManager.send(new GetIgnoredUsersComposer(this._sessionDataManager.userName.replace(/<[^>]*>/g, '')));
     }
 
     private onIgnoredUsersEvent(event: IgnoredUsersEvent): void
